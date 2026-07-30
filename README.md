@@ -150,22 +150,21 @@ border. The border matters — a `#FFFFFF` tile against light browser chrome has
 no edge, and the mark falls apart into three floating shapes without it.
 
 The header pilcrow comes out of the same script with the loop body run once for
-`U+00B6` instead of the two letters, and the transform centring the glyph on
-both axes rather than sitting it on a baseline:
+`U+00B6` instead of the two letters, and a transform that flips the glyph into
+its own bounding box rather than fitting it to a square:
 
 ```python
 rec = RecordingPen()
 gs[cmap[0x00B6]].draw(rec)
 bp = BoundsPen(gs); rec.replay(bp)
 xmin, ymin, xmax, ymax = bp.bounds
-s = 34.0 / (ymax - ymin)                       # 34 units tall on a 64 box
-t = (Transform().translate(32, 32).scale(s, -s)
-     .translate(-(xmin + xmax) / 2, -(ymin + ymax) / 2))
+t = Transform().translate(-xmin, ymax).scale(1, -1)   # y-up -> y-down, origin at 0,0
+# viewBox is then "0 0 {xmax-xmin:.0f} {ymax-ymin:.0f}"  ->  "0 0 544 945"
 ```
 
-The pilcrow is a naturally narrow glyph — 19.6 units wide at 34 tall — so the
-side margins inside the square are much wider than the top and bottom. That is
-correct, not a centring bug.
+That tight viewBox is the point: the mark has no built-in margin, so CSS can
+set its height and let the 544:945 ratio settle the width, and it can sit as
+close to the name as the design wants.
 
 ## Images
 
@@ -196,17 +195,30 @@ and the mark has to stand in for one.
 
 `assets/img/th-mark.svg` is the header mark, and it is deliberately *not* the
 same thing. It sits beside your name spelled out in full, so repeating the same
-two letters next to it would say nothing twice. It is a pilcrow: the scribe's
-mark for "a new argument begins here", older than printing, and a statement
-about the work rather than about the person — which is the only thing a mark
-next to a name has any business being.
+two letters next to it would say nothing twice. It is a pilcrow in CU red: the
+scribe's mark for "a new argument begins here", older than printing, and a
+statement about the work rather than about the person — which is the only thing
+a mark next to a name has any business being.
+
+It has no frame. A box around it turned it into a logo; without one it is a
+piece of type sitting in the margin, which is what a pilcrow has always been.
+Its viewBox is the glyph's own bounding box rather than a square, so it carries
+no invisible padding and can sit flush against the name — which also means its
+size lives entirely in CSS (`height` on `.brand-mark`, `width: auto`).
 
 See the recipe under **Fonts** for how both are cut from the font files.
 
-**The portrait.** `assets/img/tomas-haufer.jpg` is an 800×1000 crop, cut from
-one frame in `assets/img/photo/`. It is desaturated in CSS (`.portrait`) rather
-than in the file, so full colour is one line away. To swap it, re-crop to 4:5,
-save at about 800px wide, and keep the name.
+**The portrait.** `assets/img/tomas-haufer-portrait.jpg` is a 752×940 crop, cut
+from one frame in `assets/img/photo/`. Full colour, no filter — a half-hearted
+sepia looked like neither the palette nor a photograph. To swap it, re-crop to
+4:5, save at about 800px wide, and keep the name.
+
+It is matted rather than framed: a hairline outer rule, a wide margin of paper,
+and the photograph inside on a hairline of its own, with the bottom margin cut
+deeper than the top the way real mounts are. A lancet arch used to sit behind
+it, drawn larger than the picture so its apex rose above and its legs ran down
+either side; that read as a second unrelated outline nearby rather than as a
+frame, and two frames competing is worse than one.
 
 **Gitignored sources.** `CUcoat/` and `photo/` hold the originals — the vendor
 logo artwork and the full-size photographs. The repository has to be public for

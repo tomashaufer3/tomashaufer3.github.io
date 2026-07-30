@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Pilcrow">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 544 945" role="img" aria-label="Pilcrow">
   <title>Tomáš Haufer</title>
-  <!-- The header mark: a pilcrow in a hairline square.
+  <!-- The header mark: a pilcrow, in CU red.
 
        The initials went to the favicon, where a monogram belongs. Here the
        mark sits next to the name spelled out in full, so repeating the same
@@ -9,16 +9,18 @@
        something about the work rather than about the person — which is the
        only thing a mark next to a name has any business doing.
 
-       Real EB Garamond outline (U+00B6) at wght 500, extracted from
-       /assets/fonts/ebgaramond-var-normal-latin.woff2 and scaled to 34 units
-       tall, centred on the 64 box. Not <text>: an <img> renders in an isolated
-       context with no access to the site's webfont, and every platform draws a
-       different pilcrow. See "Fonts" in README.md to regenerate.
+       No frame. A box around it made it a logo; without one it is simply a
+       piece of type sitting in the margin, which is what a pilcrow has always
+       been and how it should read.
 
-       Referenced with <img> rather than inlined because the header is repeated
-       in five HTML files. That costs the hover recolour — the name beside it
-       turns red instead, which is the affordance that matters. -->
-  <rect x="0.75" y="0.75" width="62.5" height="62.5" fill="none"
-        stroke="#B4BCC2" stroke-width="1.5"/>
-  <path fill="#003657" d="M31.44 49Q30.17 49 29.1 48.48Q28.02 47.96 27.37 47.02Q26.73 46.09 26.73 44.83Q26.73 43.55 27.36 42.59Q27.98 41.63 28.95 41.08Q29.91 40.54 30.9 40.55Q32.1 40.56 32.75 41.09Q33.39 41.62 33.39 42.53Q33.39 43.37 32.9 43.9Q32.41 44.43 31.76 44.43Q31.37 44.43 31.09 44.25Q30.81 44.06 30.59 43.84Q30.35 43.63 30.12 43.44Q29.9 43.24 29.64 43.24Q29.21 43.24 28.78 43.71Q28.35 44.17 28.35 45.11Q28.35 46.14 29.28 46.9Q30.21 47.67 31.59 47.67Q32.46 47.67 33.26 47.22Q34.06 46.77 34.59 45.73Q35.12 44.69 35.12 42.96V35.64Q35.12 35.35 35.02 35.03Q34.93 34.71 34.62 34.71Q32.13 34.71 29.89 34.09Q27.65 33.46 25.92 32.23Q24.2 30.99 23.21 29.16Q22.22 27.32 22.22 24.89Q22.22 21.31 23.9 19.13Q25.59 16.95 28.68 15.98Q31.77 15 36.01 15Q37.06 15 38.16 15.04Q39.25 15.08 40.1 15.14Q40.95 15.2 41.22 15.25Q41.51 15.29 41.65 15.54Q41.78 15.79 41.78 16.07Q41.78 16.35 41.64 16.8Q41.49 17.24 41.26 17.24Q41.11 17.24 39.94 16.96Q38.77 16.67 37.34 16.67Q37.06 16.67 36.86 16.9Q36.66 17.13 36.66 17.41V42.92Q36.66 44.85 35.95 46.21Q35.25 47.57 34.07 48.28Q32.9 49 31.44 49Z"/>
+       The viewBox is the glyph's own bounding box rather than a square, so the
+       mark carries no invisible padding and can be set flush against the name.
+       That also means its size is controlled entirely in CSS: height on
+       .brand-mark, width auto, and the 544:945 ratio does the rest.
+
+       Real EB Garamond outline (U+00B6) at wght 500, extracted from
+       /assets/fonts/ebgaramond-var-normal-latin.woff2. Not <text>: an <img>
+       renders in an isolated context with no access to the site's webfont, and
+       every platform draws a different pilcrow. See "Fonts" in README.md. -->
+  <path fill="#AE2F3C" d="M256.4 945.1Q221.2 945.1 191.3 930.6Q161.3 916.1 143.4 890.1Q125.5 864.2 125.5 829.3Q125.5 793.6 142.9 766.9Q160.4 740.3 187.2 725.1Q214 709.9 241.3 710.2Q274.7 710.4 292.7 725.2Q310.7 739.9 310.7 765.2Q310.7 788.6 297 803.3Q283.3 818 265.4 818Q254.6 818 246.7 812.9Q238.8 807.9 232.7 801.8Q226.1 795.9 219.8 790.5Q213.5 785 206.4 785Q194.4 785 182.5 798Q170.7 810.9 170.7 836.9Q170.7 865.6 196.4 886.8Q222.2 908.1 260.7 908.1Q284.8 908.1 307.1 895.7Q329.3 883.2 344 854.2Q358.7 825.2 358.7 777.1V573.7Q358.7 565.7 356 556.8Q353.4 547.8 344.8 547.8Q275.5 547.8 213.2 530.5Q151 513.2 103.1 478.9Q55.2 444.5 27.6 393.5Q0 342.6 0 274.9Q0 175.3 46.9 114.8Q93.8 54.3 179.7 27.1Q265.7 0 383.5 0Q412.6 0 443.1 1.1Q473.6 2.3 497.2 3.9Q520.8 5.6 528.4 6.9Q536.4 8.2 540.2 15Q544 21.9 544 29.8Q544 37.6 539.8 50Q535.7 62.4 529.4 62.4Q525.1 62.4 492.6 54.4Q460.1 46.4 420.3 46.4Q412.7 46.4 407.1 52.7Q401.5 59.1 401.5 67V776.2Q401.5 829.7 381.8 867.5Q362.2 905.3 329.6 925.2Q296.9 945.1 256.4 945.1Z"/>
 </svg>

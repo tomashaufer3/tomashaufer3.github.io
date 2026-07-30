@@ -16,10 +16,10 @@
      If you change it here, find-and-replace in research.html, cv.html,
      substack.html and 404.html too.
 
-     Name, affiliation beneath it, and a mark to the left. The mark is the
-     favicon in outline — EB Garamond TH in a hairline square — and not an
-     institutional logo: a University coat of arms beside a personal name is
-     the visual grammar of an official University page, which this is not.
+     Name, affiliation beneath it, and a mark to the left. The mark is a
+     Garamond pilcrow in CU red — not an institutional logo: a University coat
+     of arms beside a personal name is the visual grammar of an official
+     University page, which this is not.
      The full "joint workplace of Charles University and the Economics
      Institute…" wording is a sentence rather than a label and read as a wall
      of small type at this size; it lives in the footer, with the logos.
@@ -28,7 +28,7 @@
   <div class="shell header-inner">
     <a class="brand" href="/">
       <img class="brand-mark" src="/assets/img/th-mark.svg" alt="" aria-hidden="true"
-           width="64" height="64">
+           width="544" height="945">
       <span class="brand-text">
         <span class="brand-name">Tomáš Haufer</span>
         <span class="brand-sub">CERGE-EI</span>
@@ -52,7 +52,11 @@
     <div class="shell hero-inner">
 
       <div class="hero-text">
-        <h1 class="display">Tomáš Haufer<em>Applied economics, historical evidence</em></h1>
+        <!-- The name alone. Every subtitle tried here — "Economic history,
+             quantitatively", "Applied economics, historical evidence" — was a
+             label for a field rather than a claim about the work, and the
+             eyebrow two lines below already says what he is and where. -->
+        <h1 class="display">Tomáš Haufer</h1>
 
         <svg class="divider orn" viewBox="0 0 240 12" width="240" height="12" aria-hidden="true">
           <line x1="0" y1="6" x2="98" y2="6"/>
@@ -96,17 +100,12 @@
       </div>
 
       <div class="hero-figure">
-        <div class="hero-portrait">
-          <!-- The lancet arch, reused as a frame rather than a backdrop. -->
-          <svg class="orn" viewBox="0 0 400 560" width="400" height="560"
-               fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"
-               preserveAspectRatio="none">
-            <path d="M20 560V210Q20 70 200 20Q380 70 380 210v350"/>
-            <path d="M48 560V226Q48 96 200 52Q352 96 352 226v334"/>
-          </svg>
+        <!-- Matted, not arched. See .hero-portrait in site.css for why the
+             lancet arch that used to sit behind this had to go. -->
+        <figure class="hero-portrait">
           <img class="portrait" src="/assets/img/tomas-haufer-portrait.jpg"
                alt="Tomáš Haufer" width="752" height="940">
-        </div>
+        </figure>
       </div>
 
     </div>
@@ -155,7 +154,7 @@
               <div class="cv-what">
                 <strong>In progress</strong>
                 <span class="cv-where">supervised by
-                <a href="https://sites.google.com/view/sebastian-ottinger">Sebastian
+                <a href="https://sites.google.com/view/sebastian-ottinger" target="_blank" rel="noopener">Sebastian
                 Ottinger</a> &middot; data construction complete, empirical
                 specification in development</span>
               </div>
@@ -163,11 +162,11 @@
           </ul>
 
           <p class="pill-row">
-            <a class="pill pill--doc" href="/files/theses/haufer-legions-position-paper.pdf">
+            <a class="pill pill--doc" href="/files/theses/haufer-legions-position-paper.pdf" target="_blank" rel="noopener">
               <svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>
               Position paper
             </a>
-            <a class="pill pill--data" href="https://tomashaufer3.github.io/legions-docs/">
+            <a class="pill pill--data" href="https://tomashaufer3.github.io/legions-docs/" target="_blank" rel="noopener">
               <svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M4.2 2.6L1.2 6l3 3.4"/><path d="M7.8 2.6L10.8 6l-3 3.4"/></svg>
               Documentation
             </a>
@@ -273,11 +272,10 @@
               <text x="205" y="235">deserted</text>
             </g>
 
-            <!-- the point of the whole thing -->
-            <g class="sch-note">
-              <text x="460" y="374">Voluntary enlistment: the second choice</text>
-              <text x="460" y="390">is not confounded by conscription.</text>
-            </g>
+            <!-- The conscription note is gone. The diagram already shows the
+                 same men choosing twice, and a sentence explaining a picture
+                 that works is a sentence admitting it does not. The prose
+                 beside it makes the identification argument in full. -->
             <g class="sch-note sch-note--left">
               <text x="20" y="374">Two datasets, c. 300,000</text>
               <text x="20" y="390">individual soldier records.</text>
@@ -332,8 +330,9 @@
                 Loyalty, Desertion, and the Czechoslovak Legions</h3>
               <span class="pub-venue">Master&rsquo;s thesis, CERGE-EI &middot; in progress</span>
               <p class="pill-row">
-                <a class="pill pill--doc" href="/files/theses/haufer-legions-position-paper.pdf"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>Position paper</a>
-                <a class="pill pill--data" href="https://tomashaufer3.github.io/legions-docs/"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M4.2 2.6L1.2 6l3 3.4"/><path d="M7.8 2.6L10.8 6l-3 3.4"/></svg>Documentation</a>
+                <a class="pill pill--doc" href="/files/theses/haufer-legions-position-paper.pdf" target="_blank" rel="noopener"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>Position paper</a>
+                <a class="pill pill--data" href="https://tomashaufer3.github.io/legions-docs/" target="_blank" rel="noopener"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M4.2 2.6L1.2 6l3 3.4"/><path d="M7.8 2.6L10.8 6l-3 3.4"/></svg>Documentation</a>
+                <a class="pill pill--doc" href="/research.html#legions"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 6h9"/><path d="M7 2.5L10.5 6 7 9.5"/></svg>Full entry</a>
               </p>
             </div>
           </li>
@@ -366,7 +365,8 @@
                 The Effect of Referee Coaches on Referees&rsquo; Performance</h3>
               <span class="pub-venue">Statistics term project, CERGE-EI, 2026</span>
               <p class="pill-row">
-                <a class="pill pill--doc" href="/files/term-papers/haufer-referee-performance.pdf"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>PDF</a>
+                <a class="pill pill--doc" href="/files/term-papers/haufer-referee-performance.pdf" target="_blank" rel="noopener"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>PDF</a>
+                <a class="pill pill--doc" href="/research.html#referees"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 6h9"/><path d="M7 2.5L10.5 6 7 9.5"/></svg>Full entry</a>
               </p>
             </div>
           </li>
@@ -394,7 +394,8 @@
               <span class="pub-venue">Machine Learning for Social Scientists,
               CERGE-EI, 2026</span>
               <p class="pill-row">
-                <a class="pill pill--doc" href="/files/term-papers/haufer-written-in-time.pdf"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>PDF</a>
+                <a class="pill pill--doc" href="/files/term-papers/haufer-written-in-time.pdf" target="_blank" rel="noopener"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>PDF</a>
+                <a class="pill pill--doc" href="/research.html#written-in-time"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 6h9"/><path d="M7 2.5L10.5 6 7 9.5"/></svg>Full entry</a>
               </p>
             </div>
           </li>
@@ -414,8 +415,9 @@
               <h3 class="pub-title">Central and Eastern Europe Outlook: United in Diversity</h3>
               <span class="pub-venue">Moody&rsquo;s Analytics, 2025</span>
               <p class="pill-row">
-                <a class="pill pill--doc" href="/files/articles/moodys-cee-outlook-2025.pdf"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>PDF</a>
-                <a class="pill pill--ext" href="https://www.economy.com/economicview/analysis/420380/Central-and-Eastern-Europe-Outlook-United-in-Diversity"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2H2v8h8V6"/><path d="M7.5 1.5h3v3"/><path d="M10.5 1.5L6 6"/></svg>Read online</a>
+                <a class="pill pill--doc" href="/files/articles/moodys-cee-outlook-2025.pdf" target="_blank" rel="noopener"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>PDF</a>
+                <a class="pill pill--ext" href="https://www.economy.com/economicview/analysis/420380/Central-and-Eastern-Europe-Outlook-United-in-Diversity" target="_blank" rel="noopener"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2H2v8h8V6"/><path d="M7.5 1.5h3v3"/><path d="M10.5 1.5L6 6"/></svg>Read online</a>
+                <a class="pill pill--doc" href="/research.html#cee-outlook"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 6h9"/><path d="M7 2.5L10.5 6 7 9.5"/></svg>Full entry</a>
               </p>
             </div>
           </li>
@@ -505,163 +507,74 @@
 
         <p><a class="cta" href="/cv.html">Full CV <span>&rarr;</span></a></p>
 
-        <!-- Prague, in three layers. The previous drawing was a generic walled
-             town: one gate, one cathedral, a row of crenellations. This one
-             names its buildings — the Castle and St Vitus, St Nicholas, the
-             Old Town Hall tower, Týn with its two towers and eight pinnacles,
-             the Powder Tower, Petřín, and Charles Bridge across the front.
+        <!-- The Legion's route east, 1918-1920.
 
-             Layered back to front so density does not turn into noise: the
-             roofscape is faint, the monuments are mid, the bridge is solid.
-             The repeated roofs are one <path> reused via <use>, so adding
-             density costs a line rather than a paragraph. -->
-        <svg class="skyline" viewBox="0 0 1000 214" width="1000" height="214"
-             fill="none" stroke="currentColor" aria-hidden="true">
+             This replaces a drawing of the Prague skyline. That drawing was of
+             a city rather than of anything to do with the person whose page
+             this is: the same towers appear on every Czech tourist page, and
+             getting eight landmarks right by hand at this size was never going
+             to happen.
 
-          <defs>
-            <path id="roof-a" d="M0 124V106l14-12 14 12v18"/>
-            <path id="roof-b" d="M0 124V112l11-10 11 10v12"/>
-            <path id="roof-c" d="M0 124V116l8-8 8 8v8"/>
-            <path id="pinnacle" d="M0 40V22l4-12 4 12v18"/>
-            <path id="chimney" d="M0 124V100h5v24"/>
-            <!-- A statue on the bridge parapet: plinth, figure, head. Twelve
-                 units tall, so it reads as a silhouette and not as a stick. -->
-            <path id="statue" d="M0 152v-7M-2.5 145h5M0 145v-4"/>
-          </defs>
+             This is drawn as a RAILWAY DIAGRAM, not a map, and the distinction
+             is the point. A map would have to get coastlines, distances and
+             1918 borders right, and any one of them being wrong would be a
+             claim the page cannot support. A diagram asserts only that these
+             stations came in this order along the Trans-Siberian, which is
+             what the thesis actually needs and what the record actually shows.
 
-          <!-- Petřín, behind everything. The lookout tower used to stand on
-               the same flat baseline as the Old Town, which put a hill's
-               landmark in a floodplain. -->
-          <g class="sky-hill" stroke-width="1">
-            <path d="M820 124q60-46 118-30t62 30"/>
+             Bakhmach and Chelyabinsk are set in navy because they carry dates:
+             the rearguard action that covered the withdrawal from Ukraine in
+             March 1918, and the incident in May 1918 after which the Legion
+             held the line east. The rest are stops, drawn as the site's
+             lozenge. -->
+        <svg class="route" viewBox="0 0 1000 150" width="1000" height="150"
+             role="img" aria-labelledby="route-title route-desc">
+          <title id="route-title">The Legion&rsquo;s route east, 1918&ndash;1920</title>
+          <desc id="route-desc">A schematic railway line running west to east
+            along the Trans-Siberian, with stations marked in order: Bakhmach,
+            Penza, Samara, Chelyabinsk, Omsk, Krasnoyarsk, Irkutsk and
+            Vladivostok. Not drawn to scale and not a map.</desc>
+
+          <text class="rt-title" x="20" y="26">THE LEGION&rsquo;S ROUTE EAST</text>
+
+          <!-- the track: two rails and their ties -->
+          <g class="rt-tie" stroke-width="1">
+            <path d="M40 62v14M68 62v14M96 62v14M124 62v14M152 62v14M180 62v14M208 62v14M236 62v14M264 62v14M292 62v14M320 62v14M348 62v14M376 62v14M404 62v14M432 62v14M460 62v14M488 62v14M516 62v14M544 62v14M572 62v14M600 62v14M628 62v14M656 62v14M684 62v14M712 62v14M740 62v14M768 62v14M796 62v14M824 62v14M852 62v14M880 62v14M908 62v14M936 62v14"/>
+          </g>
+          <g class="rt-rail" stroke-width="1.2">
+            <path d="M20 65h960M20 73h960"/>
           </g>
 
-          <!-- Roofscape. Three roof widths in an irregular sequence rather
-               than a strict A-B-A-B, with chimneys breaking the line: at
-               perfect alternation the row read as a picket fence, which is the
-               one thing a medieval town roofline is not. -->
-          <g class="sky-back" stroke-width="1">
-            <use href="#roof-a" x="8"/>   <use href="#roof-c" x="40"/>
-            <use href="#roof-b" x="60"/>  <use href="#chimney" x="86"/>
-            <use href="#roof-a" x="94"/>  <use href="#roof-b" x="126"/>
-            <use href="#roof-c" x="152"/> <use href="#roof-a" x="172"/>
-            <use href="#roof-b" x="206"/> <use href="#chimney" x="232"/>
-            <use href="#roof-c" x="240"/> <use href="#roof-a" x="260"/>
-            <use href="#roof-b" x="294"/> <use href="#roof-a" x="320"/>
-            <use href="#roof-c" x="354"/> <use href="#chimney" x="376"/>
-            <use href="#roof-b" x="384"/> <use href="#roof-a" x="410"/>
-            <use href="#roof-c" x="444"/> <use href="#roof-b" x="466"/>
-            <use href="#roof-a" x="492"/> <use href="#chimney" x="526"/>
-            <use href="#roof-b" x="534"/> <use href="#roof-c" x="560"/>
-            <use href="#roof-a" x="580"/> <use href="#roof-b" x="614"/>
-            <use href="#roof-c" x="640"/> <use href="#chimney" x="662"/>
-            <use href="#roof-a" x="670"/> <use href="#roof-b" x="704"/>
-            <use href="#roof-c" x="730"/> <use href="#roof-a" x="750"/>
-            <use href="#roof-b" x="784"/> <use href="#chimney" x="810"/>
-            <use href="#roof-c" x="818"/> <use href="#roof-a" x="838"/>
-            <use href="#roof-b" x="872"/> <use href="#roof-c" x="898"/>
-            <use href="#roof-a" x="918"/> <use href="#roof-b" x="952"/>
-            <use href="#roof-c" x="978"/>
-            <line x1="0" y1="124" x2="1000" y2="124"/>
+          <!-- Stations, west to east, on an even pitch. The pitch is a
+               diagram's spacing, not a distance: Penza to Samara is a few
+               hundred kilometres and Irkutsk to Vladivostok is over three
+               thousand, and nothing here should be read as claiming otherwise. -->
+          <g>
+            <path class="rt-stop" d="M60 62l7 7-7 7-7-7z"/>
+            <path class="rt-halt" d="M186 63l6 6-6 6-6-6z" stroke-width="1.1"/>
+            <path class="rt-halt" d="M311 63l6 6-6 6-6-6z" stroke-width="1.1"/>
+            <path class="rt-stop" d="M437 62l7 7-7 7-7-7z"/>
+            <path class="rt-halt" d="M563 63l6 6-6 6-6-6z" stroke-width="1.1"/>
+            <path class="rt-halt" d="M689 63l6 6-6 6-6-6z" stroke-width="1.1"/>
+            <path class="rt-halt" d="M814 63l6 6-6 6-6-6z" stroke-width="1.1"/>
+            <path class="rt-stop" d="M940 62l7 7-7 7-7-7z"/>
           </g>
 
-          <!-- monuments ------------------------------------------------- -->
-          <g class="sky-mid" stroke-width="1.25" stroke-linejoin="round">
-
-            <!-- Prague Castle: the long façade -->
-            <path d="M48 124V92h228v32"/>
-            <path d="M48 92h228"/>
-            <path d="M62 124V104h14v20M92 124V104h14v20M232 124V104h14v20M258 124V104h14v20"/>
-
-            <!-- St Vitus: two west spires, gable, rose window -->
-            <path d="M132 124V54h60v70"/>
-            <path d="M132 54l30-20 30 20"/>
-            <circle cx="162" cy="80" r="9"/>
-            <path d="M138 54V30l8-16 8 16v24"/>
-            <path d="M170 54V30l8-16 8 16v24"/>
-            <path d="M146 14V4M178 14V4"/>
-            <path d="M196 124V72h26v52"/>
-            <path d="M196 72l13-14 13 14"/>
-
-            <!-- St Nicholas: dome and bell tower -->
-            <path d="M320 124V96h74v28"/>
-            <path d="M320 96q37-46 74 0"/>
-            <path d="M357 50V38l6-10 6 10v12"/>
-            <path d="M363 28V18"/>
-            <path d="M404 124V66h24v58"/>
-            <path d="M404 66l12-14 12 14"/>
-
-            <!-- Old Town Hall tower -->
-            <path d="M556 124V50h30v74"/>
-            <path d="M552 50h38"/>
-            <path d="M556 50l15-16 15 16"/>
-            <path d="M562 124V96h18v28"/>
-
-            <!-- Týn: two towers, eight pinnacles, the nave between -->
-            <path d="M636 124V44h34v80"/>
-            <path d="M700 124V44h34v80"/>
-            <path d="M636 44l17-20 17 20"/>
-            <path d="M700 44l17-20 17 20"/>
-            <use href="#pinnacle" x="632" y="20"/>
-            <use href="#pinnacle" x="662" y="20"/>
-            <use href="#pinnacle" x="696" y="20"/>
-            <use href="#pinnacle" x="726" y="20"/>
-            <path d="M670 124V84h30v40"/>
-            <path d="M670 84l15-12 15 12"/>
-            <path d="M645 124V102h16v22M709 124V102h16v22"/>
-
-            <!-- Powder Tower -->
-            <path d="M790 124V62h32v62"/>
-            <path d="M786 62h40"/>
-            <path d="M790 62l16-18 16 18"/>
-            <path d="M806 44V32"/>
-
-            <!-- Petřín lookout, now standing on the hill drawn behind it -->
-            <path d="M898 94l14-58h8l14 58"/>
-            <path d="M902 74h36M906 58h28M910 46h20"/>
-            <path d="M916 36V24"/>
+          <g>
+            <text class="rt-name rt-name--key" x="60" y="103">BAKHMACH</text>
+            <text class="rt-name" x="186" y="103">PENZA</text>
+            <text class="rt-name" x="311" y="103">SAMARA</text>
+            <text class="rt-name rt-name--key" x="437" y="103">CHELYABINSK</text>
+            <text class="rt-name" x="563" y="103">OMSK</text>
+            <text class="rt-name" x="689" y="103">KRASNOYARSK</text>
+            <text class="rt-name" x="814" y="103">IRKUTSK</text>
+            <text class="rt-name rt-name--key" x="940" y="103">VLADIVOSTOK</text>
           </g>
 
-          <!-- Charles Bridge, across the front.
-
-               The statues are the whole point of drawing this bridge rather
-               than any other bridge, and they were missing: sixteen arches of
-               plain parapet could have been anywhere in Europe. The arch spans
-               vary now too, because the real ones do. -->
-          <g class="sky-front" stroke-width="1.4" stroke-linejoin="round">
-            <path d="M20 152h960"/>
-            <path d="M20 152v10M980 152v10"/>
-            <!-- arches, of unequal span -->
-            <path d="M104 152q26-28 52 0M172 152q31-31 62 0M250 152q28-29 56 0M322 152q30-30 60 0M398 152q27-28 54 0M468 152q31-31 62 0M546 152q28-29 56 0M618 152q30-30 60 0M694 152q27-28 54 0M764 152q31-31 62 0"/>
-            <!-- piers, carried below the arch springing -->
-            <path d="M156 152v18M234 152v18M306 152v18M382 152v18M452 152v18M530 152v18M602 152v18M678 152v18M748 152v18M826 152v18"/>
-            <!-- the statues on the parapet -->
-            <g stroke-width="1.1">
-              <use href="#statue" x="132"/> <use href="#statue" x="196"/>
-              <use href="#statue" x="266"/> <use href="#statue" x="340"/>
-              <use href="#statue" x="416"/> <use href="#statue" x="486"/>
-              <use href="#statue" x="562"/> <use href="#statue" x="636"/>
-              <use href="#statue" x="710"/> <use href="#statue" x="782"/>
-              <use href="#statue" x="846"/>
-            </g>
-            <!-- the two bridge towers -->
-            <path d="M62 152V78h34v74"/>
-            <path d="M58 78h42"/>
-            <path d="M62 78l17-20 17 20"/>
-            <path d="M70 152v-30h18v30"/>
-            <path d="M876 152V84h34v68"/>
-            <path d="M872 84h42"/>
-            <path d="M876 84l17-18 17 18"/>
-            <path d="M884 152v-28h18v28"/>
-          </g>
-
-          <!-- The Vltava. Three straight dashed rules read as ruled paper;
-               these are shallow curves at different dash rhythms, which reads
-               as moving water. -->
-          <g class="sky-water" stroke-width="1">
-            <path d="M30 179q235-7 470 0t470-2" stroke-dasharray="22 14"/>
-            <path d="M80 193q210 7 420 0t420 3" stroke-dasharray="14 18"/>
-            <path d="M140 206q180-6 360 0t360-3" stroke-dasharray="30 22"/>
+          <g class="rt-year">
+            <text x="60" y="128" text-anchor="middle">March 1918</text>
+            <text x="437" y="128" text-anchor="middle">May 1918</text>
+            <text x="940" y="128" text-anchor="middle">to 1920</text>
           </g>
         </svg>
       </div>
@@ -727,7 +640,7 @@
             <path d="M7.6 11.9V6.9"/>
             <path d="M7.6 8.7Q7.6 6.8 9.5 6.8T11.4 8.7v3.2"/>
           </svg>
-          <span><a href="https://www.linkedin.com/in/tomashaufer/">LinkedIn</a></span>
+          <span><a href="https://www.linkedin.com/in/tomashaufer/" target="_blank" rel="noopener">LinkedIn</a></span>
         </li>
         <li>
           <svg class="orn" viewBox="0 0 16 16" width="16" height="16" fill="none"
@@ -742,12 +655,12 @@
 
     <div class="footer-affil">
       <div class="footer-logos">
-        <a href="https://cuni.cz/UKEN-1.html">
+        <a href="https://cuni.cz/UKEN-1.html" target="_blank" rel="noopener">
           <img class="footer-logo-cu" src="/assets/img/cu-logo-en.svg"
                alt="Charles University" width="312" height="340">
         </a>
         <span class="footer-logo-rule" aria-hidden="true"></span>
-        <a href="https://cerge-ei.cz/">
+        <a href="https://cerge-ei.cz/" target="_blank" rel="noopener">
           <img class="footer-logo-cerge" src="/assets/img/cerge-logo.svg"
                alt="CERGE-EI" width="151" height="58">
         </a>

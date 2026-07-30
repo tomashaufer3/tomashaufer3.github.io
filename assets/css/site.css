@@ -203,6 +203,23 @@ a:focus-visible {
   border-radius: 1px;
 }
 
+/* Every link that leaves the site or opens a PDF now opens in a new tab, and a
+   link that does something the reader did not ask for should say so. The pills
+   already carry an icon for it; this covers the ones set in running prose —
+   the supervisor's page, the Substack address — with the conventional arrow.
+   Purely decorative, so it is hidden from assistive technology, which gets the
+   same information from the link itself. */
+a[target="_blank"]:not(.pill):not(.cta)::after {
+  content: "\2197";
+  display: inline-block;
+  margin-left: 0.12em;
+  font-size: 0.78em;
+  line-height: 1;
+  vertical-align: 0.32em;
+  color: var(--ink-faint);
+  text-decoration: none;
+}
+
 .skip {
   position: absolute;
   left: -9999px;
@@ -317,14 +334,18 @@ a:focus-visible {
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.95rem;
+  gap: 0.55rem;
   text-decoration: none;
   color: inherit;
 }
 
+/* Sized on height alone. The mark's viewBox is the glyph's own bounding box
+   rather than a square, so it carries no invisible padding and `width: auto`
+   lets the 544:945 ratio settle the rest — which is what allows it to sit this
+   close to the name without a gap opening up beside it. */
 .brand-mark {
-  width: 46px;
-  height: 46px;
+  width: auto;
+  height: 3.05rem;
   flex: none;
 }
 
@@ -625,31 +646,35 @@ p { margin: 0 0 var(--step); }
 
 .hero-figure .orn { width: 100%; height: auto; }
 
-/* The portrait sits in the hero figure slot, framed by the same arch the
-   headline used to sit behind — so the one photograph on the site is held by
-   the site's own ornament rather than dropped on top of it. */
-.hero-portrait {
-  position: relative;
-  display: grid;
-  place-items: center;
-  padding: clamp(1.5rem, 3vw, 2.75rem) clamp(1rem, 2vw, 2rem) 0;
-}
+/* The portrait is matted, like a plate in a book.
 
-.hero-portrait > .orn {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  color: var(--rule);
-  opacity: 0.75;
-  pointer-events: none;
+   The arch that used to sit behind it is gone. It was drawn larger than the
+   photograph so its apex rose above the picture and its legs ran down either
+   side — which read not as a frame but as a second, unrelated outline that
+   happened to be nearby. Two frames competing is worse than one.
+
+   What replaces it is a proper mount: a hairline outer frame, a wide margin of
+   paper, and the photograph inside on a hairline of its own. The bottom margin
+   is deeper than the top, which is how mounts have always been cut — an
+   optically centred picture sits slightly above the geometric centre. */
+.hero-portrait {
+  --mount: clamp(1.35rem, 2.4vw, 2.4rem);
+  position: relative;
+  max-width: 470px;
+  margin-inline: auto;
+  padding: var(--mount) var(--mount) calc(var(--mount) * 1.45);
+  background: var(--paper);
+  border: var(--hair) solid var(--rule);
 }
 
 .hero-portrait .portrait {
-  position: relative;
-  z-index: 1;
-  max-width: 420px;
-  margin-bottom: 0;
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: var(--hair) solid var(--rule-faint);
 }
 
 /* Two calls to action side by side. They wrap rather than shrink, because a
@@ -1005,22 +1030,52 @@ p { margin: 0 0 var(--step); }
    person, and the space is better spent on training a reader can check. The
    .timeline rules went with it. */
 
-/* Prague. Density is controlled per layer rather than by one flat opacity:
-   at 0.3 overall the detailed drawing turned to grey mush, and at full
-   strength the roofscape competed with the text above it. */
-.skyline {
+/* The Prague skyline that used to close this column is gone. It was a drawing
+   of a city, which is to say a drawing of nowhere in particular: the same
+   towers appear on every Czech tourist page, it said nothing about the person
+   whose page this is, and getting eight landmarks right by hand at 200px tall
+   was never going to happen.
+
+   What replaces it is the Legion's route east — the sequence of stations along
+   the Trans-Siberian that the thesis is built on. It is drawn as a railway
+   diagram rather than a map, because a diagram claims only what it can
+   support: that these places came in this order. No coastlines, no distances,
+   no borders that would have to be right. */
+.route {
   display: block;
   width: 100%;
   height: auto;
-  margin-top: 2rem;
+  margin-top: 2.4rem;
   color: var(--cu-navy);
 }
 
-.skyline .sky-hill  { opacity: 0.14; }
-.skyline .sky-back  { opacity: 0.22; }
-.skyline .sky-mid   { opacity: 0.5; }
-.skyline .sky-front { opacity: 0.62; }
-.skyline .sky-water { opacity: 0.3; }
+.route text { font-family: var(--serif); }
+
+.route .rt-rail   { stroke: currentColor; opacity: 0.55; }
+.route .rt-tie    { stroke: currentColor; opacity: 0.28; }
+.route .rt-stop   { fill: var(--accent); }
+.route .rt-halt   { fill: none; stroke: currentColor; opacity: 0.6; }
+
+.route .rt-name {
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  fill: var(--ink-faint);
+  text-anchor: middle;
+}
+
+.route .rt-name--key { fill: var(--cu-navy); }
+
+.route .rt-year {
+  font-size: 11.5px;
+  font-style: italic;
+  fill: var(--ink-faint);
+}
+
+.route .rt-title {
+  font-size: 11px;
+  letter-spacing: 0.19em;
+  fill: var(--ink-faint);
+}
 
 /* --- 11. Research entries --------------------------------------------- */
 
@@ -1256,7 +1311,10 @@ p { margin: 0 0 var(--step); }
 
 .footer-inner {
   display: grid;
-  grid-template-columns: 1.15fr 0.7fr 1fr 0.55fr;
+  /* The last column carries two institutional marks side by side and needs
+     real width for them. At 0.55fr it had about 178px to hold both, which is
+     why the seal was arriving squashed — see .footer-logos. */
+  grid-template-columns: 1fr 0.55fr 0.85fr 1.1fr;
   gap: clamp(1.75rem, 3vw, 3.5rem);
   padding-block: clamp(2.25rem, 4vw, 3.5rem);
   align-items: start;
@@ -1319,6 +1377,16 @@ p { margin: 0 0 var(--step); }
    Matching them on width would leave the seal tiny; they are matched on
    optical weight instead, and separated by a hairline so neither reads as a
    modifier of the other. */
+/* `flex: none` and `max-width: none` are load-bearing, not tidying.
+
+   Both marks are sized on one axis and left `auto` on the other, so the
+   browser derives the missing dimension from the file's aspect ratio. But
+   these are flex items, and flex items shrink: when the column was too narrow
+   the anchors were compressed, `img { max-width: 100% }` from the reset then
+   capped the image's width — and because the height was still pinned at its
+   explicit value, nothing preserved the ratio. The Charles seal was rendering
+   at 53px wide by 132px tall against a natural ratio of 0.92, i.e. squashed to
+   less than half its width. It had been arriving that way at every size. */
 .footer-logos {
   display: flex;
   align-items: center;
@@ -1326,6 +1394,9 @@ p { margin: 0 0 var(--step); }
   gap: 1.25rem;
   margin-bottom: 0.7rem;
 }
+
+.footer-logos a { flex: none; }
+.footer-logos img { max-width: none; }
 
 /* The marks link to the two institutions. No underline — an underlined logo
    looks like a broken image — so the affordance is carried by opacity instead:
@@ -1345,9 +1416,9 @@ p { margin: 0 0 var(--step); }
 .footer-logos a:hover img,
 .footer-logos a:focus-visible img { opacity: 1; }
 
-.footer-logo-cu   { width: auto; height: 96px; }
+.footer-logo-cu   { width: auto; height: 132px; }
 .footer-logo-rule { width: var(--hair); align-self: stretch; background: var(--rule); }
-.footer-logo-cerge { width: 122px; height: auto; }
+.footer-logo-cerge { width: 164px; height: auto; }
 
 .footer-affil-note {
   margin: 0;
@@ -1429,14 +1500,20 @@ p { margin: 0 0 var(--step); }
 @media (max-width: 40em) {
   .header-inner { padding-block: 1rem; }
 
-  .brand { gap: 0.75rem; }
-  .brand-mark { width: 36px; height: 36px; }
+  .brand { gap: 0.45rem; }
+  .brand-mark { height: 2.4rem; }
   .brand-name { font-size: 1.2rem; }
 
   .site-nav ul { gap: 0.4rem 1.5rem; }
   .site-nav a { font-size: 0.72rem; letter-spacing: 0.13em; }
 
   .footer-inner { grid-template-columns: 1fr; }
+
+  /* The marks no longer shrink to fit (see .footer-logos), so on a narrow
+     screen they have to be told to be smaller rather than allowed to squash. */
+  .footer-logos { gap: 0.9rem; }
+  .footer-logo-cu { height: 104px; }
+  .footer-logo-cerge { width: 128px; }
 
   .cv-row { grid-template-columns: 1fr; gap: 0.15rem; }
   .cv-when { padding-top: 0; }
