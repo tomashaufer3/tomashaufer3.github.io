@@ -603,6 +603,21 @@ p { margin: 0 0 var(--step); }
 
 .stack > * + * { margin-top: 1.15rem; }
 
+/* The portrait — the only bitmap on the site, so it needs help to sit among
+   line ornaments rather than crash into them: a hairline frame with a little
+   air inside it, and a light desaturation that pulls the photograph toward
+   the cream-and-navy palette. Drop the filter line for full colour. */
+.portrait {
+  width: 100%;
+  max-width: 265px;
+  height: auto;
+  margin: 0 0 1.5rem;
+  padding: 6px;
+  background: var(--paper);
+  border: var(--hair) solid var(--rule);
+  filter: grayscale(0.85) contrast(1.04) sepia(0.12);
+}
+
 /* Publication list on the home page: a thumbnail ornament, then the title. */
 .pub-list {
   list-style: none;
@@ -653,7 +668,13 @@ p { margin: 0 0 var(--step); }
 
 /* --- 9. Chart ---------------------------------------------------------- */
 
-/* Hand-drawn inline SVG, deliberately: a charting library would be the only
+/* Currently unused. The home page carried a figure built from invented data;
+   on a research page that is worse than carrying no figure at all, so it was
+   removed rather than relabelled. These rules stay because a real figure is
+   the obvious thing to put back — draw it from your own estimates, keep the
+   series colours below so a chart here and one from th_style agree.
+
+   Hand-drawn inline SVG, deliberately: a charting library would be the only
    JavaScript on the site, and this is one static figure. Series colours are
    the same CU constants the Python figures use, so a chart drawn here and a
    chart drawn in matplotlib match. */

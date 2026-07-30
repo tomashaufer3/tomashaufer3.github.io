@@ -115,7 +115,9 @@ ever need to retrace the SVG, fetch the artwork from the University again.
 It is deliberately **not** in the site header. An institutional emblem sitting
 next to your own name at the top of a page is the visual grammar of an official
 University page; this is a personal one. Beside a footer address it reads as "I
-work here", which is what is being claimed.
+work here", which is what is being claimed — and CERGE-EI is a joint workplace
+of Charles University and the Economics Institute of the Czech Academy of
+Sciences, so the claim is accurate.
 
 One thing still to settle before this goes public: check the University's
 visual-identity rules for personal pages. The emblem is currently drawn in
@@ -141,9 +143,20 @@ markup byte-identical (only `aria-current="page"` differs) so a change is a
 find-and-replace across the five. The same is true of the
 `<footer class="site-footer">` block, where nothing differs at all.
 
-**The contact address.** The footer carries a plain email address. `noindex`
-keeps the page out of search, but the page is still public and scrapable —
-worth a decision before this goes live, and it has to be made in five files.
+**The contact address.** The footer carries `tomas.haufer@cerge-ei.cz` in
+plain text on all five pages. `noindex` keeps the page out of search, but the
+page is still public and scrapable. The institutional address is the right one
+to expose — it can be abandoned; a personal one cannot. Nothing else from the
+CV belongs here: no home address, no phone number, no date of birth.
+
+**Content is sourced, not invented.** Every date, title, figure and link on
+the site comes from the CVs, the thesis documentation site, or the Substack
+about page. Two things were deliberately left off: the `/legions-docs/` note
+about a target journal, which is an ambition rather than a fact, and the
+personal details above. The home page also carries no figure — the one that
+used to be there was built from invented data, which on a research page is
+worse than no figure at all. The `.chart` styles are still in the stylesheet
+for when there is a real one.
 
 ## Staying out of search
 
