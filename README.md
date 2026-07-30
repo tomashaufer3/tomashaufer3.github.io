@@ -103,6 +103,52 @@ Note that Python's `urllib` fails on this machine with a certificate error
 (a local root CA that OpenSSL rejects); PowerShell's `Invoke-WebRequest` uses
 the Windows certificate store and works.
 
+**The TH monogram is cut from these files too.** `assets/img/favicon.svg` and
+`assets/img/th-mark.svg` carry real EB Garamond outlines rather than `<text>`,
+because both render in an isolated context with no access to the webfont —
+`<text>` would fall back to whatever serif the platform has and the metrics
+would shift between Windows, macOS and Linux. To regenerate after a font
+update (needs `fonttools` and `brotli`, the latter to read woff2):
+
+```python
+from fontTools.ttLib import TTFont
+from fontTools.pens.svgPathPen import SVGPathPen
+from fontTools.pens.boundsPen import BoundsPen
+from fontTools.pens.transformPen import TransformPen
+from fontTools.pens.recordingPen import RecordingPen
+from fontTools.misc.transform import Transform
+from fontTools.varLib.instancer import instantiateVariableFont
+
+SRC   = "assets/fonts/ebgaramond-var-normal-latin.woff2"
+WGHT  = 500     # a shade heavier than body: white-on-navy eats serifs at 400
+TRACK = 40      # letterspacing, font units
+CAP_H, BASELINE, CENTRE = 24.0, 38.0, 32.0     # target, in the 64-unit box
+
+f  = instantiateVariableFont(TTFont(SRC), {"wght": WGHT}, inplace=True)
+gs, cmap, hmtx = f.getGlyphSet(), f.getBestCmap(), f["hmtx"]
+
+rec, x = RecordingPen(), 0
+for ch in "TH":
+    gs[cmap[ord(ch)]].draw(TransformPen(rec, Transform().translate(x, 0)))
+    x += hmtx[cmap[ord(ch)]][0] + TRACK
+
+bp = BoundsPen(gs); rec.replay(bp)
+xmin, ymin, xmax, ymax = bp.bounds
+s = CAP_H / (ymax - ymin)
+t = (Transform().translate(CENTRE, BASELINE).scale(s, -s)
+     .translate(-(xmin + xmax) / 2, -ymin))
+
+out = SVGPathPen(gs, ntos=lambda v: f"{round(v, 2):g}")
+rec.replay(TransformPen(out, t))
+print(out.getCommands())
+```
+
+The favicon uses that path as-is (cap height 24, baseline 38, letters spanning
+x 6.8–57.2, red rule beneath at the same width). The header mark reuses the
+identical path and only wraps it in
+`translate(32 32) scale(0.86) translate(-32 -26)` to shrink and re-centre it
+inside the hairline square. Change the path in one file and change it in both.
+
 ## Images
 
 **The logos.** `assets/img/cu-logo-en.svg` is the Charles University seal with
@@ -124,6 +170,16 @@ and the Economics Institute of the Czech Academy of Sciences.
 
 Still to settle: check the University's visual-identity rules for personal
 pages, and whether recolouring the mark is allowed.
+
+**The monogram.** What *is* in the header is `assets/img/th-mark.svg` — your own
+two initials in the site's own EB Garamond, inside a hairline square. It is
+`assets/img/favicon.svg` outlined rather than filled, so the browser tab and the
+page header carry one mark and not two, and it claims nothing about the work.
+See the recipe under **Fonts** for how the letterforms are cut.
+
+The only thing the favicon has that the header mark does not is the red rule
+under the letters: the name in the header already sits on one, and two short red
+rules a centimetre apart at different heights read as a mistake.
 
 **The portrait.** `assets/img/tomas-haufer.jpg` is an 800×1000 crop, cut from
 one frame in `assets/img/photo/`. It is desaturated in CSS (`.portrait`) rather

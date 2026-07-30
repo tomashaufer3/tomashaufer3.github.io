@@ -297,14 +297,27 @@ a:focus-visible {
   padding-block: 1.15rem;
 }
 
-/* No mark. Three have been tried here — a Gothic arch, a plotted series, and
-   a TH monogram — and each had the same problem: a mark next to a personal
-   name has to earn its place, and none of them did. The name set larger, with
-   a short red rule under it, is what most established academic pages do. */
+/* The mark, and this time it earns its place. Three earlier attempts did not:
+   a Gothic arch, a plotted series and a drawn monogram each asserted something
+   about the work that a header is the wrong place to assert. This one asserts
+   nothing — it is the two letters of the name beside it, set in the site's own
+   EB Garamond, inside a hairline square. Its whole job is to be the same mark
+   as the browser tab, so the page and the favicon read as one thing.
+
+   /assets/img/th-mark.svg, and see the note in that file for why it is an
+   <img> rather than inline SVG. */
 .brand {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
   text-decoration: none;
   color: inherit;
+}
+
+.brand-mark {
+  width: 46px;
+  height: 46px;
+  flex: none;
 }
 
 .brand-name {
@@ -317,20 +330,16 @@ a:focus-visible {
 
 .brand:hover .brand-name { color: var(--accent); }
 
-/* The rule. Short and heavy enough to read as deliberate rather than as a
-   stray underline, and it is the one place red appears in the header. */
-.brand-name::after {
-  content: "";
-  display: block;
-  width: 2.15rem;
-  height: 2px;
-  margin-top: 0.42rem;
-  background: var(--cu-red-dark);
-}
+/* The name used to sit on a short red rule of its own. It has been removed,
+   because the mark beside it now carries the identical rule from the favicon:
+   two red bars of the same length, twenty pixels apart horizontally and eight
+   vertically, read as a printing error rather than as a system. The mark keeps
+   the red; the name is just the name. To put it back, restore
+   `.brand-name::after` with width 2.15rem, height 2px, margin-top 0.42rem. */
 
 .brand-sub {
   display: block;
-  margin-top: 0.42rem;
+  margin-top: 0.5rem;
   font-size: 0.68rem;
   line-height: 1.5;
   letter-spacing: 0.15em;
@@ -411,7 +420,32 @@ h1.page-title {
   margin: 0 0 1.1rem;
 }
 
-.label--accent { color: var(--accent); }
+/* Subsection heading. Theses, Education, Research experience, Skills — the
+   second level of structure on the long pages.
+
+   At plain .label size these lost to the entry titles beneath them, so a
+   reader scrolling the CV saw one undifferentiated column of rows and no
+   seams. Slightly larger and wider-tracked, and carrying the same short red
+   rule as the name in the header — the site now has one gesture for "a new
+   part starts here" and uses it in both places. */
+.label--accent {
+  color: var(--accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+}
+
+.label--accent::before {
+  content: "";
+  display: block;
+  width: 2.15rem;
+  height: 2px;
+  margin-bottom: 0.62rem;
+  background: var(--accent);
+}
+
+/* Air above a subsection, but only where something precedes it — the first
+   label in a column must still sit flush with the top of its column. */
+* + .label--accent { margin-top: 2.4rem; }
 
 h2 {
   font-size: clamp(1.3rem, 1.05rem + 0.7vw, 1.72rem);
@@ -531,8 +565,15 @@ p { margin: 0 0 var(--step); }
   opacity: 0.07;
 }
 
-/* Content must sit above the watermark. */
-.col > *, .hero-text > * { position: relative; z-index: 1; }
+/* Content must sit above the watermark.
+
+   The :not() is load-bearing. `.col > *` and `.watermark` have identical
+   specificity (0,1,0), so whichever comes later in the file wins — and this
+   one does. Without the exclusion the watermark was forced to position:
+   relative, dropped into the normal flow, and pushed the whole Background
+   column down by its own 460px height. */
+.col > *:not(.watermark),
+.hero-text > *:not(.watermark) { position: relative; z-index: 1; }
 
 /* --- 7. Hero ----------------------------------------------------------- */
 
@@ -646,7 +687,6 @@ p { margin: 0 0 var(--step); }
 }
 
 .schematic .sch-rule line { stroke: var(--rule); stroke-width: 1; }
-.schematic .sch-divider { stroke-dasharray: 3 5; opacity: 0.75; }
 
 .schematic .sch-stage {
   font-size: 11px;
@@ -810,15 +850,21 @@ p { margin: 0 0 var(--step); }
   display: grid;
   grid-template-columns: 62px 1fr;
   gap: 0 1.15rem;
-  padding: 1.15rem 0;
+  padding: 1.3rem 0;
   border-top: var(--hair) solid var(--rule-faint);
+  align-items: start;
 }
 
 .pub:first-child { border-top: 0; padding-top: 0; }
 
+/* Nudged down by three pixels. Grid alignment puts the top of the thumbnail's
+   box level with the top of the text block, but the title's cap line starts
+   below that, so a box aligned to the box read as floating. Optical alignment
+   beats geometric alignment here, as it usually does. */
 .pub-thumb {
   width: 62px;
   height: 62px;
+  margin-top: 3px;
   color: var(--cu-navy);
   opacity: 0.62;
   border: var(--hair) solid var(--rule-faint);
@@ -1312,9 +1358,9 @@ p { margin: 0 0 var(--step); }
 @media (max-width: 40em) {
   .header-inner { padding-block: 1rem; }
 
-  .brand-mark { width: 36px; height: 36px; font-size: 1rem; }
+  .brand { gap: 0.75rem; }
+  .brand-mark { width: 36px; height: 36px; }
   .brand-name { font-size: 1.2rem; }
-  .brand-note { display: none; }
 
   .site-nav ul { gap: 0.4rem 1.5rem; }
   .site-nav a { font-size: 0.72rem; letter-spacing: 0.13em; }

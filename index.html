@@ -16,17 +16,23 @@
      If you change it here, find-and-replace in research.html, cv.html,
      substack.html and 404.html too.
 
-     No mark and no institutional line. A logo beside a personal name is the
-     visual grammar of an official University page, and the full "joint
-     workplace of Charles University and the Economics Institute…" wording is
-     a sentence, not a label — at header size it read as a wall of small text.
-     Both live in the footer now, where they belong.
+     Name, affiliation beneath it, and a mark to the left. The mark is the
+     favicon in outline — EB Garamond TH in a hairline square — and not an
+     institutional logo: a University coat of arms beside a personal name is
+     the visual grammar of an official University page, which this is not.
+     The full "joint workplace of Charles University and the Economics
+     Institute…" wording is a sentence rather than a label and read as a wall
+     of small type at this size; it lives in the footer, with the logos.
      ======================================================================== -->
 <header class="site-header">
   <div class="shell header-inner">
     <a class="brand" href="/">
-      <span class="brand-name">Tomáš Haufer</span>
-      <span class="brand-sub">CERGE-EI</span>
+      <img class="brand-mark" src="/assets/img/th-mark.svg" alt="" aria-hidden="true"
+           width="64" height="64">
+      <span class="brand-text">
+        <span class="brand-name">Tomáš Haufer</span>
+        <span class="brand-sub">CERGE-EI</span>
+      </span>
     </a>
     <nav class="site-nav" aria-label="Main">
       <ul>
@@ -175,7 +181,19 @@
              second time without conscription — which is what makes the setting
              worth anything. It states no quantities it cannot support. -->
         <div class="feature-figure">
-          <svg class="schematic" viewBox="0 0 640 400" width="640" height="400"
+          <!-- Spacing, redrawn on a 700 x 420 field. Three things were wrong at
+               640 x 400, and all three were the same mistake — elements placed
+               by coordinate without measuring what would sit at that
+               coordinate. The right-hand note ran past the viewBox and lost
+               its last word; the "deserted" label overlapped the Legions box;
+               and the vertical stage divider was drawn straight through two
+               nodes, because both columns ended exactly where it stood.
+
+               The divider is gone. Two separate rules, one over each stage,
+               say the same thing without a line crossing the diagram. Every
+               box now has clear air on both sides, and the third column is
+               wide enough for the longest label it has to hold. -->
+          <svg class="schematic" viewBox="0 0 700 420" width="700" height="420"
                role="img" aria-labelledby="schematic-title schematic-desc">
             <title id="schematic-title">The two decisions</title>
             <desc id="schematic-desc">Men in the Habsburg army either stayed or
@@ -198,67 +216,71 @@
               </marker>
             </defs>
 
-            <!-- stage rules -->
+            <!-- stage rules: one per stage, with the gap between them doing
+                 the work the vertical divider used to do badly -->
             <g class="sch-rule">
-              <line x1="20" y1="44" x2="620" y2="44"/>
+              <line x1="20" y1="44" x2="400" y2="44"/>
+              <line x1="430" y1="44" x2="680" y2="44"/>
               <text class="sch-stage" x="20" y="34">FIRST DECISION</text>
-              <text class="sch-stage" x="400" y="34">SECOND DECISION</text>
-              <line x1="392" y1="44" x2="392" y2="356" class="sch-divider"/>
+              <text class="sch-stage" x="430" y="34">SECOND DECISION</text>
             </g>
 
-            <!-- flows, drawn under the nodes -->
+            <!-- flows, drawn under the nodes. Each ends six units short of the
+                 box it points at, so the arrowhead has somewhere to sit. -->
             <path class="sch-flow sch-flow--muted" marker-end="url(#ah-grey)"
-                  d="M172 186C205 186 214 96 244 96"/>
+                  d="M162 192C196 192 204 108 246 108"/>
             <path class="sch-flow sch-flow--red" marker-end="url(#ah-red)"
-                  d="M172 214C205 214 214 232 244 232"/>
+                  d="M162 220C196 220 204 238 246 238"/>
             <path class="sch-flow sch-flow--navy" marker-end="url(#ah-navy)"
-                  d="M408 218C440 218 452 154 474 154"/>
+                  d="M394 224C430 224 438 158 454 158"/>
             <path class="sch-flow sch-flow--red" marker-end="url(#ah-red)"
-                  d="M408 246C440 246 452 312 474 312"/>
+                  d="M394 252C430 252 438 310 454 310"/>
 
             <!-- nodes -->
             <g class="sch-node">
-              <rect x="22" y="172" width="150" height="56"/>
-              <text x="97" y="196">HABSBURG</text>
-              <text x="97" y="214">ARMY</text>
+              <rect x="20" y="178" width="142" height="56"/>
+              <text x="91" y="202">HABSBURG</text>
+              <text x="91" y="220">ARMY</text>
             </g>
 
             <g class="sch-node sch-node--muted">
-              <rect x="244" y="70" width="148" height="52"/>
-              <text x="318" y="101">STAYED</text>
+              <rect x="252" y="82" width="142" height="52"/>
+              <text x="323" y="113">STAYED</text>
             </g>
 
             <g class="sch-node sch-node--accent">
-              <rect x="244" y="204" width="148" height="56"/>
-              <text x="318" y="228">CZECHOSLOVAK</text>
-              <text x="318" y="246">LEGIONS</text>
+              <rect x="252" y="210" width="142" height="56"/>
+              <text x="323" y="234">CZECHOSLOVAK</text>
+              <text x="323" y="252">LEGIONS</text>
             </g>
 
             <g class="sch-node">
-              <rect x="474" y="128" width="146" height="52"/>
-              <text x="547" y="159">SERVED TO THE END</text>
+              <rect x="460" y="132" width="220" height="52"/>
+              <text x="570" y="163">SERVED TO THE END</text>
             </g>
 
             <g class="sch-node sch-node--accent">
-              <rect x="474" y="286" width="146" height="52"/>
-              <text x="547" y="317">DESERTED AGAIN</text>
+              <rect x="460" y="284" width="220" height="52"/>
+              <text x="570" y="315">DESERTED AGAIN</text>
             </g>
 
-            <!-- flow labels, on a paper-coloured backing so the line does not
-                 run through the words -->
+            <!-- The one flow that needs naming, on a paper-coloured backing so
+                 the line does not run through the word. It sits in the 90-unit
+                 gap between the first and second columns, which is why that gap
+                 is 90 units wide. -->
             <g class="sch-flowlabel">
-              <rect x="182" y="243" width="86" height="17"/>
-              <text x="225" y="255">deserted</text>
+              <rect x="177" y="223" width="56" height="17"/>
+              <text x="205" y="235">deserted</text>
             </g>
 
             <!-- the point of the whole thing -->
             <g class="sch-note">
-              <text x="474" y="368">Voluntary enlistment: the second choice</text>
-              <text x="474" y="384">is not confounded by conscription.</text>
+              <text x="460" y="374">Voluntary enlistment: the second choice</text>
+              <text x="460" y="390">is not confounded by conscription.</text>
             </g>
             <g class="sch-note sch-note--left">
-              <text x="22" y="368">Two datasets, c. 300,000</text>
-              <text x="22" y="384">individual soldier records.</text>
+              <text x="20" y="374">Two datasets, c. 300,000</text>
+              <text x="20" y="390">individual soldier records.</text>
             </g>
           </svg>
         </div>
@@ -275,19 +297,32 @@
              and a term project under a Publications heading invites the reader
              to check, and they will.
 
-             The three thumbnails are drawn to one optical box — 40 x 40 inside
-             the 62 x 62 viewBox, same 1.1 stroke — so they line up down the
-             column instead of each floating at its own size. -->
+             Each thumbnail draws the METHOD, not the subject. The previous set
+             — a ruled page, a scatter grid, a compass — described the objects
+             loosely and in one case described nothing at all: a compass has no
+             connection to a macro commentary on Central Europe, it was simply
+             a nice drawing. A reader scanning this column now learns something
+             true about each entry before reading a word of it: record linkage,
+             unsupervised clustering, a forecast.
+
+             All three are drawn to one optical box — content inside x/y 12–50
+             of the 62 x 62 viewBox, centred on (31, 31), same 1.1 stroke — so
+             they line up down the column and sit centred in their frames
+             instead of each floating at its own size and height. -->
         <p class="label">Selected work</p>
         <ul class="pub-list">
 
           <li class="pub">
             <svg class="pub-thumb orn" viewBox="0 0 62 62" width="62" height="62"
                  fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
-              <!-- a leaf of service records: ruled lines and a margin -->
-              <path d="M15 11h32v40H15z"/>
-              <path d="M21 21h9M21 28h20M21 35h20M21 42h14"/>
-              <path d="M18 15v32" stroke-dasharray="2 3"/>
+              <!-- record linkage: two registers, one man matched across them -->
+              <rect x="12" y="15" width="16" height="32"/>
+              <rect x="34" y="15" width="16" height="32"/>
+              <path d="M15 21h10M15 27h10M15 33h10M15 39h10" opacity=".45"/>
+              <path d="M37 21h10M37 27h10M37 33h10M37 39h10" opacity=".45"/>
+              <path d="M28 27h3v6h3"/>
+              <circle cx="28" cy="27" r="1.5" fill="currentColor" stroke="none"/>
+              <circle cx="34" cy="33" r="1.5" fill="currentColor" stroke="none"/>
             </svg>
             <div>
               <h3 class="pub-title">The Fateful Adventures of the Good Soldiers</h3>
@@ -302,12 +337,18 @@
           <li class="pub">
             <svg class="pub-thumb orn" viewBox="0 0 62 62" width="62" height="62"
                  fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
-              <!-- a corpus mapped across space and time -->
-              <path d="M11 11h40v40H11z"/>
-              <path d="M11 24h40M11 38h40M25 11v40M38 11v40" opacity=".45"/>
-              <path d="M17 44Q29 24 47 19" stroke-dasharray="4 3"/>
-              <circle cx="17" cy="44" r="2.4" fill="currentColor" stroke="none"/>
-              <circle cx="47" cy="19" r="2.4" fill="currentColor" stroke="none"/>
+              <!-- unsupervised clustering: groups the method found, and one
+                   book it left outside both of them -->
+              <circle cx="23" cy="24" r="9" stroke-dasharray="3 3"/>
+              <circle cx="41" cy="39" r="8" stroke-dasharray="3 3"/>
+              <circle cx="19" cy="21" r="1.4" fill="currentColor" stroke="none"/>
+              <circle cx="25" cy="20" r="1.4" fill="currentColor" stroke="none"/>
+              <circle cx="21" cy="27" r="1.4" fill="currentColor" stroke="none"/>
+              <circle cx="27" cy="26" r="1.4" fill="currentColor" stroke="none"/>
+              <circle cx="38" cy="36" r="1.4" fill="currentColor" stroke="none"/>
+              <circle cx="43" cy="37" r="1.4" fill="currentColor" stroke="none"/>
+              <circle cx="40" cy="43" r="1.4" fill="currentColor" stroke="none"/>
+              <circle cx="15" cy="43" r="1.4" fill="currentColor" stroke="none" opacity=".4"/>
             </svg>
             <div>
               <h3 class="pub-title">Written in Time</h3>
@@ -321,11 +362,13 @@
           <li class="pub">
             <svg class="pub-thumb orn" viewBox="0 0 62 62" width="62" height="62"
                  fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
-              <!-- a struck coin, for the macro commentary -->
-              <circle cx="31" cy="31" r="20"/>
-              <circle cx="31" cy="31" r="14.5" stroke-dasharray="2 3"/>
-              <path d="M31 21v20M21 31h20"/>
-              <circle cx="31" cy="31" r="4"/>
+              <!-- an outlook: history solid, projection dashed, and the line
+                   between them that every forecast turns on -->
+              <path d="M13 16v30h37"/>
+              <path d="M34 18v26" stroke-dasharray="2 3" opacity=".5"/>
+              <path d="M17 39l6-6 5 3 6-11"/>
+              <path d="M34 25l5 5 5-9 5 4" stroke-dasharray="4 3"/>
+              <circle cx="34" cy="25" r="1.6" fill="currentColor" stroke="none"/>
             </svg>
             <div>
               <h3 class="pub-title">Central and Eastern Europe Outlook: United in Diversity</h3>
@@ -593,6 +636,20 @@
             <path d="M1 3l7 6 7-6"/>
           </svg>
           <span><a href="mailto:tomas.haufer@cerge-ei.cz">tomas.haufer@cerge-ei.cz</a></span>
+        </li>
+        <!-- Drawn as hairline line art rather than the downloaded LinkedIn
+             badge, so the row matches the envelope and the pin beside it and
+             nothing third-party is bundled. -->
+        <li>
+          <svg class="orn" viewBox="0 0 16 16" width="16" height="16" fill="none"
+               stroke="currentColor" stroke-width="1.3" aria-hidden="true">
+            <rect x="1" y="1" width="14" height="14"/>
+            <circle cx="4.6" cy="4.4" r="0.9" fill="currentColor" stroke="none"/>
+            <path d="M4.6 6.9v5"/>
+            <path d="M7.6 11.9V6.9"/>
+            <path d="M7.6 8.7Q7.6 6.8 9.5 6.8T11.4 8.7v3.2"/>
+          </svg>
+          <span><a href="https://www.linkedin.com/in/tomashaufer/">LinkedIn</a></span>
         </li>
         <li>
           <svg class="orn" viewBox="0 0 16 16" width="16" height="16" fill="none"
