@@ -409,7 +409,29 @@ p { margin: 0 0 var(--step); }
   text-transform: uppercase;
   color: var(--ink-soft);
   width: fit-content;
+  /* The native disclosure triangle is a filled arrow that belongs to no part
+     of this design. Suppress it (three ways, for three browser families) and
+     substitute the site's lozenge: hollow when closed, filled when open. */
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  list-style: none;
 }
+
+.entry summary::-webkit-details-marker { display: none; }
+.entry summary::marker { content: ""; }
+
+.entry summary::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border: var(--hair) solid var(--rubric);
+  transform: rotate(45deg);
+  transition: background-color 140ms ease;
+}
+
+.entry details[open] summary::before { background: var(--rubric); }
 
 .entry summary:hover { color: var(--rubric); }
 
@@ -507,6 +529,16 @@ p { margin: 0 0 var(--step); }
   :root { --gutter: 0rem; }
 
   .folio { padding-top: 2rem; }
+
+  /* At 375px the four nav items needed 332.9px and had 330.6px — they wrapped,
+     orphaning "Writing" onto a line of its own for the sake of 2.3px. 1.5rem
+     brings it to 319.6px, with room left for the current-page lozenge that
+     sits in the gap. Narrower than ~320px it wraps again, which is fine. */
+  .masthead ul { gap: 0.35rem 1.5rem; }
+
+  /* The versal spans three lines on a narrow measure, cutting a deep notch
+     into the paragraph. Smaller here so it clears in two. */
+  .versal::first-letter { font-size: 3.1em; }
 
   .folio::before,
   .folio::after {
