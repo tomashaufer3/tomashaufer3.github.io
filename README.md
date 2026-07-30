@@ -33,7 +33,7 @@ root-relative (`/assets/...`), so `file://` will not resolve them.
 index.html          Home
 research.html       Publications, working papers, work in progress
 cv.html             Web CV (prints cleanly) + link to the PDF
-writing.html        A Diary of an Econ Student (Substack)
+substack.html       A Diary of an Econ Student (Substack)
 404.html            Not-found page, served automatically by GitHub Pages
 robots.txt          Permissive — see "Staying out of search" below
 .nojekyll           Tells GitHub to serve the files as-is, no Jekyll pass

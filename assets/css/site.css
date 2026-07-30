@@ -20,7 +20,7 @@
      7. Hero
      8. Cards & panels
      9. Chart
-    10. Timeline
+    10. Skyline
     11. Research entries
     12. CV rows
     13. Site footer
@@ -305,9 +305,13 @@ a:focus-visible {
   color: inherit;
 }
 
+/* A plotted series on an axis, not an arch. The mark says "this person
+   measures things", which is the claim the site is actually making, and it
+   rhymes with the chart further down the page. Square, so it sits level with
+   two lines of wordmark instead of towering over them. */
 .brand-mark {
-  width: 42px;
-  height: 58px;
+  width: 44px;
+  height: 44px;
   flex: none;
   color: var(--cu-red-dark);
 }
@@ -697,66 +701,12 @@ p { margin: 0 0 var(--step); }
 .swatch--a { background: var(--cu-red-dark); }
 .swatch--b { background: var(--cu-blue); }
 
-/* --- 10. Timeline ------------------------------------------------------ */
+/* --- 10. Skyline ------------------------------------------------------- */
 
-/* HTML rather than SVG, so the labels scale with the reader's font size and
-   are selectable and readable to a screen reader. */
-
-.timeline {
-  list-style: none;
-  margin: 0 0 var(--step);
-  padding: 0;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 1fr;
-  gap: 0.5rem;
-  position: relative;
-}
-
-/* The spine, drawn behind the nodes. */
-.timeline::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 2.05rem;
-  height: var(--hair);
-  background: var(--rule);
-}
-
-.timeline li {
-  text-align: center;
-  position: relative;
-  padding-top: 0;
-}
-
-.timeline-year {
-  display: block;
-  font-size: 0.8rem;
-  letter-spacing: 0.11em;
-  color: var(--cu-navy);
-  font-variant-numeric: tabular-nums lining-nums;
-  margin-bottom: 0.55rem;
-}
-
-/* The node itself: a small lozenge on the spine. */
-.timeline-node {
-  display: block;
-  width: 7px;
-  height: 7px;
-  margin: 0 auto 0.85rem;
-  background: var(--accent);
-  transform: rotate(45deg);
-  position: relative;
-  z-index: 1;
-}
-
-.timeline-caption {
-  display: block;
-  font-size: 0.78rem;
-  line-height: 1.4;
-  color: var(--ink-soft);
-}
+/* The home page used to carry a 1000–1500 timeline here. It was removed: a
+   periodisation of medieval Europe is a claim about the field, not about the
+   person, and the space is better spent on training a reader can check. The
+   .timeline rules went with it. */
 
 .skyline {
   display: block;
@@ -1049,7 +999,7 @@ p { margin: 0 0 var(--step); }
 @media (max-width: 40em) {
   .header-inner { padding-block: 1rem; }
 
-  .brand-mark { width: 34px; height: 47px; }
+  .brand-mark { width: 36px; height: 36px; }
   .brand-name { font-size: 1.2rem; }
 
   .site-nav ul { gap: 0.4rem 1.5rem; }
@@ -1062,35 +1012,6 @@ p { margin: 0 0 var(--step); }
 
   .pub { grid-template-columns: 44px 1fr; gap: 0 0.9rem; }
   .pub-thumb { width: 44px; height: 44px; }
-
-  /* The timeline cannot honestly fit six columns on a phone: it becomes a
-     vertical list with the spine running down the left. */
-  .timeline {
-    grid-auto-flow: row;
-    grid-auto-columns: auto;
-    gap: 1.1rem;
-    padding-left: 1.5rem;
-  }
-
-  .timeline::before {
-    left: 3px;
-    right: auto;
-    top: 0.4rem;
-    bottom: 0.4rem;
-    width: var(--hair);
-    height: auto;
-  }
-
-  .timeline li { text-align: left; }
-
-  .timeline-node {
-    position: absolute;
-    left: -1.5rem;
-    top: 0.45rem;
-    margin: 0;
-  }
-
-  .timeline-year { margin-bottom: 0.15rem; }
 }
 
 /* --- 15. Print -------------------------------------------------------- */

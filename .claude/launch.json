@@ -3,8 +3,13 @@
   "configurations": [
     {
       "name": "site",
+      "comment": "Static files, so the port does not matter — autoPort lets two sessions preview at once. python -m http.server ignores $PORT, hence the one-liner.",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "8000"],
+      "runtimeArgs": [
+        "-c",
+        "import os,functools,http.server,socketserver;socketserver.TCPServer.allow_reuse_address=True;socketserver.TCPServer(('127.0.0.1',int(os.environ.get('PORT','8000'))),functools.partial(http.server.SimpleHTTPRequestHandler)).serve_forever()"
+      ],
+      "autoPort": true,
       "port": 8000
     }
   ]
