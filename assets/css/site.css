@@ -305,16 +305,27 @@ a:focus-visible {
   color: inherit;
 }
 
-/* A plotted series on an axis, not an arch. The mark says "this person
-   measures things", which is the claim the site is actually making, and it
-   rhymes with the chart further down the page. Square, so it sits level with
-   two lines of wordmark instead of towering over them. */
+/* A monogram, not a picture. Two marks have been tried here — a Gothic arch
+   and a plotted series — and both had the same problem: they illustrate a
+   subject, and the subject will change. Initials in a ruled box are about the
+   person, so they keep working. Set in the page font, so it is real type at
+   any size rather than an outline that fattens when scaled. */
 .brand-mark {
   width: 44px;
   height: 44px;
   flex: none;
+  display: grid;
+  place-items: center;
+  border: var(--hair) solid var(--rule);
   color: var(--cu-red-dark);
+  font-size: 1.18rem;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  /* the cap-height of Garamond sits low in the box without this nudge */
+  padding-top: 0.06em;
 }
+
+.brand:hover .brand-mark { border-color: var(--accent); }
 
 .brand-name {
   display: block;
@@ -333,6 +344,19 @@ a:focus-visible {
   line-height: 1.5;
   letter-spacing: 0.15em;
   text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* The full institutional name. Set as ordinary text rather than more
+   letterspaced caps — at this length caps stop being a label and become a
+   wall. Hidden on narrow screens, where it would push the nav off entirely
+   and where CERGE-EI alone is enough. */
+.brand-note {
+  display: block;
+  margin-top: 0.28rem;
+  max-width: 34ch;
+  font-size: 0.62rem;
+  line-height: 1.45;
   color: var(--ink-faint);
 }
 
@@ -448,25 +472,6 @@ p { margin: 0 0 var(--step); }
   margin: 0 0 var(--step);
 }
 
-/* Pull quote — italic, set inside an arch. */
-.quote {
-  font-style: italic;
-  font-size: 1.32rem;
-  line-height: 1.5;
-  color: var(--cu-navy);
-  margin: 0;
-  text-align: center;
-}
-
-.quote-attrib {
-  margin: 1.1rem 0 0;
-  font-size: 0.7rem;
-  letter-spacing: 0.19em;
-  text-transform: uppercase;
-  color: var(--ink-faint);
-  text-align: center;
-}
-
 /* Tabular figures wherever numbers must line up in a column. */
 .tnum {
   font-variant-numeric: tabular-nums lining-nums;
@@ -522,41 +527,11 @@ p { margin: 0 0 var(--step); }
 
 .divider--center { margin-inline: auto; }
 
-/* Watermark ornaments sit behind content, very faint, and never intercept
-   clicks. Decorative only, so aria-hidden in the markup. */
-.watermark {
-  position: absolute;
-  pointer-events: none;
-  opacity: 0.13;
-  color: var(--cu-navy);
-  z-index: 0;
-}
-
-/* The only modifier in use is .watermark--emblem, defined with the rest of the
-   emblem rules in §13 so the two sizes of the same file stay together. */
-
-/* Content must sit above the watermarks. */
-.col > *, .hero-text > * { position: relative; z-index: 1; }
-
-/* The arch that frames the quote. */
-.arch-frame {
-  position: relative;
-  display: grid;
-  place-items: center;
-  padding: clamp(2.5rem, 4vw, 4rem) clamp(1.25rem, 3vw, 2.5rem);
-  min-height: 320px;
-}
-
-.arch-frame > .orn {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  color: var(--rule);
-  z-index: 0;
-}
-
-.arch-frame > *:not(.orn) { position: relative; z-index: 1; }
+/* The emblem watermark, the arch-framed pull quote and the arch behind the
+   headline all lived here. They went when the home page was rebuilt around
+   the photograph: the arch now frames the portrait (see .hero-portrait), and
+   the one quotation on the site sits in the footer. Their rules are in git
+   history if any of them is wanted back. */
 
 /* --- 7. Hero ----------------------------------------------------------- */
 
@@ -572,19 +547,6 @@ p { margin: 0 0 var(--step); }
 
 .hero-text { position: relative; }
 
-/* The big faint arch behind the headline. */
-.hero-arch {
-  position: absolute;
-  width: 130%;
-  height: 128%;
-  left: -18%;
-  top: -16%;
-  color: var(--rule);
-  opacity: 0.5;
-  pointer-events: none;
-  z-index: 0;
-}
-
 .hero-lede {
   font-size: 1.1rem;
   line-height: 1.68;
@@ -598,6 +560,57 @@ p { margin: 0 0 var(--step); }
 }
 
 .hero-figure .orn { width: 100%; height: auto; }
+
+/* The portrait sits in the hero figure slot, framed by the same arch the
+   headline used to sit behind — so the one photograph on the site is held by
+   the site's own ornament rather than dropped on top of it. */
+.hero-portrait {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(1.5rem, 3vw, 2.75rem) clamp(1rem, 2vw, 2rem) 0;
+}
+
+.hero-portrait > .orn {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--rule);
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.hero-portrait .portrait {
+  position: relative;
+  z-index: 1;
+  max-width: 340px;
+  margin-bottom: 0;
+}
+
+/* Two calls to action side by side. They wrap rather than shrink, because a
+   letterspaced cap line that has to break mid-phrase stops reading as a
+   button and starts reading as an accident. */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem 2rem;
+}
+
+/* A feature block: prose on the left, a figure held beside it. Used for the
+   current-research band, which earns the full width of the shell rather than
+   a third of it. */
+.feature {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(2rem, 4vw, 4.5rem);
+  align-items: center;
+}
+
+.feature > div > :last-child { margin-bottom: 0; }
+
+.feature-figure { color: var(--cu-navy); }
+.feature-figure .orn { width: 100%; height: auto; }
 
 /* --- 8. Cards & panels ------------------------------------------------- */
 
@@ -927,12 +940,24 @@ p { margin: 0 0 var(--step); }
    muddy institutional emblem is worse than none. */
 .footer-affil { justify-self: end; text-align: center; }
 
-.footer-emblem {
-  width: 132px;
-  height: 132px;
-  margin: 0 auto 0.6rem;
-  opacity: 0.75;
+/* Two marks, and they are not the same shape: the Charles seal is tall and
+   circular with a legend ring, the CERGE-EI wordmark is wide and horizontal.
+   Matching them on width would leave the seal tiny; they are matched on
+   optical weight instead, and separated by a hairline so neither reads as a
+   modifier of the other. */
+.footer-logos {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.25rem;
+  margin-bottom: 0.7rem;
 }
+
+.footer-logos img { opacity: 0.8; }
+
+.footer-logo-cu   { width: auto; height: 96px; }
+.footer-logo-rule { width: var(--hair); align-self: stretch; background: var(--rule); }
+.footer-logo-cerge { width: 122px; height: auto; }
 
 .footer-affil-note {
   margin: 0;
@@ -943,15 +968,6 @@ p { margin: 0 0 var(--step); }
   line-height: 1.55;
 }
 
-/* The same file as a watermark behind the About column. */
-.watermark--emblem {
-  width: 300px;
-  height: 300px;
-  left: -108px;
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.085;
-}
 
 .footer-bar {
   border-top: var(--hair) solid var(--rule);
@@ -989,9 +1005,18 @@ p { margin: 0 0 var(--step); }
   .hero-inner,
   .cols-3,
   .cols-2,
+  .feature,
   .page-grid {
     grid-template-columns: 1fr;
   }
+
+  /* Portrait above the text when stacked — a photograph below three
+     paragraphs of biography reads as an afterthought. */
+  .hero-figure { order: -1; }
+  .hero-portrait { padding-inline: 0; }
+  .hero-portrait .portrait { max-width: 280px; }
+
+  .feature { gap: 2.25rem; }
 
   .page-grid { gap: 1.75rem; }
 
@@ -1008,20 +1033,15 @@ p { margin: 0 0 var(--step); }
 
   .footer-inner { grid-template-columns: 1fr 1fr; }
   .footer-affil { justify-self: start; text-align: left; }
-  .footer-emblem { margin-inline: 0; }
-
-  /* The watermark is tuned to a three-column layout; in a stacked one it sits
-     behind body text at full column width, which hurts legibility. */
-  .watermark--emblem { display: none; }
-
-  .hero-figure { order: -1; }  /* figure above the headline when stacked */
+  .footer-logos { justify-content: flex-start; }
 }
 
 @media (max-width: 40em) {
   .header-inner { padding-block: 1rem; }
 
-  .brand-mark { width: 36px; height: 36px; }
+  .brand-mark { width: 36px; height: 36px; font-size: 1rem; }
   .brand-name { font-size: 1.2rem; }
+  .brand-note { display: none; }
 
   .site-nav ul { gap: 0.4rem 1.5rem; }
   .site-nav a { font-size: 0.72rem; letter-spacing: 0.13em; }
@@ -1067,13 +1087,11 @@ p { margin: 0 0 var(--step); }
   .skip,
   .site-nav,
   .divider,
-  .watermark,
-  .hero-arch,
   .hero-figure,
   .site-footer,
   .skyline,
   .brand-mark,
-  .arch-frame > .orn,
+  .feature-figure,
   .pub-thumb,
   .no-print { display: none !important; }
 

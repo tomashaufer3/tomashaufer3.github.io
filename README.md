@@ -39,9 +39,13 @@ robots.txt          Permissive — see "Staying out of search" below
 .nojekyll           Tells GitHub to serve the files as-is, no Jekyll pass
 assets/css/site.css The entire design system, tokens at the top
 assets/fonts/       Self-hosted EB Garamond (+ OFL.txt)
-assets/img/         Favicon and the Charles University emblem
-assets/img/CUcoat/  Source art for the emblem — gitignored, not served
-files/              PDFs (CV)
+assets/img/         Favicon, portrait, Charles University and CERGE-EI logos
+assets/img/CUcoat/  Vendor logo source art — gitignored, not served
+assets/img/photo/   Original photographs — gitignored, not served
+files/theses/       Legions position paper, Laffer curve BA thesis
+files/term-papers/  Written in Time, referee performance
+files/articles/     The two Moody's commentaries
+files/haufer-cv.pdf The CV PDF
 ```
 
 Every page is built from the same three pieces: a `.site-header`, one or more
@@ -99,29 +103,55 @@ Note that Python's `urllib` fails on this machine with a certificate error
 (a local root CA that OpenSSL rejects); PowerShell's `Invoke-WebRequest` uses
 the Windows certificate store and works.
 
-## The Charles University emblem
+## Images
 
-`assets/img/cu-emblem.svg` is the served file: a single-colour vector of the
-historical seal, traced from the University's official artwork in
-`assets/img/CUcoat/`. It appears twice — as a faint watermark behind the About
-column on the home page, and beside the affiliation line in every footer.
+**The logos.** `assets/img/cu-logo-en.svg` is the Charles University seal with
+its English wordmark, converted from the official PDF in `assets/img/CUcoat/`;
+`assets/img/cerge-logo.svg` is the CERGE-EI mark. Both are recoloured to
+`--cu-navy` so they sit with the palette — the CERGE file originally carried its
+fill in an internal `<style>` block, which some renderers ignore, so the fill is
+flattened onto the root element instead.
 
-The `CUcoat/` sources are **gitignored**: this repository has to be public for
-Pages, and republishing the University's source art is a separate thing from
-using the emblem to show affiliation. They live on disk (and in Dropbox) only,
-so a fresh clone will not have them. Nothing on the site loads them — if you
-ever need to retrace the SVG, fetch the artwork from the University again.
+They appear together in the footer, separated by a hairline, and are matched on
+optical weight rather than width: the seal is tall and circular, the CERGE
+wordmark wide and horizontal, so equal widths would leave the seal tiny.
 
-It is deliberately **not** in the site header. An institutional emblem sitting
+They are deliberately **not** in the site header. An institutional mark sitting
 next to your own name at the top of a page is the visual grammar of an official
-University page; this is a personal one. Beside a footer address it reads as "I
-work here", which is what is being claimed — and CERGE-EI is a joint workplace
-of Charles University and the Economics Institute of the Czech Academy of
-Sciences, so the claim is accurate.
+University page; this is a personal one. In the footer it reads as "I work
+here", which is accurate — CERGE-EI is a joint workplace of Charles University
+and the Economics Institute of the Czech Academy of Sciences.
 
-One thing still to settle before this goes public: check the University's
-visual-identity rules for personal pages. The emblem is currently drawn in
-`--cu-navy`, matching the site rather than the official colour.
+Still to settle: check the University's visual-identity rules for personal
+pages, and whether recolouring the mark is allowed.
+
+**The portrait.** `assets/img/tomas-haufer.jpg` is an 800×1000 crop, cut from
+one frame in `assets/img/photo/`. It is desaturated in CSS (`.portrait`) rather
+than in the file, so full colour is one line away. To swap it, re-crop to 4:5,
+save at about 800px wide, and keep the name.
+
+**Gitignored sources.** `CUcoat/` and `photo/` hold the originals — the vendor
+logo artwork and the full-size photographs. The repository has to be public for
+Pages, and neither the University's source art nor six near-identical 800 KB
+frames belong in it. They live on disk and in Dropbox only, so a fresh clone
+will not have them.
+
+## PDFs
+
+`files/` carries about 12 MB. It nearly carried 124 MB: the exports of the two
+long papers embed figures at three to eight times the resolution they are
+displayed at, and one of them was **107 MB — over GitHub's 100 MB hard limit**,
+which would have rejected the push outright.
+
+Both were rewritten with PyMuPDF, resizing each embedded image to roughly 200
+DPI at its actual size on the page and re-encoding as JPEG at quality 84. Text
+stays vector and is untouched; the figures are visually identical at reading
+size. The Written in Time write-up went 107 MB → 6.9 MB, the Laffer thesis
+15 MB → 3.8 MB.
+
+**Before adding a PDF, check its size.** A raw LaTeX export with bitmap figures
+will be far larger than it needs to be, and anything over 100 MB cannot be
+pushed at all.
 
 ## Making changes
 
