@@ -1,0 +1,534 @@
+/* ===========================================================================
+   Ruled Manuscript — design system
+   Tomáš Haufer · quantitative economic history
+
+   One stylesheet, no build step, no dependencies. Everything is tuned from
+   the tokens in :root below — change a token, the whole site follows.
+
+   Contents
+     1. Tokens
+     2. Reset & base
+     3. The folio (ruling motif)
+     4. Masthead & navigation
+     5. Typography
+     6. Ornaments
+     7. Research entries
+     8. CV rows
+     9. Colophon (footer)
+    10. Responsive
+    11. Dark mode
+    12. Print
+   ======================================================================== */
+
+/* --- 1. Tokens ---------------------------------------------------------- */
+
+:root {
+  /* Palette. Warm throughout — no cold greys anywhere. */
+  --paper:      #FAF8F3;  /* cream ground */
+  --paper-deep: #F3F0E8;  /* subtle blocks */
+  --ink:        #1A1A1A;  /* body text */
+  --ink-soft:   #4A4741;  /* secondary text */
+  --ink-faint:  #857F73;  /* metadata, years, dates */
+  --rule:       #C9C2B4;  /* hairlines — the signature element */
+  --rubric:     #8C2F22;  /* rubrication: red ink, used sparingly.
+                             To remove it entirely: --rubric: var(--ink); */
+
+  /* Type. One family. Metadata uses the same face with tabular figures. */
+  --serif: "EB Garamond", "Iowan Old Style", "Palatino Linotype", Palatino,
+           Georgia, "Times New Roman", serif;
+
+  /* Rhythm */
+  --measure:  34em;   /* prose line length — roughly 68 characters */
+  --gutter:   2.25rem;/* distance from the ruling to the text */
+  --hair:     1px;    /* hairline weight */
+  --step:     1.6rem; /* vertical unit */
+}
+
+/* --- 2. Reset & base --------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.075rem;
+  line-height: 1.7;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* Links: hairline underline that thickens and turns rubric on hover.
+   Never colour alone — the underline always carries the signal. */
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: var(--hair);
+  text-decoration-color: var(--rule);
+  text-underline-offset: 0.18em;
+  transition: text-decoration-color 120ms ease, color 120ms ease;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--rubric);
+  text-decoration-color: var(--rubric);
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--rubric);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* Skip link — visible only once focused. */
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--paper);
+  border: var(--hair) solid var(--rule);
+  padding: 0.5rem 0.9rem;
+  z-index: 10;
+  text-decoration: none;
+}
+.skip:focus { left: 1rem; top: 1rem; }
+
+/* --- 3. The folio (ruling motif) --------------------------------------- */
+
+/* A manuscript folio's ruled writing area: a PAIR of vertical bounding
+   hairlines down the left, with the text set to their right. The second
+   hairline is the ::before — 6px is close enough to read as a pair, far
+   enough not to look like a rendering artefact. */
+
+.folio {
+  position: relative;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 5vw, 3rem);
+}
+
+.folio::after,
+.folio::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--hair);
+  background: var(--rule);
+}
+
+.folio::after  { left: clamp(1.25rem, 5vw, 3rem); }
+.folio::before { left: calc(clamp(1.25rem, 5vw, 3rem) - 6px); }
+
+/* Text sits inside the ruling, not on it. */
+.folio > * { padding-left: var(--gutter); }
+
+.prose { max-width: var(--measure); }
+
+/* --- 4. Masthead & navigation ------------------------------------------ */
+
+.masthead {
+  padding-bottom: var(--step);
+  border-bottom: var(--hair) solid var(--rule);
+  margin-bottom: calc(var(--step) * 1.75);
+}
+
+.wordmark {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.wordmark a { text-decoration: none; }
+.wordmark a:hover { color: var(--rubric); }
+
+.tagline {
+  margin: 0.35rem 0 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.07em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+}
+
+.masthead nav { margin-top: calc(var(--step) * 0.9); }
+
+.masthead ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.75rem;
+}
+
+.masthead a {
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+
+.masthead a:hover { color: var(--rubric); }
+
+/* Current page: rubric, with a small lozenge in front of it. */
+.masthead a[aria-current="page"] {
+  color: var(--rubric);
+  position: relative;
+}
+
+.masthead a[aria-current="page"]::before {
+  content: "";
+  position: absolute;
+  left: -0.85em;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  margin-top: -2px;
+  background: var(--rubric);
+  transform: rotate(45deg);
+}
+
+/* --- 5. Typography ----------------------------------------------------- */
+
+h1, h2, h3 { font-weight: 400; }
+
+h1 {
+  font-size: clamp(1.85rem, 1.35rem + 1.7vw, 2.55rem);
+  line-height: 1.2;
+  letter-spacing: -0.012em;
+  margin: 0 0 var(--step);
+  max-width: 28em;
+}
+
+/* Section headings read as rubric section marks, not as big text: small,
+   letterspaced caps with a lozenge set out in the margin. */
+h2 {
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: calc(var(--step) * 2.25) 0 var(--step);
+  position: relative;
+}
+
+h2::before {
+  content: "";
+  position: absolute;
+  left: -1.45rem;
+  top: 0.52em;
+  width: 5px;
+  height: 5px;
+  background: var(--rubric);
+  transform: rotate(45deg);
+}
+
+h3 {
+  font-size: 1.09rem;
+  line-height: 1.42;
+  margin: 0 0 0.3rem;
+}
+
+p { margin: 0 0 var(--step); }
+
+.lead {
+  font-size: 1.16rem;
+  line-height: 1.62;
+  color: var(--ink);
+}
+
+/* The versal (drop initial). Exactly one on the site, on the home page. */
+.versal::first-letter {
+  float: left;
+  font-size: 4.15em;
+  line-height: 0.8;
+  padding: 0.02em 0.1em 0 0;
+  color: var(--rubric);
+  font-weight: 400;
+}
+
+.muted { color: var(--ink-faint); }
+
+.small {
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* Tabular figures for anything that has to line up in a column. */
+.tnum {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* --- 6. Ornaments ------------------------------------------------------ */
+
+/* Divider: two hairlines with a rubric lozenge between them. Inline SVG so
+   it stays crisp at any zoom and themes off the tokens. */
+.divider {
+  display: block;
+  width: min(15rem, 100%);
+  height: 12px;
+  margin: calc(var(--step) * 2) 0;
+  overflow: visible;
+}
+
+.divider line {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.divider .lozenge { fill: var(--rubric); }
+
+/* --- 7. Research entries ----------------------------------------------- */
+
+.entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entry {
+  padding: calc(var(--step) * 0.95) 0;
+  border-top: var(--hair) solid var(--rule);
+  max-width: var(--measure);
+}
+
+.entry:first-child { border-top: 0; padding-top: 0; }
+
+.entry-meta {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Separators between metadata fields come from CSS, so the markup for an
+   entry stays clean — add or drop a <span> and it still reads correctly. */
+.entry-meta > * + *::before {
+  content: "·";
+  margin: 0 0.55em;
+  color: var(--rule);
+}
+
+.entry details {
+  margin-top: 0.7rem;
+  font-size: 0.95rem;
+}
+
+.entry summary {
+  cursor: pointer;
+  font-size: 0.78rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  width: fit-content;
+}
+
+.entry summary:hover { color: var(--rubric); }
+
+.entry details[open] summary { margin-bottom: 0.6rem; }
+
+.entry details p {
+  margin: 0;
+  padding-left: 1rem;
+  border-left: var(--hair) solid var(--rule);
+  color: var(--ink-soft);
+}
+
+.entry-links {
+  margin: 0.8rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.15rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+/* A note on status for work in progress. */
+.status {
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--rubric);
+  border: var(--hair) solid var(--rule);
+  padding: 0.1rem 0.45rem;
+  white-space: nowrap;
+}
+
+.entry-meta > .status + *::before,
+.entry-meta > * + .status::before { content: none; margin: 0; }
+.entry-meta > * + .status { margin-left: 0.55em; }
+
+/* --- 8. CV rows -------------------------------------------------------- */
+
+.cv-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cv-row {
+  display: grid;
+  grid-template-columns: 8em 1fr;
+  gap: 0 1.5rem;
+  padding: 0.85rem 0;
+  border-top: var(--hair) solid var(--rule);
+}
+
+.cv-row:first-child { border-top: 0; }
+
+.cv-when {
+  font-size: 0.88rem;
+  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  padding-top: 0.22em;
+}
+
+.cv-what > strong { font-weight: 600; }
+
+.cv-where {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+/* --- 9. Colophon (footer) ---------------------------------------------- */
+
+.colophon {
+  margin-top: calc(var(--step) * 3);
+  padding-top: var(--step);
+  border-top: var(--hair) solid var(--rule);
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.5rem;
+  justify-content: space-between;
+}
+
+.colophon p { margin: 0; }
+
+/* --- 10. Responsive ---------------------------------------------------- */
+
+/* Below 640px the vertical ruling would eat too much of a narrow screen, so
+   the frame rotates: the pair of vertical hairlines becomes a single rule
+   across the top of the folio. */
+
+@media (max-width: 40em) {
+  :root { --gutter: 0rem; }
+
+  .folio { padding-top: 2rem; }
+
+  .folio::before,
+  .folio::after {
+    top: 0;
+    bottom: auto;
+    left: clamp(1.25rem, 5vw, 3rem);
+    right: clamp(1.25rem, 5vw, 3rem);
+    width: auto;
+    height: var(--hair);
+  }
+
+  .folio::before { top: 6px; }
+
+  h2::before { display: none; }
+
+  .cv-row {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+
+  .cv-when { padding-top: 0; }
+}
+
+/* --- 11. Dark mode ----------------------------------------------------- */
+
+/* A warm dark ground rather than a cold grey, so the parchment logic still
+   reads. The rubric is lightened to hold contrast against the dark. */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:      #14130F;
+    --paper-deep: #1C1A15;
+    --ink:        #E8E3D7;
+    --ink-soft:   #B7B1A3;
+    --ink-faint:  #8C8574;
+    --rule:       #3B382F;
+    --rubric:     #CE7A67;
+  }
+
+  body { -webkit-font-smoothing: subpixel-antialiased; }
+}
+
+/* --- 12. Print --------------------------------------------------------- */
+
+/* Aimed squarely at the CV: black on white, no navigation, no ornament,
+   and link targets spelled out because paper has no hover. */
+
+@media print {
+  :root {
+    --paper: #FFFFFF;
+    --ink: #000000;
+    --ink-soft: #222222;
+    --ink-faint: #444444;
+    --rule: #999999;
+    --rubric: #000000;
+  }
+
+  body { font-size: 10.5pt; line-height: 1.45; }
+
+  .skip,
+  .masthead nav,
+  .divider,
+  .colophon,
+  .no-print { display: none !important; }
+
+  .folio {
+    max-width: none;
+    padding: 0;
+  }
+
+  .folio::before,
+  .folio::after { display: none; }
+
+  .folio > * { padding-left: 0; }
+
+  .masthead { margin-bottom: 1.2rem; }
+
+  a { text-decoration: none; color: #000; }
+
+  /* Spell out external targets only — internal nav is hidden anyway. */
+  main a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #444;
+    word-break: break-all;
+  }
+
+  .entry details { display: block; }
+  .entry summary { display: none; }
+
+  .entry, .cv-row, h2, h3 { break-inside: avoid; }
+  h2 { break-after: avoid; }
+}

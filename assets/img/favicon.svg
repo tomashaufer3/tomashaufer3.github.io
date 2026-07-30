@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" fill="#FAF8F3"/>
+  <!-- The site's lozenge, plus the pair of ruling hairlines. -->
+  <path d="M16 7 L25 16 L16 25 L7 16 Z" fill="none" stroke="#8C2F22" stroke-width="2"/>
+  <path d="M2.5 0 V32 M5 0 V32" stroke="#C9C2B4" stroke-width="1"/>
+</svg>

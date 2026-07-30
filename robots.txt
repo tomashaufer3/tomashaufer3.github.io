@@ -1,0 +1,16 @@
+# This site is intentionally kept out of search results.
+#
+# The mechanism is the per-page <meta name="robots" content="noindex, nofollow">
+# tag in every HTML file — NOT a Disallow rule here. That is deliberate:
+# "Disallow: /" would stop crawlers from fetching the pages at all, so they
+# would never read the noindex tag, and a URL linked from anywhere else could
+# stay indexed indefinitely. Allowing the crawl and serving noindex is what
+# actually gets a page dropped.
+#
+# A Disallow here would also apply to the whole tomashaufer3.github.io domain,
+# including the separate /legions-docs/ project site.
+#
+# Do not add "Disallow: /" to this file while the noindex tags are in place.
+
+User-agent: *
+Allow: /

@@ -1,0 +1,8 @@
+# OS / editor cruft
+Thumbs.db
+desktop.ini
+.DS_Store
+*.swp
+
+# Dropbox conflict copies — this repo lives inside a Dropbox folder
+*conflicted copy*
