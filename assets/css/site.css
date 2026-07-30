@@ -6,6 +6,7 @@
    the tokens in :root below — change a token, the whole site follows.
 
    Contents
+     0. Fonts
      1. Tokens
      2. Reset & base
      3. The folio (ruling motif)
@@ -19,6 +20,68 @@
     11. Dark mode
     12. Print
    ======================================================================== */
+
+/* --- 0. Fonts ----------------------------------------------------------- */
+
+/* EB Garamond, self-hosted. SIL Open Font License 1.1 — see
+   /assets/fonts/OFL.txt. Declared here rather than in a separate file so the
+   site still makes exactly one stylesheet request and no third-party request.
+
+   These are the VARIABLE font files: the 400 and 600 downloads from the CDN
+   were byte-identical, so each subset ships once and the weight range is
+   declared on the face. Requesting 600 interpolates from the same file.
+
+   Two subsets per style. latin-ext is the one that carries á š č ř ž ě ů ý —
+   without it every Czech name on the site falls back to another face
+   mid-word. Do not drop it.
+
+   To regenerate, see "Fonts" in README.md. */
+
+@font-face {
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/assets/fonts/ebgaramond-var-normal-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "EB Garamond";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/assets/fonts/ebgaramond-var-normal-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Italic is declared at 400 only — the site never sets bold italic, and a
+   range here would stop the browser synthesising one if it ever did. */
+@font-face {
+  font-family: "EB Garamond";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/ebgaramond-var-italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "EB Garamond";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/ebgaramond-var-italic-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
 
 /* --- 1. Tokens ---------------------------------------------------------- */
 
@@ -49,6 +112,11 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
+  /* Garamond runs small: its x-height is 0.425 of the em against Georgia's
+     0.475, so at a nominal 17px it reads about 11% smaller than the scale was
+     tuned for. Compensating at the root rather than per-rule keeps every
+     rem-based value in the system proportionate. Measured, not guessed. */
+  font-size: 111%;
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
 }

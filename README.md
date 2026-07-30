@@ -38,9 +38,58 @@ writing.html        A Diary of an Econ Student (Substack)
 robots.txt          Permissive — see "Staying out of search" below
 .nojekyll           Tells GitHub to serve the files as-is, no Jekyll pass
 assets/css/site.css The entire design system, tokens at the top
+assets/fonts/       Self-hosted EB Garamond (+ OFL.txt)
 assets/img/         Favicon
 files/              PDFs (CV)
 ```
+
+## Fonts
+
+EB Garamond, self-hosted from `assets/fonts/`, SIL Open Font License 1.1 (the
+licence text ships alongside the files in `OFL.txt`). Nothing is loaded from a
+third party at runtime.
+
+The `@font-face` declarations live at the top of `site.css` rather than in a
+separate file, so the site still makes exactly one stylesheet request.
+
+Four files, 224 KB total, but a visitor never downloads all four. The browser
+picks by `unicode-range` and style, so a page with no italic fetches no italic,
+and the 114 KB `latin-ext` file arrives only because Czech diacritics need it:
+
+```
+ebgaramond-var-normal-latin.woff2         44 KB
+ebgaramond-var-normal-latin-ext.woff2    114 KB   ← á š č ř ž live here
+ebgaramond-var-italic-latin.woff2         25 KB
+ebgaramond-var-italic-latin-ext.woff2     45 KB
+```
+
+Two things worth knowing before changing any of this:
+
+- These are **variable** font files. The CDN served byte-identical files for
+  weight 400 and weight 600, so each subset ships once and the face declares
+  `font-weight: 400 700`; asking for 600 interpolates from the same file. Do not
+  add separate weight files without checking they actually differ.
+- **Do not drop the `latin-ext` subset.** It is what carries `á š č ř ž ě ů ý`.
+  Without it, every Czech name on the site falls back to a different typeface
+  in the middle of a word.
+
+`html { font-size: 111% }` in `site.css` is not arbitrary: Garamond's x-height
+is 0.425 of the em where Georgia's is 0.475, so it reads about 11% smaller at
+the same nominal size. The root compensates so that everything measured in
+`rem` stays proportionate. If you ever swap the typeface, re-measure and adjust
+that one number.
+
+To regenerate the font files (e.g. to add a weight), fetch the Google Fonts
+CSS with a modern browser user-agent — without one the API serves TTF instead of
+woff2 — then download the `latin` and `latin-ext` `woff2` URLs it lists:
+
+```
+https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap
+```
+
+Note that Python's `urllib` fails on this machine with a certificate error
+(a local root CA that OpenSSL rejects); PowerShell's `Invoke-WebRequest` uses
+the Windows certificate store and works.
 
 ## Making changes
 
