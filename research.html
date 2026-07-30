@@ -11,12 +11,22 @@
 
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="folio">
-
-  <header class="masthead">
-    <p class="wordmark"><a href="/">Tomáš Haufer</a></p>
-    <p class="tagline">Quantitative Economic History</p>
-    <nav aria-label="Main">
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="/">
+      <svg class="brand-mark orn" viewBox="0 0 42 58" fill="none"
+           stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+        <path d="M3 57V22Q3 8 21 2Q39 8 39 22v35"/>
+        <path d="M9.5 57V24.5Q9.5 13.5 21 8.8Q32.5 13.5 32.5 24.5V57"/>
+        <path d="M21 15.2l3.4 3.4L21 22l-3.4-3.4z" fill="currentColor" stroke="none"/>
+        <path d="M2 57h38"/>
+      </svg>
+      <span>
+        <span class="brand-name">Tomáš Haufer</span>
+        <span class="brand-sub">Quantitative Economic History<br>Medieval Europe</span>
+      </span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/research.html" aria-current="page">Research</a></li>
@@ -24,142 +34,197 @@
         <li><a href="/writing.html">Writing</a></li>
       </ul>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <main id="main">
+<main id="main">
+  <section class="band">
+    <div class="shell band-pad page-grid">
 
-    <h1>Research</h1>
+      <div class="page-aside">
+        <h1 class="page-title">Research</h1>
+        <svg class="divider orn" viewBox="0 0 240 12" aria-hidden="true">
+          <line x1="0" y1="6" x2="98" y2="6"/>
+          <path class="lozenge" d="M120 1l7 5-7 5-7-5z"/>
+          <line x1="142" y1="6" x2="240" y2="6"/>
+        </svg>
+        <p class="small">
+          Placeholder. One or two sentences framing the research programme —
+          the question behind the separate papers.
+        </p>
+      </div>
 
-    <div class="prose">
-      <p class="lead">
-        Placeholder. One or two sentences framing the research programme — the
-        question behind the separate papers.
+      <div class="page-body">
+
+        <!-- =================================================================
+             HOW TO ADD AN ENTRY
+
+             Copy the block between the markers below, paste it as the first
+             <li> of the relevant list, and fill it in.
+
+               · Drop any <span> in .entry-meta you do not need — the middot
+                 separators come from CSS, so they stay correct either way.
+               · Drop the whole <details> block if there is no abstract yet.
+               · Drop .entry-links if there is nothing to link to.
+               · <span class="status"> renders as a small outlined tag; use it
+                 for "in progress", "under review", "R&R" and the like.
+
+             ---------------- COPY FROM HERE ----------------
+             <li class="entry">
+               <h3>Title of the paper</h3>
+               <p class="entry-meta">
+                 <span>with Coauthor Name</span>
+                 <span>Journal or venue</span>
+                 <span>2026</span>
+               </p>
+               <details>
+                 <summary>Abstract</summary>
+                 <p>Abstract text.</p>
+               </details>
+               <p class="entry-links">
+                 <a href="/files/paper.pdf">PDF</a>
+                 <a href="https://doi.org/...">DOI</a>
+                 <a href="https://...">Replication</a>
+               </p>
+             </li>
+             ----------------- TO HERE ----------------------
+             ============================================================== -->
+
+        <h2 class="label label--accent">Publications</h2>
+        <ul class="entries">
+          <li class="entry">
+            <h3>Placeholder title of a published article</h3>
+            <p class="entry-meta">
+              <span>with Coauthor Name</span>
+              <span>Journal of Economic History</span>
+              <span>2026</span>
+            </p>
+            <details>
+              <summary>Abstract</summary>
+              <p>
+                Placeholder abstract. Native &lt;details&gt;, so it opens and
+                closes with no JavaScript at all and prints fully expanded.
+              </p>
+            </details>
+            <p class="entry-links">
+              <a href="/files/haufer-cv.pdf">PDF</a>
+              <a href="/research.html">DOI</a>
+              <a href="/research.html">Replication</a>
+            </p>
+          </li>
+        </ul>
+
+        <h2 class="label label--accent">Working papers</h2>
+        <ul class="entries">
+          <li class="entry">
+            <h3>Placeholder title of a working paper</h3>
+            <p class="entry-meta">
+              <span>Single-authored</span>
+              <span>2026</span>
+              <span class="status">Under review</span>
+            </p>
+            <details>
+              <summary>Abstract</summary>
+              <p>Placeholder abstract.</p>
+            </details>
+            <p class="entry-links">
+              <a href="/files/haufer-cv.pdf">PDF</a>
+            </p>
+          </li>
+          <li class="entry">
+            <h3>Second placeholder working paper</h3>
+            <p class="entry-meta">
+              <span>with Coauthor Name</span>
+              <span>2025</span>
+            </p>
+            <details>
+              <summary>Abstract</summary>
+              <p>Placeholder abstract.</p>
+            </details>
+          </li>
+        </ul>
+
+        <h2 class="label label--accent">Work in progress</h2>
+        <ul class="entries">
+          <li class="entry">
+            <h3>Placeholder title of a project in progress</h3>
+            <p class="entry-meta">
+              <span>Draft expected 2027</span>
+              <span class="status">In progress</span>
+            </p>
+          </li>
+          <li class="entry">
+            <h3>Another project in progress</h3>
+            <p class="entry-meta">
+              <span class="status">In progress</span>
+            </p>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+
+    <div>
+      <p class="footer-quote">
+        &ldquo;Placeholder &mdash; a line you actually like, or delete this
+        block entirely.&rdquo;
       </p>
+      <svg class="divider orn" viewBox="0 0 240 12" aria-hidden="true">
+        <line x1="0" y1="6" x2="98" y2="6"/>
+        <path class="lozenge" d="M120 1l7 5-7 5-7-5z"/>
+        <line x1="142" y1="6" x2="240" y2="6"/>
+      </svg>
     </div>
 
-    <!-- =====================================================================
-         HOW TO ADD AN ENTRY
-
-         Copy the block between the markers below, paste it as the first <li>
-         of the relevant list, and fill it in. Rules of thumb:
-
-           · Drop any <span> in .entry-meta you do not need — the middot
-             separators are generated by CSS, so they stay correct.
-           · Drop the whole <details> block if there is no abstract yet.
-           · Drop .entry-links if there is nothing to link to.
-           · <span class="status"> renders as a small outlined tag; use it for
-             "in progress", "under review", "R&R" and the like.
-
-         ---------------- COPY FROM HERE ----------------
-         <li class="entry">
-           <h3>Title of the paper</h3>
-           <p class="entry-meta">
-             <span>with Coauthor Name</span>
-             <span>Journal or venue</span>
-             <span>2026</span>
-           </p>
-           <details>
-             <summary>Abstract</summary>
-             <p>Abstract text.</p>
-           </details>
-           <p class="entry-links">
-             <a href="/files/paper.pdf">PDF</a>
-             <a href="https://doi.org/...">DOI</a>
-             <a href="https://...">Replication</a>
-           </p>
-         </li>
-         ----------------- TO HERE ----------------------
-         ================================================================== -->
-
-    <h2>Publications</h2>
-    <ul class="entries">
-      <li class="entry">
-        <h3>Placeholder title of a published article</h3>
-        <p class="entry-meta">
-          <span>with Coauthor Name</span>
-          <span>Journal of Economic History</span>
-          <span>2026</span>
-        </p>
-        <details>
-          <summary>Abstract</summary>
-          <p>
-            Placeholder abstract. Native &lt;details&gt;, so it opens and closes
-            with no JavaScript at all and prints fully expanded.
-          </p>
-        </details>
-        <p class="entry-links">
-          <a href="/files/haufer-cv.pdf">PDF</a>
-          <a href="/research.html">DOI</a>
-          <a href="/research.html">Replication</a>
-        </p>
-      </li>
-    </ul>
-
-    <h2>Working papers</h2>
-    <ul class="entries">
-      <li class="entry">
-        <h3>Placeholder title of a working paper</h3>
-        <p class="entry-meta">
-          <span>Single-authored</span>
-          <span>2026</span>
-          <span class="status">Under review</span>
-        </p>
-        <details>
-          <summary>Abstract</summary>
-          <p>Placeholder abstract.</p>
-        </details>
-        <p class="entry-links">
-          <a href="/files/haufer-cv.pdf">PDF</a>
-        </p>
-      </li>
-      <li class="entry">
-        <h3>Second placeholder working paper</h3>
-        <p class="entry-meta">
-          <span>with Coauthor Name</span>
-          <span>2025</span>
-        </p>
-        <details>
-          <summary>Abstract</summary>
-          <p>Placeholder abstract.</p>
-        </details>
-      </li>
-    </ul>
-
-    <h2>Work in progress</h2>
-    <ul class="entries">
-      <li class="entry">
-        <h3>Placeholder title of a project in progress</h3>
-        <p class="entry-meta">
-          <span>Draft expected 2027</span>
-          <span class="status">In progress</span>
-        </p>
-      </li>
-      <li class="entry">
-        <h3>Another project in progress</h3>
-        <p class="entry-meta">
-          <span class="status">In progress</span>
-        </p>
-      </li>
-    </ul>
-
-    <svg class="divider" viewBox="0 0 240 12" role="presentation" aria-hidden="true">
-      <line x1="0" y1="6" x2="98" y2="6" />
-      <path class="lozenge" d="M120 1 L127 6 L120 11 L113 6 Z" />
-      <line x1="142" y1="6" x2="240" y2="6" />
-    </svg>
-
-    <div class="prose">
-      <p class="small muted">
-        Placeholder. A line on how to reach you about any of this, or a pointer
-        to a data repository once you have one.
-      </p>
+    <div>
+      <p class="label">Navigation</p>
+      <ul class="footer-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/research.html">Research</a></li>
+        <li><a href="/cv.html">CV</a></li>
+        <li><a href="/writing.html">Writing</a></li>
+      </ul>
     </div>
 
-  </main>
+    <div>
+      <p class="label">Contact</p>
+      <ul class="footer-contact">
+        <li>
+          <svg class="orn" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+               stroke-width="1.3" aria-hidden="true">
+            <rect x="1" y="3" width="14" height="10"/>
+            <path d="M1 3l7 6 7-6"/>
+          </svg>
+          <span>your.name@cuni.cz</span>
+        </li>
+        <li>
+          <svg class="orn" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+               stroke-width="1.3" aria-hidden="true">
+            <path d="M8 15s5.5-6 5.5-9A5.5 5.5 0 0 0 2.5 6c0 3 5.5 9 5.5 9z"/>
+            <circle cx="8" cy="6" r="2"/>
+          </svg>
+          <span>Placeholder faculty or institute<br>Charles University<br>Prague</span>
+        </li>
+      </ul>
+    </div>
 
-  <footer class="colophon">
-    <p>Tomáš Haufer</p>
-    <p>Last revised <span class="tnum">2026</span></p>
-  </footer>
+    <div class="footer-affil">
+      <img class="footer-emblem" src="/assets/img/cu-emblem.svg"
+           alt="Historical seal of Charles University" width="354" height="354">
+      <p class="footer-affil-note">Charles University<br>Prague</p>
+    </div>
 
-</div>
+  </div>
+
+  <div class="footer-bar">
+    <div class="shell">
+      <p>&copy; <span class="tnum">2026</span> Tomáš Haufer</p>
+      <p>No analytics, no trackers, no cookies.</p>
+    </div>
+  </div>
+</footer>

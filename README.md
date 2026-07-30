@@ -39,9 +39,17 @@ robots.txt          Permissive — see "Staying out of search" below
 .nojekyll           Tells GitHub to serve the files as-is, no Jekyll pass
 assets/css/site.css The entire design system, tokens at the top
 assets/fonts/       Self-hosted EB Garamond (+ OFL.txt)
-assets/img/         Favicon
+assets/img/         Favicon and the Charles University emblem
+assets/img/CUcoat/  Source art for the emblem — gitignored, not served
 files/              PDFs (CV)
 ```
+
+Every page is built from the same three pieces: a `.site-header`, one or more
+full-bleed `.band` sections each wrapping a width-capped `.shell`, and a
+`.site-footer`. Inner pages (Research, CV, Writing) put a `.page-grid` inside
+the band — a narrow left column for the title and a short standfirst, the
+content down the right. 404 skips the grid, because a title column beside three
+lines of text reads as a mistake.
 
 ## Fonts
 
@@ -91,6 +99,28 @@ Note that Python's `urllib` fails on this machine with a certificate error
 (a local root CA that OpenSSL rejects); PowerShell's `Invoke-WebRequest` uses
 the Windows certificate store and works.
 
+## The Charles University emblem
+
+`assets/img/cu-emblem.svg` is the served file: a single-colour vector of the
+historical seal, traced from the University's official artwork in
+`assets/img/CUcoat/`. It appears twice — as a faint watermark behind the About
+column on the home page, and beside the affiliation line in every footer.
+
+The `CUcoat/` sources are **gitignored**: this repository has to be public for
+Pages, and republishing the University's source art is a separate thing from
+using the emblem to show affiliation. They live on disk (and in Dropbox) only,
+so a fresh clone will not have them. Nothing on the site loads them — if you
+ever need to retrace the SVG, fetch the artwork from the University again.
+
+It is deliberately **not** in the site header. An institutional emblem sitting
+next to your own name at the top of a page is the visual grammar of an official
+University page; this is a personal one. Beside a footer address it reads as "I
+work here", which is what is being claimed.
+
+One thing still to settle before this goes public: check the University's
+visual-identity rules for personal pages. The emblem is currently drawn in
+`--cu-navy`, matching the site rather than the official colour.
+
 ## Making changes
 
 **Adding a paper.** Open `research.html`. There is a copy-me block in a comment
@@ -105,9 +135,15 @@ The year column uses tabular figures so ranges line up down the page.
 at the top of `assets/css/site.css`. To drop the red rubrication entirely, set
 `--rubric: var(--ink)`.
 
-**Changing the navigation.** The masthead is duplicated in all five HTML files —
-the cost of having no build step. Keep the markup byte-identical (only
-`aria-current="page"` differs) so a change is a find-and-replace across the five.
+**Changing the navigation.** The `<header class="site-header">` block is
+duplicated in all five HTML files — the cost of having no build step. Keep the
+markup byte-identical (only `aria-current="page"` differs) so a change is a
+find-and-replace across the five. The same is true of the
+`<footer class="site-footer">` block, where nothing differs at all.
+
+**The contact address.** The footer carries a plain email address. `noindex`
+keeps the page out of search, but the page is still public and scrapable —
+worth a decision before this goes live, and it has to be made in five files.
 
 ## Staying out of search
 

@@ -6,3 +6,11 @@ desktop.ini
 
 # Dropbox conflict copies — this repo lives inside a Dropbox folder
 *conflicted copy*
+
+# Charles University source artwork: the Illustrator file and print PDF the
+# served emblem was traced from. Kept locally (and in Dropbox), out of the
+# repository — this repo has to be public for Pages, and republishing the
+# University's source art is a separate thing from using the emblem to show
+# affiliation. Nothing on the site loads these; assets/img/cu-emblem.svg does
+# all the work. See README, "The Charles University emblem".
+assets/img/CUcoat/

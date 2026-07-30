@@ -11,15 +11,33 @@
 
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="folio">
+<!-- ===========================================================================
+     SITE HEADER — keep byte-identical across all pages except aria-current.
+     If you change it here, find-and-replace in research.html, cv.html,
+     writing.html and 404.html too.
 
-  <!-- MASTHEAD — keep byte-identical across all pages except aria-current.
-       If you change it here, find-and-replace it in research.html, cv.html,
-       writing.html and 404.html too. -->
-  <header class="masthead">
-    <p class="wordmark"><a href="/">Tomáš Haufer</a></p>
-    <p class="tagline">Quantitative Economic History</p>
-    <nav aria-label="Main">
+     The Charles University emblem is deliberately NOT here. An institutional
+     emblem sitting beside your own name in a site header is the visual grammar
+     of an official University page, and this is a personal one. It appears
+     instead as a watermark below and in the footer beside the affiliation
+     line, where it reads as "I work here" rather than "this is official".
+     ======================================================================== -->
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href="/">
+      <svg class="brand-mark orn" viewBox="0 0 42 58" fill="none"
+           stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+        <path d="M3 57V22Q3 8 21 2Q39 8 39 22v35"/>
+        <path d="M9.5 57V24.5Q9.5 13.5 21 8.8Q32.5 13.5 32.5 24.5V57"/>
+        <path d="M21 15.2l3.4 3.4L21 22l-3.4-3.4z" fill="currentColor" stroke="none"/>
+        <path d="M2 57h38"/>
+      </svg>
+      <span>
+        <span class="brand-name">Tomáš Haufer</span>
+        <span class="brand-sub">Quantitative Economic History<br>Medieval Europe</span>
+      </span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
       <ul>
         <li><a href="/" aria-current="page">Home</a></li>
         <li><a href="/research.html">Research</a></li>
@@ -27,64 +45,472 @@
         <li><a href="/writing.html">Writing</a></li>
       </ul>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <main id="main">
+<main id="main">
 
-    <h1>Prices, wages, and institutions in medieval Europe.</h1>
+  <!-- ======================= HERO ======================================= -->
+  <section class="band hero">
+    <div class="shell hero-inner">
 
-    <!-- PLACEHOLDER PROSE. The .versal class puts the one drop initial of the
-         site on this paragraph — keep it here and nowhere else. -->
-    <div class="prose">
-      <p class="lead versal">
-        Placeholder. Two or three sentences on what you actually work on and why
-        it matters — the era, the sources, the method. This paragraph carries the
-        drop initial, so it wants to open on a strong word rather than on
-        &ldquo;I&rdquo;. Write it last, once the rest of the site exists.
+      <div class="hero-text">
+        <!-- The lancet arch behind the headline. Drawn with quadratic Béziers
+             rather than SVG arcs: arc flag semantics are error-prone and a
+             Bézier is indistinguishable at ornament scale. -->
+        <svg class="hero-arch orn" viewBox="0 0 400 560" fill="none"
+             stroke="currentColor" stroke-width="1.2" aria-hidden="true"
+             preserveAspectRatio="xMidYMid meet">
+          <path d="M20 560V210Q20 70 200 20Q380 70 380 210v350"/>
+          <path d="M48 560V226Q48 96 200 52Q352 96 352 226v334"/>
+          <path d="M20 210h360" stroke-dasharray="3 6" opacity=".65"/>
+          <g transform="translate(200,124)">
+            <circle cx="0" cy="-12" r="11"/>
+            <circle cx="12" cy="0" r="11"/>
+            <circle cx="0" cy="12" r="11"/>
+            <circle cx="-12" cy="0" r="11"/>
+          </g>
+        </svg>
+
+        <!-- PLACEHOLDER. Your line, shaped like the reference: roman first
+             clause, italic second. -->
+        <h1 class="display">Prices, Wages, and Institutions<em>in Medieval Europe</em></h1>
+
+        <svg class="divider orn" viewBox="0 0 240 12" aria-hidden="true">
+          <line x1="0" y1="6" x2="98" y2="6"/>
+          <path class="lozenge" d="M120 1l7 5-7 5-7-5z"/>
+          <line x1="142" y1="6" x2="240" y2="6"/>
+        </svg>
+
+        <p class="eyebrow">Quantitative economic history<br>Tenth to fifteenth centuries</p>
+
+        <p class="hero-lede">
+          Placeholder. Two sentences on what you actually study and why it
+          matters — the era, the sources, the method. Write this last, once the
+          rest of the site exists.
+        </p>
+
+        <p><a class="cta" href="/research.html">Explore my research <span>&rarr;</span></a></p>
+      </div>
+
+      <!-- Stylised trade network. Deliberately NOT a map: an accurate medieval
+           coastline is not something to fake, and unlabelled nodes make no
+           geographic claim. Reads as a network over a portolan graticule. -->
+      <div class="hero-figure">
+        <svg class="orn" viewBox="0 0 640 470" fill="none" stroke="currentColor"
+             aria-hidden="true">
+          <!-- frame -->
+          <rect x="8" y="8" width="624" height="454" stroke-width="1" opacity=".35"/>
+          <rect x="18" y="18" width="604" height="434" stroke-width="1" opacity=".2"/>
+
+          <!-- graticule: curved rhumb lines, as on a portolan chart -->
+          <g stroke-width="1" opacity=".17">
+            <path d="M30 120Q320 60 610 120"/>
+            <path d="M30 200Q320 150 610 200"/>
+            <path d="M30 280Q320 240 610 280"/>
+            <path d="M30 360Q320 330 610 360"/>
+            <path d="M110 30Q80 235 110 445"/>
+            <path d="M230 30Q210 235 230 445"/>
+            <path d="M350 30Q340 235 350 445"/>
+            <path d="M470 30Q470 235 470 445"/>
+            <path d="M580 30Q590 235 580 445"/>
+          </g>
+
+          <!-- routes -->
+          <g stroke-width="1.3" stroke-dasharray="5 4" opacity=".72">
+            <path d="M140 320Q170 250 200 205"/>
+            <path d="M200 205Q240 160 285 150"/>
+            <path d="M285 150Q330 190 320 255"/>
+            <path d="M320 255Q365 210 400 175"/>
+            <path d="M400 175Q440 130 480 120"/>
+            <path d="M480 120Q520 165 500 225"/>
+            <path d="M500 225Q530 270 545 315"/>
+            <path d="M320 255Q380 295 420 340"/>
+            <path d="M420 340Q370 385 310 390"/>
+            <path d="M310 390Q250 380 210 355"/>
+            <path d="M210 355Q160 350 140 320"/>
+            <path d="M200 205Q265 230 320 255"/>
+            <path d="M480 120Q555 135 580 175"/>
+            <path d="M545 315Q490 350 420 340"/>
+          </g>
+
+          <!-- nodes -->
+          <g fill="currentColor" stroke="none">
+            <circle cx="140" cy="320" r="4"/>
+            <circle cx="200" cy="205" r="4.5"/>
+            <circle cx="285" cy="150" r="4"/>
+            <circle cx="320" cy="255" r="5.5"/>
+            <circle cx="400" cy="175" r="4"/>
+            <circle cx="480" cy="120" r="5"/>
+            <circle cx="500" cy="225" r="4"/>
+            <circle cx="545" cy="315" r="4"/>
+            <circle cx="420" cy="340" r="4.5"/>
+            <circle cx="310" cy="390" r="4"/>
+            <circle cx="210" cy="355" r="3.5"/>
+            <circle cx="580" cy="175" r="3.5"/>
+          </g>
+
+          <!-- a few towered settlements on the larger nodes -->
+          <g stroke-width="1.2" stroke-linejoin="round">
+            <g transform="translate(320,255)">
+              <path d="M-13 -8h26v-9l-6-6-4 5-4-6-6 7v9z" fill="var(--cream)"/>
+              <path d="M-9 -8v-6M0 -8v-9M9 -8v-6"/>
+            </g>
+            <g transform="translate(480,120)">
+              <path d="M-11 -8h22v-8l-5-6-3 4-4-5-5 6v9z" fill="var(--cream)"/>
+              <path d="M0 -8v-8"/>
+            </g>
+            <g transform="translate(200,205)">
+              <path d="M-10 -8h20v-8l-5-6-3 4-4-5-5 6v9z" fill="var(--cream)"/>
+              <path d="M0 -8v-8"/>
+            </g>
+            <g transform="translate(420,340)">
+              <path d="M-10 -8h20v-8l-5-6-3 4-4-5-5 6v9z" fill="var(--cream)"/>
+              <path d="M0 -8v-8"/>
+            </g>
+          </g>
+
+          <!-- compass rose -->
+          <g transform="translate(556,404)" stroke-width="1.1">
+            <circle r="26" opacity=".5"/>
+            <circle r="4"/>
+            <path d="M0 -26L5 -5 0 0-5 -5z" fill="currentColor" stroke="none"/>
+            <path d="M0 26L5 5 0 0-5 5z" opacity=".55"/>
+            <path d="M-26 0L-5 5 0 0-5 -5z" opacity=".55"/>
+            <path d="M26 0L5 5 0 0 5 -5z" opacity=".55"/>
+          </g>
+        </svg>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ THREE-COLUMN BAND: about / research / quote =========== -->
+  <section class="band band--alt">
+    <div class="shell cols-3">
+
+      <div class="col">
+        <!-- Charles University emblem as a faint watermark. Decorative here,
+             hence aria-hidden and an empty alt. -->
+        <img class="watermark watermark--emblem" src="/assets/img/cu-emblem.svg"
+             alt="" aria-hidden="true" width="354" height="354">
+        <p class="label">About</p>
+        <h2>Measuring economies that left no statistics.</h2>
+        <svg class="divider orn" viewBox="0 0 240 12" aria-hidden="true">
+          <line x1="0" y1="6" x2="98" y2="6"/>
+          <path class="lozenge" d="M120 1l7 5-7 5-7-5z"/>
+          <line x1="142" y1="6" x2="240" y2="6"/>
+        </svg>
+        <p class="small">
+          Placeholder. Three or four lines on how you work: which archives,
+          which series, which questions. Keep the detail for the CV and the
+          research page.
+        </p>
+        <p><a class="cta" href="/cv.html">Read more <span>&rarr;</span></a></p>
+      </div>
+
+      <div class="col">
+        <p class="label label--accent">Current research</p>
+        <h2>Prices, Mints, and Market Integration</h2>
+        <p class="small">
+          Placeholder. Two lines describing the project the figure belongs to.
+        </p>
+
+        <!-- PLACEHOLDER FIGURE — the data is invented. Series colours are the
+             same CU constants th_style uses, so a chart drawn here and one
+             drawn in matplotlib agree. Hand-written SVG on purpose: a charting
+             library would be the only JavaScript on the site. -->
+        <svg class="chart" viewBox="0 0 440 238" role="img"
+             aria-label="Placeholder figure: two illustrative series, 1000 to 1500.">
+          <title>Placeholder figure — illustrative data only</title>
+          <g class="grid">
+            <line x1="46" y1="205"   x2="425" y2="205"/>
+            <line x1="46" y1="174.2" x2="425" y2="174.2"/>
+            <line x1="46" y1="143.3" x2="425" y2="143.3"/>
+            <line x1="46" y1="112.5" x2="425" y2="112.5"/>
+            <line x1="46" y1="81.7"  x2="425" y2="81.7"/>
+            <line x1="46" y1="50.8"  x2="425" y2="50.8"/>
+            <line x1="46" y1="20"    x2="425" y2="20"/>
+          </g>
+          <g class="axis">
+            <line x1="46" y1="20" x2="46" y2="205"/>
+            <line x1="46" y1="205" x2="425" y2="205"/>
+          </g>
+          <g text-anchor="end">
+            <text x="39" y="209">0</text>
+            <text x="39" y="178">20</text>
+            <text x="39" y="147">40</text>
+            <text x="39" y="116">60</text>
+            <text x="39" y="86">80</text>
+            <text x="39" y="55">100</text>
+            <text x="39" y="24">120</text>
+          </g>
+          <g text-anchor="middle">
+            <text x="46"  y="222">1000</text>
+            <text x="122" y="222">1100</text>
+            <text x="198" y="222">1200</text>
+            <text x="273" y="222">1300</text>
+            <text x="349" y="222">1400</text>
+            <text x="425" y="222">1500</text>
+          </g>
+          <polyline class="series-b" points="46,174.2 83.9,168 121.8,171.1 159.7,158.8 197.6,154.1 235.5,141.8 273.4,124.8 311.3,112.5 349.2,106.3 387.1,103.2 425,100.2"/>
+          <polyline class="series-a" points="46,171.1 83.9,161.8 121.8,164.9 159.7,146.4 197.6,135.6 235.5,115.6 273.4,94 311.3,69.3 349.2,55.5 387.1,44.7 425,41.6"/>
+          <g class="dot-b">
+            <circle cx="46" cy="174.2" r="2.2"/><circle cx="121.8" cy="171.1" r="2.2"/>
+            <circle cx="197.6" cy="154.1" r="2.2"/><circle cx="273.4" cy="124.8" r="2.2"/>
+            <circle cx="349.2" cy="106.3" r="2.2"/><circle cx="425" cy="100.2" r="2.2"/>
+          </g>
+          <g class="dot-a">
+            <circle cx="46" cy="171.1" r="2.2"/><circle cx="121.8" cy="164.9" r="2.2"/>
+            <circle cx="197.6" cy="135.6" r="2.2"/><circle cx="273.4" cy="94" r="2.2"/>
+            <circle cx="349.2" cy="55.5" r="2.2"/><circle cx="425" cy="41.6" r="2.2"/>
+          </g>
+        </svg>
+
+        <ul class="chart-legend">
+          <li><span class="swatch swatch--a"></span>Placeholder series A</li>
+          <li><span class="swatch swatch--b"></span>Placeholder series B</li>
+        </ul>
+
+        <p><a class="cta" href="/research.html">View project <span>&rarr;</span></a></p>
+      </div>
+
+      <div class="col">
+        <div class="arch-frame">
+          <svg class="orn" viewBox="0 0 300 400" fill="none" stroke="currentColor"
+               stroke-width="1.1" aria-hidden="true" preserveAspectRatio="none">
+            <path d="M14 400V150Q14 46 150 12Q286 46 286 150v250"/>
+            <path d="M34 400V162Q34 68 150 38Q266 68 266 162v238"/>
+          </svg>
+          <!-- PLACEHOLDER QUOTE. Your reference attributes its quote to Fernand
+               Braudel, but I could not verify he wrote it, and an unverifiable
+               quotation under a real historian's name does not belong on an
+               academic page. Put in something you can cite. -->
+          <div>
+            <p class="quote">&ldquo;Placeholder quotation &mdash; replace with
+              something you can actually cite, and check the wording against
+              the source.&rdquo;</p>
+            <svg class="divider divider--center orn" viewBox="0 0 240 12" aria-hidden="true">
+              <line x1="0" y1="6" x2="98" y2="6"/>
+              <path class="lozenge" d="M120 1l7 5-7 5-7-5z"/>
+              <line x1="142" y1="6" x2="240" y2="6"/>
+            </svg>
+            <p class="quote-attrib">Author, work, year</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========= TWO-COLUMN BAND: publications / long view =============== -->
+  <section class="band">
+    <div class="shell cols-2">
+
+      <div class="col">
+        <p class="label">Selected publications</p>
+        <ul class="pub-list">
+
+          <li class="pub">
+            <svg class="pub-thumb orn" viewBox="0 0 62 62" fill="none"
+                 stroke="currentColor" stroke-width="1.1" aria-hidden="true">
+              <!-- manuscript leaf: ruled lines and a versal -->
+              <path d="M13 10h36v42H13z"/>
+              <path d="M19 20h10M19 26h24M19 32h24M19 38h24M19 44h16"/>
+              <path d="M16 14v34" stroke-dasharray="2 3"/>
+            </svg>
+            <div>
+              <h3 class="pub-title">Placeholder title of a published article</h3>
+              <span class="pub-venue">Journal of Economic History, 2026</span>
+              <p class="pub-links"><a href="/files/haufer-cv.pdf">PDF</a></p>
+            </div>
+          </li>
+
+          <li class="pub">
+            <svg class="pub-thumb orn" viewBox="0 0 62 62" fill="none"
+                 stroke="currentColor" stroke-width="1.1" aria-hidden="true">
+              <!-- map fragment: a route across a graticule -->
+              <path d="M10 12h42v38H10z"/>
+              <path d="M10 24h42M10 36h42M24 12v38M38 12v38" opacity=".45"/>
+              <path d="M16 42Q28 22 46 18" stroke-dasharray="4 3"/>
+              <circle cx="16" cy="42" r="2.4" fill="currentColor" stroke="none"/>
+              <circle cx="46" cy="18" r="2.4" fill="currentColor" stroke="none"/>
+            </svg>
+            <div>
+              <h3 class="pub-title">Placeholder title of a second article</h3>
+              <span class="pub-venue">Economic History Review, 2025</span>
+              <p class="pub-links"><a href="/files/haufer-cv.pdf">PDF</a></p>
+            </div>
+          </li>
+
+          <li class="pub">
+            <svg class="pub-thumb orn" viewBox="0 0 62 62" fill="none"
+                 stroke="currentColor" stroke-width="1.1" aria-hidden="true">
+              <!-- coin: a struck penny, for the monetary paper -->
+              <circle cx="31" cy="31" r="20"/>
+              <circle cx="31" cy="31" r="15" stroke-dasharray="2 3"/>
+              <path d="M31 20v22M20 31h22"/>
+              <circle cx="31" cy="31" r="4"/>
+            </svg>
+            <div>
+              <h3 class="pub-title">Placeholder title of a third article</h3>
+              <span class="pub-venue">Explorations in Economic History, 2024</span>
+              <p class="pub-links"><a href="/files/haufer-cv.pdf">PDF</a></p>
+            </div>
+          </li>
+
+        </ul>
+        <p><a class="cta" href="/research.html">View all publications <span>&rarr;</span></a></p>
+      </div>
+
+      <div class="col">
+        <p class="label">Historical perspective</p>
+        <h2>A long view on economic change</h2>
+
+        <!-- Timeline in HTML rather than SVG so the labels scale with the
+             reader's font size, stay selectable, and read correctly aloud.
+             On a phone it becomes a vertical list with the spine on the left. -->
+        <ol class="timeline">
+          <li>
+            <span class="timeline-year tnum">1000</span>
+            <span class="timeline-node" aria-hidden="true"></span>
+            <span class="timeline-caption">Regional<br>economies</span>
+          </li>
+          <li>
+            <span class="timeline-year tnum">1100</span>
+            <span class="timeline-node" aria-hidden="true"></span>
+            <span class="timeline-caption">Commercial<br>expansion</span>
+          </li>
+          <li>
+            <span class="timeline-year tnum">1200</span>
+            <span class="timeline-node" aria-hidden="true"></span>
+            <span class="timeline-caption">Urban<br>transformation</span>
+          </li>
+          <li>
+            <span class="timeline-year tnum">1300</span>
+            <span class="timeline-node" aria-hidden="true"></span>
+            <span class="timeline-caption">Institutional<br>innovation</span>
+          </li>
+          <li>
+            <span class="timeline-year tnum">1400</span>
+            <span class="timeline-node" aria-hidden="true"></span>
+            <span class="timeline-caption">Integration<br>and growth</span>
+          </li>
+          <li>
+            <span class="timeline-year tnum">1500</span>
+            <span class="timeline-node" aria-hidden="true"></span>
+            <span class="timeline-caption">New<br>horizons</span>
+          </li>
+        </ol>
+
+        <p class="small muted">
+          Placeholder. A line on what the periodisation is doing here, or
+          delete this section if it turns out to be decoration.
+        </p>
+
+        <!-- A walled river town: towers, spires, a bridge. Decorative. -->
+        <svg class="skyline orn" viewBox="0 0 800 168" fill="none"
+             stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+          <!-- back spires -->
+          <g opacity=".55">
+            <path d="M96 118V64l14-30 14 30v54"/>
+            <path d="M110 34V20"/>
+            <path d="M196 118V72l18-34 18 34v46"/>
+            <path d="M214 38V24"/>
+            <path d="M604 118V70l16-32 16 32v48"/>
+            <path d="M620 38V22"/>
+          </g>
+          <!-- town wall with crenellations -->
+          <path d="M40 118v-34h680v34"/>
+          <path d="M40 84h12v-9h12v9h12v-9h12v9h12v-9h12v9h12v-9h12v9"/>
+          <path d="M640 84h12v-9h12v9h12v-9h12v9h12v-9h12v9h12v-9h12v9"/>
+          <!-- gatehouse and towers -->
+          <path d="M300 118V56h56v62"/>
+          <path d="M300 56l28-20 28 20"/>
+          <path d="M316 118V92q12-10 24 0v26"/>
+          <path d="M430 118V60h44v58"/>
+          <path d="M430 60l22-16 22 16"/>
+          <path d="M444 118V96q8-8 16 0v22"/>
+          <!-- cathedral -->
+          <path d="M500 118V74h72v44"/>
+          <path d="M500 74l36-26 36 26"/>
+          <path d="M520 118V94q16-14 32 0v24"/>
+          <!-- bridge over the river -->
+          <path d="M40 138h720"/>
+          <path d="M120 138q26-26 52 0M232 138q26-26 52 0M344 138q26-26 52 0M456 138q26-26 52 0M568 138q26-26 52 0"/>
+          <!-- water -->
+          <g opacity=".4" stroke-dasharray="14 10">
+            <path d="M40 152h720"/>
+            <path d="M80 162h680"/>
+          </g>
+        </svg>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- =========================== SITE FOOTER ============================== -->
+<footer class="site-footer">
+  <div class="shell footer-inner">
+
+    <div>
+      <p class="footer-quote">
+        &ldquo;Placeholder &mdash; a line you actually like, or delete this
+        block entirely.&rdquo;
       </p>
-
-      <p>
-        Placeholder. A second paragraph for your current position and
-        affiliation, and where you are in your training. Keep it to a few lines
-        — the CV carries the detail.
-      </p>
+      <svg class="divider orn" viewBox="0 0 240 12" aria-hidden="true">
+        <line x1="0" y1="6" x2="98" y2="6"/>
+        <path class="lozenge" d="M120 1l7 5-7 5-7-5z"/>
+        <line x1="142" y1="6" x2="240" y2="6"/>
+      </svg>
     </div>
 
-    <svg class="divider" viewBox="0 0 240 12" role="presentation" aria-hidden="true">
-      <line x1="0" y1="6" x2="98" y2="6" />
-      <path class="lozenge" d="M120 1 L127 6 L120 11 L113 6 Z" />
-      <line x1="142" y1="6" x2="240" y2="6" />
-    </svg>
-
-    <h2>Current work</h2>
-    <div class="prose">
-      <p class="small">
-        Placeholder. Two or three lines pointing at what is on your desk right
-        now, then a link through to the full list.
-        <a href="/research.html">All research &rarr;</a>
-      </p>
+    <div>
+      <p class="label">Navigation</p>
+      <ul class="footer-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/research.html">Research</a></li>
+        <li><a href="/cv.html">CV</a></li>
+        <li><a href="/writing.html">Writing</a></li>
+      </ul>
     </div>
 
-    <h2>Elsewhere</h2>
-    <ul class="entries">
-      <li class="entry">
-        <h3><a href="/writing.html">A Diary of an Econ Student</a></h3>
-        <p class="entry-meta"><span>Substack</span><span>Notes on studying economics</span></p>
-        <p class="entry-links"><a href="https://econdiary.substack.com/">econdiary.substack.com &rarr;</a></p>
-      </li>
-      <li class="entry">
-        <h3>Contact</h3>
-        <!-- Consider whether you want a plain address here. It is a public,
-             crawlable page even with noindex — an image or a form is an option. -->
-        <p class="entry-meta"><span>your.name@institution.edu</span></p>
-      </li>
-    </ul>
+    <div>
+      <p class="label">Contact</p>
+      <ul class="footer-contact">
+        <li>
+          <svg class="orn" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+               stroke-width="1.3" aria-hidden="true">
+            <rect x="1" y="3" width="14" height="10"/>
+            <path d="M1 3l7 6 7-6"/>
+          </svg>
+          <span>your.name@cuni.cz</span>
+        </li>
+        <li>
+          <svg class="orn" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+               stroke-width="1.3" aria-hidden="true">
+            <path d="M8 15s5.5-6 5.5-9A5.5 5.5 0 0 0 2.5 6c0 3 5.5 9 5.5 9z"/>
+            <circle cx="8" cy="6" r="2"/>
+          </svg>
+          <span>Placeholder faculty or institute<br>Charles University<br>Prague</span>
+        </li>
+      </ul>
+    </div>
 
-  </main>
+    <div class="footer-affil">
+      <img class="footer-emblem" src="/assets/img/cu-emblem.svg"
+           alt="Historical seal of Charles University" width="354" height="354">
+      <p class="footer-affil-note">Charles University<br>Prague</p>
+    </div>
 
-  <footer class="colophon">
-    <p>Tomáš Haufer</p>
-    <p>Last revised <span class="tnum">2026</span></p>
-  </footer>
+  </div>
 
-</div>
+  <div class="footer-bar">
+    <div class="shell">
+      <p>&copy; <span class="tnum">2026</span> Tomáš Haufer</p>
+      <p>No analytics, no trackers, no cookies.</p>
+    </div>
+  </div>
+</footer>
