@@ -297,39 +297,19 @@ a:focus-visible {
   padding-block: 1.15rem;
 }
 
+/* No mark. Three have been tried here — a Gothic arch, a plotted series, and
+   a TH monogram — and each had the same problem: a mark next to a personal
+   name has to earn its place, and none of them did. The name set larger, with
+   a short red rule under it, is what most established academic pages do. */
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
+  display: block;
   text-decoration: none;
   color: inherit;
 }
 
-/* A monogram, not a picture. Two marks have been tried here — a Gothic arch
-   and a plotted series — and both had the same problem: they illustrate a
-   subject, and the subject will change. Initials in a ruled box are about the
-   person, so they keep working. Set in the page font, so it is real type at
-   any size rather than an outline that fattens when scaled. */
-.brand-mark {
-  width: 44px;
-  height: 44px;
-  flex: none;
-  display: grid;
-  place-items: center;
-  border: var(--hair) solid var(--rule);
-  color: var(--cu-red-dark);
-  font-size: 1.18rem;
-  line-height: 1;
-  letter-spacing: 0.03em;
-  /* the cap-height of Garamond sits low in the box without this nudge */
-  padding-top: 0.06em;
-}
-
-.brand:hover .brand-mark { border-color: var(--accent); }
-
 .brand-name {
   display: block;
-  font-size: 1.42rem;
+  font-size: 1.52rem;
   line-height: 1.15;
   color: var(--cu-navy);
   letter-spacing: 0.005em;
@@ -337,26 +317,24 @@ a:focus-visible {
 
 .brand:hover .brand-name { color: var(--accent); }
 
+/* The rule. Short and heavy enough to read as deliberate rather than as a
+   stray underline, and it is the one place red appears in the header. */
+.brand-name::after {
+  content: "";
+  display: block;
+  width: 2.15rem;
+  height: 2px;
+  margin-top: 0.42rem;
+  background: var(--cu-red-dark);
+}
+
 .brand-sub {
   display: block;
-  margin-top: 0.22rem;
-  font-size: 0.66rem;
+  margin-top: 0.42rem;
+  font-size: 0.68rem;
   line-height: 1.5;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--ink-faint);
-}
-
-/* The full institutional name. Set as ordinary text rather than more
-   letterspaced caps — at this length caps stop being a label and become a
-   wall. Hidden on narrow screens, where it would push the nav off entirely
-   and where CERGE-EI alone is enough. */
-.brand-note {
-  display: block;
-  margin-top: 0.28rem;
-  max-width: 34ch;
-  font-size: 0.62rem;
-  line-height: 1.45;
   color: var(--ink-faint);
 }
 
@@ -527,21 +505,47 @@ p { margin: 0 0 var(--step); }
 
 .divider--center { margin-inline: auto; }
 
-/* The emblem watermark, the arch-framed pull quote and the arch behind the
-   headline all lived here. They went when the home page was rebuilt around
-   the photograph: the arch now frames the portrait (see .hero-portrait), and
-   the one quotation on the site sits in the footer. Their rules are in git
-   history if any of them is wanted back. */
+/* Watermark ornaments sit behind content, very faint, and never intercept
+   clicks. Decorative only, so aria-hidden with an empty alt in the markup. */
+.watermark {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* The Charles University seal behind the Background column. Referenced with
+   <img src> rather than inlined: it is 102 KB of intricate vector, so inlining
+   would put it in every HTML page instead of being fetched and cached once.
+   CU_NAVY is baked into the file because an <img> renders in an isolated
+   context where currentColor would resolve to black.
+
+   Large and very faint on purpose. The seal is dense — at a small size and a
+   readable opacity it turns into grey noise; big and nearly invisible, it
+   reads as a watermark. */
+.watermark--emblem {
+  width: 460px;
+  height: 460px;
+  right: -150px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.07;
+}
+
+/* Content must sit above the watermark. */
+.col > *, .hero-text > * { position: relative; z-index: 1; }
 
 /* --- 7. Hero ----------------------------------------------------------- */
 
 .hero { position: relative; overflow: hidden; }
 
+/* The text column takes the larger share now. It was 0.92 against 1.08, which
+   left the prose in a narrower measure than the photograph beside it — the
+   biography is the substance of this page, so it gets the width. */
 .hero-inner {
   display: grid;
-  grid-template-columns: 0.92fr 1.08fr;
+  grid-template-columns: 1.32fr 0.68fr;
   align-items: center;
-  gap: clamp(2rem, 4vw, 4.5rem);
+  gap: clamp(2rem, 4.5vw, 5rem);
   padding-block: clamp(3rem, 6vw, 6rem);
 }
 
@@ -550,8 +554,19 @@ p { margin: 0 0 var(--step); }
 .hero-lede {
   font-size: 1.1rem;
   line-height: 1.68;
-  max-width: 30em;
+  max-width: 38em;
   color: var(--ink);
+}
+
+.hero-text .small { max-width: 40em; }
+
+/* Research interests. Navy and slightly larger than body, so the line reads
+   as a standing statement rather than as another sentence of the biography. */
+.interests {
+  font-size: 1.04rem;
+  line-height: 1.55;
+  color: var(--cu-navy);
+  max-width: 34em;
 }
 
 .hero-figure {
@@ -584,7 +599,7 @@ p { margin: 0 0 var(--step); }
 .hero-portrait .portrait {
   position: relative;
   z-index: 1;
-  max-width: 340px;
+  max-width: 420px;
   margin-bottom: 0;
 }
 
@@ -612,23 +627,176 @@ p { margin: 0 0 var(--step); }
 .feature-figure { color: var(--cu-navy); }
 .feature-figure .orn { width: 100%; height: auto; }
 
+/* --- The identification schematic -------------------------------------
+
+   Labels are typed in capitals in the markup rather than set with
+   text-transform: SVG text support for it is inconsistent across renderers,
+   and a diagram that loses its labels in one browser is worse than one that
+   is slightly less tidy in the source. */
+
+.schematic {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.schematic text {
+  font-family: var(--serif);
+  fill: var(--cu-navy);
+}
+
+.schematic .sch-rule line { stroke: var(--rule); stroke-width: 1; }
+.schematic .sch-divider { stroke-dasharray: 3 5; opacity: 0.75; }
+
+.schematic .sch-stage {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  fill: var(--ink-faint);
+}
+
+.schematic .sch-node rect {
+  fill: var(--paper-alt);
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.schematic .sch-node text {
+  font-size: 12.5px;
+  letter-spacing: 0.13em;
+  text-anchor: middle;
+}
+
+.schematic .sch-node--accent rect { stroke: var(--cu-red-dark); }
+.schematic .sch-node--accent text { fill: var(--cu-red-dark); }
+
+.schematic .sch-node--muted rect { stroke-dasharray: 4 4; opacity: 0.6; }
+.schematic .sch-node--muted text { fill: var(--ink-faint); }
+
+.schematic .sch-flow { fill: none; stroke-width: 1.5; }
+.schematic .sch-flow--navy  { stroke: var(--cu-navy); }
+.schematic .sch-flow--red   { stroke: var(--cu-red-dark); }
+.schematic .sch-flow--muted { stroke: var(--cu-grey-light); stroke-dasharray: 4 4; }
+
+.schematic .sch-flowlabel rect { fill: var(--paper-alt); }
+
+.schematic .sch-flowlabel text {
+  font-size: 12px;
+  font-style: italic;
+  text-anchor: middle;
+  fill: var(--cu-red-dark);
+}
+
+.schematic .sch-note text {
+  font-size: 11.5px;
+  fill: var(--ink-faint);
+  text-anchor: start;
+}
+
 /* --- 8. Cards & panels ------------------------------------------------- */
 
 .stack > * + * { margin-top: 1.15rem; }
 
 /* The portrait — the only bitmap on the site, so it needs help to sit among
    line ornaments rather than crash into them: a hairline frame with a little
-   air inside it, and a light desaturation that pulls the photograph toward
-   the cream-and-navy palette. Drop the filter line for full colour. */
+   air inside it.
+
+   No filter. It previously carried grayscale(0.85) sepia(0.12) to pull the
+   photograph toward the cream-and-navy palette; the result was a muddy
+   half-tinted image that matched neither the page nor a real photograph.
+   Full colour, and the frame does the reconciling instead. */
 .portrait {
   width: 100%;
-  max-width: 265px;
+  max-width: 420px;
   height: auto;
   margin: 0 0 1.5rem;
-  padding: 6px;
+  padding: 7px;
   background: var(--paper);
   border: var(--hair) solid var(--rule);
-  filter: grayscale(0.85) contrast(1.04) sepia(0.12);
+}
+
+/* --- Link pills --------------------------------------------------------
+
+   One component for every outbound link on the site, so a reader learns the
+   vocabulary once. Colour carries the KIND of destination, not its importance:
+
+     .pill--doc   navy  — something to read: PDF, position paper, thesis
+     .pill--ext   red   — leaves the site: published article, Substack, a
+                          coauthor's page
+     .pill--data  grey  — code, data, replication, documentation
+
+   The icon repeats the same distinction, so the categories survive both
+   greyscale printing and colour-blindness.
+
+   Each modifier sets --pill-color and nothing else. Hover then swaps which
+   side of the pair is ink and which is ground. Doing it through a custom
+   property rather than currentColor matters: with `background: currentColor`
+   the label would be painted in the same colour as its own background and
+   vanish, and a bare text node cannot be recoloured by a child selector. The
+   icon inherits through currentColor, so it needs no rule of its own.
+
+   Usage: <a class="pill pill--doc" href="…"><svg class="pill-icon">…</svg>PDF</a>
+   wrapped in <p class="pill-row"> or <div class="pill-row">.  */
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.6rem;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pill {
+  --pill-color: var(--cu-navy);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.32rem 0.85rem 0.34rem;
+  color: var(--pill-color);
+  border: var(--hair) solid var(--pill-color);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  text-decoration: none;
+  line-height: 1.35;
+  white-space: nowrap;
+  transition: background-color 130ms ease, color 130ms ease;
+}
+
+.pill-icon {
+  width: 12px;
+  height: 12px;
+  flex: none;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.4;
+}
+
+.pill--doc  { --pill-color: var(--cu-navy); }
+.pill--ext  { --pill-color: var(--cu-red-dark); }
+.pill--data { --pill-color: var(--cu-grey); }
+
+.pill:hover,
+.pill:focus-visible {
+  background: var(--pill-color);
+  color: var(--paper);
+  text-decoration: none;
+}
+
+/* One filled pill, for the single action worth pushing: Subscribe. It arrives
+   already in the state the others reach on hover, and inverts back on hover so
+   it still responds to the pointer. Use sparingly — a page of filled pills has
+   no emphasis at all. */
+.pill--filled {
+  background: var(--pill-color);
+  color: var(--paper);
+}
+
+.pill--filled:hover,
+.pill--filled:focus-visible {
+  background: none;
+  color: var(--pill-color);
 }
 
 /* Publication list on the home page: a thumbnail ornament, then the title. */
@@ -742,13 +910,21 @@ p { margin: 0 0 var(--step); }
    person, and the space is better spent on training a reader can check. The
    .timeline rules went with it. */
 
+/* Prague. Density is controlled per layer rather than by one flat opacity:
+   at 0.3 overall the detailed drawing turned to grey mush, and at full
+   strength the roofscape competed with the text above it. */
 .skyline {
   display: block;
   width: 100%;
   height: auto;
+  margin-top: 2rem;
   color: var(--cu-navy);
-  opacity: 0.3;
 }
+
+.skyline .sky-back  { opacity: 0.22; }
+.skyline .sky-mid   { opacity: 0.5; }
+.skyline .sky-front { opacity: 0.62; }
+.skyline .sky-water { opacity: 0.3; }
 
 /* --- 11. Research entries --------------------------------------------- */
 
@@ -866,6 +1042,103 @@ p { margin: 0 0 var(--step); }
 }
 
 .cv-what > strong { font-weight: 600; color: var(--heading); }
+
+/* A collapsed detail on a CV row: the full description from the PDF CV, and
+   the module lists under each degree. Same lozenge disclosure as the research
+   abstracts, so the site has one "there is more here" signal rather than two.
+   Kept as native <details> — still no JavaScript anywhere. */
+.cv-detail { margin-top: 0.5rem; }
+
+.cv-detail summary {
+  cursor: pointer;
+  font-size: 0.7rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--cu-navy);
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 0.55em;
+  list-style: none;
+}
+
+.cv-detail summary::-webkit-details-marker { display: none; }
+.cv-detail summary::marker { content: ""; }
+
+.cv-detail summary::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border: var(--hair) solid var(--accent);
+  transform: rotate(45deg);
+  transition: background-color 140ms ease;
+}
+
+.cv-detail[open] summary::before { background: var(--accent); }
+.cv-detail summary:hover { color: var(--accent); }
+.cv-detail[open] summary { margin-bottom: 0.65rem; }
+
+.cv-detail > :not(summary) {
+  padding-left: 1rem;
+  border-left: var(--hair) solid var(--rule);
+}
+
+.cv-detail p {
+  margin: 0 0 0.6rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.cv-detail p:last-child { margin-bottom: 0; }
+
+/* Module lists. Two columns where there is room — a single column of eleven
+   course names is a wall, and these are meant to be scanned. */
+.course-list {
+  margin: 0 0 0.6rem;
+  padding-left: 1rem;
+  border-left: var(--hair) solid var(--rule);
+  list-style: none;
+  columns: 2;
+  column-gap: 2rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.course-list li {
+  break-inside: avoid;
+  margin-bottom: 0.32rem;
+  padding-left: 0.85rem;
+  position: relative;
+}
+
+/* A small navy lozenge as the bullet, matching the rest of the ornament. */
+.course-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 4px;
+  height: 4px;
+  background: var(--cu-navy);
+  opacity: 0.55;
+  transform: rotate(45deg);
+}
+
+.course-year {
+  display: block;
+  margin: 0 0 0.45rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 48em) {
+  .course-list { columns: 1; }
+}
 
 .cv-where {
   display: block;
@@ -1124,8 +1397,26 @@ p { margin: 0 0 var(--step); }
     word-break: break-all;
   }
 
-  .entry details { display: block; }
-  .entry summary { display: none; }
+  .entry details,
+  .cv-detail { display: block; }
+  .entry summary,
+  .cv-detail summary { display: none; }
+
+  .cv-detail > :not(summary),
+  .course-list { border-left: 0; padding-left: 0; }
+
+  /* Pills lose their fill and border on paper and become plain labels; the
+     URL is spelled out by the rule below, which is what actually matters when
+     the reader cannot click. */
+  .pill {
+    border: 0;
+    padding: 0;
+    color: #000;
+    background: none;
+  }
+
+  .pill-icon { display: none; }
+  .pill-row { gap: 0.2rem 1.2rem; }
 
   .entry, .cv-row, .pub, h2, h3 { break-inside: avoid; }
   h2, .label { break-after: avoid; }

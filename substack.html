@@ -14,13 +14,8 @@
 <header class="site-header">
   <div class="shell header-inner">
     <a class="brand" href="/">
-      <span class="brand-mark" aria-hidden="true">TH</span>
-      <span>
-        <span class="brand-name">Tomáš Haufer</span>
-        <span class="brand-sub">CERGE-EI</span>
-        <span class="brand-note">A joint workplace of Charles University and the
-          Economics Institute of the Czech Academy of Sciences</span>
-      </span>
+      <span class="brand-name">Tomáš Haufer</span>
+      <span class="brand-sub">CERGE-EI</span>
     </a>
     <nav class="site-nav" aria-label="Main">
       <ul>
@@ -93,10 +88,22 @@
           </p>
         </div>
 
-        <p class="entry-links">
-          <a href="https://econdiary.substack.com/">Read on Substack &rarr;</a>
-          <a href="https://econdiary.substack.com/subscribe">Subscribe</a>
-          <a href="https://econdiary.substack.com/archive">Archive</a>
+        <!-- All three leave the site, so all three are .pill--ext. Subscribe
+             is the one action worth emphasising, so it is the only filled
+             pill on the site — the same shape the others take on hover. -->
+        <p class="pill-row">
+          <a class="pill pill--ext pill--filled" href="https://econdiary.substack.com/subscribe">
+            <svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><rect x="1" y="2.5" width="10" height="7"/><path d="M1 2.5l5 4 5-4"/></svg>
+            Subscribe
+          </a>
+          <a class="pill pill--ext" href="https://econdiary.substack.com/">
+            <svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2H2v8h8V6"/><path d="M7.5 1.5h3v3"/><path d="M10.5 1.5L6 6"/></svg>
+            Read on Substack
+          </a>
+          <a class="pill pill--ext" href="https://econdiary.substack.com/archive">
+            <svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><rect x="1.5" y="2" width="9" height="8"/><path d="M1.5 4.5h9M4.5 2v8"/></svg>
+            Archive
+          </a>
         </p>
 
         <!-- Optional. A short hand-curated list of posts worth keeping in
@@ -180,7 +187,6 @@
         <img class="footer-logo-cerge" src="/assets/img/cerge-logo.svg"
              alt="CERGE-EI" width="151" height="58">
       </div>
-      <p class="footer-affil-note">Prague</p>
     </div>
 
   </div>

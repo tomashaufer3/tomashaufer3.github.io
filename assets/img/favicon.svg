@@ -1,10 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img"
-     aria-label="Tomáš Haufer">
-  <!-- The site's lozenge, the one ornament that appears on every page.
-       Solid, not outlined, and without the ruling hairlines the earlier
-       version carried: at 16px a 1px rule is a smudge and a 2px outline
-       closes up into a blob. One shape, high contrast, legible in a tab.
-       Colours are the palette's own — cream paper, CU_RED_DARK. -->
-  <rect width="32" height="32" fill="#FAF7F0"/>
-  <path d="M16 4 L27 16 L16 28 L5 16 Z" fill="#AE2F3C"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TH">
+  <title>Tomáš Haufer</title>
+  <!-- White rounded square, navy TH, red rule beneath.
+
+       The letters are drawn as rectangles rather than set as <text>. A favicon
+       renders in an isolated context with no access to the site's webfont, so
+       <text> would fall back to whatever serif the platform has and the
+       metrics would shift between Windows, macOS and Linux. Rectangles look
+       identical everywhere and stay legible at 16px, which is the only size
+       that really matters. -->
+  <rect width="64" height="64" rx="12" fill="#FFFFFF"/>
+  <g fill="#003657">
+    <!-- T -->
+    <rect x="10" y="14" width="19" height="5.5"/>
+    <rect x="16.75" y="14" width="5.5" height="25"/>
+    <!-- H -->
+    <rect x="35" y="14" width="5.5" height="25"/>
+    <rect x="48.5" y="14" width="5.5" height="25"/>
+    <rect x="35" y="23.75" width="19" height="5.5"/>
+  </g>
+  <rect x="10" y="44.5" width="44" height="4.5" rx="1" fill="#AE2F3C"/>
 </svg>

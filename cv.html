@@ -14,13 +14,8 @@
 <header class="site-header">
   <div class="shell header-inner">
     <a class="brand" href="/">
-      <span class="brand-mark" aria-hidden="true">TH</span>
-      <span>
-        <span class="brand-name">Tomáš Haufer</span>
-        <span class="brand-sub">CERGE-EI</span>
-        <span class="brand-note">A joint workplace of Charles University and the
-          Economics Institute of the Czech Academy of Sciences</span>
-      </span>
+      <span class="brand-name">Tomáš Haufer</span>
+      <span class="brand-sub">CERGE-EI</span>
     </a>
     <nav class="site-nav" aria-label="Main">
       <ul>
@@ -57,19 +52,24 @@
         <!-- =====================================================================
              HOW TO ADD A ROW
 
-             Every section below is the same two-column pattern. Copy one <li>:
+             Every entry is the same shape: a date, a title, a one-line
+             subtitle, and — where there is more to say — a collapsed detail.
 
              <li class="cv-row">
-               <span class="cv-when">2024&ndash;</span>
+               <span class="cv-when tnum">2026</span>
                <div class="cv-what">
-                 <strong>What it was</strong>
-                 <span class="cv-where">Where it was</span>
+                 <strong>Position or title</strong>
+                 <span class="cv-where">Institution, city · one-line subtitle</span>
+                 <details class="cv-detail">
+                   <summary>Detail</summary>
+                   <p>The fuller description.</p>
+                 </details>
                </div>
              </li>
 
-             The .cv-when column uses tabular figures so year ranges line up
-             down the page. On narrow screens the two columns stack
-             automatically.
+             The page is deliberately brief on first read: title and subtitle
+             visible, everything else behind a disclosure. The descriptions are
+             taken from the PDF CV, so if you revise that, revise these.
 
              There is no PhD row, and there should not be one until there is an
              offer. Listing a degree you have not started is the one error on an
@@ -81,8 +81,8 @@
           <li class="cv-row">
             <span class="cv-when">Fields</span>
             <div class="cv-what">
-              <span class="cv-where">Applied economics &middot; economic history
-              &middot; institutional and political economy</span>
+              <span class="cv-where">Applied economics &middot; quantitative
+              economic history &middot; institutional and political economy</span>
             </div>
           </li>
         </ul>
@@ -90,22 +90,55 @@
         <h2 class="label label--accent">Education</h2>
         <ul class="cv-list">
           <li class="cv-row">
-            <span class="cv-when">2025&ndash;2027</span>
+            <span class="cv-when tnum">2025&ndash;2027</span>
             <div class="cv-what">
-              <strong>MA, Economic Research</strong>
-              <span class="cv-where">CERGE-EI, Prague</span>
+              <strong>Magistr (Mgr.), Economic Research</strong>
+              <span class="cv-where">CERGE-EI, Prague &middot; M.A. equivalent</span>
+              <details class="cv-detail">
+                <summary>Modules</summary>
+                <span class="course-year">First year</span>
+                <ul class="course-list">
+                  <li>Applied Microeconomics I</li>
+                  <li>Applied Microeconomics II</li>
+                  <li>Applied Macroeconomics I</li>
+                  <li>Applied Macroeconomics II</li>
+                  <li>Statistics</li>
+                  <li>Econometrics</li>
+                  <li>Machine Learning for Social Scientists</li>
+                  <li>Research Writing I</li>
+                </ul>
+              </details>
             </div>
           </li>
           <li class="cv-row">
-            <span class="cv-when">2022&ndash;2025</span>
+            <span class="cv-when tnum">2022&ndash;2025</span>
             <div class="cv-what">
-              <strong>BA, Economics</strong>
-              <span class="cv-where">Prague University of Economics and
-              Business &middot; top 10% of the cohort</span>
+              <strong>Bakalář (Bc.), Economics</strong>
+              <span class="cv-where">Prague University of Economics and Business
+              &middot; B.A. equivalent &middot; top 10% of cohort</span>
+              <details class="cv-detail">
+                <summary>Modules</summary>
+                <span class="course-year">Selected modules and courses</span>
+                <ul class="course-list">
+                  <li>Principles of Microeconomics</li>
+                  <li>Principles of Macroeconomics</li>
+                  <li>Microeconomics I</li>
+                  <li>Macroeconomics I</li>
+                  <li>Macroeconomics II</li>
+                  <li>Mathematics A &mdash; Fundamentals of Calculus and
+                    Optimisation for Economists</li>
+                  <li>Mathematics B &mdash; Fundamentals of Linear Algebra,
+                    Matrix Methods and Integration</li>
+                  <li>Introduction to Game Theory</li>
+                  <li>Statistics</li>
+                  <li>Introduction to Econometrics</li>
+                  <li>Applied Quantitative Methods</li>
+                </ul>
+              </details>
             </div>
           </li>
           <li class="cv-row">
-            <span class="cv-when">2024</span>
+            <span class="cv-when tnum">2024</span>
             <div class="cv-what">
               <strong>Erasmus exchange</strong>
               <span class="cv-where">University of Agder, Kristiansand, Norway</span>
@@ -116,15 +149,15 @@
         <h2 class="label label--accent">Additional training</h2>
         <ul class="cv-list">
           <li class="cv-row">
-            <span class="cv-when">2024</span>
+            <span class="cv-when tnum">2024</span>
             <div class="cv-what">
               <strong>Prague&ndash;Glasgow Summer School in Economics</strong>
-              <span class="cv-where">Prague University of Economics and
-              Business and the University of Glasgow</span>
+              <span class="cv-where">Prague University of Economics and Business
+              and the University of Glasgow</span>
             </div>
           </li>
           <li class="cv-row">
-            <span class="cv-when">2024</span>
+            <span class="cv-when tnum">2024</span>
             <div class="cv-what">
               <strong>Mises Academy</strong>
               <span class="cv-where">Institute of Liberal Studies, Prague</span>
@@ -135,7 +168,7 @@
         <h2 class="label label--accent">Research experience</h2>
         <ul class="cv-list">
           <li class="cv-row">
-            <span class="cv-when">2026</span>
+            <span class="cv-when tnum">2026</span>
             <div class="cv-what">
               <strong>Research Assistant to Clara Sievert</strong>
               <span class="cv-where">CERGE-EI, Prague &middot; full-time,
@@ -143,13 +176,26 @@
             </div>
           </li>
           <li class="cv-row">
-            <span class="cv-when">2025</span>
+            <span class="cv-when tnum">2025</span>
             <div class="cv-what">
               <strong>Economic Analysis Summer Intern</strong>
               <span class="cv-where">Moody&rsquo;s Analytics, Prague &middot;
-              country outlooks for the Economic View series, Economic Scenarios
-              for Climate Risk, and exchange-rate equations in the Global
-              Macroeconomic Model</span>
+              June to August</span>
+              <details class="cv-detail">
+                <summary>Detail</summary>
+                <p>Updated the Moody&rsquo;s Précis® Report for Romania,
+                analysing key macroeconomic indicators.</p>
+                <p>Assisted with Economic Scenarios for Climate Risk by creating
+                scripts for data manipulation in EViews, and conducted quality
+                checks on forecasted time series data to ensure model
+                accuracy.</p>
+                <p>Estimated new equations for exchange rates for selected
+                countries in the Moody&rsquo;s Analytics Global Macroeconomic
+                Model.</p>
+                <p>Analysed the economic situation in Central and Eastern Europe
+                and authored commentaries on regional outlooks and oil shock
+                scenarios.</p>
+              </details>
             </div>
           </li>
         </ul>
@@ -161,51 +207,68 @@
             <div class="cv-what">
               <strong>The Fateful Adventures of the Good Soldiers</strong>
               <span class="cv-where">Master&rsquo;s thesis, CERGE-EI &middot;
-              supervised by Sebastian Ottinger &middot;
-              <a href="/files/theses/haufer-legions-position-paper.pdf">position paper</a></span>
+              supervised by <a href="https://sites.google.com/view/sebastian-ottinger">Sebastian
+              Ottinger</a></span>
+              <p class="pill-row">
+                <a class="pill pill--doc" href="/files/theses/haufer-legions-position-paper.pdf"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>Position paper</a>
+                <a class="pill pill--data" href="https://tomashaufer3.github.io/legions-docs/"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M4.2 2.6L1.2 6l3 3.4"/><path d="M7.8 2.6L10.8 6l-3 3.4"/></svg>Documentation</a>
+              </p>
             </div>
           </li>
           <li class="cv-row">
-            <span class="cv-when">2026</span>
+            <span class="cv-when tnum">2026</span>
             <div class="cv-what">
               <strong>Written in Time</strong>
               <span class="cv-where">Term project, Machine Learning for Social
-              Scientists, CERGE-EI &middot;
-              <a href="/files/term-papers/haufer-written-in-time.pdf">PDF</a></span>
+              Scientists, CERGE-EI</span>
+              <p class="pill-row">
+                <a class="pill pill--doc" href="/files/term-papers/haufer-written-in-time.pdf"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>PDF</a>
+              </p>
             </div>
           </li>
           <li class="cv-row">
-            <span class="cv-when">2026</span>
+            <span class="cv-when tnum">2026</span>
             <div class="cv-what">
               <strong>What Drives the Referees&rsquo; Performance?</strong>
-              <span class="cv-where">Statistics term project, CERGE-EI &middot;
-              <a href="/files/term-papers/haufer-referee-performance.pdf">PDF</a></span>
+              <span class="cv-where">Statistics term project, CERGE-EI</span>
+              <p class="pill-row">
+                <a class="pill pill--doc" href="/files/term-papers/haufer-referee-performance.pdf"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>PDF</a>
+              </p>
             </div>
           </li>
           <li class="cv-row">
-            <span class="cv-when">2025</span>
+            <span class="cv-when tnum">2025</span>
             <div class="cv-what">
               <strong>The Laffer Curve in the Czech Republic</strong>
               <span class="cv-where">Bachelor&rsquo;s thesis, Prague University
-              of Economics and Business &middot; supervised by Pavel Potužák
-              &middot; <a href="/files/theses/haufer-laffer-curve.pdf">PDF</a></span>
+              of Economics and Business &middot; supervised by Pavel Potužák</span>
+              <p class="pill-row">
+                <a class="pill pill--doc" href="/files/theses/haufer-laffer-curve.pdf"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>PDF</a>
+                <a class="pill pill--ext" href="https://vskp.vse.cz/english/97598_the-laffer-curve-in-the-czech-republic"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2H2v8h8V6"/><path d="M7.5 1.5h3v3"/><path d="M10.5 1.5L6 6"/></svg>Library record</a>
+              </p>
             </div>
           </li>
           <li class="cv-row">
-            <span class="cv-when">2025</span>
+            <span class="cv-when tnum">2025</span>
             <div class="cv-what">
               <strong>Central and Eastern Europe Outlook: United in Diversity</strong>
-              <span class="cv-where">Moody&rsquo;s Analytics &middot;
-              <a href="/files/articles/moodys-cee-outlook-2025.pdf">PDF</a></span>
+              <span class="cv-where">Moody&rsquo;s Analytics, Economic View</span>
+              <p class="pill-row">
+                <a class="pill pill--doc" href="/files/articles/moodys-cee-outlook-2025.pdf"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>PDF</a>
+                <a class="pill pill--ext" href="https://www.economy.com/economicview/analysis/420380/Central-and-Eastern-Europe-Outlook-United-in-Diversity"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2H2v8h8V6"/><path d="M7.5 1.5h3v3"/><path d="M10.5 1.5L6 6"/></svg>Read online</a>
+              </p>
             </div>
           </li>
           <li class="cv-row">
-            <span class="cv-when">2025</span>
+            <span class="cv-when tnum">2025</span>
             <div class="cv-what">
               <strong>Shifting Sands: The UAE Under an Oil Shock</strong>
               <span class="cv-where">with Tomas Sgouralis &middot;
-              Moody&rsquo;s Analytics &middot;
-              <a href="/files/articles/moodys-uae-oil-shock-2025.pdf">PDF</a></span>
+              Moody&rsquo;s Analytics, Economic View</span>
+              <p class="pill-row">
+                <a class="pill pill--doc" href="/files/articles/moodys-uae-oil-shock-2025.pdf"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1h5l3 3v7H3z"/><path d="M8 1v3h3"/></svg>PDF</a>
+                <a class="pill pill--ext" href="https://www.economy.com/economicview/analysis/420315/Shifting-Sands-The-UAE-Under-an-Oil-Shock"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2H2v8h8V6"/><path d="M7.5 1.5h3v3"/><path d="M10.5 1.5L6 6"/></svg>Read online</a>
+              </p>
             </div>
           </li>
         </ul>
@@ -213,11 +276,14 @@
         <h2 class="label label--accent">Writing</h2>
         <ul class="cv-list">
           <li class="cv-row">
-            <span class="cv-when">2025&ndash;</span>
+            <span class="cv-when tnum">2025&ndash;</span>
             <div class="cv-what">
               <strong>Diary of an Econ Student</strong>
               <span class="cv-where">Substack &middot; data-driven notes on
-              macroeconomics and on my own work</span>
+              economics and on my own work</span>
+              <p class="pill-row">
+                <a class="pill pill--ext" href="https://econdiary.substack.com/"><svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 2H2v8h8V6"/><path d="M7.5 1.5h3v3"/><path d="M10.5 1.5L6 6"/></svg>econdiary.substack.com</a>
+              </p>
             </div>
           </li>
         </ul>
@@ -225,43 +291,71 @@
         <h2 class="label label--accent">Other professional experience</h2>
         <ul class="cv-list">
           <li class="cv-row">
-            <span class="cv-when">2023&ndash;2025</span>
+            <span class="cv-when tnum">2023&ndash;2025</span>
             <div class="cv-what">
               <strong>Trainee, Social Media and Communications</strong>
-              <span class="cv-where">Siemens s.r.o., Trutnov &middot;
-              communication strategy, marketing materials, internal workshops</span>
+              <span class="cv-where">Siemens s.r.o., Trutnov</span>
+              <details class="cv-detail">
+                <summary>Detail</summary>
+                <p>Provided administrative support to branch top management and
+                collaborated on cross-departmental projects.</p>
+                <p>Developed communication strategies and prepared marketing
+                materials and graphical content.</p>
+                <p>Conducted internal staff workshops on Microsoft Word and
+                PowerPoint.</p>
+              </details>
             </div>
           </li>
           <li class="cv-row">
-            <span class="cv-when">2023</span>
+            <span class="cv-when tnum">2023</span>
             <div class="cv-what">
               <strong>Finance Analyst Intern</strong>
-              <span class="cv-where">Investown Technologies, Prague &middot;
-              rent-payment reconciliation and billing for real-estate
-              portfolios</span>
+              <span class="cv-where">Investown Technologies s.r.o., Prague
+              &middot; February to June</span>
+              <details class="cv-detail">
+                <summary>Detail</summary>
+                <p>Performed verification and matching of incoming rent
+                payments.</p>
+                <p>Created billing statements and managed financial
+                documentation for real estate portfolios.</p>
+              </details>
             </div>
           </li>
         </ul>
 
-        <h2 class="label label--accent">Service and leadership</h2>
+        <h2 class="label label--accent">Leadership and service</h2>
         <ul class="cv-list">
           <li class="cv-row">
-            <span class="cv-when">2023&ndash;</span>
+            <span class="cv-when tnum">2023&ndash;</span>
             <div class="cv-what">
               <strong>Regional Committee of Referees and Delegates</strong>
-              <span class="cv-where">Czech Floorball, Hradec Králové and
-              Pardubice regions &middot; supervision and training of regional
-              delegates, lecturing at certification seminars &middot; voted
-              best delegate of the region, 2023/24</span>
+              <span class="cv-where">Czech Floorball &middot; Hradec Králové and
+              Pardubice region</span>
+              <details class="cv-detail">
+                <summary>Detail</summary>
+                <p>Supervised regional delegates, analysed reports, and provided
+                performance feedback.</p>
+                <p>Compiled statistics on referees and delegates; co-created
+                nominations and training events.</p>
+                <p>Awarded 1st best delegate of the region (2023/24) by referee
+                election.</p>
+                <p>Lectured at regional referee certification seminars and
+                referee coach training courses.</p>
+              </details>
             </div>
           </li>
           <li class="cv-row">
-            <span class="cv-when">2023&ndash;</span>
+            <span class="cv-when tnum">2023&ndash;</span>
             <div class="cv-what">
               <strong>Secretary and Manager</strong>
-              <span class="cv-where">FBC Trutnov (DTJ) &middot; budgeting,
-              logistics, partnerships, and competition entries for a
-              medium-sized sports club</span>
+              <span class="cv-where">FBC Trutnov (DTJ)</span>
+              <details class="cv-detail">
+                <summary>Detail</summary>
+                <p>Managed operations for a medium-sized sports club, including
+                budgeting, logistics, and external partnerships.</p>
+                <p>Oversaw marketing strategy and graphic identity; handled
+                competition applications.</p>
+              </details>
             </div>
           </li>
         </ul>
@@ -269,18 +363,16 @@
         <h2 class="label label--accent">Skills</h2>
         <ul class="cv-list">
           <li class="cv-row">
-            <span class="cv-when">Methods</span>
+            <span class="cv-when">Econometrics</span>
             <div class="cv-what">
-              <span class="cv-where">Panel data and fixed effects, instrumental
-              variables and GMM, time series, unsupervised learning on text,
-              archival record linkage and corpus construction</span>
+              <span class="cv-where">Python, R, EViews, Stata</span>
             </div>
           </li>
           <li class="cv-row">
             <span class="cv-when">Software</span>
             <div class="cv-what">
-              <span class="cv-where">Python, R, Stata, EViews, LaTeX, Adobe
-              Creative Cloud</span>
+              <span class="cv-where">LaTeX, Microsoft Office, Adobe Creative
+              Cloud (Photoshop, InDesign, Premiere Pro)</span>
             </div>
           </li>
           <li class="cv-row">
@@ -352,7 +444,6 @@
         <img class="footer-logo-cerge" src="/assets/img/cerge-logo.svg"
              alt="CERGE-EI" width="151" height="58">
       </div>
-      <p class="footer-affil-note">Prague</p>
     </div>
 
   </div>
