@@ -103,12 +103,13 @@ Note that Python's `urllib` fails on this machine with a certificate error
 (a local root CA that OpenSSL rejects); PowerShell's `Invoke-WebRequest` uses
 the Windows certificate store and works.
 
-**The TH monogram is cut from these files too.** `assets/img/favicon.svg` and
-`assets/img/th-mark.svg` carry real EB Garamond outlines rather than `<text>`,
-because both render in an isolated context with no access to the webfont —
-`<text>` would fall back to whatever serif the platform has and the metrics
-would shift between Windows, macOS and Linux. To regenerate after a font
-update (needs `fonttools` and `brotli`, the latter to read woff2):
+**Both marks are cut from these files too.** `assets/img/favicon.svg` (the TH
+monogram) and `assets/img/th-mark.svg` (the header pilcrow) carry real EB
+Garamond outlines rather than `<text>`, because both render in an isolated
+context with no access to the webfont — `<text>` would fall back to whatever
+serif the platform has and the metrics would shift between Windows, macOS and
+Linux. To regenerate after a font update (needs `fonttools` and `brotli`, the
+latter to read woff2):
 
 ```python
 from fontTools.ttLib import TTFont
@@ -143,11 +144,28 @@ rec.replay(TransformPen(out, t))
 print(out.getCommands())
 ```
 
-The favicon uses that path as-is (cap height 24, baseline 38, letters spanning
-x 6.8–57.2, red rule beneath at the same width). The header mark reuses the
-identical path and only wraps it in
-`translate(32 32) scale(0.86) translate(-32 -26)` to shrink and re-centre it
-inside the hairline square. Change the path in one file and change it in both.
+The favicon uses that path as-is: cap height 24, baseline 38, letters spanning
+x 6.8–57.2, red rule beneath at the same width, on a white tile with a hairline
+border. The border matters — a `#FFFFFF` tile against light browser chrome has
+no edge, and the mark falls apart into three floating shapes without it.
+
+The header pilcrow comes out of the same script with the loop body run once for
+`U+00B6` instead of the two letters, and the transform centring the glyph on
+both axes rather than sitting it on a baseline:
+
+```python
+rec = RecordingPen()
+gs[cmap[0x00B6]].draw(rec)
+bp = BoundsPen(gs); rec.replay(bp)
+xmin, ymin, xmax, ymax = bp.bounds
+s = 34.0 / (ymax - ymin)                       # 34 units tall on a 64 box
+t = (Transform().translate(32, 32).scale(s, -s)
+     .translate(-(xmin + xmax) / 2, -(ymin + ymax) / 2))
+```
+
+The pilcrow is a naturally narrow glyph — 19.6 units wide at 34 tall — so the
+side margins inside the square are much wider than the top and bottom. That is
+correct, not a centring bug.
 
 ## Images
 
@@ -171,15 +189,19 @@ and the Economics Institute of the Czech Academy of Sciences.
 Still to settle: check the University's visual-identity rules for personal
 pages, and whether recolouring the mark is allowed.
 
-**The monogram.** What *is* in the header is `assets/img/th-mark.svg` — your own
-two initials in the site's own EB Garamond, inside a hairline square. It is
-`assets/img/favicon.svg` outlined rather than filled, so the browser tab and the
-page header carry one mark and not two, and it claims nothing about the work.
-See the recipe under **Fonts** for how the letterforms are cut.
+**The two marks.** `assets/img/favicon.svg` is the TH monogram — your initials
+in the site's own EB Garamond on a white tile, with the red rule beneath. A
+monogram is exactly right for a browser tab, where there is no room for a name
+and the mark has to stand in for one.
 
-The only thing the favicon has that the header mark does not is the red rule
-under the letters: the name in the header already sits on one, and two short red
-rules a centimetre apart at different heights read as a mistake.
+`assets/img/th-mark.svg` is the header mark, and it is deliberately *not* the
+same thing. It sits beside your name spelled out in full, so repeating the same
+two letters next to it would say nothing twice. It is a pilcrow: the scribe's
+mark for "a new argument begins here", older than printing, and a statement
+about the work rather than about the person — which is the only thing a mark
+next to a name has any business being.
+
+See the recipe under **Fonts** for how both are cut from the font files.
 
 **The portrait.** `assets/img/tomas-haufer.jpg` is an 800×1000 crop, cut from
 one frame in `assets/img/photo/`. It is desaturated in CSS (`.portrait`) rather

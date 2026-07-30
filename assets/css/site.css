@@ -224,11 +224,19 @@ a:focus-visible {
 .band {
   width: 100%;
   border-bottom: var(--hair) solid var(--rule);
+  /* Published so anything sitting on the band can paint its own ground in the
+     band's colour. The chamfered pills need it: their outline is a filled
+     shape with a smaller shape knocked out of the middle, and that knockout
+     has to be the colour of whatever is behind it. */
+  --band-bg: var(--paper);
 }
 
 .band:last-of-type { border-bottom: 0; }
 
-.band--alt { background: var(--paper-alt); }
+.band--alt {
+  background: var(--paper-alt);
+  --band-bg: var(--paper-alt);
+}
 
 .shell {
   max-width: var(--shell);
@@ -786,22 +794,63 @@ p { margin: 0 0 var(--step); }
   list-style: none;
 }
 
+/* The shape is a cartouche: the corners are cut off at 45° rather than
+   rounded, which is what a printer's label looks like and what a 999px pill
+   emphatically does not.
+
+   It cannot be done with `border` — a border follows the box, and clipping the
+   box to an octagon clips the border away with it, leaving four bare diagonals.
+   So the outline is drawn as two stacked shapes: the element itself is filled
+   solid in --pill-color and clipped to the octagon, and ::before is inset by a
+   hairline, filled in the band's own colour and clipped to the same octagon one
+   pixel smaller. What is left visible between them is a 1px chamfered rule.
+
+   That is why .band publishes --band-bg. Hover then only has to repaint the
+   knockout in --pill-color and the shape fills solid, which is the same
+   inversion the rounded version had. */
+
 .pill {
   --pill-color: var(--cu-navy);
+  --chamfer: 0.4rem;
+  --pill-shape:
+    polygon(var(--chamfer) 0, calc(100% - var(--chamfer)) 0,
+            100% var(--chamfer), 100% calc(100% - var(--chamfer)),
+            calc(100% - var(--chamfer)) 100%, var(--chamfer) 100%,
+            0 calc(100% - var(--chamfer)), 0 var(--chamfer));
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   gap: 0.5em;
-  padding: 0.32rem 0.85rem 0.34rem;
+  padding: 0.34rem 0.9rem 0.36rem;
   color: var(--pill-color);
-  border: var(--hair) solid var(--pill-color);
-  border-radius: 999px;
+  background: var(--pill-color);
+  border: 0;
+  border-radius: 0;
+  clip-path: var(--pill-shape);
   font-size: 0.7rem;
   letter-spacing: 0.13em;
   text-transform: uppercase;
   text-decoration: none;
   line-height: 1.35;
   white-space: nowrap;
-  transition: background-color 130ms ease, color 130ms ease;
+  transition: color 130ms ease;
+}
+
+/* The knockout. One pixel in on every side, and its chamfer is a pixel
+   shallower so the diagonal stays parallel to the outer one. */
+.pill::before {
+  content: "";
+  position: absolute;
+  inset: var(--hair);
+  z-index: -1;
+  background: var(--band-bg, var(--paper));
+  clip-path:
+    polygon(calc(var(--chamfer) - 1px) 0, calc(100% - var(--chamfer) + 1px) 0,
+            100% calc(var(--chamfer) - 1px), 100% calc(100% - var(--chamfer) + 1px),
+            calc(100% - var(--chamfer) + 1px) 100%, calc(var(--chamfer) - 1px) 100%,
+            0 calc(100% - var(--chamfer) + 1px), 0 calc(var(--chamfer) - 1px));
+  transition: background-color 130ms ease;
 }
 
 .pill-icon {
@@ -819,25 +868,25 @@ p { margin: 0 0 var(--step); }
 
 .pill:hover,
 .pill:focus-visible {
-  background: var(--pill-color);
   color: var(--paper);
   text-decoration: none;
 }
+
+.pill:hover::before,
+.pill:focus-visible::before { background: var(--pill-color); }
 
 /* One filled pill, for the single action worth pushing: Subscribe. It arrives
    already in the state the others reach on hover, and inverts back on hover so
    it still responds to the pointer. Use sparingly — a page of filled pills has
    no emphasis at all. */
-.pill--filled {
-  background: var(--pill-color);
-  color: var(--paper);
-}
+.pill--filled { color: var(--paper); }
+.pill--filled::before { background: var(--pill-color); }
 
 .pill--filled:hover,
-.pill--filled:focus-visible {
-  background: none;
-  color: var(--pill-color);
-}
+.pill--filled:focus-visible { color: var(--pill-color); }
+
+.pill--filled:hover::before,
+.pill--filled:focus-visible::before { background: var(--band-bg, var(--paper)); }
 
 /* Publication list on the home page: a thumbnail ornament, then the title. */
 .pub-list {
@@ -967,6 +1016,7 @@ p { margin: 0 0 var(--step); }
   color: var(--cu-navy);
 }
 
+.skyline .sky-hill  { opacity: 0.14; }
 .skyline .sky-back  { opacity: 0.22; }
 .skyline .sky-mid   { opacity: 0.5; }
 .skyline .sky-front { opacity: 0.62; }
@@ -1192,6 +1242,11 @@ p { margin: 0 0 var(--step); }
   color: var(--ink-soft);
 }
 
+/* A second .cv-where under the first is the "what I actually did there" line:
+   the post is one thing, the work is another, and running them together behind
+   a middot made a single unreadable sentence out of two facts. */
+.cv-where + .cv-where { margin-top: 0.4rem; }
+
 /* --- 13. Site footer -------------------------------------------------- */
 
 .site-footer {
@@ -1272,7 +1327,23 @@ p { margin: 0 0 var(--step); }
   margin-bottom: 0.7rem;
 }
 
-.footer-logos img { opacity: 0.8; }
+/* The marks link to the two institutions. No underline — an underlined logo
+   looks like a broken image — so the affordance is carried by opacity instead:
+   they sit back at 0.8 and come forward to full strength on hover and on
+   keyboard focus. */
+.footer-logos a {
+  display: block;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+.footer-logos img {
+  opacity: 0.8;
+  transition: opacity 140ms ease;
+}
+
+.footer-logos a:hover img,
+.footer-logos a:focus-visible img { opacity: 1; }
 
 .footer-logo-cu   { width: auto; height: 96px; }
 .footer-logo-rule { width: var(--hair); align-self: stretch; background: var(--rule); }
@@ -1459,7 +1530,11 @@ p { margin: 0 0 var(--step); }
     padding: 0;
     color: #000;
     background: none;
+    clip-path: none;
   }
+
+  /* The cartouche knockout would print as a white rectangle over the label. */
+  .pill::before { display: none; }
 
   .pill-icon { display: none; }
   .pill-row { gap: 0.2rem 1.2rem; }
