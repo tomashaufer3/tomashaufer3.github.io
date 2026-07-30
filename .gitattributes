@@ -1,0 +1,15 @@
+# Normalise line endings for text so the repo stays LF regardless of platform.
+* text=auto eol=lf
+
+# Binaries must never be touched by line-ending conversion — CRLF translation
+# corrupts them. Without this, a fresh clone on Windows produces a broken PDF.
+*.pdf   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
