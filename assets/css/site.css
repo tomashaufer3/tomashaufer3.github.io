@@ -566,22 +566,27 @@ p { margin: 0 0 var(--step); }
   z-index: 0;
 }
 
-/* The Charles University seal behind the Background column. Referenced with
-   <img src> rather than inlined: it is 102 KB of intricate vector, so inlining
-   would put it in every HTML page instead of being fetched and cached once.
-   CU_NAVY is baked into the file because an <img> renders in an isolated
-   context where currentColor would resolve to black.
+/* The Charles University seal, now behind the hero rather than behind the
+   Background column — Prague took that column over, and two watermarks in one
+   column is one too many. The hero is where an institutional watermark reads
+   as context: it is the first band a reader meets, and the seal sits behind
+   the biography that explains the affiliation.
+
+   Referenced with <img src> rather than inlined: it is 102 KB of intricate
+   vector, so inlining would put it in every HTML page instead of being fetched
+   and cached once. CU_NAVY is baked into the file because an <img> renders in
+   an isolated context where currentColor would resolve to black.
 
    Large and very faint on purpose. The seal is dense — at a small size and a
    readable opacity it turns into grey noise; big and nearly invisible, it
    reads as a watermark. */
 .watermark--emblem {
-  width: 460px;
-  height: 460px;
-  right: -150px;
+  width: min(620px, 52vw);
+  height: auto;
+  left: 46%;
   top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.07;
+  transform: translate(-50%, -50%);
+  opacity: 0.055;
 }
 
 /* Content must sit above the watermark.
@@ -647,35 +652,35 @@ p { margin: 0 0 var(--step); }
    paper, and the photograph inside on a hairline of its own. The bottom margin
    is deeper than the top, which is how mounts have always been cut — an
    optically centred picture sits slightly above the geometric centre. */
-/* Registration marks, not a mount.
+/* One hairline around the photograph and a small red lozenge at each corner,
+   just outside it. The lozenge is the site's own ornament — it is the divider's
+   centre mark, the disclosure bullet, and the rubricator's mark — so the
+   photograph is framed in a shape the page already uses rather than in a new
+   one invented for it.
 
-   One hairline around the photograph and four short rules floating off the
-   midpoint of each edge — the marks a printer sets outside the trim to line
-   up a plate. It puts the one bitmap on the site into the same vocabulary as
-   everything else here: printing, archival registration, measurement.
+   The four marks are drawn as background gradients rather than elements: an
+   element has two pseudo-elements and this needs four. Each is a tiny square
+   rotated 45° by a pair of crossed gradients — cheaper than four SVGs and it
+   inherits the accent colour. They sit in the figure's padding, clear of the
+   image's own hairline.
 
-   Midpoints rather than corners on purpose. Corner brackets are what a camera
-   viewfinder does, and that is a different and much louder idea.
+   Earlier: midpoint tick marks, which read as registration but very quietly;
+   and before that a wide paper mount, which looked like a placeholder.
 
-   The four marks are background gradients rather than elements, because an
-   element only has two pseudo-elements and this needs four; they sit in the
-   figure's padding, outside the image's own hairline. */
+   The lozenge is one small inline SVG repeated at the four corners. The colour
+   is baked into the data URI because a CSS custom property cannot reach inside
+   one — it is --accent, #AE2F3C; change it in both places or not at all. */
 .hero-portrait {
-  --tick: 10px;
+  --pip: 8px;
+  --lozenge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5 0l5 5-5 5-5-5z' fill='%23AE2F3C'/%3E%3C/svg%3E");
   position: relative;
   max-width: 430px;
   margin-inline: auto;
-  padding: 0.85rem;
-  background-image:
-    linear-gradient(var(--rule), var(--rule)),
-    linear-gradient(var(--rule), var(--rule)),
-    linear-gradient(var(--rule), var(--rule)),
-    linear-gradient(var(--rule), var(--rule));
+  padding: 0.8rem;
+  background-image: var(--lozenge), var(--lozenge), var(--lozenge), var(--lozenge);
   background-repeat: no-repeat;
-  background-size:
-    var(--hair) var(--tick), var(--hair) var(--tick),
-    var(--tick) var(--hair), var(--tick) var(--hair);
-  background-position: 50% 0, 50% 100%, 0 50%, 100% 50%;
+  background-size: var(--pip) var(--pip);
+  background-position: 0 0, 100% 0, 0 100%, 100% 100%;
 }
 
 .hero-portrait .portrait {
@@ -708,6 +713,13 @@ p { margin: 0 0 var(--step); }
 }
 
 .feature > div > :last-child { margin-bottom: 0; }
+
+/* min-width: 0 is load-bearing. A grid item defaults to min-width: auto, so it
+   refuses to shrink below its content's min-content width — and the chart
+   inside carries min-width: 560px on narrow screens. Without this the column
+   blew out to 560px and took the whole page's horizontal scroll with it,
+   which is exactly what .chart-scroll exists to prevent. */
+.feature > div { min-width: 0; }
 
 .feature-figure { color: var(--cu-navy); }
 .feature-figure .orn { width: 100%; height: auto; }
@@ -990,9 +1002,12 @@ p { margin: 0 0 var(--step); }
    hundred kilobytes of dependency for one figure. Series colours are the same
    CU constants th_style uses, so this chart and the matplotlib one agree. */
 
+/* The figure sits in the right-hand column of .feature, under the diagram and
+   beside the prose. The hairline above it separates the two figures without
+   implying the second belongs to a new section. */
 .chart-figure {
-  margin: clamp(2rem, 3.5vw, 3.25rem) 0 0;
-  padding-top: clamp(1.75rem, 3vw, 2.75rem);
+  margin: clamp(1.5rem, 2.6vw, 2.4rem) 0 0;
+  padding-top: clamp(1.4rem, 2.2vw, 2rem);
   border-top: var(--hair) solid var(--rule);
 }
 
@@ -1016,14 +1031,34 @@ p { margin: 0 0 var(--step); }
 .chart .dot-a   { fill: var(--cu-navy); }
 .chart .dot-b   { fill: var(--cu-red-dark); }
 
-/* The four dated events. Dotted so they read as annotation rather than data. */
-.chart .chart-mile path {
+/* The four dated events, annotated above the plot rather than inside it. The
+   rule crosses the data dotted; the leader from the label down to the plot is
+   solid and fainter, so the two lines never read as the same mark. */
+.chart .chart-mile .mile-rule {
   stroke: var(--cu-grey);
   stroke-width: 0.9;
   stroke-dasharray: 2 4;
-  opacity: 0.75;
+  opacity: 0.7;
   fill: none;
 }
+
+.chart .chart-mile .mile-lead {
+  stroke: var(--rule);
+  stroke-width: 0.9;
+  fill: none;
+}
+
+/* Each axis named in its series' colour. With two scales on one frame this is
+   the whole of the disambiguation — the numbers alone cannot say which side
+   belongs to which line. */
+.chart .axis-title {
+  font-size: 10px;
+  letter-spacing: 0.17em;
+  text-anchor: middle;
+}
+
+.chart .axis-title--a { fill: var(--cu-navy); }
+.chart .axis-title--b { fill: var(--cu-red-dark); }
 
 /* Set upright and these collided: the Russian Revolution, Zborov and the
    Bolshevik coup fall within eight months of each other, so at this width the
@@ -1033,7 +1068,7 @@ p { margin: 0 0 var(--step); }
 .chart .chart-mile text {
   font-size: 10px;
   letter-spacing: 0.1em;
-  text-anchor: start;
+  text-anchor: middle;
   fill: var(--ink-faint);
 }
 
@@ -1130,13 +1165,27 @@ p { margin: 0 0 var(--step); }
    above it. The hairline is 0.4pt in the source, which at this width lands
    just under a device pixel, so the browser's own antialiasing does the rest
    of the softening. */
+/* Prague, as a watermark rather than a tailpiece.
+
+   It sits behind the foot of the Background column, wider than the column and
+   bled off both edges, with the Full CV link sitting on top of it. Widening it
+   past the column is what makes it read as a watermark and not as a picture
+   that happens to be last: a watermark has no edges you can see.
+
+   .col already carries overflow: hidden, which does the bleeding for us.
+
+   It carries the .watermark class as well as .prague, and that is load-bearing:
+   `.col > *:not(.watermark)` forces every other child to position: relative,
+   which silently cancelled the absolute positioning here until the class was
+   added. */
 .prague {
-  display: block;
-  width: 100%;
-  max-width: 560px;
+  left: 50%;
+  bottom: -3%;
+  width: 126%;
+  max-width: none;
   height: auto;
-  margin: 2.6rem auto 0;
-  opacity: 0.62;
+  transform: translateX(-50%);
+  opacity: 0.2;
 }
 
 /* --- 11. Research entries --------------------------------------------- */
@@ -1453,8 +1502,15 @@ p { margin: 0 0 var(--step); }
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 1.25rem;
+  flex-wrap: wrap;
+  gap: 1rem;
   margin-bottom: 0.7rem;
+}
+
+/* The hairline separators disappear when the row wraps — a vertical rule
+   between two marks that are no longer side by side is just a stray mark. */
+@media (max-width: 62em) {
+  .footer-logo-rule { display: none; }
 }
 
 .footer-logos a { flex: none; }
@@ -1478,9 +1534,14 @@ p { margin: 0 0 var(--step); }
 .footer-logos a:hover img,
 .footer-logos a:focus-visible img { opacity: 1; }
 
-.footer-logo-cu   { width: auto; height: 132px; }
-.footer-logo-rule { width: var(--hair); align-self: stretch; background: var(--rule); }
-.footer-logo-cerge { width: 164px; height: auto; }
+/* Three marks of three different shapes: a tall circular seal, a wide
+   wordmark, and a roundel-plus-wordmark. Matched on optical weight rather than
+   on any single dimension — equal widths would leave the seal tiny and equal
+   heights would leave the two wordmarks enormous. */
+.footer-logo-cu    { width: auto; height: 112px; }
+.footer-logo-rule  { width: var(--hair); align-self: stretch; background: var(--rule); }
+.footer-logo-cerge { width: 136px; height: auto; }
+.footer-logo-cas   { width: 150px; height: auto; }
 
 .footer-affil-note {
   margin: 0;
