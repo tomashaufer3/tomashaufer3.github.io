@@ -586,11 +586,26 @@ p { margin: 0 0 var(--step); }
    when it worked. .hero-inner carries position: relative so these percentages
    resolve against the content column and not the full-bleed band. */
 .watermark--emblem {
+  --cut: 38%;
   width: min(560px, 46vw);
   height: auto;
-  left: -13%;
+  /* Cut at the text border, not at the window edge.
+
+     `left` on an absolutely positioned element resolves against the containing
+     block's PADDING box, so left: 0 would be the shell's outer edge — the text
+     begins one --pad further in. Setting left to --pad puts the origin exactly
+     on the text's left margin.
+
+     The element is then pushed --cut of its own width to the left and the same
+     --cut is clipped away again. Both are percentages of the same width, so
+     they stay in step at every viewport and the visible edge always lands on
+     the text margin. Clipping here rather than relying on the band's
+     overflow: hidden is the whole point: the band's edge is the window, and
+     the window is not where the cut should fall. */
+  left: var(--pad);
   top: 50%;
-  transform: translateY(-50%);
+  transform: translate(calc(-1 * var(--cut)), -50%);
+  clip-path: inset(0 0 0 var(--cut));
   opacity: 0.07;
 }
 
@@ -1079,8 +1094,13 @@ p { margin: 0 0 var(--step); }
 /* Each axis named in its series' colour. With two scales on one frame this is
    the whole of the disambiguation — the numbers alone cannot say which side
    belongs to which line. */
+/* All three label sizes below are in SVG USER UNITS, and this chart renders at
+   0.551 of its viewBox width in the column it sits in — measured, not
+   assumed. Divide by it to get the size on screen: 22 units lands near 12px,
+   25 near 13.5px. Treating these as pixels is what made the first two
+   attempts at enlarging them barely show. */
 .chart .axis-title {
-  font-size: 12px;
+  font-size: 22px;
   letter-spacing: 0.17em;
   text-anchor: middle;
 }
@@ -1093,12 +1113,12 @@ p { margin: 0 0 var(--step); }
    three labels overlapped by up to thirty units. Turned on their side they run
    up their own milestone lines and cannot collide at all — which is also what
    the matplotlib version of this figure does. */
-/* 11.5px, not larger. These four labels sit on three staggered rows 13 units
-   apart, and "Russian Revolution" on row one overlaps "Zborov" on row two
-   horizontally — at 12px the descender of the first row meets the ascender of
-   the second. The rows cannot be spread further without shifting the plot. */
+/* The three staggered rows are 24 units apart to carry this size — "Russian
+   Revolution" on row one sits directly above "Zborov" on row two, so the gap
+   has to exceed the type's own height. Verified on screen with client rects,
+   which is the only way to catch it: getBBox() reports pre-transform boxes. */
 .chart .chart-mile text {
-  font-size: 11.5px;
+  font-size: 21px;
   letter-spacing: 0.1em;
   text-anchor: middle;
   fill: var(--ink-faint);
@@ -1144,7 +1164,7 @@ p { margin: 0 0 var(--step); }
 
 .chart text {
   font-family: var(--serif);
-  font-size: 13px;
+  font-size: 25px;
   fill: var(--ink-faint);
   font-variant-numeric: tabular-nums lining-nums;
 }
@@ -1234,10 +1254,10 @@ p { margin: 0 0 var(--step); }
   max-width: none;
   height: auto;
   transform: translateX(-50%);
-  /* 0.2 put the spires straight through the Full CV link and the Toolkit row.
-     A watermark has to lose to the text every time; 0.1 keeps the drawing
-     legible as a form while the words stay first. */
-  opacity: 0.1;
+  /* 0.2 put the spires straight through the Full CV link; 0.1 was so faint the
+     city stopped reading as a city. 0.16 is the compromise: the drawing is
+     recognisable, and the text still wins wherever the two meet. */
+  opacity: 0.16;
 }
 
 /* --- 11. Research entries --------------------------------------------- */
@@ -1478,7 +1498,7 @@ p { margin: 0 0 var(--step); }
      real width for them. At 1.1fr it had roughly 330px against the ~390px the
      row wants, so the Academy mark was wrapping onto a line of its own and the
      three logos were rendering across four rows. Measured, then widened. */
-  grid-template-columns: 0.95fr 0.5fr 0.8fr 1.5fr;
+  grid-template-columns: 0.85fr 0.44fr 0.72fr 2fr;
   gap: clamp(1.75rem, 3vw, 3.5rem);
   padding-block: clamp(2.25rem, 4vw, 3.5rem);
   align-items: start;
@@ -1534,7 +1554,15 @@ p { margin: 0 0 var(--step); }
    Sized generously at 132px because the seal is genuinely detailed: the gothic
    legend ring and the diaper background turn to mush much below that, and a
    muddy institutional emblem is worse than none. */
-.footer-affil { justify-self: end; text-align: center; }
+/* Centred against the footer's full height rather than pinned to its top.
+   The other three columns are blocks of text that start at the same baseline;
+   this one is a row of marks of three different heights, and top-aligning it
+   left the group sitting high with the whole lower half of the column empty. */
+.footer-affil {
+  justify-self: end;
+  align-self: center;
+  text-align: center;
+}
 
 /* Two marks, and they are not the same shape: the Charles seal is tall and
    circular with a legend ring, the CERGE-EI wordmark is wide and horizontal.
@@ -1556,7 +1584,7 @@ p { margin: 0 0 var(--step); }
   align-items: center;
   justify-content: flex-end;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.85rem;
   margin-bottom: 0.7rem;
 }
 
@@ -1596,13 +1624,13 @@ p { margin: 0 0 var(--step); }
    CERGE-EI is the exception and stays smaller: it is a wordmark with no device
    above it, so matching its height to the other two would set the type
    enormous. It is matched on optical weight instead. */
-.footer-logo-cu    { width: auto; height: 96px; }
-.footer-logo-cas   { width: auto; height: 84px; }
-.footer-logo-cerge { width: 124px; height: auto; }
+.footer-logo-cu    { width: auto; height: 122px; }
+.footer-logo-cas   { width: auto; height: 106px; }
+.footer-logo-cerge { width: 158px; height: auto; }
 
 .footer-logo-rule {
   width: var(--hair);
-  height: 72px;
+  height: 92px;
   align-self: center;
   background: var(--rule);
 }

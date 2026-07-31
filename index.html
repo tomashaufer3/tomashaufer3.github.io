@@ -90,9 +90,10 @@
         </p>
 
         <p class="small">
-          What most of the work has in common is building the dataset first,
-          out of records that were never meant to be data, and only then asking
-          what it can identify. Alongside the research I write
+          Much of what I have worked on so far has involved assembling data from
+          historical and administrative records that were not collected for
+          research, and then asking what those data can and cannot support.
+          Alongside the research I write
           <a href="/substack.html">Diary of an Econ Student</a>, and I serve as
           Secretary of FBC Trutnov and on a Regional Referee Committee in Czech
           Floorball.
@@ -325,18 +326,25 @@
             <p class="chart-title">Enrolments and desertions by month</p>
             <p class="chart-sub">Russian theatre, 1914&ndash;1920</p>
             <div class="chart-scroll">
-              <!-- Grown on two sides to make room for larger labels, without
-                   touching a single plotted coordinate.
+              <!-- Grown on three sides to make room for readable labels,
+                   without touching a single plotted coordinate.
 
-                   30 units to the right: the tick labels now reach x≈989 and
-                   the rotated axis title had been sitting at 980.
+                   The sizes here are in USER UNITS, not pixels. This SVG
+                   renders at 0.551 of its viewBox width in this column —
+                   measured, not assumed; the first two attempts at enlarging
+                   these labels failed because the figure was guessed at 1.0
+                   and then at 0.68. Divide by 0.551 to get the on-screen size:
+                   25 units is about 13.5px, 22 about 12px.
 
-                   16 units above y=0: the three staggered milestone rows were
-                   13 units apart, and at 11.5px "Russian Revolution" was
-                   overlapping "Zborov", and "Zborov" overlapping "Bolshevik
-                   coup" — measured on screen, not guessed. The rows are 19
-                   apart now and start above the old origin. -->
-              <svg class="chart" viewBox="0 -16 1030 362" width="1030" height="362"
+                   Right to 1075 and left to -20: at 25 units the tick labels
+                   run 967→1009 and 17→67, and the rotated axis titles need
+                   clear space outside both.
+
+                   Top to -34: the three staggered milestone rows are 28 units
+                   apart. The top row's ascender rises well above y=0, which is
+                   free to do because extending the viewBox moves no plotted
+                   coordinate. -->
+              <svg class="chart" viewBox="-20 -34 1095 380" width="1095" height="380"
                    role="img" aria-labelledby="ch-title ch-desc">
                 <title id="ch-title">Monthly enrolments and desertions in the
                   Russian theatre, 1914 to 1920</title>
@@ -349,17 +357,17 @@
               <g class="axis"><path d="M76 52V296H958M958 52V296"/></g>
               <g class="chart-mile">
                 <path class="mile-rule" d="M479.8 52V296"/>
-                <path class="mile-lead" d="M479.8 2V52"/>
-                <text x="479.8" y="-2">Russian Revolution</text>
+                <path class="mile-lead" d="M479.8 -9V52"/>
+                <text x="479.8" y="-14">Russian Revolution</text>
                 <path class="mile-rule" d="M522.3 52V296"/>
-                <path class="mile-lead" d="M522.3 21V52"/>
-                <text x="522.3" y="17">Zborov</text>
+                <path class="mile-lead" d="M522.3 19V52"/>
+                <text x="522.3" y="14">Zborov</text>
                 <path class="mile-rule" d="M564.8 52V296"/>
-                <path class="mile-lead" d="M564.8 40V52"/>
-                <text x="564.8" y="36">Bolshevik coup</text>
+                <path class="mile-lead" d="M564.8 47V52"/>
+                <text x="564.8" y="42">Bolshevik coup</text>
                 <path class="mile-rule" d="M692.3 52V296"/>
-                <path class="mile-lead" d="M692.3 2V52"/>
-                <text x="692.3" y="-2">Armistice</text>
+                <path class="mile-lead" d="M692.3 -9V52"/>
+                <text x="692.3" y="-14">Armistice</text>
               </g>
               <path class="fill-a" d="M76 295.9 L86.6 295.9 L97.3 295.9 L107.9 295.7 L118.5 295.9 L129.1 295.8 L139.8 295.6 L150.4 273.8 L161 286.1 L171.6 295.3 L182.3 295.1 L192.9 287.6 L203.5 295.3 L214.1 295.6 L224.8 295.6 L235.4 295.5 L246 294.7 L256.7 292.9 L267.3 295.4 L277.9 295.5 L288.5 294.3 L299.2 292.5 L309.8 291.3 L320.4 294.3 L331 294.9 L341.7 294 L352.3 293.3 L362.9 289.4 L373.5 285 L384.2 257 L394.8 260.4 L405.4 253.4 L416 277.4 L426.7 270.9 L437.3 276.9 L447.9 279.7 L458.6 281.4 L469.2 287.5 L479.8 288.7 L490.4 274.1 L501.1 262.5 L511.7 164.9 L522.3 52 L532.9 122.7 L543.6 207.3 L554.2 181.4 L564.8 188.9 L575.4 221.4 L586.1 246.2 L596.7 265.9 L607.3 246.5 L618 206.6 L628.6 218.2 L639.2 202.4 L649.8 181 L660.5 155.7 L671.1 206.2 L681.7 230.5 L692.3 249.5 L703 260.3 L713.6 281.5 L724.2 288.9 L734.8 290.4 L745.5 264.9 L756.1 267.2 L766.7 273.4 L777.3 287.5 L788 285.3 L798.6 282.2 L809.2 274.1 L819.9 280.4 L830.5 279 L841.1 277.9 L851.7 278.3 L862.4 281.1 L873 281.5 L883.6 294.1 L894.2 293.4 L904.9 289.7 L915.5 292.6 L926.1 295.8 L936.7 295.8 L947.4 295.7 L958 295.7 L958 296 L76 296 Z"/>
               <path class="fill-b" d="M76 296 L86.6 296 L97.3 296 L107.9 296 L118.5 296 L129.1 296 L139.8 296 L150.4 296 L161 295.4 L171.6 295.4 L182.3 294.9 L192.9 296 L203.5 295.4 L214.1 296 L224.8 295.4 L235.4 295.4 L246 295.4 L256.7 296 L267.3 295.4 L277.9 296 L288.5 295.4 L299.2 296 L309.8 296 L320.4 296 L331 296 L341.7 294.9 L352.3 296 L362.9 296 L373.5 294.9 L384.2 296 L394.8 296 L405.4 294.9 L416 280.1 L426.7 289.2 L437.3 288.1 L447.9 293.2 L458.6 290.3 L469.2 291.5 L479.8 289.8 L490.4 292 L501.1 284.1 L511.7 259.2 L522.3 230.9 L532.9 256.9 L543.6 272.2 L554.2 267.7 L564.8 230.3 L575.4 195.2 L586.1 125.6 L596.7 121.1 L607.3 52 L618 99 L628.6 120.5 L639.2 263.7 L649.8 283.5 L660.5 248.4 L671.1 276.2 L681.7 260.3 L692.3 278.5 L703 283 L713.6 288.1 L724.2 282.4 L734.8 281.3 L745.5 275.1 L756.1 277.3 L766.7 265.4 L777.3 263.7 L788 281.8 L798.6 290.9 L809.2 289.2 L819.9 284.1 L830.5 253 L841.1 222.4 L851.7 229.8 L862.4 282.4 L873 284.1 L883.6 284.1 L894.2 292.6 L904.9 294.3 L915.5 293.7 L926.1 292 L936.7 293.2 L947.4 294.3 L958 292 L958 296 L76 296 Z"/>
@@ -368,8 +376,8 @@
               <g class="tick tick--l"><text x="67" y="296">0</text><text x="67" y="235">2.0k</text><text x="67" y="174">4.1k</text><text x="67" y="113">6.1k</text><text x="67" y="52">8.1k</text></g>
               <g class="tick tick--r"><text x="967" y="296">0</text><text x="967" y="235">108</text><text x="967" y="174">216</text><text x="967" y="113">323</text><text x="967" y="52">431</text></g>
               <g class="tick tick--x"><text x="139.8" y="316">1914</text><text x="267.3" y="316">1915</text><text x="394.8" y="316">1916</text><text x="522.3" y="316">1917</text><text x="649.8" y="316">1918</text><text x="777.3" y="316">1919</text><text x="904.9" y="316">1920</text></g>
-              <text class="axis-title axis-title--a" transform="rotate(-90 22 174)" x="22" y="174">ENROLMENTS</text>
-              <text class="axis-title axis-title--b" transform="rotate(90 1006 174)" x="1006" y="174">DESERTIONS</text>
+              <text class="axis-title axis-title--a" transform="rotate(-90 4 174)" x="4" y="174">ENROLMENTS</text>
+              <text class="axis-title axis-title--b" transform="rotate(90 1046 174)" x="1046" y="174">DESERTIONS</text>
                 <g class="chart-cursor" hidden>
                   <path class="chart-cursor-line" d="M0 52V296"/>
                   <circle class="dot-a" r="3.2"/>
