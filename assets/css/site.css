@@ -631,11 +631,29 @@ p { margin: 0 0 var(--step); }
      rather than the full-bleed band behind it. */
   position: relative;
   display: grid;
+  /* The name is its own grid item rather than the first line of .hero-text,
+     so that the photograph can be placed between the name and the biography
+     when this stacks. row-gap stays 0 because the h1 already carries its own
+     margin-bottom; only the columns need separating. */
+  grid-template-areas:
+    "name figure"
+    "text figure";
   grid-template-columns: 1.32fr 0.68fr;
   align-items: center;
-  gap: clamp(2rem, 4.5vw, 5rem);
+  /* column-gap, not gap: a shorthand here would reset row-gap back to the same
+     clamp and drive the name five rems clear of the text beneath it. */
+  column-gap: clamp(2rem, 4.5vw, 5rem);
+  row-gap: 0;
   padding-block: clamp(3rem, 6vw, 6rem);
 }
+
+.hero-inner > .display { grid-area: name; }
+.hero-inner > .hero-text { grid-area: text; }
+.hero-inner > .hero-figure { grid-area: figure; }
+
+/* The name and the text block are separate grid items now, so both need
+   lifting above the seal watermark rather than only the old wrapper. */
+.hero-inner > *:not(.watermark) { position: relative; z-index: 1; }
 
 .hero-text { position: relative; }
 
@@ -1715,9 +1733,21 @@ p { margin: 0 0 var(--step); }
     grid-template-columns: 1fr;
   }
 
-  /* Portrait above the text when stacked — a photograph below three
-     paragraphs of biography reads as an afterthought. */
-  .hero-figure { order: -1; }
+  /* Name, then photograph, then biography. Ordering cannot do this — the
+     figure is a sibling of the whole text block, so `order` could only put it
+     before or after all of it. The h1 is its own grid item precisely so the
+     areas can interleave the three. */
+  .hero-inner {
+    grid-template-areas:
+      "name"
+      "figure"
+      "text";
+  }
+
+  /* The h1 owns the space above the photograph; the photograph owns the space
+     above the biography. Neither comes from row-gap, which stays 0 so the
+     desktop arrangement is unaffected. */
+  .hero-figure { margin-block: 0.4rem 2.25rem; }
 
   /* The corner marks are BACKGROUND images on .hero-portrait, positioned at
      0 and 100% of its padding box — so the frame is only in the right place
@@ -1728,16 +1758,14 @@ p { margin: 0 0 var(--step); }
      what they were doing on every phone and every tablet held upright. Cap the
      CONTAINER instead and let the image fill it.
 
-     margin-inline: 0 because everything else in this column is flush left.
-     Centred, the photograph was the one element on the page not lining up with
-     anything — which is the whole of the complaint. */
+     The mat is kept, just narrower — 0.55rem against 0.8rem. Removing it
+     altogether made the marks sit half on top of the picture; keeping it means
+     the FRAME lines up with the text margin and the photograph is inset evenly
+     inside it on all four sides, which is the same logic as the wide layout.
+
+     margin-inline: 0 because everything else in this column is flush left. */
   .hero-portrait {
-    /* All four sides, not just the inline ones. The 0.8rem mat that gives the
-       marks their breathing room on a wide screen is worth about 14px, which
-       is affordable in a 430px column and not in a 340px one — and zeroing
-       only the inline padding left the marks hugging the sides while still
-       floating above and below. */
-    padding: 0;
+    padding: 0.55rem;
     max-width: min(340px, 100%);
     margin-inline: 0;
   }
@@ -1759,7 +1787,30 @@ p { margin: 0 0 var(--step); }
 
   .footer-inner { grid-template-columns: 1fr 1fr; }
   .footer-affil { justify-self: start; text-align: left; }
-  .footer-logos { justify-content: flex-start; }
+
+  /* All three marks on one line, as on a wide screen.
+
+     The sizing belongs at THIS breakpoint, not at 40em: the footer collapses to
+     two columns here, which leaves the affiliation block about 340px, and the
+     full-size marks want roughly 480. Left at desktop size they paired two and
+     dropped the third onto a row of its own — an arrangement that reads as an
+     accident. Roughly 70 + 100 + 86 plus two gaps is about 285, which fits
+     every width from 320px up.
+
+     The marks no longer shrink to fit (see .footer-logos), so they have to be
+     told to be smaller rather than allowed to squash. Heights are matched
+     between the two stacked marks; the wordmark is set on optical weight,
+     exactly as on the wide layout. */
+  .footer-logos {
+    justify-content: flex-start;
+    gap: 0.85rem;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  .footer-logo-cu    { height: 76px; }
+  .footer-logo-cas   { height: 62px; }
+  .footer-logo-cerge { width: 100px; }
 }
 
 @media (max-width: 40em) {
@@ -1774,17 +1825,28 @@ p { margin: 0 0 var(--step); }
 
   .footer-inner { grid-template-columns: 1fr; }
 
-  /* The marks no longer shrink to fit (see .footer-logos), so on a narrow
-     screen they have to be told to be smaller rather than allowed to squash. */
-  .footer-logos { gap: 0.9rem; }
-  .footer-logo-cu { height: 104px; }
-  .footer-logo-cerge { width: 128px; }
+  /* Logo sizing lives in the 62em block — that is where the footer collapses
+     and where the row has to be made to fit. Nothing to add here. */
 
   .cv-row { grid-template-columns: 1fr; gap: 0.15rem; }
   .cv-when { padding-top: 0; }
 
-  .pub { grid-template-columns: 44px 1fr; gap: 0 0.9rem; }
-  .pub-thumb { width: 44px; height: 44px; }
+  /* Selected work, on a phone. Each entry's title runs to three lines at this
+     width, so the entries need clearly more air BETWEEN them than the lines
+     have within them — otherwise three stacked three-line titles read as one
+     paragraph. More padding on the row, and a deliberate rhythm inside it:
+     title, then venue, then a wider gap before the buttons, which are the one
+     thing in the entry a thumb is aiming for. */
+  .pub {
+    grid-template-columns: 40px 1fr;
+    gap: 0 0.85rem;
+    padding: 1.6rem 0;
+  }
+
+  .pub-thumb { width: 40px; height: 40px; margin-top: 2px; }
+  .pub-title { font-size: 1.02rem; line-height: 1.34; margin-bottom: 0.4rem; }
+  .pub-venue { line-height: 1.5; margin-bottom: 0; }
+  .pub .pill-row { margin-top: 0.85rem; }
 
   /* Nine years of monthly data cannot shrink to a phone's width — at 320px the
      axis labels land at about three pixels. The figure scrolls sideways inside
