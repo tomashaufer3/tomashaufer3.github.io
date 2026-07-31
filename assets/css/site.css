@@ -289,6 +289,24 @@ a:focus-visible {
 
 .page-aside { position: relative; }
 
+/* "As of July 2026" under the title column on the inner pages. Deliberately
+   the quietest thing in that column — it is provenance, not content — but it
+   is there, because a CV or a research list with no date on it makes a reader
+   guess how stale it is, and they always guess worse than the truth.
+
+   Kept as a hand-written line rather than a build-time stamp: this site has no
+   build step, and a date generated from a file's mtime would go stale in the
+   opposite direction, claiming freshness for a commit that fixed a typo. */
+.as-of {
+  margin: 1.5rem 0 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.as-of time { font-variant-numeric: lining-nums; }
+
 .page-body { max-width: 46em; }
 
 @media (min-width: 62.01em) {
@@ -659,6 +677,10 @@ p { margin: 0 0 var(--step); }
    to whatever follows — the biography on a wide screen, the photograph on a
    narrow one. row-gap stays 0 so this margin is the only thing setting it. */
 .hero-id > :last-child { margin-bottom: var(--step); }
+
+/* The second rule is a phone-only device: on a wide screen the photograph has
+   its own column and needs no fence. */
+.hero-rule { display: none; }
 
 .hero-text { position: relative; }
 
@@ -1757,13 +1779,36 @@ p { margin: 0 0 var(--step); }
     grid-template-areas:
       "id"
       "figure"
+      "rule"
       "text";
   }
 
-  /* The h1 owns the space above the photograph; the photograph owns the space
-     above the biography. Neither comes from row-gap, which stays 0 so the
-     desktop arrangement is unaffected. */
-  .hero-figure { margin-block: 0.4rem 2.25rem; }
+  /* Two rules, fencing the photograph.
+     The first one moves: in the wide layout it sits between the name and the
+     affiliation, but stacked it belongs BELOW the affiliation, because name
+     and affiliation are one thought and the rule's job here is to close them
+     off from the picture. Flex order does it without touching the markup, so
+     the source order stays the one that reads correctly to a screen reader.
+     The second rule then closes the picture off from the prose. */
+  .hero-id { display: flex; flex-direction: column; }
+  .hero-id .divider { order: 1; margin: var(--step) 0; }
+  .hero-id .eyebrow { margin-bottom: 0; }
+  /* :last-child is DOM order, so this is the eyebrow, not the rule above. */
+  .hero-id > :last-child { margin-bottom: 0; }
+
+  .hero-rule {
+    display: block;
+    grid-area: rule;
+    margin: var(--step) 0;
+  }
+
+
+  /* Zero, and deliberately so. This used to be 0.4rem top / 2.25rem bottom,
+     from when the photograph sat between the name and the prose with nothing
+     between them and had to make its own air. The two rules do that job now,
+     and the leftover asymmetry was putting 87px under the picture against 55
+     above it. The <figure> inside still carries its own symmetric margin. */
+  .hero-figure { margin-block: 0; }
 
   /* The corner marks are BACKGROUND images on .hero-portrait, positioned at
      0 and 100% of its padding box — so the frame is only in the right place
@@ -1790,7 +1835,14 @@ p { margin: 0 0 var(--step); }
 
   .page-grid { gap: 1.75rem; }
 
-  .hero-inner { gap: 2.5rem; }
+  /* column-gap only, and row-gap to zero, so the two rules fencing the
+     photograph sit in an even rhythm. With the `gap` shorthand here the four
+     gaps in the stacked hero came from three sources stacking — this row-gap,
+     each rule's own margin, and the <figure>'s default block margin — which
+     put 113px under the photograph against 28 above it. Every gap is one
+     --step now, with only the figure's own margin adding to it, symmetrically
+     on both sides. */
+  .hero-inner { column-gap: 2.5rem; row-gap: 0; }
 
   /* Stacked columns need horizontal rules instead of vertical ones. */
   .col {
