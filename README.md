@@ -208,10 +208,20 @@ size lives entirely in CSS (`height` on `.brand-mark`, `width: auto`).
 
 See the recipe under **Fonts** for how both are cut from the font files.
 
-**The portrait.** `assets/img/tomas-haufer-portrait.jpg` is a 752×940 crop, cut
-from one frame in `assets/img/photo/`. Full colour, no filter — a half-hearted
-sepia looked like neither the palette nor a photograph. To swap it, re-crop to
-4:5, save at about 800px wide, and keep the name.
+**The portrait.** `assets/img/tomas-haufer-portrait.jpg` is an 800×1000 crop of
+`photo/54899135309_7d62aa7f34_o.jpg`, the tightest frame in the set. 4:5, face
+centred, eyes on the upper third. The earlier crop held about as much corridor
+as it did subject, which made it read as a snapshot taken in a building rather
+than as a portrait.
+
+The background is desaturated, flattened and very slightly blurred; the subject
+is untouched. There is no segmentation model here, so the mask is geometric — a
+soft ellipse over the head and torso widening into a band at the shoulders,
+blurred by 9% of the frame width so no edge shows. The script is
+`portrait.py` in the session scratchpad; the recipe is: crop at
+`x0 = 544 − 400`, full height, then `Color 0.34 · Contrast 0.80 · Brightness
+1.06 · GaussianBlur 1.1` outside the mask. If you ever want it done properly,
+export a masked version from Photoshop and drop it in under the same name.
 
 It is matted rather than framed: a hairline outer rule, a wide margin of paper,
 and the photograph inside on a hairline of its own, with the bottom margin cut

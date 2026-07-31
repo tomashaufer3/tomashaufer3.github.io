@@ -104,7 +104,7 @@
              lancet arch that used to sit behind this had to go. -->
         <figure class="hero-portrait">
           <img class="portrait" src="/assets/img/tomas-haufer-portrait.jpg"
-               alt="Tomáš Haufer" width="752" height="940">
+               alt="Tomáš Haufer" width="800" height="1000">
         </figure>
       </div>
 
@@ -507,75 +507,52 @@
 
         <p><a class="cta" href="/cv.html">Full CV <span>&rarr;</span></a></p>
 
-        <!-- The Legion's route east, 1918-1920.
+        <!-- A ruled leaf: the grid a scribe pricked and ruled onto parchment
+             before writing a word.
 
-             This replaces a drawing of the Prague skyline. That drawing was of
-             a city rather than of anything to do with the person whose page
-             this is: the same towers appear on every Czech tourist page, and
-             getting eight landmarks right by hand at this size was never going
-             to happen.
+             This replaces, in order, a Prague skyline and a railway diagram of
+             the Legion's route east. Both were pictures of something, and a
+             picture of something has to keep being the right thing to picture.
+             This is not: it is the substrate every record in the thesis was
+             eventually written onto, it is abstract, and ruling patterns have
+             looked like this since the eighth century.
 
-             This is drawn as a RAILWAY DIAGRAM, not a map, and the distinction
-             is the point. A map would have to get coastlines, distances and
-             1918 borders right, and any one of them being wrong would be a
-             claim the page cannot support. A diagram asserts only that these
-             stations came in this order along the Trans-Siberian, which is
-             what the thesis actually needs and what the record actually shows.
+             The detail that makes it read as real is the prick marks — the
+             holes a scribe made down both outer edges to space the lines
+             evenly before ruling between them. Nothing is written on it, which
+             is the point: the page is prepared and still empty.
 
-             Bakhmach and Chelyabinsk are set in navy because they carry dates:
-             the rearguard action that covered the withdrawal from Ukraine in
-             March 1918, and the incident in May 1918 after which the Legion
-             held the line east. The rest are stops, drawn as the site's
-             lozenge. -->
-        <svg class="route" viewBox="0 0 1000 150" width="1000" height="150"
-             role="img" aria-labelledby="route-title route-desc">
-          <title id="route-title">The Legion&rsquo;s route east, 1918&ndash;1920</title>
-          <desc id="route-desc">A schematic railway line running west to east
-            along the Trans-Siberian, with stations marked in order: Bakhmach,
-            Penza, Samara, Chelyabinsk, Omsk, Krasnoyarsk, Irkutsk and
-            Vladivostok. Not drawn to scale and not a map.</desc>
+             The one red mark is a rubricator's lozenge in the margin, the same
+             ornament the dividers use and a cousin of the pilcrow in the
+             header — where a scribe would mark the start of a new argument. -->
+        <svg class="ruling" viewBox="0 0 1000 200" width="1000" height="200"
+             fill="none" stroke="currentColor" aria-hidden="true">
 
-          <text class="rt-title" x="20" y="26">THE LEGION&rsquo;S ROUTE EAST</text>
-
-          <!-- the track: two rails and their ties -->
-          <g class="rt-tie" stroke-width="1">
-            <path d="M40 62v14M68 62v14M96 62v14M124 62v14M152 62v14M180 62v14M208 62v14M236 62v14M264 62v14M292 62v14M320 62v14M348 62v14M376 62v14M404 62v14M432 62v14M460 62v14M488 62v14M516 62v14M544 62v14M572 62v14M600 62v14M628 62v14M656 62v14M684 62v14M712 62v14M740 62v14M768 62v14M796 62v14M824 62v14M852 62v14M880 62v14M908 62v14M936 62v14"/>
-          </g>
-          <g class="rt-rail" stroke-width="1.2">
-            <path d="M20 65h960M20 73h960"/>
+          <!-- prick marks, outside the text block -->
+          <g class="rl-prick" stroke="none" fill="currentColor">
+            <circle cx="16" cy="40" r="1.6"/><circle cx="984" cy="40" r="1.6"/>
+            <circle cx="16" cy="55" r="1.6"/><circle cx="984" cy="55" r="1.6"/>
+            <circle cx="16" cy="70" r="1.6"/><circle cx="984" cy="70" r="1.6"/>
+            <circle cx="16" cy="85" r="1.6"/><circle cx="984" cy="85" r="1.6"/>
+            <circle cx="16" cy="100" r="1.6"/><circle cx="984" cy="100" r="1.6"/>
+            <circle cx="16" cy="115" r="1.6"/><circle cx="984" cy="115" r="1.6"/>
+            <circle cx="16" cy="130" r="1.6"/><circle cx="984" cy="130" r="1.6"/>
+            <circle cx="16" cy="145" r="1.6"/><circle cx="984" cy="145" r="1.6"/>
+            <circle cx="16" cy="160" r="1.6"/><circle cx="984" cy="160" r="1.6"/>
           </g>
 
-          <!-- Stations, west to east, on an even pitch. The pitch is a
-               diagram's spacing, not a distance: Penza to Samara is a few
-               hundred kilometres and Irkutsk to Vladivostok is over three
-               thousand, and nothing here should be read as claiming otherwise. -->
-          <g>
-            <path class="rt-stop" d="M60 62l7 7-7 7-7-7z"/>
-            <path class="rt-halt" d="M186 63l6 6-6 6-6-6z" stroke-width="1.1"/>
-            <path class="rt-halt" d="M311 63l6 6-6 6-6-6z" stroke-width="1.1"/>
-            <path class="rt-stop" d="M437 62l7 7-7 7-7-7z"/>
-            <path class="rt-halt" d="M563 63l6 6-6 6-6-6z" stroke-width="1.1"/>
-            <path class="rt-halt" d="M689 63l6 6-6 6-6-6z" stroke-width="1.1"/>
-            <path class="rt-halt" d="M814 63l6 6-6 6-6-6z" stroke-width="1.1"/>
-            <path class="rt-stop" d="M940 62l7 7-7 7-7-7z"/>
+          <!-- double vertical bounding rules -->
+          <g class="rl-bound" stroke-width="1">
+            <path d="M40 22v156M48 22v156M952 22v156M960 22v156"/>
           </g>
 
-          <g>
-            <text class="rt-name rt-name--key" x="60" y="103">BAKHMACH</text>
-            <text class="rt-name" x="186" y="103">PENZA</text>
-            <text class="rt-name" x="311" y="103">SAMARA</text>
-            <text class="rt-name rt-name--key" x="437" y="103">CHELYABINSK</text>
-            <text class="rt-name" x="563" y="103">OMSK</text>
-            <text class="rt-name" x="689" y="103">KRASNOYARSK</text>
-            <text class="rt-name" x="814" y="103">IRKUTSK</text>
-            <text class="rt-name rt-name--key" x="940" y="103">VLADIVOSTOK</text>
+          <!-- the writing lines -->
+          <g class="rl-line" stroke-width="1">
+            <path d="M56 40h888M56 55h888M56 70h888M56 85h888M56 100h888M56 115h888M56 130h888M56 145h888M56 160h888"/>
           </g>
 
-          <g class="rt-year">
-            <text x="60" y="128" text-anchor="middle">March 1918</text>
-            <text x="437" y="128" text-anchor="middle">May 1918</text>
-            <text x="940" y="128" text-anchor="middle">to 1920</text>
-          </g>
+          <!-- the rubricator's mark -->
+          <path class="rl-rubric" d="M30 85l5 5-5 5-5-5z" stroke="none"/>
         </svg>
       </div>
 

@@ -203,22 +203,11 @@ a:focus-visible {
   border-radius: 1px;
 }
 
-/* Every link that leaves the site or opens a PDF now opens in a new tab, and a
-   link that does something the reader did not ask for should say so. The pills
-   already carry an icon for it; this covers the ones set in running prose —
-   the supervisor's page, the Substack address — with the conventional arrow.
-   Purely decorative, so it is hidden from assistive technology, which gets the
-   same information from the link itself. */
-a[target="_blank"]:not(.pill):not(.cta)::after {
-  content: "\2197";
-  display: inline-block;
-  margin-left: 0.12em;
-  font-size: 0.78em;
-  line-height: 1;
-  vertical-align: 0.32em;
-  color: var(--ink-faint);
-  text-decoration: none;
-}
+/* Links that leave the site or open a PDF do so in a new tab. They carried a
+   small ↗ to announce it; it has been removed by choice. The pills still show
+   their own icon, so the only links now opening a tab unannounced are the ones
+   set in running prose, which is a deliberate trade of a signal for a cleaner
+   line of text. Restore by giving a[target="_blank"] an ::after of "\2197". */
 
 .skip {
   position: absolute;
@@ -1041,7 +1030,7 @@ p { margin: 0 0 var(--step); }
    diagram rather than a map, because a diagram claims only what it can
    support: that these places came in this order. No coastlines, no distances,
    no borders that would have to be right. */
-.route {
+.ruling {
   display: block;
   width: 100%;
   height: auto;
@@ -1049,33 +1038,14 @@ p { margin: 0 0 var(--step); }
   color: var(--cu-navy);
 }
 
-.route text { font-family: var(--serif); }
-
-.route .rt-rail   { stroke: currentColor; opacity: 0.55; }
-.route .rt-tie    { stroke: currentColor; opacity: 0.28; }
-.route .rt-stop   { fill: var(--accent); }
-.route .rt-halt   { fill: none; stroke: currentColor; opacity: 0.6; }
-
-.route .rt-name {
-  font-size: 11px;
-  letter-spacing: 0.13em;
-  fill: var(--ink-faint);
-  text-anchor: middle;
-}
-
-.route .rt-name--key { fill: var(--cu-navy); }
-
-.route .rt-year {
-  font-size: 11.5px;
-  font-style: italic;
-  fill: var(--ink-faint);
-}
-
-.route .rt-title {
-  font-size: 11px;
-  letter-spacing: 0.19em;
-  fill: var(--ink-faint);
-}
+/* Three weights, because a ruled leaf has three. The prick marks are the
+   firmest thing on the page — they are holes, not ink — the bounding rules
+   next, and the writing lines faintest of all. Flat opacity across the whole
+   drawing made it read as a grid; this reads as a prepared page. */
+.ruling .rl-prick  { opacity: 0.34; }
+.ruling .rl-bound  { opacity: 0.24; }
+.ruling .rl-line   { opacity: 0.15; }
+.ruling .rl-rubric { fill: var(--accent); opacity: 0.75; }
 
 /* --- 11. Research entries --------------------------------------------- */
 
