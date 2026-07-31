@@ -1405,6 +1405,16 @@ p { margin: 0 0 var(--step); }
 .entry-meta > * + .status::before { content: none; margin: 0; }
 .entry-meta > * + .status { margin-left: 0.55em; }
 
+/* State tags inside a CV row, between the headline and the description. They
+   wrap as a group rather than inline with the text, so two of them on a phone
+   break onto their own line instead of pushing the row's measure out. */
+.status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.4rem;
+  margin: 0.45rem 0 0.15rem;
+}
+
 /* --- 12. CV rows ------------------------------------------------------ */
 
 .cv-list { list-style: none; margin: 0; padding: 0; }
