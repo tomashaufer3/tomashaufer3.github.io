@@ -1128,7 +1128,24 @@ p { margin: 0 0 var(--step); }
 .chart .tick--r text { text-anchor: start;  dominant-baseline: middle; }
 .chart .tick--x text { text-anchor: middle; }
 
-.chart .chart-hit { fill: transparent; cursor: crosshair; }
+/* touch-action is the whole fix for the readout on a phone.
+
+   Below 40em the chart is wider than the column and .chart-scroll pans it.
+   With the default touch-action, a finger dragged across the plot was claimed
+   by the scroll container: the reader tried to move the cursor along the dates
+   and slid the entire figure sideways instead — and because that pan persists,
+   the chart was then sitting scrolled with 1914, 1915 and the ENROLMENTS axis
+   pushed off the left edge, which is how it appears in the screenshots.
+
+   pan-y hands vertical gestures back to the page, so the reader can still
+   scroll past the figure by dragging on it, while horizontal movement goes to
+   the readout where it was always meant to go. Panning the chart itself is
+   still possible from the margins outside this rect, and from the scrollbar. */
+.chart .chart-hit {
+  fill: transparent;
+  cursor: crosshair;
+  touch-action: pan-y;
+}
 
 .chart .chart-cursor-line {
   stroke: var(--cu-navy);
@@ -1701,8 +1718,29 @@ p { margin: 0 0 var(--step); }
   /* Portrait above the text when stacked — a photograph below three
      paragraphs of biography reads as an afterthought. */
   .hero-figure { order: -1; }
-  .hero-portrait { padding-inline: 0; }
-  .hero-portrait .portrait { max-width: 280px; }
+
+  /* The corner marks are BACKGROUND images on .hero-portrait, positioned at
+     0 and 100% of its padding box — so the frame is only in the right place
+     if the container is the same width as the photograph inside it.
+
+     Capping the image at 280px while the container stayed at 430px left the
+     lozenges floating about 75px clear of the picture on each side, which is
+     what they were doing on every phone and every tablet held upright. Cap the
+     CONTAINER instead and let the image fill it.
+
+     margin-inline: 0 because everything else in this column is flush left.
+     Centred, the photograph was the one element on the page not lining up with
+     anything — which is the whole of the complaint. */
+  .hero-portrait {
+    /* All four sides, not just the inline ones. The 0.8rem mat that gives the
+       marks their breathing room on a wide screen is worth about 14px, which
+       is affordable in a 430px column and not in a 340px one — and zeroing
+       only the inline padding left the marks hugging the sides while still
+       floating above and below. */
+    padding: 0;
+    max-width: min(340px, 100%);
+    margin-inline: 0;
+  }
 
   .feature { gap: 2.25rem; }
 
