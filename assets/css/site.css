@@ -636,7 +636,7 @@ p { margin: 0 0 var(--step); }
      when this stacks. row-gap stays 0 because the h1 already carries its own
      margin-bottom; only the columns need separating. */
   grid-template-areas:
-    "name figure"
+    "id   figure"
     "text figure";
   grid-template-columns: 1.32fr 0.68fr;
   align-items: center;
@@ -647,13 +647,18 @@ p { margin: 0 0 var(--step); }
   padding-block: clamp(3rem, 6vw, 6rem);
 }
 
-.hero-inner > .display { grid-area: name; }
+.hero-inner > .hero-id { grid-area: id; }
 .hero-inner > .hero-text { grid-area: text; }
 .hero-inner > .hero-figure { grid-area: figure; }
 
-/* The name and the text block are separate grid items now, so both need
-   lifting above the seal watermark rather than only the old wrapper. */
+/* The identity block and the text block are separate grid items now, so both
+   need lifting above the seal watermark rather than only the old wrapper. */
 .hero-inner > *:not(.watermark) { position: relative; z-index: 1; }
+
+/* The eyebrow is the last thing in the identity block and carries the gap down
+   to whatever follows — the biography on a wide screen, the photograph on a
+   narrow one. row-gap stays 0 so this margin is the only thing setting it. */
+.hero-id > :last-child { margin-bottom: var(--step); }
 
 .hero-text { position: relative; }
 
@@ -1733,13 +1738,14 @@ p { margin: 0 0 var(--step); }
     grid-template-columns: 1fr;
   }
 
-  /* Name, then photograph, then biography. Ordering cannot do this — the
-     figure is a sibling of the whole text block, so `order` could only put it
-     before or after all of it. The h1 is its own grid item precisely so the
-     areas can interleave the three. */
+  /* Identity block — name, ornament, and what he is — then the photograph,
+     then the biography. Ordering cannot do this: the figure is a sibling of
+     the whole text block, so `order` could only put it before or after all of
+     it. The identity block is its own grid item precisely so the areas can
+     interleave the three. */
   .hero-inner {
     grid-template-areas:
-      "name"
+      "id"
       "figure"
       "text";
   }
@@ -1781,9 +1787,15 @@ p { margin: 0 0 var(--step); }
     border-left: 0;
     border-top: var(--hair) solid var(--rule);
     padding-inline: 0;
+    padding-block: clamp(2.5rem, 6vw, 3.25rem);
   }
 
-  .col:first-child { border-top: 0; padding-top: 0; }
+  /* Only the RULE comes off the first stacked column. It used to lose its top
+     padding as well, which left "Selected work" pressed against the band above
+     it with almost no air while every other stacked column got a full measure.
+     The border is what would have been redundant at the top of the band — the
+     space never was. */
+  .col:first-child { border-top: 0; }
 
   .footer-inner { grid-template-columns: 1fr 1fr; }
   .footer-affil { justify-self: start; text-align: left; }

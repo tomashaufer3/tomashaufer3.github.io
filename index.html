@@ -56,21 +56,22 @@
            real affiliation statement is the three logos in the footer. -->
       <img class="watermark watermark--emblem" src="/assets/img/cu-emblem.svg"
            alt="" aria-hidden="true" width="354" height="354">
-      <!-- The name sits OUTSIDE .hero-text, as its own grid item. That is what
-           lets the photograph fall between the name and the biography when the
-           layout stacks — with the name inside the text block, the figure could
-           only be ordered before or after the whole thing.
+      <!-- The identity block — name, ornament, and what he is — sits OUTSIDE
+           .hero-text as its own grid item. That is what lets the photograph
+           fall between it and the biography when the layout stacks: the figure
+           is a sibling of the text block, so `order` alone could only put it
+           before or after the whole thing.
 
-           Grid areas do the rest: "name figure / text figure" on a wide screen,
-           "name / figure / text" on a narrow one. See .hero-inner in site.css.
+           Grid areas do the rest: "id figure / text figure" on a wide screen,
+           "id / figure / text" on a narrow one. See .hero-inner in site.css.
 
-           Every subtitle tried here — "Economic history, quantitatively",
-           "Applied economics, historical evidence" — was a label for a field
-           rather than a claim about the work, and the eyebrow below already
-           says what he is and where. -->
-      <h1 class="display">Tomáš Haufer</h1>
+           Every subtitle tried on the name itself — "Economic history,
+           quantitatively", "Applied economics, historical evidence" — was a
+           label for a field rather than a claim about the work, and the eyebrow
+           below already says what he is and where. -->
+      <div class="hero-id">
+        <h1 class="display">Tomáš Haufer</h1>
 
-      <div class="hero-text">
         <svg class="divider orn" viewBox="0 0 240 12" width="240" height="12" aria-hidden="true">
           <line x1="0" y1="6" x2="98" y2="6"/>
           <path class="lozenge" d="M120 1l7 5-7 5-7-5z"/>
@@ -78,6 +79,9 @@
         </svg>
 
         <p class="eyebrow">Master&rsquo;s student in Economic Research<br>CERGE-EI, Prague</p>
+      </div>
+
+      <div class="hero-text">
 
         <p class="hero-lede">
           I hold a bachelor&rsquo;s degree in economics from the Prague University
