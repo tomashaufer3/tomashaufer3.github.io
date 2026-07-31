@@ -580,13 +580,18 @@ p { margin: 0 0 var(--step); }
    Large and very faint on purpose. The seal is dense — at a small size and a
    readable opacity it turns into grey noise; big and nearly invisible, it
    reads as a watermark. */
+/* Left, and running off the edge. Centred behind the biography it read as a
+   backdrop the text was sitting on top of; anchored left and cropped by the
+   shell it reads as a watermark on the page itself — which is what it was
+   when it worked. .hero-inner carries position: relative so these percentages
+   resolve against the content column and not the full-bleed band. */
 .watermark--emblem {
-  width: min(620px, 52vw);
+  width: min(560px, 46vw);
   height: auto;
-  left: 46%;
+  left: -13%;
   top: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0.055;
+  transform: translateY(-50%);
+  opacity: 0.07;
 }
 
 /* Content must sit above the watermark.
@@ -607,6 +612,9 @@ p { margin: 0 0 var(--step); }
    left the prose in a narrower measure than the photograph beside it — the
    biography is the substance of this page, so it gets the width. */
 .hero-inner {
+  /* So .watermark--emblem's percentages resolve against the content column
+     rather than the full-bleed band behind it. */
+  position: relative;
   display: grid;
   grid-template-columns: 1.32fr 0.68fr;
   align-items: center;
@@ -672,15 +680,35 @@ p { margin: 0 0 var(--step); }
    one — it is --accent, #AE2F3C; change it in both places or not at all. */
 .hero-portrait {
   --pip: 8px;
+  --box: 22px;
   --lozenge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M5 0l5 5-5 5-5-5z' fill='%23AE2F3C'/%3E%3C/svg%3E");
+  /* A hairline square concentric with each lozenge, so the four corners read
+     as registration marks rather than as loose diamonds. Colour is baked into
+     the data URI because a CSS custom property cannot reach inside one — it is
+     --rule, #B4BCC2. Change it in both places or not at all. */
+  --corner: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Crect x='0.5' y='0.5' width='21' height='21' fill='none' stroke='%23B4BCC2'/%3E%3C/svg%3E");
   position: relative;
   max-width: 430px;
   margin-inline: auto;
   padding: 0.8rem;
-  background-image: var(--lozenge), var(--lozenge), var(--lozenge), var(--lozenge);
+  background-image:
+    var(--lozenge), var(--lozenge), var(--lozenge), var(--lozenge),
+    var(--corner), var(--corner), var(--corner), var(--corner);
   background-repeat: no-repeat;
-  background-size: var(--pip) var(--pip);
-  background-position: 0 0, 100% 0, 0 100%, 100% 100%;
+  background-size:
+    var(--pip) var(--pip), var(--pip) var(--pip),
+    var(--pip) var(--pip), var(--pip) var(--pip),
+    var(--box) var(--box), var(--box) var(--box),
+    var(--box) var(--box), var(--box) var(--box);
+  /* The lozenge sits flush in each corner, so its centre is --pip/2 in from
+     the edge. The square is centred on that same point: offset by
+     (--box - --pip) / 2 = 7px outwards on each axis. */
+  background-position:
+    0 0, 100% 0, 0 100%, 100% 100%,
+    -7px -7px,
+    calc(100% + 7px) -7px,
+    -7px calc(100% + 7px),
+    calc(100% + 7px) calc(100% + 7px);
 }
 
 .hero-portrait .portrait {
@@ -1052,7 +1080,7 @@ p { margin: 0 0 var(--step); }
    the whole of the disambiguation — the numbers alone cannot say which side
    belongs to which line. */
 .chart .axis-title {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 0.17em;
   text-anchor: middle;
 }
@@ -1065,8 +1093,12 @@ p { margin: 0 0 var(--step); }
    three labels overlapped by up to thirty units. Turned on their side they run
    up their own milestone lines and cannot collide at all — which is also what
    the matplotlib version of this figure does. */
+/* 11.5px, not larger. These four labels sit on three staggered rows 13 units
+   apart, and "Russian Revolution" on row one overlaps "Zborov" on row two
+   horizontally — at 12px the descender of the first row meets the ascender of
+   the second. The rows cannot be spread further without shifting the plot. */
 .chart .chart-mile text {
-  font-size: 10px;
+  font-size: 11.5px;
   letter-spacing: 0.1em;
   text-anchor: middle;
   fill: var(--ink-faint);
@@ -1112,9 +1144,26 @@ p { margin: 0 0 var(--step); }
 
 .chart text {
   font-family: var(--serif);
-  font-size: 11px;
+  font-size: 13px;
   fill: var(--ink-faint);
   font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* The figure's own title. Set in HTML above the SVG rather than as SVG text,
+   so it scales with the reader's font size and stays selectable. */
+.chart-title {
+  margin: 0 0 0.15rem;
+  font-size: 1.02rem;
+  line-height: 1.3;
+  color: var(--heading);
+}
+
+.chart-sub {
+  margin: 0 0 0.85rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
 }
 
 .chart-legend {
@@ -1185,7 +1234,10 @@ p { margin: 0 0 var(--step); }
   max-width: none;
   height: auto;
   transform: translateX(-50%);
-  opacity: 0.2;
+  /* 0.2 put the spires straight through the Full CV link and the Toolkit row.
+     A watermark has to lose to the text every time; 0.1 keeps the drawing
+     legible as a form while the words stay first. */
+  opacity: 0.1;
 }
 
 /* --- 11. Research entries --------------------------------------------- */
@@ -1422,10 +1474,11 @@ p { margin: 0 0 var(--step); }
 
 .footer-inner {
   display: grid;
-  /* The last column carries two institutional marks side by side and needs
-     real width for them. At 0.55fr it had about 178px to hold both, which is
-     why the seal was arriving squashed — see .footer-logos. */
-  grid-template-columns: 1fr 0.55fr 0.85fr 1.1fr;
+  /* The last column carries THREE institutional marks side by side and needs
+     real width for them. At 1.1fr it had roughly 330px against the ~390px the
+     row wants, so the Academy mark was wrapping onto a line of its own and the
+     three logos were rendering across four rows. Measured, then widened. */
+  grid-template-columns: 0.95fr 0.5fr 0.8fr 1.5fr;
   gap: clamp(1.75rem, 3vw, 3.5rem);
   padding-block: clamp(2.25rem, 4vw, 3.5rem);
   align-items: start;
@@ -1534,14 +1587,25 @@ p { margin: 0 0 var(--step); }
 .footer-logos a:hover img,
 .footer-logos a:focus-visible img { opacity: 1; }
 
-/* Three marks of three different shapes: a tall circular seal, a wide
-   wordmark, and a roundel-plus-wordmark. Matched on optical weight rather than
-   on any single dimension — equal widths would leave the seal tiny and equal
-   heights would leave the two wordmarks enormous. */
-.footer-logo-cu    { width: auto; height: 112px; }
-.footer-logo-rule  { width: var(--hair); align-self: stretch; background: var(--rule); }
-.footer-logo-cerge { width: 136px; height: auto; }
-.footer-logo-cas   { width: 150px; height: auto; }
+/* Two of the three marks are now the same construction — a device above its
+   wordmark — so they are matched on HEIGHT and centred on a common axis. The
+   Academy's horizontal lockup was swapped for its centred one precisely to
+   make this possible; side by side with two stacked marks it had been sitting
+   on no shared line at all.
+
+   CERGE-EI is the exception and stays smaller: it is a wordmark with no device
+   above it, so matching its height to the other two would set the type
+   enormous. It is matched on optical weight instead. */
+.footer-logo-cu    { width: auto; height: 96px; }
+.footer-logo-cas   { width: auto; height: 84px; }
+.footer-logo-cerge { width: 124px; height: auto; }
+
+.footer-logo-rule {
+  width: var(--hair);
+  height: 72px;
+  align-self: center;
+  background: var(--rule);
+}
 
 .footer-affil-note {
   margin: 0;
