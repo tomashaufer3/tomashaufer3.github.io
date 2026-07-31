@@ -2,7 +2,8 @@
    Tomáš Haufer — quantitative economic history
    Design system, v2. Full-bleed bands, CU palette, light only.
 
-   One stylesheet, no build step, no dependencies, no JavaScript.
+   One stylesheet, no build step, no dependencies. The only JavaScript on the
+   site is the ~30-line pointer readout on the home-page figure; see .chart.
 
    Colour comes from th_style (CU palette), the same constants used for the
    figures in previous projects, so plots and page agree:
@@ -646,14 +647,35 @@ p { margin: 0 0 var(--step); }
    paper, and the photograph inside on a hairline of its own. The bottom margin
    is deeper than the top, which is how mounts have always been cut — an
    optically centred picture sits slightly above the geometric centre. */
+/* Registration marks, not a mount.
+
+   One hairline around the photograph and four short rules floating off the
+   midpoint of each edge — the marks a printer sets outside the trim to line
+   up a plate. It puts the one bitmap on the site into the same vocabulary as
+   everything else here: printing, archival registration, measurement.
+
+   Midpoints rather than corners on purpose. Corner brackets are what a camera
+   viewfinder does, and that is a different and much louder idea.
+
+   The four marks are background gradients rather than elements, because an
+   element only has two pseudo-elements and this needs four; they sit in the
+   figure's padding, outside the image's own hairline. */
 .hero-portrait {
-  --mount: clamp(1.35rem, 2.4vw, 2.4rem);
+  --tick: 10px;
   position: relative;
-  max-width: 470px;
+  max-width: 430px;
   margin-inline: auto;
-  padding: var(--mount) var(--mount) calc(var(--mount) * 1.45);
-  background: var(--paper);
-  border: var(--hair) solid var(--rule);
+  padding: 0.85rem;
+  background-image:
+    linear-gradient(var(--rule), var(--rule)),
+    linear-gradient(var(--rule), var(--rule)),
+    linear-gradient(var(--rule), var(--rule)),
+    linear-gradient(var(--rule), var(--rule));
+  background-repeat: no-repeat;
+  background-size:
+    var(--hair) var(--tick), var(--hair) var(--tick),
+    var(--tick) var(--hair), var(--tick) var(--hair);
+  background-position: 50% 0, 50% 100%, 0 50%, 100% 50%;
 }
 
 .hero-portrait .portrait {
@@ -663,7 +685,7 @@ p { margin: 0 0 var(--step); }
   margin: 0;
   padding: 0;
   background: none;
-  border: var(--hair) solid var(--rule-faint);
+  border: var(--hair) solid var(--rule);
 }
 
 /* Two calls to action side by side. They wrap rather than shrink, because a
@@ -958,30 +980,100 @@ p { margin: 0 0 var(--step); }
 
 /* --- 9. Chart ---------------------------------------------------------- */
 
-/* Currently unused. The home page carried a figure built from invented data;
-   on a research page that is worse than carrying no figure at all, so it was
-   removed rather than relabelled. These rules stay because a real figure is
-   the obvious thing to put back — draw it from your own estimates, keep the
-   series colours below so a chart here and one from th_style agree.
+/* The figure under the identification diagram, and the one place the site
+   uses real estimates. It replaces a chart built from invented data, which was
+   removed on the grounds that on a research page a fabricated figure is worse
+   than no figure — every number here is recomputed from the thesis repository
+   using notebook 03's own definitions.
 
-   Hand-drawn inline SVG, deliberately: a charting library would be the only
-   JavaScript on the site, and this is one static figure. Series colours are
-   the same CU constants the Python figures use, so a chart drawn here and a
-   chart drawn in matplotlib match. */
+   Hand-written inline SVG, deliberately: a charting library would be several
+   hundred kilobytes of dependency for one figure. Series colours are the same
+   CU constants th_style uses, so this chart and the matplotlib one agree. */
+
+.chart-figure {
+  margin: clamp(2rem, 3.5vw, 3.25rem) 0 0;
+  padding-top: clamp(1.75rem, 3vw, 2.75rem);
+  border-top: var(--hair) solid var(--rule);
+}
 
 .chart {
   display: block;
   width: 100%;
   height: auto;
-  margin: 0 0 1.1rem;
+  margin: 0 0 0.9rem;
+  overflow: visible;
 }
 
-.chart .grid    { stroke: var(--rule-faint); stroke-width: 1; }
-.chart .axis    { stroke: var(--rule);       stroke-width: 1; }
-.chart .series-a { stroke: var(--cu-red-dark); fill: none; stroke-width: 1.6; }
-.chart .series-b { stroke: var(--cu-blue);     fill: none; stroke-width: 1.6; }
-.chart .dot-a   { fill: var(--cu-red-dark); }
-.chart .dot-b   { fill: var(--cu-blue); }
+.chart .grid    { stroke: var(--rule-faint); stroke-width: 1; fill: none; }
+.chart .axis    { stroke: var(--rule);       stroke-width: 1; fill: none; }
+
+/* Navy is enrolment, red is desertion — the same assignment th_style makes,
+   so a reader who has seen the paper's figures reads this one the same way. */
+.chart .series-a { stroke: var(--cu-navy);     fill: none; stroke-width: 1.4; }
+.chart .series-b { stroke: var(--cu-red-dark); fill: none; stroke-width: 1.4; }
+.chart .fill-a   { fill: var(--cu-navy);     stroke: none; opacity: 0.12; }
+.chart .fill-b   { fill: var(--cu-red-dark); stroke: none; opacity: 0.12; }
+.chart .dot-a   { fill: var(--cu-navy); }
+.chart .dot-b   { fill: var(--cu-red-dark); }
+
+/* The four dated events. Dotted so they read as annotation rather than data. */
+.chart .chart-mile path {
+  stroke: var(--cu-grey);
+  stroke-width: 0.9;
+  stroke-dasharray: 2 4;
+  opacity: 0.75;
+  fill: none;
+}
+
+/* Set upright and these collided: the Russian Revolution, Zborov and the
+   Bolshevik coup fall within eight months of each other, so at this width the
+   three labels overlapped by up to thirty units. Turned on their side they run
+   up their own milestone lines and cannot collide at all — which is also what
+   the matplotlib version of this figure does. */
+.chart .chart-mile text {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-anchor: start;
+  fill: var(--ink-faint);
+}
+
+.chart .tick--l text { text-anchor: end;    dominant-baseline: middle; }
+.chart .tick--r text { text-anchor: start;  dominant-baseline: middle; }
+.chart .tick--x text { text-anchor: middle; }
+
+.chart .chart-hit { fill: transparent; cursor: crosshair; }
+
+.chart .chart-cursor-line {
+  stroke: var(--cu-navy);
+  stroke-width: 1;
+  opacity: 0.4;
+  fill: none;
+}
+
+.chart-readout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.4rem;
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  /* Reserve the line so the block does not jump as the readout changes. */
+  min-height: 1.6em;
+}
+
+.chart-when {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  min-width: 9.5em;
+}
+
+.chart-vals { font-variant-numeric: tabular-nums lining-nums; }
+.chart-vals b { font-weight: 600; color: var(--heading); }
+.chart-vals .swatch { display: inline-block; margin: 0 0.35em 0 1.1em; }
+.chart-vals .swatch:first-child { margin-left: 0; }
 
 .chart text {
   font-family: var(--serif);
@@ -1009,8 +1101,8 @@ p { margin: 0 0 var(--step); }
   flex: none;
 }
 
-.swatch--a { background: var(--cu-red-dark); }
-.swatch--b { background: var(--cu-blue); }
+.swatch--a { background: var(--cu-navy); }
+.swatch--b { background: var(--cu-red-dark); }
 
 /* --- 10. Skyline ------------------------------------------------------- */
 
@@ -1030,22 +1122,22 @@ p { margin: 0 0 var(--step); }
    diagram rather than a map, because a diagram claims only what it can
    support: that these places came in this order. No coastlines, no distances,
    no borders that would have to be right. */
-.ruling {
+/* The Prague drawing that closes the Background column.
+
+   Held back to 0.62 rather than shown at full strength. It is a genuinely
+   detailed illustration and the last thing in a column of biography — at full
+   contrast it stopped being a tailpiece and started competing with the CV link
+   above it. The hairline is 0.4pt in the source, which at this width lands
+   just under a device pixel, so the browser's own antialiasing does the rest
+   of the softening. */
+.prague {
   display: block;
   width: 100%;
+  max-width: 560px;
   height: auto;
-  margin-top: 2.4rem;
-  color: var(--cu-navy);
+  margin: 2.6rem auto 0;
+  opacity: 0.62;
 }
-
-/* Three weights, because a ruled leaf has three. The prick marks are the
-   firmest thing on the page — they are holes, not ink — the bounding rules
-   next, and the writing lines faintest of all. Flat opacity across the whole
-   drawing made it read as a grid; this reads as a prepared page. */
-.ruling .rl-prick  { opacity: 0.34; }
-.ruling .rl-bound  { opacity: 0.24; }
-.ruling .rl-line   { opacity: 0.15; }
-.ruling .rl-rubric { fill: var(--accent); opacity: 0.75; }
 
 /* --- 11. Research entries --------------------------------------------- */
 
@@ -1490,6 +1582,13 @@ p { margin: 0 0 var(--step); }
 
   .pub { grid-template-columns: 44px 1fr; gap: 0 0.9rem; }
   .pub-thumb { width: 44px; height: 44px; }
+
+  /* Nine years of monthly data cannot shrink to a phone's width — at 320px the
+     axis labels land at about three pixels. The figure scrolls sideways inside
+     its own box instead, which keeps it readable without the page itself ever
+     scrolling horizontally. */
+  .chart-scroll { overflow-x: auto; }
+  .chart { min-width: 560px; }
 }
 
 /* --- 15. Print -------------------------------------------------------- */

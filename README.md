@@ -10,9 +10,14 @@ A hand-written static site. **No build step, no dependencies, nothing to
 install.** Five HTML files and one stylesheet. Edit a file, commit, push — that
 is the whole deployment process.
 
-There is no JavaScript anywhere on the site, by design: the abstract toggles on
-the research page use the native `<details>` element, so everything works with
-scripting disabled and prints correctly.
+There is **almost** no JavaScript, and the exception is deliberate. The abstract
+toggles on the research page use the native `<details>` element; nothing else on
+the site scripts anything. The one exception is the pointer readout on the
+enrolment/desertion figure on the home page — about thirty lines, inline, no
+dependencies. That figure is complete static SVG without it: both series, both
+axes and all four milestones render with scripting off, and the script only adds
+the month-by-month readout. If you ever want the site back to zero JavaScript,
+delete the `<script>` block after `.chart-figure` and nothing else breaks.
 
 ## Preview locally
 
@@ -223,15 +228,74 @@ blurred by 9% of the frame width so no edge shows. The script is
 1.06 · GaussianBlur 1.1` outside the mask. If you ever want it done properly,
 export a masked version from Photoshop and drop it in under the same name.
 
-It is matted rather than framed: a hairline outer rule, a wide margin of paper,
-and the photograph inside on a hairline of its own, with the bottom margin cut
-deeper than the top the way real mounts are. A lancet arch used to sit behind
-it, drawn larger than the picture so its apex rose above and its legs ran down
-either side; that read as a second unrelated outline nearby rather than as a
-frame, and two frames competing is worse than one.
+It carries **registration marks**: one hairline around the image and four short
+rules floating off the midpoint of each edge, the way a printer sets marks
+outside the trim to line up a plate. Midpoints rather than corners on purpose —
+corner brackets are what a camera viewfinder does, which is a louder and
+different idea. The four marks are background gradients on `.hero-portrait`
+rather than elements, because an element has two pseudo-elements and this needs
+four.
+
+Two earlier treatments are worth not repeating. A lancet arch sat behind the
+photograph, drawn larger than it, so its apex rose above and its legs ran down
+either side — that read as a second unrelated outline nearby, not a frame. A
+wide paper mount replaced it, which was correct but quiet to the point of
+looking like a placeholder.
+
+## The home-page figure
+
+`index.html` carries one real chart: monthly enrolments against monthly
+desertions in the Russian theatre, 1914–1922, under the identification diagram.
+
+Every number comes from the thesis repository — `data/final/persons/
+legionnaires_clean.parquet` — using the definitions in `notebooks/
+03_visualisation.ipynb` cell 8 verbatim: `theater == "Russia"`, monthly counts
+of `enroll_date` against monthly counts of `exit_date` among deserters. Copying
+the definitions rather than re-deriving them is the point: the page and the
+paper cannot drift on what the figure means.
+
+Only aggregates reach the page — 108 monthly counts per series. No individual
+record is published, which matters because the underlying data is scraped
+personal data on ~320,000 people.
+
+The two series are on **separate scales**, and they have to be: enrolments peak
+at 8,104 in a month against 431 desertions, so one axis would flatten the red
+line onto the baseline and hide the entire finding. Both axes are labelled.
+
+To regenerate after a data change, re-run the extraction in the session
+scratchpad (`mkchart.py`) or recompute the two 108-element arrays yourself and
+replace the `d = {...}` literal in the inline script plus the two `<path>`
+`d` attributes.
+
+⚠️ **One date to check.** Notebook 03 dates the Bolshevik coup `1917-09-07`.
+The docs overview says November 1917, and the October Revolution is 7 November
+1917 by the Gregorian calendar. The page marks **November**. If the notebook is
+right and I am wrong, the milestone is one `<text>` and one `<path>` in
+`index.html` — but it looks like a typo in the notebook worth fixing at source.
+
+**The Prague drawing.** `assets/img/prague-cerge.svg` is Charles Bridge, the Old
+Town bridge tower and the skyline behind them. It is **not** original artwork:
+it is the illustration from CERGE-EI's own Master in Economic Research leaflet,
+`assets/img/prg/MER_leaflet_EN.pdf`.
+
+It was lifted out as vector rather than traced or screenshotted. The twenty
+stroked paths that make up the drawing were rebuilt from the PDF page's own path
+items with PyMuPDF, so nothing was resampled and no text, logo or layout came
+with it; the 0.4pt hairline is the original weight, recoloured from CERGE blue
+to CU navy. To redo it after a leaflet update, filter `page.get_drawings()` on
+page 1 to the entries with `fill is None`, `rect.x0 > 700` and `rect.y1 > 300`,
+then emit the `l`/`c`/`re`/`qu` items as SVG path data.
+
+⚠️ **Check before this goes anywhere else.** This is CERGE-EI's commissioned
+artwork, not yours. Using it on the personal page of a CERGE-EI student is a
+reasonable thing to ask for and you asked for it — but it is worth a line to the
+Study Affairs Office confirming they are happy with it, for the same reason the
+CU coat of arms stays out of the header: institutional artwork on a personal
+page can read as an official page.
 
 **Gitignored sources.** `CUcoat/` and `photo/` hold the originals — the vendor
-logo artwork and the full-size photographs. The repository has to be public for
+logo artwork and the full-size photographs. `prg/` holds the CERGE-EI leaflet
+and poster the Prague drawing was taken from. The repository has to be public for
 Pages, and neither the University's source art nor six near-identical 800 KB
 frames belong in it. They live on disk and in Dropbox only, so a fresh clone
 will not have them.

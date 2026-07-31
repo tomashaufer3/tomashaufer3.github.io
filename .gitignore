@@ -16,7 +16,18 @@ desktop.ini
 assets/img/CUcoat/
 
 # Original photographs. The site serves one derived crop,
-# assets/img/tomas-haufer-portrait.jpg, cut from 54898893341 and centred on the
+# assets/img/tomas-haufer-portrait.jpg, cut from 54899135309 and centred on the
 # face; these are the full-size originals, and there is no reason to publish
 # six near-identical 800 KB frames. The crop is reproducible — see README.
 assets/img/photo/
+
+# CERGE-EI programme print material: the Master in Economic Research leaflet and
+# A3 poster. The Prague drawing on the home page was lifted out of the leaflet
+# as vector (assets/img/prague-cerge.svg, which IS committed), but that is a
+# different thing from republishing the school's print files in a public repo.
+# Same reasoning as CUcoat/ above.
+assets/img/prg/
+
+# Czech Academy of Sciences logo artwork. Not used by the site at all; vendor
+# source files, same reasoning again.
+assets/img/AVcoat/
