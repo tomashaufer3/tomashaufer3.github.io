@@ -293,12 +293,65 @@ Study Affairs Office confirming they are happy with it, for the same reason the
 CU coat of arms stays out of the header: institutional artwork on a personal
 page can read as an official page.
 
+**The lion.** `assets/img/cz-lion.svg` is the Bohemian lion, used as a watermark
+behind the aside on `research.html` and behind the whole of `404.html`. It is
+flattened from the Wikimedia drawing
+`assets/img/Lion_from_small_coat_of_arms_of_the_Czech_Republic.svg`, which is
+gitignored.
+
+**It is the lion alone, with no escutcheon, and that distinction is the whole
+licence to use it.** On the red shield this is the *malý státní znak*, whose use
+Act No. 352/2001 Sb. reserves to state bodies and a short list of others; a
+personal page is not among them. Off the shield it is the heraldic charge of the
+Kingdom of Bohemia, six centuries older than the Republic, and it reads as the
+subject matter of the work rather than as a claim of office. So: never add a
+shield, and never set it on red.
+
+It is also never mirrored. The lion is rampant to dexter — crowned head
+upper-centre, forepaws reaching left, the double tail sweeping up the right — and
+a heraldic beast turned to sinister is a mark of disgrace. This constrains the
+crop: it is cut on the **left**, at 18%, which costs part of the forepaws and
+keeps both tails. Cutting from the right would take the second tail, and the
+second tail is the one feature that makes this the Bohemian lion and not any
+other lion. The cut lands exactly on the text margin, the same device and the
+same reasoning as the CU seal behind the hero.
+
+Why here and nowhere else: the footer carries three real institutional logos, and
+a state lion standing in that row would read as a fourth affiliation; beside the
+name in the header it would read as a personal coat of arms, which is the same
+mistake the pilcrow exists to avoid. Behind the Research page, at six per cent,
+it is neither.
+
+To regenerate after replacing the source: fold every ink colour
+(`#000000`, `#1f1a17`, and the heraldic gold `#e9cc0c`) to `#003657`, leave the
+three `#ffffff` paths alone — they are punch-outs, and navying them fills in the
+detail — round the coordinates to whole units, strip the Inkscape ids and
+`<defs>`, and add a `viewBox`, which the original does not have at all. That
+took 134 KB to 66 KB. The script is `build_lion.py` in the session scratchpad.
+One trap worth writing down: the file's own header comment must contain no
+double hyphen anywhere, including in CSS class names quoted inside it — `--` is
+illegal in an XML comment, and it fails silently, with the browser reporting
+`naturalWidth: 0` and rendering nothing.
+
+**Licence, checked.** Wikimedia Commons carries the file as **PD-CzechGov**:
+Act No. 121/2000 Sb. (the Copyright Act), §3(a), excludes state symbols from
+copyright protection outright, so the drawing is public domain and there is no
+attribution requirement. Provenance anyway, since it is worth knowing: the
+coat of arms was designed by Jiří Louda, converted to SVG by Tlusťa, and the
+shield-less lion cut out of it by Ragimiri.
+
+Note what that does **not** cover. The Commons page itself warns that use may
+still be regulated by other laws, and for this file that means exactly Act
+No. 352/2001 Sb. above. Copyright was never the binding constraint here; the
+escutcheon is.
+
 **Gitignored sources.** `CUcoat/` and `photo/` hold the originals — the vendor
 logo artwork and the full-size photographs. `prg/` holds the CERGE-EI leaflet
-and poster the Prague drawing was taken from. The repository has to be public for
-Pages, and neither the University's source art nor six near-identical 800 KB
-frames belong in it. They live on disk and in Dropbox only, so a fresh clone
-will not have them.
+and poster the Prague drawing was taken from, and the full-colour
+`Lion_from_small_coat_of_arms_of_the_Czech_Republic.svg` sits alongside them as
+a single file. The repository has to be public for Pages, and neither the
+University's source art nor six near-identical 800 KB frames belong in it. They
+live on disk and in Dropbox only, so a fresh clone will not have them.
 
 ## PDFs
 

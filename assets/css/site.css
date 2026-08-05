@@ -627,6 +627,59 @@ p { margin: 0 0 var(--step); }
   opacity: 0.07;
 }
 
+/* The Bohemian lion — the same device as the seal above, and cut the same way.
+
+   Which SIDE it is cut on is not a free choice. The lion is rampant to dexter,
+   so the crowned head sits upper-centre and the outstretched forepaws run to
+   the left, while the double tail sweeps up the right. Cutting the left costs
+   part of the forepaws; cutting the right would take the second tail, which is
+   the one feature that makes this the Bohemian lion rather than any other
+   lion. So it is cut on the left, which is also where the seal is cut.
+
+   Mirroring it to make the crop fall more kindly is not an option either: a
+   heraldic beast turned to sinister is a mark of disgrace, and on a page about
+   Czech economic history that is a detail somebody will notice.
+
+   As with the seal, both the shift and the clip are percentages of the
+   element's own width, so they stay in step at every viewport and the visible
+   edge lands on the text margin at any size. Fainter than the seal at 0.06:
+   this is 159 paths of line art rather than an engraved disc, and at 0.07 the
+   hatching started to read as dirt on the page. */
+.watermark--lion {
+  --cut: 18%;
+  height: auto;
+  /* Belt and braces against the global img cap: the sizes below are all
+     comfortably inside their containers today, but a watermark that silently
+     reflows to fit its column is no longer a watermark. */
+  max-width: none;
+  transform: translateX(calc(-1 * var(--cut)));
+  clip-path: inset(0 0 0 var(--cut));
+  opacity: 0.06;
+}
+
+/* Research: hanging below the aside.
+
+   The aside is a title, an ornament, two lines and a date in a 0.42fr column,
+   and everything under it on a wide screen is dead space — the stranding the
+   .page-grid note above describes. `top: 100%` starts the lion where the aside
+   content ends, so it occupies exactly that gap.
+
+   left: 0 rather than var(--pad): unlike .hero-inner, .page-aside is a grid
+   item and not the shell itself, so its own left edge already IS the text
+   margin.
+
+   340px is the cap that actually binds — 26vw only takes over below about
+   1300px — and it is deliberately a little under the column, so the drawing
+   sits inside the gutter instead of running under the entries. It does not
+   need to bleed sideways the way Prague does: the left is already cut at the
+   margin, and the other three sides are the animal's own silhouette, so there
+   is no straight edge anywhere to give it away as a picture in a box. */
+.page-aside .watermark--lion {
+  left: 0;
+  top: calc(100% + 2.5rem);
+  width: min(340px, 26vw);
+}
+
 /* Content must sit above the watermark.
 
    The :not() is load-bearing. `.col > *` and `.watermark` have identical
@@ -635,7 +688,43 @@ p { margin: 0 0 var(--step); }
    relative, dropped into the normal flow, and pushed the whole Background
    column down by its own 460px height. */
 .col > *:not(.watermark),
-.hero-text > *:not(.watermark) { position: relative; z-index: 1; }
+.hero-text > *:not(.watermark),
+.page-aside > *:not(.watermark),
+.lacuna > *:not(.watermark) { position: relative; z-index: 1; }
+
+/* The 404, which is four lines of text and otherwise an empty page — so the
+   lion gets the room here that it does not get anywhere else, and the emptiness
+   stops being an accident and becomes the point.
+
+   min-height, because the band would otherwise be shorter than the drawing and
+   overflow: hidden would slice the lion through the middle. overflow: hidden,
+   because .band — unlike .hero — does not clip, and without it the tail runs
+   down into the footer.
+
+   left: var(--pad) and not 0: this element IS the shell, and `left` resolves
+   against its padding box, so 0 would be the window edge rather than where the
+   text starts. Same correction as .watermark--emblem. */
+.lacuna {
+  position: relative;
+  overflow: hidden;
+  /* Paired with the width below, not chosen independently. The drawing is
+     1:1.235, so the two clamps are set to keep this taller than the lion at
+     every viewport — 19rem against 247px of lion on a phone, 31rem against
+     420px on a desktop. If either clamp moves, check the other. */
+  min-height: clamp(19rem, 40vw, 31rem);
+}
+
+.lacuna .watermark--lion {
+  left: var(--pad);
+  top: 50%;
+  /* clamp and not min(): a bare 30vw collapsed to 112px on a 375px phone,
+     which left a thumbnail adrift in a tall empty band. The floor keeps it at
+     half the screen, which is the size at which it still reads as a lion. */
+  width: clamp(200px, 30vw, 340px);
+  /* Rewritten in full rather than added to: the base rule's translateX would
+     be replaced by this declaration anyway, so both axes belong here. */
+  transform: translate(calc(-1 * var(--cut)), -50%);
+}
 
 /* --- 7. Hero ----------------------------------------------------------- */
 
@@ -1770,6 +1859,13 @@ p { margin: 0 0 var(--step); }
     grid-template-columns: 1fr;
   }
 
+  /* The lion is gone from Research here. Its whole justification is the dead
+     space beside a 0.42fr column; once the grid is one column there is no dead
+     space, the aside sits directly on top of the entry list, and `top: 100%`
+     would lay the drawing across the first two entries. The 404 keeps its own,
+     which is centred in a band with nothing else in it. */
+  .page-aside .watermark--lion { display: none; }
+
   /* Identity block — name, ornament, and what he is — then the photograph,
      then the biography. Ordering cannot do this: the figure is a sibling of
      the whole text block, so `order` could only put it before or after all of
@@ -1964,7 +2060,13 @@ p { margin: 0 0 var(--step); }
   .divider,
   .hero-figure,
   .site-footer,
-  .skyline,
+  /* The base class, not the individual ones. This said `.skyline` and had
+     said so since before that element was renamed to .prague, so the Prague
+     drawing had quietly been printing; naming .watermark instead fixes that
+     and covers the seal and the lion without needing a third entry here.
+     A 6%-opacity drawing is a grey smear on paper at the best of times, and
+     an inkjet renders it as nothing at all. */
+  .watermark,
   .brand-mark,
   .feature-figure,
   .pub-thumb,
@@ -1973,6 +2075,8 @@ p { margin: 0 0 var(--step); }
   .band { border-bottom: 0; }
   .shell { max-width: none; padding-inline: 0; }
   .band-pad { padding-block: 0; }
+  /* The height was reserved for a drawing that print has just hidden. */
+  .lacuna { min-height: 0; }
 
   /* The CV prints from .page-grid. Keeping the two columns would spend a
      third of the sheet on a title, and a sticky aside means nothing on

@@ -31,3 +31,11 @@ assets/img/prg/
 # Czech Academy of Sciences logo artwork. Not used by the site at all; vendor
 # source files, same reasoning again.
 assets/img/AVcoat/
+
+# The Wikimedia drawing of the Bohemian lion, in its original full-colour,
+# 134 KB, Inkscape-with-the-editor-metadata-still-in-it form. The site serves
+# assets/img/cz-lion.svg (which IS committed), flattened to one navy and half
+# the size — see README, "The lion". A file, not a directory, but the same
+# reasoning as the four above: nothing loads this, and the licence on the
+# drawing is somebody else's to state, not ours to restate by republishing it.
+assets/img/Lion_from_small_coat_of_arms_of_the_Czech_Republic.svg
