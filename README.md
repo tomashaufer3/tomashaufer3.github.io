@@ -294,10 +294,20 @@ CU coat of arms stays out of the header: institutional artwork on a personal
 page can read as an official page.
 
 **The lion.** `assets/img/cz-lion.svg` is the Bohemian lion, used as a watermark
-behind the aside on `research.html` and behind the whole of `404.html`. It is
-flattened from the Wikimedia drawing
+on `research.html` — large, right-aligned, behind the entries — and behind the
+whole of `404.html`. It is flattened from the Wikimedia drawing
 `assets/img/Lion_from_small_coat_of_arms_of_the_Czech_Republic.svg`, which is
 gitignored.
+
+It is anchored in `.page-body`, and that is load-bearing rather than incidental.
+It sat in `.page-aside` first, which is `position: sticky` — so the absolutely
+positioned drawing travelled down the page as you scrolled, out through the
+bottom of the band and across the footer, because a `.band` does not clip the
+way `.hero` does. The fix is geometric, not a clip: the body column is several
+times the drawing's height, so `top: 50%` with a centring translate cannot put
+any part of it outside the band at any scroll position. Do **not** reach for
+`overflow: hidden` on `.page-grid` or `.band` if this ever needs revisiting —
+that makes a scroll container of the ancestor and kills the aside's stickiness.
 
 **It is the lion alone, with no escutcheon, and that distinction is the whole
 licence to use it.** On the red shield this is the *malý státní znak*, whose use
@@ -309,12 +319,25 @@ shield, and never set it on red.
 
 It is also never mirrored. The lion is rampant to dexter — crowned head
 upper-centre, forepaws reaching left, the double tail sweeping up the right — and
-a heraldic beast turned to sinister is a mark of disgrace. This constrains the
-crop: it is cut on the **left**, at 18%, which costs part of the forepaws and
-keeps both tails. Cutting from the right would take the second tail, and the
-second tail is the one feature that makes this the Bohemian lion and not any
-other lion. The cut lands exactly on the text margin, the same device and the
-same reasoning as the CU seal behind the hero.
+a heraldic beast turned to sinister is a mark of disgrace.
+
+Only the 404 crops it, cut on the **left** at 18% so the visible edge lands on
+the text margin, the same device and the same reasoning as the CU seal behind
+the hero. Left rather than right because cutting from the right would take the
+second tail, and the second tail is the one feature that makes this the Bohemian
+lion and not any other lion. On Research it is uncropped: a crop earns its keep
+when it lands on a margin and says "the page continues past this", and
+right-aligned in the middle of a column it would only be a straight edge through
+an animal.
+
+**The crown is stroked rather than filled**, the one exception to the
+flattening. Solid navy it was the single closed lump in a drawing that is
+otherwise all open line, and at watermark opacity a lump reads as a smudge where
+line reads as engraving. It is outlined at 62.2 units, the hairline weight the
+source already uses for its own stroked paths. The tongue and the sixteen claws
+stay filled — they are small enough that an outline would close up. Measured on
+canvas: the crown's own bounding box went from a filled shape to 33% ink, against
+62.7% for the still-filled tongue, and the whole drawing from 19.3% to 16.4%.
 
 Why here and nowhere else: the footer carries three real institutional logos, and
 a state lion standing in that row would read as a fourth affiliation; beside the
@@ -322,12 +345,20 @@ name in the header it would read as a personal coat of arms, which is the same
 mistake the pilcrow exists to avoid. Behind the Research page, at six per cent,
 it is neither.
 
-To regenerate after replacing the source: fold every ink colour
-(`#000000`, `#1f1a17`, and the heraldic gold `#e9cc0c`) to `#003657`, leave the
-three `#ffffff` paths alone — they are punch-outs, and navying them fills in the
-detail — round the coordinates to whole units, strip the Inkscape ids and
-`<defs>`, and add a `viewBox`, which the original does not have at all. That
-took 134 KB to 66 KB. The script is `build_lion.py` in the session scratchpad.
+To regenerate after replacing the source: pull the crown out first and re-emit
+it as `fill:none` with a `#003657` stroke at 62.20962143, then fold every
+remaining ink colour (`#000000`, `#1f1a17`, and the heraldic gold `#e9cc0c`) to
+`#003657`, leave the three `#ffffff` paths alone — they are punch-outs, and
+navying them fills in the detail — round the coordinates to whole units, strip
+the Inkscape ids and `<defs>`, and add a `viewBox`, which the original does not
+have at all. That took 134 KB to 67 KB.
+
+The crown is found by area rather than by index, so a re-export with different
+path ordering still finds it: among the gold paths it is 1.56% of the frame
+against 0.79% for the next one (the tongue) and about 0.15% for each of the
+sixteen claws. The script asserts it landed on something top-centre, so a wrong
+pick fails loudly instead of quietly outlining a paw. The script is
+`build_lion.py` in the session scratchpad.
 One trap worth writing down: the file's own header comment must contain no
 double hyphen anywhere, including in CSS class names quoted inside it — `--` is
 illegal in an XML comment, and it fails silently, with the browser reporting

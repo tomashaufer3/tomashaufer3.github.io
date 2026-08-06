@@ -307,7 +307,9 @@ a:focus-visible {
 
 .as-of time { font-variant-numeric: lining-nums; }
 
-.page-body { max-width: 46em; }
+/* position: relative so the Research lion can be anchored to this column.
+   Harmless on the pages that carry no watermark. */
+.page-body { max-width: 46em; position: relative; }
 
 @media (min-width: 62.01em) {
   /* The title column tracks the reader down the page on tall screens. */
@@ -657,27 +659,35 @@ p { margin: 0 0 var(--step); }
   opacity: 0.06;
 }
 
-/* Research: hanging below the aside.
+/* Research: large, right, behind the entries.
 
-   The aside is a title, an ornament, two lines and a date in a 0.42fr column,
-   and everything under it on a wide screen is dead space — the stranding the
-   .page-grid note above describes. `top: 100%` starts the lion where the aside
-   content ends, so it occupies exactly that gap.
+   This hung off .page-aside first, small and cut at the left margin, and that
+   was wrong twice over. It was too timid — a 340px drawing tucked into the
+   gutter of a 0.42fr column, when the page has a whole body column to sit
+   behind. And it was broken: .page-aside is sticky, so an absolutely
+   positioned child travelled down the page with it, out through the bottom of
+   the band and across the footer, because a .band does not clip the way .hero
+   does. Anchoring it in .page-body fixes both. The body column is several
+   times the drawing's height, so top: 50% with a centring translate cannot
+   put any part of it outside the band at any scroll position — the geometry
+   does the clipping, and no ancestor needs overflow: hidden. Which matters:
+   overflow on .page-grid or .band would make a scroll container of it and
+   kill the aside's stickiness.
 
-   left: 0 rather than var(--pad): unlike .hero-inner, .page-aside is a grid
-   item and not the shell itself, so its own left edge already IS the text
-   margin.
+   Uncropped, unlike the seal and unlike the 404. A crop earns its keep when
+   it lands on a margin and says "the page continues past this"; right-aligned
+   in the middle of a column it would just be a straight edge through a lion.
+   Both tails stay, which is the point of not cutting from the right.
 
-   340px is the cap that actually binds — 26vw only takes over below about
-   1300px — and it is deliberately a little under the column, so the drawing
-   sits inside the gutter instead of running under the entries. It does not
-   need to bleed sideways the way Prague does: the left is already cut at the
-   margin, and the other three sides are the animal's own silhouette, so there
-   is no straight edge anywhere to give it away as a picture in a box. */
-.page-aside .watermark--lion {
-  left: 0;
-  top: calc(100% + 2.5rem);
-  width: min(340px, 26vw);
+   62% of the column rather than a pixel width, so it stays in proportion to
+   the text it sits behind instead of to the window; the 620px cap stops it
+   growing past the point where it competes with the entries on a wide screen. */
+.page-body .watermark--lion {
+  right: 0;
+  top: 50%;
+  width: min(620px, 62%);
+  transform: translateY(-50%);
+  clip-path: none;
 }
 
 /* Content must sit above the watermark.
@@ -689,7 +699,7 @@ p { margin: 0 0 var(--step); }
    column down by its own 460px height. */
 .col > *:not(.watermark),
 .hero-text > *:not(.watermark),
-.page-aside > *:not(.watermark),
+.page-body > *:not(.watermark),
 .lacuna > *:not(.watermark) { position: relative; z-index: 1; }
 
 /* The 404, which is four lines of text and otherwise an empty page — so the
@@ -1859,12 +1869,10 @@ p { margin: 0 0 var(--step); }
     grid-template-columns: 1fr;
   }
 
-  /* The lion is gone from Research here. Its whole justification is the dead
-     space beside a 0.42fr column; once the grid is one column there is no dead
-     space, the aside sits directly on top of the entry list, and `top: 100%`
-     would lay the drawing across the first two entries. The 404 keeps its own,
-     which is centred in a band with nothing else in it. */
-  .page-aside .watermark--lion { display: none; }
+  /* The lion stays on Research here. It used to be hidden at this breakpoint,
+     because hung off the aside it would have been laid across the first two
+     entries; anchored in the body column it is simply centred behind them,
+     and 62% of a phone-width column is a small drawing at six per cent. */
 
   /* Identity block — name, ornament, and what he is — then the photograph,
      then the biography. Ordering cannot do this: the figure is a sibling of
