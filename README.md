@@ -294,20 +294,21 @@ CU coat of arms stays out of the header: institutional artwork on a personal
 page can read as an official page.
 
 **The lion.** `assets/img/cz-lion.svg` is the Bohemian lion, used as a watermark
-on `research.html` — large, right-aligned, behind the entries — and behind the
-whole of `404.html`. It is flattened from the Wikimedia drawing
+behind the whole of `404.html` and nowhere else. It is flattened from the
+Wikimedia drawing
 `assets/img/Lion_from_small_coat_of_arms_of_the_Czech_Republic.svg`, which is
 gitignored.
 
-It is anchored in `.page-body`, and that is load-bearing rather than incidental.
-It sat in `.page-aside` first, which is `position: sticky` — so the absolutely
-positioned drawing travelled down the page as you scrolled, out through the
-bottom of the band and across the footer, because a `.band` does not clip the
-way `.hero` does. The fix is geometric, not a clip: the body column is several
-times the drawing's height, so `top: 50%` with a centring translate cannot put
-any part of it outside the band at any scroll position. Do **not** reach for
-`overflow: hidden` on `.page-grid` or `.band` if this ever needs revisiting —
-that makes a scroll container of the ancestor and kills the aside's stickiness.
+It stood behind the entries on `research.html` too, large and right-aligned, and
+was taken off that page. If it ever goes back: anchor it in `.page-body` and not
+in `.page-aside`, which is `position: sticky` — an absolutely positioned child of
+the aside travelled down the page as you scrolled, out through the bottom of the
+band and across the footer, because a `.band` does not clip the way `.hero` does.
+The fix is geometric, not a clip: the body column is several times the drawing's
+height, so `top: 50%` with a centring translate cannot put any part of it outside
+the band at any scroll position. Do **not** reach for `overflow: hidden` on
+`.page-grid` or `.band` instead — that makes a scroll container of the ancestor
+and kills the aside's stickiness.
 
 **It is the lion alone, with no escutcheon, and that distinction is the whole
 licence to use it.** On the red shield this is the *malý státní znak*, whose use
@@ -321,14 +322,13 @@ It is also never mirrored. The lion is rampant to dexter — crowned head
 upper-centre, forepaws reaching left, the double tail sweeping up the right — and
 a heraldic beast turned to sinister is a mark of disgrace.
 
-Only the 404 crops it, cut on the **left** at 18% so the visible edge lands on
-the text margin, the same device and the same reasoning as the CU seal behind
-the hero. Left rather than right because cutting from the right would take the
-second tail, and the second tail is the one feature that makes this the Bohemian
-lion and not any other lion. On Research it is uncropped: a crop earns its keep
-when it lands on a margin and says "the page continues past this", and
-right-aligned in the middle of a column it would only be a straight edge through
-an animal.
+It is cropped, cut on the **left** at 18% so the visible edge lands on the text
+margin, the same device and the same reasoning as the CU seal behind the hero.
+Left rather than right because cutting from the right would take the second
+tail, and the second tail is the one feature that makes this the Bohemian lion
+and not any other lion. A crop earns its keep only where it lands on a margin
+and says "the page continues past this" — anywhere it would fall in the middle
+of a column, leave the drawing whole.
 
 **The crown is stroked rather than filled**, the one exception to the
 flattening. Solid navy it was the single closed lump in a drawing that is
@@ -342,8 +342,8 @@ canvas: the crown's own bounding box went from a filled shape to 33% ink, agains
 Why here and nowhere else: the footer carries three real institutional logos, and
 a state lion standing in that row would read as a fourth affiliation; beside the
 name in the header it would read as a personal coat of arms, which is the same
-mistake the pilcrow exists to avoid. Behind the Research page, at six per cent,
-it is neither.
+mistake the pilcrow exists to avoid. Behind an otherwise empty 404, at six per
+cent, it is neither.
 
 To regenerate after replacing the source: pull the crown out first and re-emit
 it as `fill:none` with a `#003657` stroke at 62.20962143, then fold every
