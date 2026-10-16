@@ -1680,12 +1680,22 @@ p { margin: 0 0 var(--step); }
   align-items: start;
 }
 
-.footer-quote {
-  font-style: italic;
-  font-size: 1.02rem;
-  line-height: 1.55;
+/* Signature block: the page signs off with the name and one line of field
+   and place, the way a letter does. It replaced a film quote, which read as
+   a student touch on a site meant for admissions readers. */
+.footer-sig {
+  font-size: 0.86rem;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
   color: var(--cu-navy);
-  margin: 0;
+  margin: 0 0 0.45rem;
+}
+
+.footer-sig-line {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--ink-faint);
+  margin: 0 0 0.9rem;
 }
 
 .footer-list {
