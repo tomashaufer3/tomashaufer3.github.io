@@ -47,7 +47,7 @@ assets/fonts/       Self-hosted EB Garamond (+ OFL.txt)
 assets/img/         Favicon, portrait, Charles University and CERGE-EI logos
 assets/img/CUcoat/  Vendor logo source art — gitignored, not served
 assets/img/photo/   Original photographs — gitignored, not served
-files/theses/       Legions position paper, Laffer curve BA thesis
+files/theses/       Laffer curve BA thesis
 files/term-papers/  Written in Time, referee performance
 files/articles/     The two Moody's commentaries
 files/haufer-cv.pdf The CV PDF
