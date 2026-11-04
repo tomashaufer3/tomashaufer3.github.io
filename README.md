@@ -12,12 +12,12 @@ is the whole deployment process.
 
 There is **almost** no JavaScript, and the exception is deliberate. The abstract
 toggles on the research page use the native `<details>` element; nothing else on
-the site scripts anything. The one exception is the pointer readout on the
-enrolment/desertion figure on the home page — about thirty lines, inline, no
-dependencies. That figure is complete static SVG without it: both series, both
-axes and all four milestones render with scripting off, and the script only adds
-the month-by-month readout. If you ever want the site back to zero JavaScript,
-delete the `<script>` block after `.chart-figure` and nothing else breaks.
+the site scripts anything. The one exception is the district map on the home
+page: its view buttons and hover readout are a short inline script with no
+dependencies. The map is complete static SVG without it, showing its first view
+(Matice) with its colours and scale. If you ever want the site back to zero
+JavaScript, delete the `<script>` block after `.maps-figure` and nothing else
+breaks.
 
 ## Preview locally
 
@@ -51,6 +51,8 @@ files/theses/       Laffer curve BA thesis
 files/term-papers/  Written in Time, referee performance
 files/articles/     The two Moody's commentaries
 files/haufer-cv.pdf The CV PDF
+tools/              build_maps.py (the home-page map) and build_chart.py (the
+                    removed timeline), see "The home-page figures"
 ```
 
 Every page is built from the same three pieces: a `.site-header`, one or more
@@ -242,30 +244,51 @@ either side — that read as a second unrelated outline nearby, not a frame. A
 wide paper mount replaced it, which was correct but quiet to the point of
 looking like a placeholder.
 
-## The home-page figure
+## The home-page figures
 
-`index.html` carries one real chart: monthly enrolments against monthly
-desertions in the Russian theatre, 1914–1922, under the identification diagram.
+Under the identification diagram, `index.html` carries one real figure: the
+district map below.
 
-Every number comes from the thesis repository — `data/final/persons/
-legionnaires_clean.parquet` — using the definitions in `notebooks/
-03_visualisation.ipynb` cell 8 verbatim: `theater == "Russia"`, monthly counts
-of `enroll_date` against monthly counts of `exit_date` among deserters. Copying
-the definitions rather than re-deriving them is the point: the page and the
-paper cannot drift on what the figure means.
+**The timeline (removed 4 November 2026).** Monthly enrolments against monthly
+desertions in the Russian theatre, 1914–1920, used to sit between the diagram
+and the map. It was taken off because the figure column ran far below the text;
+the docs overview carries the same chart. To bring it back, restore the
+`<figure class="chart-figure">` block and the `<script>` after it from commit
+`32094b4` (`git show 32094b4:index.html`), then refresh its numbers:
 
-Only aggregates reach the page — 108 monthly counts per series. No individual
-record is published, which matters because the underlying data is scraped
-personal data on ~320,000 people.
+```bash
+python tools/build_chart.py
+```
 
-The two series are on **separate scales**, and they have to be: enrolments peak
-at 8,104 in a month against 431 desertions, so one axis would flatten the red
-line onto the baseline and hide the entire finding. Both axes are labelled.
+The script takes its counts from `data/final/persons/legionnaires_clean.parquet`
+with the definitions of `notebooks/03_visualisation.ipynb` cell 8 (`theater ==
+"Russia"`, dates precise to the day or month only), and rewrites the series
+paths, axis labels, peak figures, readout totals and hover data. The `.chart*`
+styles stay in `site.css`; the map reuses the title, subtitle and readout ones.
 
-To regenerate after a data change, re-run the extraction in the session
-scratchpad (`mkchart.py`) or recompute the two 108-element arrays yourself and
-replace the `d = {...}` literal in the inline script plus the two `<path>`
-`d` attributes.
+**The district map.** Under the diagram, one map of the Czech lands by 1910
+census district (148 units), with four views behind buttons: Matice members,
+amateur theatre, legionnaires per 1,000 inhabitants and desertion per 1,000
+legionnaires. Without JavaScript it shows the Matice view and hides the buttons. They are the okres view
+of the docs site's intensity maps, from the same table
+(`data/interim/intensity/intensity_okres.csv`, written by `run_intensities.py`)
+and the same court polygons (`_district_map` in `utils/docs/build_docs.py`),
+merged here into census districts. Each view has its own colour scale, from zero
+(or the 3rd percentile, for the Matice z-score and desertion) to the 97th
+percentile; grey is no value. The definitions are provisional on the thesis side
+(D-163), so rebuild after they change:
+
+```bash
+python tools/build_maps.py
+```
+
+It replaces the block between `<!-- MAPS:BEGIN -->` and `<!-- MAPS:END -->`.
+The courts are merged into census districts by parity: an edge belongs to a
+district's outline, or to the frontier, when it is used an odd number of times,
+so shared borders cancel and the frontier closes into one ring. Coordinates stay
+on the docs site's own 1-unit grid (about 1 km); a coarser grid made the frontier
+jagged and broke it into pieces. The block is about 125 KB. Line widths are set in
+screen pixels (`vector-effect: non-scaling-stroke`), so they stay thin at any size.
 
 ⚠️ **One date to check.** Notebook 03 dates the Bolshevik coup `1917-09-07`.
 The docs overview says November 1917, and the October Revolution is 7 November
