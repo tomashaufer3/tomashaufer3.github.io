@@ -1,0 +1,1826 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Delegáti HKaPA 2026-27</title>
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<style>
+  :root { --cds-gap-xs: 4px; --cds-gap-sm: 8px; --cds-gap-md: 14px; --cds-gap-lg: 20px; --cds-gap-xl: 28px;
+          --cds-pad-xs: 4px; --cds-pad-sm: 8px; --cds-pad-md: 12px; --cds-pad-lg: 18px; --cds-pad-xl: 26px;
+          --cds-radius: 6px; --cds-dur-slow: .3s; --font-anthropic-sans: "Segoe UI", system-ui, sans-serif; color-scheme: light; }
+  html, body { margin: 0; background: #F1F2F1; }
+  body { font-family: Calibri, Carlito, "Segoe UI", system-ui, sans-serif; color: #05266B; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 18px max(16px, env(safe-area-inset-right, 0px)) 40px max(16px, env(safe-area-inset-left, 0px)); }
+  .gate { max-width: 26rem; margin: 12vh auto 0; background: #fff; border-top: 4px solid #D40D1E; padding: 26px 26px 22px; box-shadow: 0 6px 24px rgba(5, 38, 107, .12); }
+  .gate .eyebrow { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: #D40D1E; font-weight: 700; }
+  .gate h1 { margin: 6px 0 8px; font-size: 1.7rem; line-height: 1.15; }
+  .gate p { margin: 0 0 16px; font-size: 15px; color: #5E6789; }
+  .gate label { display: block; font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+  .gate .row { display: flex; gap: 8px; }
+  .gate input { flex: 1; min-width: 0; font: inherit; font-size: 16px; padding: 8px 10px; border: 1px solid #D9DDE6; color: #05266B; }
+  .gate input:focus-visible, .gate button:focus-visible { outline: 2px solid #D40D1E; outline-offset: 2px; }
+  .gate button { font: inherit; font-weight: 700; font-size: 16px; padding: 8px 16px; border: 0; background: #05266B; color: #fff; cursor: pointer; }
+  .gate button:disabled { opacity: .6; cursor: default; }
+  .gate .err { margin: 10px 0 0; color: #C00000; font-weight: 700; font-size: 14px; }
+  .foot { margin: 14px 0 0; font-size: 12.5px; color: #5E6789; text-align: center; }
+  .dash-skeleton { min-height: 3rem; }
+  [hidden] { display: none !important; }
+
+  /* ČF light report style: white sheet, navy text, ČF red accents, light grey panels — taken from the KRD season reports */
+  .kd {
+    --cf-navy: #05266B; --cf-navy-2: #041D50; --cf-red: #D40D1E; --cf-red-2: #C00000; --cf-maroon: #7A0A12;
+    --cf-blue: #2E75B6; --cf-graphite: #3B3B3B; --cf-grey: #F1F2F1; --cf-line: #D9DDE6; --cf-muted: #5E6789; --cf-white: #FFFFFF;
+    --cf-ok: #1E7B34; --cf-warn: #B26200;
+    --cf-font: Calibri, Carlito, "Segoe UI", var(--font-anthropic-sans), sans-serif;
+    color-scheme: light;
+    display: grid; gap: var(--cds-gap-xl);
+    background: var(--cf-white); color: var(--cf-navy);
+    font-family: var(--cf-font); font-size: 15px;
+    padding: var(--cds-pad-xl) var(--cds-pad-lg);
+    border-radius: var(--cds-radius);
+  }
+  .kd-head { display: grid; gap: var(--cds-gap-sm); border-bottom: 3px solid var(--cf-red); padding-bottom: var(--cds-pad-md); }
+  .kd-head .eyebrow { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--cf-red); font-weight: 700; }
+  .kd-head h1 { margin: 0; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.15; font-weight: 700; color: var(--cf-navy); text-wrap: balance; }
+  .kd-head p { margin: 0; max-width: 70ch; color: var(--cf-navy); font-size: 16px; }
+  .kd .kd-head p b { color: var(--cf-red); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  .kd-bar { margin: 0; padding: 6px 14px; font-size: 20px; font-weight: 700; color: var(--cf-white); background: var(--cf-navy); }
+  .kd-bar.red { background: var(--cf-red); }
+  .kd-section { display: grid; gap: var(--cds-gap-md); }
+
+  .kd-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr)); gap: 10px; }
+  .kd-tile { display: grid; gap: 2px; align-content: start; padding: 12px 16px 14px; min-width: 0; background: var(--cf-grey); color: var(--cf-red-2); }
+  .kd-tile .num { font-size: 2.3rem; line-height: 1.05; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .kd-tile .lab { font-size: 14px; }
+  .kd .kd-tile .lab b { font-weight: 700; }
+  .kd-tile.red { background: var(--cf-red-2); color: var(--cf-white); }
+  .kd-tile.navy { background: var(--cf-navy); color: var(--cf-white); }
+
+  .kd-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-md); }
+  .kd-card { display: grid; gap: 8px; align-content: start; min-width: 0; padding: 14px 16px 16px; background: var(--cf-grey); }
+  .kd-card.white { background: var(--cf-white); border: 1px solid var(--cf-line); }
+  .kd-card h3 { margin: 0; font-size: 19px; font-weight: 700; color: var(--cf-navy); text-align: center; text-wrap: balance; }
+  .kd-card .note { margin: 0; font-size: 13px; color: var(--cf-muted); text-align: center; }
+  .kd-card.left h3, .kd-card.left .note { text-align: left; }
+
+  .kd-chart { position: relative; min-height: 14rem; }
+  .kd-chart.tall { min-height: 18rem; }
+  .kd-chart svg { display: block; overflow: visible; }
+  .kd-chart text { font-family: var(--cf-font); font-size: 12.5px; fill: var(--cf-navy); font-variant-numeric: tabular-nums; }
+  .kd-chart text.muted { fill: var(--cf-muted); }
+  .kd-chart text.on-dark { fill: var(--cf-white); }
+  .kd-chart text.big { font-size: 22px; font-weight: 700; }
+  .kd-tip { position: absolute; z-index: 3; pointer-events: none; background: var(--cf-white); color: var(--cf-navy); border: 1px solid var(--cf-line); box-shadow: 0 4px 14px rgba(5, 38, 107, .16); padding: 6px 10px; font-size: 13px; font-variant-numeric: tabular-nums; min-width: 10rem; }
+  .kd-tip .h { color: var(--cf-muted); margin-bottom: 2px; }
+  .kd-tip .l { display: flex; align-items: center; gap: .45rem; }
+  .kd-tip .l span:last-child { margin-left: auto; padding-left: .8rem; font-weight: 700; }
+  .kd-sw { display: inline-block; width: .7rem; height: .7rem; flex: none; }
+  .kd-legend { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; font-size: 14px; }
+  .kd-legend li { display: flex; align-items: center; gap: .5rem; }
+  .kd-legend li span:nth-child(3) { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .kd-legend li span:nth-child(4) { width: 3.4rem; text-align: right; color: var(--cf-muted); font-variant-numeric: tabular-nums; }
+  .kd-donut { display: grid; grid-template-columns: minmax(9rem, 13rem) 1fr; gap: var(--cds-gap-md); align-items: center; }
+  @media (max-width: 34rem) { .kd-donut { grid-template-columns: 1fr; justify-items: center; } .kd-donut .kd-legend { width: 100%; } }
+
+  .kd-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+  .kd-search { font: inherit; font-size: 14px; color: var(--cf-navy); background-color: var(--cf-white); border: 1px solid var(--cf-line); padding: 5px 9px; width: min(100%, 20rem); }
+  .kd-search:focus-visible, .kd-t th button:focus-visible { outline: 2px solid var(--cf-red); outline-offset: 2px; }
+  .kd-scroll { overflow: auto; max-height: 30rem; background: var(--cf-white); }
+  .kd-scroll.short { max-height: none; }
+  table.kd-t { width: 100%; border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; color: var(--cf-navy); }
+  .kd-t th { position: sticky; top: 0; z-index: 1; background: var(--cf-navy); color: var(--cf-white); text-align: left; white-space: nowrap; font-weight: 700; padding: 6px 9px; }
+  .kd-t td { padding: 5px 9px; border-bottom: 1px solid var(--cf-line); vertical-align: top; }
+  .kd-t tbody tr:nth-child(even) td { background: #F7F8FA; }
+  .kd-t .r { text-align: right; }
+  .kd-t td.nw { white-space: nowrap; }
+  .kd-t td.strong { font-weight: 700; }
+  .kd-t th button { all: unset; cursor: pointer; }
+  .kd-t th[aria-sort="ascending"] button::after { content: " ↑"; }
+  .kd-t th[aria-sort="descending"] button::after { content: " ↓"; }
+  .chip { display: inline-flex; align-items: center; gap: .35rem; white-space: nowrap; }
+  .chip::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; flex: none; background: var(--cf-muted); }
+  .chip.ok::before { background: var(--cf-ok); }
+  .chip.warn::before { background: var(--cf-warn); }
+  .chip.bad::before { background: var(--cf-red); }
+  .kd-fail { display: flex; align-items: center; justify-content: center; gap: .4rem; min-height: inherit; color: var(--cf-muted); font-size: 13px; }
+  .kd-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--cf-red); }
+
+  .kd details { font-size: 14px; color: var(--cf-navy); max-width: 78ch; border-top: 1px solid var(--cf-line); padding-top: 10px; }
+  .kd details summary { cursor: pointer; font-weight: 700; }
+  .kd details dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 10px 0 0; }
+  .kd details dt { font-weight: 700; }
+  .kd details dd { margin: 0; color: var(--cf-muted); }
+  .kd-foot { margin: 0; font-size: 13px; color: var(--cf-muted); }
+  .kd-lead { margin: 0; font-size: 15px; }
+  .kd .kd-lead b { color: var(--cf-red); font-weight: 700; }
+  .kd-legend-row { display: flex; flex-wrap: wrap; gap: 6px 20px; }
+  .kd-legend-row .kd-line { width: 1.4rem; height: 4px; }
+  .kd-t td.up { color: var(--cf-ok); font-weight: 700; }
+  .kd-t td.down { color: var(--cf-red); font-weight: 700; }
+  .kd-switch { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+  .kd-switch-lab { font-weight: 700; margin-right: 4px; }
+  .kd-seg { font: inherit; font-size: 15px; font-weight: 700; color: var(--cf-navy); background-color: var(--cf-grey); border: 1px solid var(--cf-line); padding: 5px 14px; cursor: pointer; }
+  .kd-seg[aria-pressed="true"] { background-color: var(--cf-navy); border-color: var(--cf-navy); color: var(--cf-white); }
+  .kd-seg:disabled { opacity: .45; cursor: default; }
+  .kd-seg:focus-visible { outline: 2px solid var(--cf-red); outline-offset: 2px; }
+  .kd-switch-note { font-size: 13px; color: var(--cf-muted); }
+  .kd-empty { min-height: 10rem; }
+  .kd-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; min-height: 2rem; }
+  .kd-pick-hint { font-size: 13px; color: var(--cf-muted); }
+  .kd-pick-list { display: contents; }
+  .kd-chip { font: inherit; font-size: 14px; font-weight: 700; color: var(--cf-white); background-color: var(--cf-red-2); border: 0; padding: 4px 10px; cursor: pointer; }
+  .kd-chip.clear { background-color: var(--cf-grey); color: var(--cf-navy); border: 1px solid var(--cf-line); }
+  .kd-chip:focus-visible { outline: 2px solid var(--cf-navy); outline-offset: 2px; }
+  .kd-t.kd-click tbody tr { cursor: pointer; }
+  .kd-t.kd-click tbody tr:hover td { background: #E8ECF5; }
+  .kd-t tbody tr.sel td { background: #FBE3E5; }
+  .kd-legend li.click { cursor: pointer; }
+  .kd-t tbody tr.total td { font-weight: 700; background: #EEF1F7; }
+  .kd-t.kd-heat td.heat { font-weight: 700; min-width: 4.5rem; }
+  .kd-card .kd-switch { margin-top: 2px; }
+  .kd-sm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 9.5rem), 1fr)); gap: 10px; }
+  .kd-sm { background: var(--cf-white); border: 1px solid var(--cf-line); padding: 8px 10px 4px; cursor: pointer; min-width: 0; }
+  .kd-sm.all { border: 2px solid var(--cf-navy); cursor: default; }
+  .kd-sm:focus-visible { outline: 2px solid var(--cf-red); outline-offset: 2px; }
+  .kd-sm h4 { margin: 0; font-size: 14px; font-weight: 700; color: var(--cf-navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .kd-sm-note { margin: 0 0 8px; font-size: 13px; color: var(--cf-muted); }
+  [data-dash-source-state=empty] { color: transparent; }
+  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+  @media (max-width: 40rem) { .kd-t .wide { display: none; } .kd { padding: var(--cds-pad-lg) var(--cds-pad-md); } }
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="gate" id="gate">
+    <span class="eyebrow">Komise rozhodčích a delegátů HK a PA ČF</span>
+    <h1>Delegáti HKaPA 2026-27</h1>
+    <p>Interní přehled delegací, odměn a hodnocení. Data jsou zašifrovaná; pro zobrazení zadejte heslo komise.</p>
+    <form id="gate-form" autocomplete="off">
+      <label for="gate-pass">Heslo</label>
+      <div class="row"><input id="gate-pass" type="password" autocomplete="current-password" required><button id="gate-btn" type="submit">Otevřít</button></div>
+      <p class="err" id="gate-err" hidden>Heslo nesouhlasí. Zkuste to znovu.</p>
+    </form>
+  </section>
+  <main id="app" hidden>
+    <div id="dash-root">
+<div class="kd">
+  <header class="kd-head" id="prehled">
+    <span class="eyebrow">Komise rozhodčích a delegátů HK a PA ČF</span>
+    <h1>Delegáti HKaPA 2026-27</h1>
+    <p>Sezona zatím: <b data-draw="kpi" data-fmt="int" data-fixed="sezona" data-source="kpi" data-field="zapasy" data-where="obdobi=sezona&amp;deleg=">—</b> delegovaných zápasů a odměny delegátům <b data-draw="kpi" data-fmt="kc" data-fixed="sezona" data-source="kpi" data-field="odmena" data-where="obdobi=sezona&amp;deleg=">—</b>. Na zprávu delegáta ještě čeká <b data-draw="kpi" data-fmt="int" data-fixed="sezona" data-source="kpi" data-field="ceka" data-where="obdobi=sezona&amp;deleg=">—</b> zápasů. Loni ke stejnému dni to bylo <b data-draw="kpi-loni" data-source="srovnani" data-field="s2025_26" data-where="id=zapasy">—</b> zápasů a <b data-draw="kpi-loni" data-source="srovnani" data-field="s2025_26" data-where="id=odmena" data-fmt="kc">—</b> na odměnách.</p>
+  </header>
+
+
+  <nav class="kd-switch" id="obdobi" aria-label="Období">
+    <span class="kd-switch-lab">Období:</span>
+    <button type="button" class="kd-seg" data-obdobi="sezona" aria-pressed="true">Celá sezona</button>
+    <button type="button" class="kd-seg" data-obdobi="podzim" aria-pressed="false">Podzim</button>
+    <button type="button" class="kd-seg" data-obdobi="jaro" aria-pressed="false">Jaro</button>
+    <span class="kd-switch-note" data-note="jaro" hidden>Jaro zatím bez delegovaných zápasů.</span>
+    <span class="kd-switch-note">Srovnání se sezonami je vždy za celou sezonu ke stejnému dni.</span>
+  </nav>
+  <div class="kd-pick" id="vyber" aria-live="polite">
+    <span class="kd-pick-hint">Tip: klikněte v grafech nebo tabulkách na delegáta, soutěž, rozhodčího nebo listinu a stránka se zúží jen na ně. Dalším kliknutím výběr zrušíte.</span>
+    <span class="kd-pick-list" data-draw="vyber"></span>
+  </div>
+
+  <section class="kd-section" id="v-cislech">
+    <h2 class="kd-bar">V číslech</h2>
+    <div class="kd-tiles">
+      <div class="kd-tile"><span class="num" data-draw="kpi" data-fmt="int" data-source="kpi" data-field="zapasy" data-where="obdobi=sezona&amp;deleg=">—</span><span class="lab">delegovaných zápasů</span></div>
+      <div class="kd-tile red"><span class="num" data-draw="kpi" data-fmt="kc" data-source="kpi" data-field="odmena" data-where="obdobi=sezona&amp;deleg=">—</span><span class="lab">odměny delegátům</span></div>
+      <div class="kd-tile"><span class="num" data-draw="kpi" data-fmt="int" data-source="kpi" data-field="akce" data-where="obdobi=sezona&amp;deleg=">—</span><span class="lab">akcí delegátů (turnajů)</span></div>
+      <div class="kd-tile navy"><span class="num" data-draw="kpi" data-fmt="int" data-source="kpi" data-field="minuty" data-where="obdobi=sezona&amp;deleg=">—</span><span class="lab">delegovaných minut hry</span></div>
+      <div class="kd-tile"><span class="num" data-draw="kpi" data-fmt="int" data-source="kpi" data-field="rozhodci" data-where="obdobi=sezona&amp;deleg=">—</span><span class="lab">rozhodčích min. 1× delegováno</span></div>
+      <div class="kd-tile red"><span class="num" data-draw="kpi" data-fmt="pct" data-source="kpi" data-field="podil_rozhodcich" data-where="obdobi=sezona&amp;deleg=">—</span><span class="lab">rozhodčích z listin 1R–5R s delegátem</span></div>
+      <div class="kd-tile navy"><span class="num" data-draw="kpi" data-fmt="pct" data-source="kpi" data-field="bonus_podil" data-where="obdobi=sezona&amp;deleg=">—</span><span class="lab">uzavřených akcí s bonusem za včasné zprávy</span></div>
+      <div class="kd-tile"><span class="num" data-draw="kpi" data-fmt="int" data-source="kpi" data-field="ceka" data-where="obdobi=sezona&amp;deleg=">—</span><span class="lab">zápasů čeká na zprávu delegáta</span></div>
+    </div>
+  </section>
+
+  <section class="kd-section" id="srovnani">
+    <h2 class="kd-bar red">Srovnání s minulými sezonami</h2>
+    <p class="kd-lead">Každá sezona do stejného dne: letos do <b data-draw="den" data-source="stejny_den" data-field="datum" data-row="0">—</b>, loni do <b data-draw="den" data-source="stejny_den" data-field="datum_loni" data-row="0">—</b>.</p>
+    <div class="kd-card white left" id="srovnani-tabulka">
+      <h3>Ke stejnému dni sezony</h3>
+      <p class="note">Změna = letos proti sezoně 2025-26 ke stejnému dni. Odměny za 2023-24 nejsou po zápasech dostupné (tehdy platil jiný systém odměn).</p>
+      <div class="kd-scroll short">
+        <table class="kd-t" data-source="srovnani" data-row-key="ukazatel">
+          <thead><tr>
+            <th data-field="ukazatel">Ukazatel</th>
+            <th class="r wide" data-field="s2023_24">2023-24</th>
+            <th class="r" data-field="s2024_25">2024-25</th>
+            <th class="r" data-field="s2025_26">2025-26</th>
+            <th class="r" data-field="s2026_27">2026-27</th>
+            <th class="r" data-field="zmena">Změna proti loňsku</th>
+          </tr></thead>
+          <tbody data-draw="tb-srovnani"></tbody>
+        </table>
+      </div>
+    </div>
+    <ul class="kd-legend kd-legend-row" aria-label="Sezony">
+      <li><span class="kd-sw kd-line" data-season="2026-27"></span><span>2026-27 (letos)</span></li>
+      <li><span class="kd-sw kd-line" data-season="2025-26"></span><span>2025-26</span></li>
+      <li><span class="kd-sw kd-line" data-season="2024-25"></span><span>2024-25</span></li>
+      <li><span class="kd-sw kd-line" data-season="2023-24"></span><span>2023-24</span></li>
+    </ul>
+    <div class="kd-grid">
+      <div class="kd-card" id="prubeh-zapasy">
+        <h3>Delegované zápasy v průběhu sezony</h3>
+        <p class="note">Průběžný součet od 1. září. Svislá čára = dnešek v sezoně.</p>
+        <div class="kd-chart" id="graf-prubeh-zapasy" data-draw="ch-prubeh" data-metric="zapasy" data-source="prubeh"></div>
+      </div>
+      <div class="kd-card" id="prubeh-pokryti">
+        <h3>Rozhodčí s delegátem v průběhu sezony</h3>
+        <p class="note">Podíl rozhodčích z listin 1R–5R, kteří už měli na zápase delegáta.</p>
+        <div class="kd-chart" id="graf-prubeh-pokryti" data-draw="ch-prubeh" data-metric="pokryti" data-source="prubeh"></div>
+      </div>
+      <div class="kd-card" id="prubeh-odmeny">
+        <h3>Odměny delegátům v průběhu sezony</h3>
+        <p class="note">Průběžný součet v Kč. Sezony s odměnami po zápasech (od 2024-25).</p>
+        <div class="kd-chart" id="graf-prubeh-odmeny" data-draw="ch-prubeh" data-metric="odmena" data-source="prubeh"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kd-section" id="odmeny">
+    <h2 class="kd-bar red">Delegáti a odměny</h2>
+    <div class="kd-grid">
+      <div class="kd-card" id="odmeny-delegati">
+        <h3>Odměny podle delegátů</h3>
+        <p class="note">V Kč, rozdělené na sazbu a příplatky. Kliknutím na delegáta zúžíte celou stránku.</p>
+        <div class="kd-chart" id="graf-delegati" data-draw="ch-delegati" data-source="delegati"></div>
+      </div>
+      <div class="kd-card" id="slozky">
+        <h3>Z čeho se odměny skládají</h3>
+        <p class="note">Součet všech delegátů. Příplatky se platí jednou za akci.</p>
+        <div class="kd-chart" id="graf-slozky" data-draw="ch-slozky" data-source="slozky"></div>
+      </div>
+    </div>
+    <div class="kd-grid">
+      <div class="kd-card" id="kumulace">
+        <h3>Odměny v průběhu sezony</h3>
+        <p class="note">Průběžný součet odměn podle data zápasu.</p>
+        <div class="kd-chart" id="graf-kumulace" data-draw="ch-kumulace" data-source="kumulace"></div>
+      </div>
+      <div class="kd-card" id="kalendar">
+        <h3>Kdo kdy delegoval</h3>
+        <p class="note">Delegované zápasy v týdnu (pondělí–neděle); čím červenější, tím víc zápasů.</p>
+        <div class="kd-chart" id="graf-kalendar" data-draw="ch-kalendar" data-source="kalendar"></div>
+      </div>
+    </div>
+    <div class="kd-card white left" id="tabulka-delegati">
+      <h3>Delegáti</h3>
+      <p class="note">Akce = jeden delegát na jednom turnaji nebo utkání v jeden den.</p>
+      <div class="kd-scroll short">
+        <table class="kd-t kd-click" data-source="delegati" data-row-key="obdobi,delegat">
+          <thead><tr>
+            <th data-field="delegat">Delegát</th>
+            <th class="r" data-field="zapasy">Zápasy</th>
+            <th class="r" data-field="akce">Akce</th>
+            <th class="r wide" data-field="minuty">Minuty</th>
+            <th class="r" data-field="odmena">Odměna</th>
+            <th class="r wide" data-field="akce_bonus">Akce s bonusem</th>
+            <th class="r" data-field="ceka">Čeká na zprávu</th>
+          </tr></thead>
+          <tbody data-draw="tb-delegati"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="kd-section" id="hodnoceni">
+    <h2 class="kd-bar">Hodnocení rozhodčích delegáty</h2>
+    <p class="kd-lead">Známka 1 = výborný … 4 = nedostatečný. Obtížnost 1 = snadné … 4 = velmi náročné. CEZ = 4·√známka / ((koeficient soutěže + 1)·√obtížnost), nižší = lepší. Bez soutěží 3+1, kde se známka nedává.</p>
+    <div class="kd-grid">
+      <div class="kd-card" id="hodnoceni-rozlozeni">
+        <h3>Jaké známky delegáti dávají</h3>
+        <p class="note">Podíl známek 1–4 u každého delegáta; vpravo počet známek a průměr.</p>
+        <div class="kd-chart" id="graf-znamky" data-draw="ch-znamky" data-source="hodnoceni"></div>
+      </div>
+      <div class="kd-card" id="hodnoceni-cez">
+        <h3>Průměrné CEZ podle delegáta</h3>
+        <p class="note">Nižší = lepší hodnocení. Čárkovaná čára = průměr všech delegátů.</p>
+        <div class="kd-chart" id="graf-cez" data-draw="ch-cez" data-source="hodnoceni"></div>
+      </div>
+    </div>
+    <div class="kd-grid">
+      <div class="kd-card" id="hodnoceni-mapa">
+        <h3>Ø známka a Ø obtížnost podle delegáta</h3>
+        <p class="note">Obojí na stupnici 1–4. Známka 1 = výborný výkon, obtížnost 1 = snadný zápas. Vyšší modrý sloupec = delegát dává horší známky; vyšší světlý = hodnotí těžší zápasy.</p>
+        <div class="kd-chart tall" id="graf-zn-obt" data-draw="ch-zn-obt" data-source="hodnoceni"></div>
+      </div>
+      <div class="kd-card white left" id="hodnoceni-tabulka">
+        <h3>Delegáti a jejich hodnocení</h3>
+        <p class="note">Průměry ze všech známek, které delegát v období udělil. Kliknutím na řádek zúžíte stránku na delegáta.</p>
+        <div class="kd-scroll short">
+          <table class="kd-t kd-click" data-source="hodnoceni" data-row-key="obdobi,delegat">
+            <thead><tr>
+              <th data-field="delegat">Delegát</th>
+              <th class="r" data-field="hodnoceni">Známek</th>
+              <th class="r" data-field="znamka">Ø známka</th>
+              <th class="r" data-field="obtiznost">Ø obtížnost</th>
+              <th class="r" data-field="cez">Ø CEZ</th>
+              <th class="r" data-field="podil1">Jedničky</th>
+            </tr></thead>
+            <tbody data-draw="tb-hodnoceni"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kd-section" id="hodnoceni-sezony">
+    <h2 class="kd-bar red">Známky v čase a podle soutěží</h2>
+    <div class="kd-grid">
+      <div class="kd-card" id="rozlozeni-sezony">
+        <h3>Rozložení známek po sezonách</h3>
+        <p class="note">Podíl známek 1–4 ze všech hodnocení v sezoně; 2026-27 zatím jen podzim.</p>
+        <div class="kd-chart" id="graf-rozlozeni-sezony" data-draw="ch-rozlozeni-sezony" data-source="rozlozeni_sezony"></div>
+      </div>
+      <div class="kd-card" id="znamky-souteze">
+        <h3>Rozložení známek podle soutěže</h3>
+        <p class="note">Letošní sezona, řazeno podle koeficientu soutěže; vpravo počet známek a průměr. Řídí se přepínačem období a výběrem delegáta.</p>
+        <div class="kd-chart" id="graf-znamky-souteze" data-draw="ch-znamky-souteze" data-source="znamky_souteze"></div>
+      </div>
+    </div>
+    <div class="kd-card" id="delegati-sezony">
+      <h3>Delegáti v porovnání se sezonami</h3>
+      <p class="note">Každý rámeček je jeden delegát, sloupce jsou jeho sezony zleva doprava. Všechny rámečky mají stejné měřítko. Ukazatel přepnete tlačítky; kliknutím na rámeček zúžíte stránku na delegáta.</p>
+      <div class="kd-switch" aria-label="Ukazatel">
+        <span class="kd-switch-lab">Ukazatel:</span>
+        <button type="button" class="kd-seg" data-metrika="znamka" aria-pressed="true">Ø známka</button>
+        <button type="button" class="kd-seg" data-metrika="cez" aria-pressed="false">Ø CEZ</button>
+        <button type="button" class="kd-seg" data-metrika="podil1" aria-pressed="false">Podíl jedniček</button>
+        <button type="button" class="kd-seg" data-metrika="obtiznost" aria-pressed="false">Ø obtížnost</button>
+      </div>
+      <ul class="kd-legend kd-legend-row" aria-label="Sezony">
+        <li><span class="kd-sw kd-line" data-season="2023-24"></span><span>2023-24</span></li>
+        <li><span class="kd-sw kd-line" data-season="2024-25"></span><span>2024-25</span></li>
+        <li><span class="kd-sw kd-line" data-season="2025-26"></span><span>2025-26</span></li>
+        <li><span class="kd-sw kd-line" data-season="2026-27"></span><span>2026-27</span></li>
+      </ul>
+      <div class="kd-chart tall" id="graf-delegati-sezony" data-draw="ch-delegati-sezony" data-source="delegati_sezony"></div>
+    </div>
+    <div class="kd-card white left" id="delegati-sezony-tabulka">
+      <h3>Ø známka delegáta po sezonách</h3>
+      <p class="note">Barva buňky: modrá = lepší průměrné známky, červená = horší. Počet známek v bublině po najetí myší.</p>
+      <div class="kd-scroll short">
+        <table class="kd-t kd-heat" data-source="delegati_sezony_tab" data-row-key="delegat">
+          <thead><tr>
+            <th data-field="delegat">Delegát</th>
+            <th class="r" data-field="s2023_24">2023-24</th>
+            <th class="r" data-field="s2024_25">2024-25</th>
+            <th class="r" data-field="s2025_26">2025-26</th>
+            <th class="r" data-field="s2026_27">2026-27</th>
+          </tr></thead>
+          <tbody data-draw="tb-delegati-sezony"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="kd-section" id="rozhodci">
+    <h2 class="kd-bar">Rozhodčí a listiny</h2>
+    <div class="kd-grid">
+      <div class="kd-card" id="listiny-podil">
+        <h3>Rozdělení delegování mezi listiny</h3>
+        <p class="note">Kolikrát byl na delegovaném zápase rozhodčí z dané listiny.</p>
+        <div class="kd-chart" id="graf-listiny-podil" data-draw="ch-listiny-deleg" data-source="listiny_deleg"></div>
+      </div>
+      <div class="kd-card" id="listiny-pokryti">
+        <h3>Rozhodčí s delegátem podle listiny</h3>
+        <p class="note">Kolik rozhodčích z každé listiny už mělo na zápase delegáta.</p>
+        <div class="kd-chart" id="graf-listiny" data-draw="ch-listiny" data-source="listiny_podil"></div>
+      </div>
+    </div>
+    <div class="kd-card" id="nejcasteji">
+      <h3>Nejčastěji delegovaní rozhodčí</h3>
+      <p class="note">Počet delegovaných zápasů; barva podle listiny. Kliknutím zobrazíte jeho zápasy.</p>
+      <div class="kd-chart tall" id="graf-rozhodci" data-draw="ch-rozhodci" data-source="rozhodci_top"></div>
+    </div>
+  </section>
+
+  <section class="kd-section" id="souteze">
+    <h2 class="kd-bar red">Soutěže</h2>
+    <div class="kd-grid">
+      <div class="kd-card" id="minuty-souteze">
+        <h3>Delegované minuty dle soutěží</h3>
+        <p class="note">Součet čisté hrací doby delegovaných zápasů. Kliknutím zobrazíte zápasy soutěže.</p>
+        <div class="kd-chart tall" id="graf-souteze" data-draw="ch-souteze" data-source="souteze"></div>
+      </div>
+      <div class="kd-card white left" id="tabulka-souteze">
+        <h3>Soutěže v číslech</h3>
+        <p class="note">Delegované zápasy, minuty a odměny podle soutěže.</p>
+        <div class="kd-scroll">
+          <table class="kd-t kd-click" data-source="souteze" data-row-key="obdobi,deleg,soutez">
+            <thead><tr>
+              <th data-field="soutez">Soutěž</th>
+              <th class="r" data-field="zapasy">Zápasy</th>
+              <th class="r" data-field="minuty">Minuty</th>
+              <th class="r" data-field="odmena">Odměna</th>
+            </tr></thead>
+            <tbody data-draw="tb-souteze"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="kd-section" id="zpravy">
+    <h2 class="kd-bar">Zprávy a bonusy</h2>
+    <div class="kd-card" id="prodleva">
+      <h3>Za kolik pracovních dnů dorazily zprávy</h3>
+      <p class="note">Uzavřené akce podle pracovních dnů od zápasu do poslední nahrané zprávy. Bonus do 3 pracovních dnů.</p>
+      <div class="kd-chart" id="graf-prodleva" data-draw="ch-prodleva" data-source="prodleva"></div>
+    </div>
+  </section>
+
+  <section class="kd-section" id="zapasy">
+    <h2 class="kd-bar red">Všechny delegované zápasy</h2>
+    <div class="kd-card white left">
+      <div class="kd-tools">
+        <p class="note">Hledání podle týmu, rozhodčího, delegáta nebo kódu. Řazení kliknutím na záhlaví. <span data-draw="n-zapasy" data-source="zapasy">—</span></p>
+        <input id="kd-hledat" class="kd-search" type="search" placeholder="Hledat…" aria-label="Hledat v zápasech">
+      </div>
+      <div class="kd-scroll">
+        <table class="kd-t" data-source="zapasy" data-row-key="kod">
+          <thead><tr>
+            <th data-field="kod" data-sort="kod"><button type="button">Kód</button></th>
+            <th data-field="datum" data-sort="datum" aria-sort="ascending"><button type="button">Datum</button></th>
+            <th class="wide" data-field="domaci" data-sort="domaci"><button type="button">Domácí</button></th>
+            <th class="wide" data-field="hoste" data-sort="hoste"><button type="button">Hosté</button></th>
+            <th data-field="rozhodci1" data-sort="rozhodci1"><button type="button">Rozhodčí 1</button></th>
+            <th data-field="rozhodci2" data-sort="rozhodci2"><button type="button">Rozhodčí 2</button></th>
+            <th data-field="delegat" data-sort="delegat"><button type="button">Delegát</button></th>
+            <th class="r" data-field="odmena" data-sort="odmena"><button type="button">Odměna</button></th>
+            <th data-field="stav" data-sort="stav"><button type="button">Stav</button></th>
+          </tr></thead>
+          <tbody data-draw="tb-zapasy"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <details id="pravidla">
+    <summary>Jak se odměny počítají</summary>
+    <dl>
+      <dt>Sazba</dt><dd>Částka za každý delegovaný zápas podle soutěže (Odměny delegátů od sezony 2024-25, upraveno KRD).</dd>
+      <dt>Akce</dt><dd>Zápasy jednoho delegáta v jeden den v jedné soutěži a turnaji. Příplatky se platí jednou za akci.</dd>
+      <dt>Pořadatelská zpráva</dt><dd>Příplatek, pokud delegát nahrál pořadatelskou zprávu. Online delegace ho nemá.</dd>
+      <dt>Video</dt><dd>Příplatek, pokud delegát při rozboru použil video.</dd>
+      <dt>Bonus</dt><dd>Všechny zprávy akce nahrané do 3 pracovních dnů po zápase (po víkendu do středy 23:59, svátky se nepočítají). Pozdní pořadatelská zpráva stojí jen bonus.</dd>
+      <dt>14 dní</dt><dd>Pokud zpráva o rozhodčích nedorazí do 14 dnů, akce je bez odměny.</dd>
+      <dt>Online delegace</dt><dd>80 % sazby, bez pořadatelské zprávy.</dd>
+      <dt>Známka a CEZ</dt><dd>Známky a obtížnost ze zpráv delegátů (ne z FIS). CEZ = 4·√známka / ((koeficient soutěže + 1)·√obtížnost); koeficienty jsou v listu CEZ tabulky Delegovaní rozhodčí.</dd>
+      <dt>Srovnání sezon</dt><dd>Známky z listů Delegace tabulek 2023-24 až 2026-27; CEZ se sezonními koeficienty (8XW1 v 2024-25 a 4KM7 v 2025-26 koeficient nemají, do CEZ se nepočítají).</dd>
+      <dt>Zdroj</dt><dd>Tabulka Delegovaní rozhodčí 26-27 a časy nahrání zpráv z FIS.</dd>
+    </dl>
+  </details>
+  <p class="kd-foot">Komise rozhodčích a delegátů HK a PA ČF · Tomáš Haufer</p>
+</div>
+    </div>
+    <p class="foot">Stav dat k <span class="stav">—</span> · interní stránka, neodkazovat veřejně</p>
+  </main>
+</div>
+<script src="d3.v7.9.0.min.js"></script>
+<script>
+(function () {
+  const calcs = {}, draws = {}, onDatas = [];
+  let raw = null, cache = {}, params = {};
+  const resolve = (id) => {
+    if (!raw) return {status: 'loading', data: [], refreshing: false, meta: []};
+    if (id in cache) return cache[id];
+    let res;
+    if (raw[id]) res = {status: 'ok', data: raw[id], columns: raw[id].length ? Object.keys(raw[id][0]) : [], meta: []};
+    else if (calcs[id]) {
+      try {
+        const ins = calcs[id].inputs.map(resolve);
+        res = ins.some((x) => x.status !== 'ok') ? {status: 'error', data: [], meta: []} : {status: 'ok', data: calcs[id].fn(...ins.map((x) => x.data)), meta: []};
+      } catch (e) { console.error('calc', id, e); res = {status: 'error', data: [], message: String(e), meta: []}; }
+    } else res = {status: 'missing', data: [], meta: []};
+    cache[id] = res; return res;
+  };
+  const runDraw = (name) => document.querySelectorAll('[data-draw="' + name + '"]').forEach((el) => {
+    if (el.closest('[hidden]')) return;
+    try { draws[name](el); } catch (e) { console.error('draw', name, e); }
+  });
+  const renderAll = () => {
+    onDatas.forEach((f) => { try { f(); } catch (e) { console.error(e); } });
+    Object.keys(draws).forEach(runDraw);
+  };
+  window.dash = {
+    data: resolve,
+    calc: (id, o) => { calcs[id] = o; },
+    loader: () => {},
+    draw: (name, fn) => {
+      if (fn) { draws[name] = typeof fn === 'function' ? fn : fn.update; if (raw) runDraw(name); }
+      else if (draws[name] && raw) runDraw(name);
+    },
+    onData: (fn) => { onDatas.push(fn); if (raw) fn(); },
+    params: () => Object.assign({}, params),
+    setParams: (p) => { for (const [k, v] of Object.entries(p)) { if (v === null || v === undefined) delete params[k]; else params[k] = v; } renderAll(); },
+    resetParams: () => { params = {}; renderAll(); },
+    setLink: () => {}, refresh: () => {},
+    colors: ['#05266B', '#2E75B6', '#7A0A12', '#D40D1E', '#3B3B3B', '#9DB7D9', '#E8A0A6', '#5E6789'],
+    _setData: (d) => { raw = d; cache = {}; renderAll(); },
+  };
+  let lastW = 0, t;
+  window.addEventListener('resize', () => {
+    clearTimeout(t);
+    t = setTimeout(() => { const w = document.documentElement.clientWidth; if (raw && w !== lastW) { lastW = w; Object.keys(draws).forEach(runDraw); } }, 150);
+  });
+})();
+</script>
+<script>
+  // shared helpers and the ČF palette
+  const L = d3.formatLocale({decimal: ',', thousands: ' ', grouping: [3], currency: ['', ' Kč']});
+  const fInt = L.format(',d');
+  const fKc = L.format('$,d');
+  const fPctRaw = L.format('.1%');
+  const fPct = (v) => fPctRaw(v).replace('%', ' %');
+  const fDate = (s) => { const d = new Date(s + 'T00:00:00Z'); return isNaN(d) ? s : `${d.getUTCDate()}. ${d.getUTCMonth() + 1}. ${d.getUTCFullYear()}`; };
+  const fDay = (s) => { const d = new Date(s + 'T00:00:00Z'); return `${d.getUTCDate()}. ${d.getUTCMonth() + 1}.`; };
+  const CF = {navy: '#05266B', red: '#D40D1E', red2: '#C00000', maroon: '#7A0A12', blue: '#2E75B6', graphite: '#3B3B3B', grey: '#F1F2F1', line: '#D9DDE6', muted: '#5E6789', white: '#FFFFFF'};
+  const LISTINA = {'1R': CF.red, '2R': CF.maroon, '3R': CF.blue, '4R': CF.navy, '5R': CF.graphite};
+  const SLOZKY = [['sazba', 'Sazba za zápasy', CF.navy], ['poradatel', 'Pořadatelská zpráva', CF.blue], ['video', 'Video', CF.maroon], ['bonus', 'Bonus za včasné zprávy', CF.red]];
+  const failed = (st) => st === 'error' || st === 'connect' || st === 'declined' || st === 'missing';
+  const failLine = () => { const s = document.createElement('span'); s.className = 'kd-fail'; s.textContent = 'Nepodařilo se načíst'; return s; };
+  const notReady = (el, id) => {
+    const d = dash.data(id);
+    if (d.status === 'ok') { el.classList.remove('dash-skeleton'); return false; }
+    el.classList.toggle('dash-skeleton', d.status === 'loading');
+    if (failed(d.status)) el.replaceChildren(failLine()); else el.replaceChildren();
+    return true;
+  };
+  const tip = (el) => { let t = el.querySelector('.kd-tip'); if (!t) { t = document.createElement('div'); t.className = 'kd-tip'; t.hidden = true; el.appendChild(t); } return t; };
+  const placeTip = (el, t, x, y) => {
+    t.hidden = false;
+    const w = t.offsetWidth, h = t.offsetHeight, W = el.clientWidth;
+    let left = x + 14; if (left + w > W) left = Math.max(0, x - w - 14);
+    t.style.left = left + 'px'; t.style.top = Math.max(0, y - h / 2) + 'px';
+  };
+  const tipHead = (t, text) => { t.replaceChildren(); const h = document.createElement('div'); h.className = 'h'; h.textContent = text; t.appendChild(h); };
+  const tipLine = (t, color, name, value) => {
+    const l = document.createElement('div'); l.className = 'l';
+    if (color) { const i = document.createElement('i'); i.className = 'kd-sw'; i.style.background = color; l.appendChild(i); }
+    const a = document.createElement('span'); a.textContent = name;
+    const b = document.createElement('span'); b.textContent = value;
+    l.append(a, b); t.appendChild(l);
+  };
+  const textWidth = (svg, s, cls) => { const t = svg.append('text').attr('x', -9999).attr('class', cls || null).text(s); const w = t.node().getComputedTextLength(); t.remove(); return w; };
+  const newSvg = (el, W, H, label) => d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', label);
+  const hoverable = (sel, el, fill) => sel.on('pointermove', (ev, r) => { const t = tip(el); fill(t, r); const [mx, my] = d3.pointer(ev, el); placeTip(el, t, mx, my); })
+    .on('pointerleave', () => { const t = el.querySelector('.kd-tip'); if (t) t.hidden = true; });
+  // donut + legend with value and share
+  const donut = (el, rows, label, nameOf, valueOf, colorOf, fmt, param) => {
+    el.replaceChildren();
+    const wrap = document.createElement('div'); wrap.className = 'kd-donut'; el.appendChild(wrap);
+    const box = document.createElement('div'); wrap.appendChild(box);
+    const S = 220, R = S / 2, total = d3.sum(rows, valueOf) || 1;
+    const svg = newSvg(box, S, S, label);
+    const arcs = d3.pie().sort(null).value(valueOf)(rows);
+    const arc = d3.arc().innerRadius(R * 0.56).outerRadius(R - 2);
+    const g = svg.append('g').attr('transform', `translate(${R},${R})`);
+    const p = g.selectAll('path').data(arcs).join('path').attr('d', arc).attr('fill', (a) => colorOf(a.data)).attr('stroke', CF.white).attr('stroke-width', 2);
+    hoverable(p, el, (t, a) => { tipHead(t, nameOf(a.data)); tipLine(t, colorOf(a.data), fmt(valueOf(a.data)), fPct(valueOf(a.data) / total)); });
+    if (param) p.style('cursor', 'pointer').style('opacity', (a) => dim(param, nameOf(a.data))).on('click', (ev, a) => toggle(param, nameOf(a.data)));
+    g.append('text').attr('class', 'big').attr('text-anchor', 'middle').attr('dy', '0.1em').text(fmt(total).replace(' Kč', ''));
+    g.append('text').attr('class', 'muted').attr('text-anchor', 'middle').attr('dy', '1.6em').text(fmt === fKc ? 'Kč celkem' : 'celkem');
+    const ul = document.createElement('ul'); ul.className = 'kd-legend'; wrap.appendChild(ul);
+    for (const r of rows) {
+      const li = document.createElement('li');
+      const sw = document.createElement('span'); sw.className = 'kd-sw'; sw.style.background = colorOf(r);
+      const n = document.createElement('span'); n.textContent = nameOf(r);
+      const v = document.createElement('span'); v.textContent = fmt(valueOf(r));
+      const s = document.createElement('span'); s.textContent = fPct(valueOf(r) / total);
+      li.append(sw, n, v, s); ul.appendChild(li);
+      if (param) { li.classList.add('click'); li.style.opacity = dim(param, nameOf(r)); li.addEventListener('click', () => toggle(param, nameOf(r))); }
+    }
+  };
+  const period = () => { const p = dash.params().obdobi; return p === 'podzim' || p === 'jaro' ? p : 'sezona'; };
+  const selDel = () => dash.params().delegat || '';
+  const rows = (id, p, dl) => { const d = dash.data(id); const pp = p || period(); const dd = dl === undefined ? selDel() : dl; return d.status === 'ok' ? d.data.filter((r) => r.obdobi === pp && (r.deleg === undefined || r.deleg === dd)) : []; };
+  const toggle = (name, value) => { const cur = dash.params()[name]; dash.setParams({[name]: cur === value ? null : value}); };
+  const dim = (name, value) => { const cur = dash.params()[name]; return !cur || cur === value ? 1 : 0.28; };
+  const emptyMsg = (el) => { const s = document.createElement('span'); s.className = 'kd-fail kd-empty'; s.textContent = 'Pro vybrané období zatím nejsou data.'; el.replaceChildren(s); };
+  window.kd = {period, selDel, rows, toggle, dim, emptyMsg, fInt, fKc, fPct, fDate, fDay, CF, LISTINA, SLOZKY, notReady, tip, placeTip, tipHead, tipLine, textWidth, newSvg, hoverable, donut};
+</script>
+<script>
+  // worked-out values
+  dash.calc('kpi', {
+    inputs: ['zapasy', 'listiny'],
+    title: 'Souhrn podzimu',
+    description: 'Počty zápasů, akcí, minut, rozhodčích a odměn ze seznamu zápasů a listin; pro každé období a delegáta.',
+    fn: (zapasy, listiny) => {
+      const one = (zapasy, listiny) => {
+        const num = (v) => Number(v) || 0;
+        const akce = zapasy.filter((z) => num(z.prvni_v_turnaji) === 1);
+        const hotove = akce.filter((z) => !String(z.stav).startsWith('čeká'));
+        const bonus = hotove.filter((z) => num(z.bonus) > 0).length;
+        const rozhodci = new Set(zapasy.flatMap((z) => [z.rozhodci1, z.rozhodci2]).filter((x) => x));
+        const naListinach = listiny.reduce((s, l) => s + num(l.rozhodcich), 0);
+        return [{
+          zapasy: zapasy.length,
+          akce: akce.length,
+          minuty: zapasy.reduce((s, z) => s + num(z.minuty), 0),
+          odmena: zapasy.reduce((s, z) => s + num(z.odmena), 0),
+          ceka: zapasy.filter((z) => z.stav === 'čeká na zprávu').length,
+          rozhodci: rozhodci.size,
+          rozhodcich_listiny: naListinach,
+          podil_rozhodcich: naListinach ? rozhodci.size / naListinach : 0,
+          akce_hotove: hotove.length,
+          akce_bonus: bonus,
+          bonus_podil: hotove.length ? bonus / hotove.length : 0,
+        }];
+      };
+      const lide = ['', ...new Set(zapasy.map((r) => r.delegat))];
+      return ['sezona', 'podzim', 'jaro'].flatMap((o) => lide.flatMap((d) => {
+        const z = zapasy.filter((r) => (o === 'sezona' || r.obdobi === o) && (d === '' || r.delegat === d));
+        return one(z, listiny).map((r) => ({obdobi: o, deleg: d, ...r}));
+      }));
+    },
+  });
+  dash.calc('delegati', {
+    inputs: ['zapasy'],
+    title: 'Odměny podle delegátů',
+    description: 'Zápasy, akce, minuty a složky odměny za každého delegáta.',
+    fn: (zapasy) => {
+      const one = (zapasy) => {
+        const num = (v) => Number(v) || 0;
+        const by = new Map();
+        for (const z of zapasy) {
+          const r = by.get(z.delegat) || {delegat: z.delegat, zapasy: 0, akce: 0, minuty: 0, sazba: 0, poradatel: 0, video: 0, bonus: 0, odmena: 0, akce_bonus: 0, ceka: 0};
+          const plati = !String(z.stav).startsWith('bez');
+          r.zapasy += 1; r.minuty += num(z.minuty);
+          if (num(z.prvni_v_turnaji) === 1) { r.akce += 1; if (num(z.bonus) > 0) r.akce_bonus += 1; }
+          if (plati) { r.sazba += num(z.sazba); r.poradatel += num(z.poradatel); r.video += num(z.video); r.bonus += num(z.bonus); }
+          r.odmena += num(z.odmena);
+          if (z.stav === 'čeká na zprávu') r.ceka += 1;
+          by.set(z.delegat, r);
+        }
+        return [...by.values()].sort((a, b) => b.odmena - a.odmena);
+      };
+      return ['sezona', 'podzim', 'jaro'].flatMap((o) => {
+        const z = o === 'sezona' ? zapasy : zapasy.filter((r) => r.obdobi === o);
+        return one(z).map((r) => ({obdobi: o, ...r}));
+      });
+    },
+  });
+  dash.calc('slozky', {
+    inputs: ['zapasy'],
+    title: 'Složky odměn',
+    description: 'Součet sazeb, pořadatelských zpráv, videa a bonusů za zápasy s nárokem na odměnu; pro každé období a delegáta.',
+    fn: (zapasy) => {
+      const one = (zapasy) => {
+        const num = (v) => Number(v) || 0;
+        const plati = zapasy.filter((z) => !String(z.stav).startsWith('bez'));
+        return ['sazba', 'poradatel', 'video', 'bonus'].map((k) => ({slozka: k, castka: plati.reduce((s, z) => s + num(z[k]), 0)}));
+      };
+      const lide = ['', ...new Set(zapasy.map((r) => r.delegat))];
+      return ['sezona', 'podzim', 'jaro'].flatMap((o) => lide.flatMap((d) => {
+        const z = zapasy.filter((r) => (o === 'sezona' || r.obdobi === o) && (d === '' || r.delegat === d));
+        return one(z).map((r) => ({obdobi: o, deleg: d, ...r}));
+      }));
+    },
+  });
+  dash.calc('kumulace', {
+    inputs: ['zapasy'],
+    title: 'Odměny v průběhu sezony',
+    description: 'Odměny sečtené po dnech zápasu a jejich průběžný součet; pro každé období a delegáta.',
+    fn: (zapasy) => {
+      const one = (zapasy) => {
+        const num = (v) => Number(v) || 0;
+        const by = new Map();
+        for (const z of zapasy) by.set(z.datum, (by.get(z.datum) || 0) + num(z.odmena));
+        let run = 0;
+        return [...by.keys()].sort().map((d) => { run += by.get(d); return {datum: d, odmena: by.get(d), kumulace: run}; });
+      };
+      const lide = ['', ...new Set(zapasy.map((r) => r.delegat))];
+      return ['sezona', 'podzim', 'jaro'].flatMap((o) => lide.flatMap((d) => {
+        const z = zapasy.filter((r) => (o === 'sezona' || r.obdobi === o) && (d === '' || r.delegat === d));
+        return one(z).map((r) => ({obdobi: o, deleg: d, ...r}));
+      }));
+    },
+  });
+  dash.calc('kalendar', {
+    inputs: ['zapasy'],
+    title: 'Kdo kdy delegoval',
+    description: 'Počet delegovaných zápasů každého delegáta v každém týdnu (pondělí–neděle).',
+    fn: (zapasy) => {
+      const one = (zapasy) => {
+        const day = 864e5;
+        const monday = (s) => { const d = new Date(s + 'T00:00:00Z'); return new Date(d.getTime() - ((d.getUTCDay() + 6) % 7) * day).toISOString().slice(0, 10); };
+        const weeks = [...new Set(zapasy.map((z) => monday(z.datum)))].sort();
+        const all = [];
+        if (weeks.length) for (let t = Date.parse(weeks[0] + 'T00:00:00Z'); t <= Date.parse(weeks[weeks.length - 1] + 'T00:00:00Z'); t += 7 * day) all.push(new Date(t).toISOString().slice(0, 10));
+        const total = new Map(); for (const z of zapasy) total.set(z.delegat, (total.get(z.delegat) || 0) + 1);
+        const people = [...total.keys()].sort((a, b) => total.get(b) - total.get(a) || a.localeCompare(b));
+        const out = [];
+        for (const p of people) for (const w of all) out.push({delegat: p, tyden: w, zapasy: zapasy.filter((z) => z.delegat === p && monday(z.datum) === w).length});
+        return out;
+      };
+      return ['sezona', 'podzim', 'jaro'].flatMap((o) => {
+        const z = o === 'sezona' ? zapasy : zapasy.filter((r) => r.obdobi === o);
+        return one(z).map((r) => ({obdobi: o, ...r}));
+      });
+    },
+  });
+  dash.calc('listiny_deleg', {
+    inputs: ['zapasy'],
+    title: 'Delegování podle listin',
+    description: 'Kolikrát byl na delegovaném zápase rozhodčí z dané listiny a kolik různých rozhodčích to bylo; pro každé období a delegáta.',
+    fn: (zapasy) => {
+      const one = (zapasy) => {
+        const by = new Map();
+        for (const z of zapasy) for (const [n, l] of [[z.rozhodci1, z.rozhodci1_listina], [z.rozhodci2, z.rozhodci2_listina]]) {
+          if (!n) continue;
+          const r = by.get(l) || {listina: l, nasazeni: 0, lide: new Set()};
+          r.nasazeni += 1; r.lide.add(n); by.set(l, r);
+        }
+        return [...by.values()].sort((a, b) => String(a.listina).localeCompare(String(b.listina))).map((r) => ({listina: r.listina, nasazeni: r.nasazeni, rozhodcich: r.lide.size}));
+      };
+      const lide = ['', ...new Set(zapasy.map((r) => r.delegat))];
+      return ['sezona', 'podzim', 'jaro'].flatMap((o) => lide.flatMap((d) => {
+        const z = zapasy.filter((r) => (o === 'sezona' || r.obdobi === o) && (d === '' || r.delegat === d));
+        return one(z).map((r) => ({obdobi: o, deleg: d, ...r}));
+      }));
+    },
+  });
+  dash.calc('listiny_podil', {
+    inputs: ['zapasy', 'listiny'],
+    title: 'Pokrytí listin',
+    description: 'Podíl rozhodčích z každé listiny, kteří v období měli na zápase delegáta.',
+    fn: (zapasy, listiny) => {
+      const num = (v) => Number(v) || 0;
+      const vsichni = ['', ...new Set(zapasy.map((r) => r.delegat))];
+      return ['sezona', 'podzim', 'jaro'].flatMap((o) => vsichni.flatMap((d) => {
+        const z = zapasy.filter((r) => (o === 'sezona' || r.obdobi === o) && (d === '' || r.delegat === d));
+        return listiny.map((l) => {
+          const lide = new Set();
+          for (const m of z) {
+            if (m.rozhodci1 && m.rozhodci1_listina === l.listina) lide.add(m.rozhodci1);
+            if (m.rozhodci2 && m.rozhodci2_listina === l.listina) lide.add(m.rozhodci2);
+          }
+          return {obdobi: o, deleg: d, listina: l.listina, rozhodcich: num(l.rozhodcich), delegovanych: lide.size, podil: num(l.rozhodcich) ? lide.size / num(l.rozhodcich) : 0};
+        });
+      }));
+    },
+  });
+  dash.calc('rozhodci_top', {
+    inputs: ['zapasy'],
+    title: 'Nejčastěji delegovaní rozhodčí',
+    description: 'Rozhodčí s nejvíce delegovanými zápasy (prvních 15), s počtem různých delegací; pro každé období a delegáta.',
+    fn: (zapasy) => {
+      const one = (zapasy) => {
+        const by = new Map();
+        for (const z of zapasy) for (const [n, l] of [[z.rozhodci1, z.rozhodci1_listina], [z.rozhodci2, z.rozhodci2_listina]]) {
+          if (!n) continue;
+          const r = by.get(n) || {rozhodci: n, listina: l, zapasy: 0, akce: new Set()};
+          r.zapasy += 1; r.akce.add(z.delegat + '|' + z.datum + '|' + z.soutez + '|' + z.turnaj); by.set(n, r);
+        }
+        return [...by.values()].map((r) => ({rozhodci: r.rozhodci, listina: r.listina, zapasy: r.zapasy, delegaci: r.akce.size}))
+          .sort((a, b) => b.zapasy - a.zapasy || b.delegaci - a.delegaci || a.rozhodci.localeCompare(b.rozhodci)).slice(0, 15);
+      };
+      const lide = ['', ...new Set(zapasy.map((r) => r.delegat))];
+      return ['sezona', 'podzim', 'jaro'].flatMap((o) => lide.flatMap((d) => {
+        const z = zapasy.filter((r) => (o === 'sezona' || r.obdobi === o) && (d === '' || r.delegat === d));
+        return one(z).map((r) => ({obdobi: o, deleg: d, ...r}));
+      }));
+    },
+  });
+  dash.calc('souteze', {
+    inputs: ['zapasy'],
+    title: 'Soutěže',
+    description: 'Delegované zápasy, minuty a odměny podle soutěže; pro každé období a delegáta.',
+    fn: (zapasy) => {
+      const one = (zapasy) => {
+        const num = (v) => Number(v) || 0;
+        const by = new Map();
+        for (const z of zapasy) {
+          const r = by.get(z.soutez) || {soutez: z.soutez, zapasy: 0, minuty: 0, odmena: 0};
+          r.zapasy += 1; r.minuty += num(z.minuty); r.odmena += num(z.odmena); by.set(z.soutez, r);
+        }
+        return [...by.values()].sort((a, b) => b.minuty - a.minuty || a.soutez.localeCompare(b.soutez));
+      };
+      const lide = ['', ...new Set(zapasy.map((r) => r.delegat))];
+      return ['sezona', 'podzim', 'jaro'].flatMap((o) => lide.flatMap((d) => {
+        const z = zapasy.filter((r) => (o === 'sezona' || r.obdobi === o) && (d === '' || r.delegat === d));
+        return one(z).map((r) => ({obdobi: o, deleg: d, ...r}));
+      }));
+    },
+  });
+  dash.calc('prodleva', {
+    inputs: ['zapasy'],
+    title: 'Prodleva zpráv',
+    description: 'Uzavřené akce podle počtu pracovních dnů od zápasu do poslední nahrané zprávy (svátky 2026-27 se nepočítají); pro každé období a delegáta.',
+    fn: (zapasy) => {
+      const one = (zapasy) => {
+        const svatky = ['2026-09-28', '2026-10-28', '2026-11-17', '2026-12-24', '2026-12-25', '2026-12-26', '2027-01-01', '2027-03-26', '2027-03-29', '2027-05-01', '2027-05-08'];
+        const day = 864e5;
+        const prac = (from, to) => { let n = 0; for (let t = Date.parse(from + 'T00:00:00Z') + day; t <= Date.parse(to + 'T00:00:00Z'); t += day) { const d = new Date(t); const w = d.getUTCDay(); if (w !== 0 && w !== 6 && !svatky.includes(d.toISOString().slice(0, 10))) n += 1; } return n; };
+        const akce = new Map();
+        for (const z of zapasy) {
+          const k = z.delegat + '|' + z.datum + '|' + z.soutez + '|' + z.turnaj;
+          const a = akce.get(k) || {datum: z.datum, chybi: false, posledni: ''};
+          if (!z.zprava_r) a.chybi = true;
+          for (const d of [z.zprava_r, z.zprava_p]) if (d && d > a.posledni) a.posledni = d;
+          akce.set(k, a);
+        }
+        const bins = [['0', 0, 0], ['1', 1, 1], ['2', 2, 2], ['3', 3, 3], ['4', 4, 4], ['5–7', 5, 7], ['8–10', 8, 10], ['11+', 11, 1e9]];
+        const out = bins.map(([dni]) => ({dni, akce: 0}));
+        for (const a of akce.values()) {
+          if (a.chybi || !a.posledni) continue;
+          const n = prac(a.datum, a.posledni);
+          const i = bins.findIndex(([, lo, hi]) => n >= lo && n <= hi);
+          out[i].akce += 1;
+        }
+        return out;
+      };
+      const lide = ['', ...new Set(zapasy.map((r) => r.delegat))];
+      return ['sezona', 'podzim', 'jaro'].flatMap((o) => lide.flatMap((d) => {
+        const z = zapasy.filter((r) => (o === 'sezona' || r.obdobi === o) && (d === '' || r.delegat === d));
+        return one(z).map((r) => ({obdobi: o, deleg: d, ...r}));
+      }));
+    },
+  });
+  dash.calc('stejny_den', {
+    inputs: ['sezony', 'sezony_info'],
+    title: 'Stejný den sezony',
+    description: 'Den letošní sezony podle posledního delegovaného zápasu a stejný den loňské sezony.',
+    fn: (sezony, sezony_info) => {
+      const info = sezony_info.slice().sort((a, b) => String(a.sezona).localeCompare(String(b.sezona)));
+      const cur = info[info.length - 1], prev = info[info.length - 2];
+      const den = Math.max(...sezony.filter((z) => z.sezona === cur.sezona).map((z) => Number(z.den)));
+      const plus = (start, d) => new Date(Date.parse(start + 'T00:00:00Z') + d * 864e5).toISOString().slice(0, 10);
+      return [{den, datum: plus(cur.zacatek, den), datum_loni: prev ? plus(prev.zacatek, den) : ''}];
+    },
+  });
+  dash.calc('srovnani', {
+    inputs: ['sezony', 'sezony_info'],
+    title: 'Srovnání sezon ke stejnému dni',
+    description: 'Zápasy, akce, minuty, rozhodčí, delegáti a odměny každé sezony od 1. září do stejného dne jako letos.',
+    fn: (sezony, sezony_info) => {
+      const num = (v) => Number(v) || 0;
+      const info = sezony_info.slice().sort((a, b) => String(a.sezona).localeCompare(String(b.sezona)));
+      const cur = info[info.length - 1], prev = info[info.length - 2];
+      const den = Math.max(...sezony.filter((z) => z.sezona === cur.sezona).map((z) => num(z.den)));
+      const stat = {};
+      for (const s of info) {
+        const sub = sezony.filter((z) => z.sezona === s.sezona && num(z.den) <= den);
+        const rozhodci = new Set(sub.flatMap((z) => [z.rozhodci1, z.rozhodci2]).filter((x) => x));
+        stat[s.sezona] = {
+          zapasy: sub.length,
+          akce: new Set(sub.map((z) => [z.delegat, z.datum, z.soutez, z.turnaj].join('|'))).size,
+          minuty: sub.reduce((t, z) => t + num(z.minuty), 0),
+          rozhodci: rozhodci.size,
+          pokryti: num(s.rozhodcich_listiny) ? rozhodci.size / num(s.rozhodcich_listiny) : 0,
+          delegatu: new Set(sub.map((z) => z.delegat).filter((x) => x)).size,
+          odmena: num(s.odmeny_po_zapasech) === 1 ? sub.reduce((t, z) => t + num(z.odmena), 0) : null,
+        };
+      }
+      const rows = [['zapasy', 'Delegované zápasy', 'int'], ['akce', 'Akce delegátů', 'int'], ['minuty', 'Delegované minuty', 'int'], ['rozhodci', 'Rozhodčí s delegátem', 'int'], ['pokryti', 'Podíl rozhodčích z listin', 'pct'], ['delegatu', 'Aktivní delegáti', 'int'], ['odmena', 'Odměny delegátům', 'kc']];
+      return rows.map(([id, ukazatel, typ]) => {
+        const r = {ukazatel, id, typ};
+        for (const s of info) r['s' + String(s.sezona).replace('-', '_')] = stat[s.sezona][id];
+        const a = stat[cur.sezona][id], b = prev ? stat[prev.sezona][id] : null;
+        r.zmena = (a === null || b === null || b === 0) ? null : (typ === 'pct' ? a - b : a / b - 1);
+        return r;
+      });
+    },
+  });
+  dash.calc('prubeh', {
+    inputs: ['sezony', 'sezony_info'],
+    title: 'Průběh sezon',
+    description: 'Průběžný počet delegovaných zápasů, podíl rozhodčích s delegátem a odměny podle dne sezony (od 1. září).',
+    fn: (sezony, sezony_info) => {
+      const num = (v) => Number(v) || 0;
+      const out = [];
+      for (const s of sezony_info) {
+        const sub = sezony.filter((z) => z.sezona === s.sezona).sort((a, b) => num(a.den) - num(b.den));
+        const lide = new Set(); let zapasy = 0, odmena = 0;
+        const maOdmeny = num(s.odmeny_po_zapasech) === 1;
+        out.push({sezona: s.sezona, den: 0, zapasy: 0, pokryti: 0, odmena: maOdmeny ? 0 : null});
+        for (let i = 0; i < sub.length; i++) {
+          const z = sub[i];
+          zapasy += 1; odmena += num(z.odmena);
+          if (z.rozhodci1) lide.add(z.rozhodci1);
+          if (z.rozhodci2) lide.add(z.rozhodci2);
+          if (i === sub.length - 1 || num(sub[i + 1].den) !== num(z.den)) {
+            out.push({sezona: s.sezona, den: num(z.den), zapasy, pokryti: num(s.rozhodcich_listiny) ? lide.size / num(s.rozhodcich_listiny) : 0, odmena: maOdmeny ? odmena : null});
+          }
+        }
+      }
+      return out;
+    },
+  });
+  dash.calc('hodnoceni', {
+    inputs: ['znamky'],
+    title: 'Hodnocení podle delegátů',
+    description: 'Počet známek, průměrná známka, obtížnost a CEZ = 4·√známka / ((koeficient + 1)·√obtížnost), za každé období a delegáta i za všechny.',
+    fn: (znamky) => {
+      const num = (v) => Number(v) || 0;
+      const VSICHNI = 'Všichni delegáti';
+      const one = (z, delegat) => {
+        const g = z.filter((r) => num(r.znamka) > 0 && num(r.obtiznost) > 0);
+        if (!g.length) return null;
+        const cez = g.map((r) => 4 * Math.sqrt(num(r.znamka)) / ((num(r.koeficient) + 1) * Math.sqrt(num(r.obtiznost))));
+        const cnt = (k) => g.filter((r) => num(r.znamka) === k).length;
+        return {delegat, hodnoceni: g.length, zapasu: new Set(g.map((r) => r.kod)).size,
+          znamka: g.reduce((s, r) => s + num(r.znamka), 0) / g.length,
+          obtiznost: g.reduce((s, r) => s + num(r.obtiznost), 0) / g.length,
+          cez: cez.reduce((s, v) => s + v, 0) / g.length,
+          z1: cnt(1), z2: cnt(2), z3: cnt(3), z4: cnt(4), podil1: cnt(1) / g.length};
+      };
+      return ['sezona', 'podzim', 'jaro'].flatMap((o) => {
+        const z = o === 'sezona' ? znamky : znamky.filter((r) => r.obdobi === o);
+        const lide = [...new Set(z.map((r) => r.delegat))];
+        const rows = lide.map((d) => one(z.filter((r) => r.delegat === d), d)).filter((r) => r).sort((a, b) => b.hodnoceni - a.hodnoceni || a.delegat.localeCompare(b.delegat));
+        const all = one(z, VSICHNI);
+        return (all ? [all, ...rows] : rows).map((r) => ({obdobi: o, ...r}));
+      });
+    },
+  });
+  dash.calc('rozlozeni_sezony', {
+    inputs: ['znamky_sezony'],
+    title: 'Rozložení známek po sezonách',
+    description: 'Počet a podíl známek 1–4 v každé sezoně (všechny delegované zápasy s hodnocením).',
+    fn: (znamky_sezony) => {
+      const seasons = [...new Set(znamky_sezony.map((z) => z.sezona))].sort();
+      return seasons.flatMap((s) => {
+        const z = znamky_sezony.filter((r) => r.sezona === s);
+        return [1, 2, 3, 4].map((k) => { const n = z.filter((r) => Number(r.znamka) === k).length; return {sezona: s, znamka: k, pocet: n, podil: z.length ? n / z.length : 0, celkem: z.length}; });
+      });
+    },
+  });
+  dash.calc('delegati_sezony', {
+    inputs: ['znamky_sezony'],
+    title: 'Delegáti po sezonách',
+    description: 'Za každou sezonu a delegáta: počet známek, Ø známka, Ø obtížnost, podíl jedniček a Ø CEZ = 4·√známka / ((koeficient + 1)·√obtížnost) se sezonními koeficienty (bez soutěží bez koeficientu).',
+    fn: (znamky_sezony) => {
+      const num = (v) => Number(v) || 0;
+      const VSICHNI = 'Všichni delegáti';
+      const one = (z, sezona, delegat) => {
+        const withK = z.filter((r) => r.koeficient !== '' && r.koeficient !== null && num(r.obtiznost) > 0);
+        return {sezona, delegat, hodnoceni: z.length,
+          znamka: z.reduce((s, r) => s + num(r.znamka), 0) / z.length,
+          obtiznost: z.reduce((s, r) => s + num(r.obtiznost), 0) / z.length,
+          podil1: z.filter((r) => num(r.znamka) === 1).length / z.length,
+          cez: withK.length ? withK.reduce((s, r) => s + 4 * Math.sqrt(num(r.znamka)) / ((num(r.koeficient) + 1) * Math.sqrt(num(r.obtiznost))), 0) / withK.length : null};
+      };
+      const out = [];
+      for (const s of [...new Set(znamky_sezony.map((r) => r.sezona))].sort()) {
+        const z = znamky_sezony.filter((r) => r.sezona === s);
+        out.push(one(z, s, VSICHNI));
+        for (const d of [...new Set(z.map((r) => r.delegat_jmeno))]) out.push(one(z.filter((r) => r.delegat_jmeno === d), s, d));
+      }
+      return out;
+    },
+  });
+  dash.calc('delegati_sezony_tab', {
+    inputs: ['znamky_sezony'],
+    title: 'Ø známka delegáta po sezonách',
+    description: 'Průměrná známka každého delegáta v každé sezoně a počet známek; řazeno podle letošní aktivity.',
+    fn: (znamky_sezony) => {
+      const num = (v) => Number(v) || 0;
+      const seasons = [...new Set(znamky_sezony.map((r) => r.sezona))].sort();
+      const cur = seasons[seasons.length - 1];
+      const lide = [...new Set(znamky_sezony.map((r) => r.delegat_jmeno))];
+      const row = (d, z) => {
+        const r = {delegat: d};
+        for (const s of seasons) {
+          const k = 's' + s.replace('-', '_'); const g = z.filter((x) => x.sezona === s);
+          r[k] = g.length ? g.reduce((t, x) => t + num(x.znamka), 0) / g.length : null; r['n' + s.replace('-', '_')] = g.length;
+        }
+        r.letos = z.filter((x) => x.sezona === cur).length; r.celkem = z.length;
+        return r;
+      };
+      const rows = lide.map((d) => row(d, znamky_sezony.filter((x) => x.delegat_jmeno === d))).sort((a, b) => b.letos - a.letos || b.celkem - a.celkem || a.delegat.localeCompare(b.delegat));
+      return [row('Všichni delegáti', znamky_sezony), ...rows];
+    },
+  });
+  dash.calc('znamky_souteze', {
+    inputs: ['znamky'],
+    title: 'Známky podle soutěže',
+    description: 'Letošní známky 1–4 podle soutěže, za každé období a delegáta; řazeno podle koeficientu soutěže.',
+    fn: (znamky) => {
+      const num = (v) => Number(v) || 0;
+      const lide = ['', ...new Set(znamky.map((r) => r.delegat))];
+      return ['sezona', 'podzim', 'jaro'].flatMap((o) => lide.flatMap((d) => {
+        const z = znamky.filter((r) => (o === 'sezona' || r.obdobi === o) && (d === '' || r.delegat === d));
+        return [...new Set(z.map((r) => r.soutez))].map((s) => {
+          const g = z.filter((r) => r.soutez === s);
+          const cnt = (k) => g.filter((r) => num(r.znamka) === k).length;
+          return {obdobi: o, deleg: d, soutez: s, koeficient: num(g[0].koeficient), hodnoceni: g.length, z1: cnt(1), z2: cnt(2), z3: cnt(3), z4: cnt(4),
+            znamka: g.reduce((t, r) => t + num(r.znamka), 0) / g.length};
+        }).sort((a, b) => b.koeficient - a.koeficient || a.soutez.localeCompare(b.soutez));
+      }));
+    },
+  });
+</script>
+<script>
+  // single figures
+  dash.draw('kpi', (el) => {
+    const p = el.dataset.fixed || kd.period();
+    const d = el.dataset.fixed ? '' : kd.selDel();
+    el.dataset.where = 'obdobi=' + p + '&deleg=' + encodeURIComponent(d);
+    const r = kd.rows('kpi', p, d)[0];
+    if (!r) { el.textContent = '—'; return; }
+    const v = r[el.dataset.field];
+    const f = el.dataset.fmt;
+    el.textContent = f === 'kc' ? kd.fKc(v) : f === 'pct' ? kd.fPct(v) : kd.fInt(v);
+  });
+
+  // header: same day last season
+  dash.draw('kpi-loni', (el) => {
+    const d = dash.data('srovnani');
+    const id = (el.dataset.where || '').split('=')[1];
+    const r = d.status === 'ok' ? d.data.find((x) => x.id === id) : null;
+    const v = r ? r[el.dataset.field] : null;
+    el.textContent = v === null || v === undefined ? '—' : el.dataset.fmt === 'kc' ? kd.fKc(v) : kd.fInt(v);
+  });
+
+  // season comparison
+  const SEASON_COLOR = {'2026-27': kd.CF.red, '2025-26': kd.CF.navy, '2024-25': kd.CF.blue, '2023-24': '#9AA1B8'};
+  document.querySelectorAll('.kd-line[data-season]').forEach((s) => { s.style.background = SEASON_COLOR[s.dataset.season] || kd.CF.muted; });
+  dash.draw('den', (el) => {
+    const d = dash.data('stejny_den');
+    if (d.status !== 'ok' || !d.data.length) { el.textContent = '—'; return; }
+    const v = d.data[0][el.dataset.field];
+    el.textContent = v ? kd.fDate(v) : '—';
+  });
+  dash.draw('tb-srovnani', (el) => {
+    el.replaceChildren();
+    const d = dash.data('srovnani');
+    if (d.status !== 'ok') return;
+    const fmt = (typ, v) => (v === null || v === undefined || v === '') ? '—' : typ === 'kc' ? kd.fKc(v) : typ === 'pct' ? kd.fPct(v) : kd.fInt(v);
+    const sign = (v) => (v > 0 ? '+' : v < 0 ? '−' : '±');
+    const pp = (v) => (Math.round(Math.abs(v) * 1000) / 10).toFixed(1).replace('.', ',');
+    for (const r of d.data) {
+      const tr = document.createElement('tr');
+      const add = (text, cls) => { const td = document.createElement('td'); td.textContent = text; if (cls) td.className = cls; tr.appendChild(td); return td; };
+      add(r.ukazatel, 'strong');
+      add(fmt(r.typ, r.s2023_24), 'r wide');
+      add(fmt(r.typ, r.s2024_25), 'r');
+      add(fmt(r.typ, r.s2025_26), 'r');
+      add(fmt(r.typ, r.s2026_27), 'r strong');
+      let txt = '—';
+      if (r.zmena !== null && r.zmena !== undefined) txt = r.typ === 'pct' ? `${sign(r.zmena)}${pp(r.zmena)} p. b.` : `${sign(r.zmena)}${kd.fPct(Math.abs(r.zmena))}`;
+      const td = add(txt, 'r nw');
+      if (r.zmena && r.typ !== 'kc') td.classList.add(r.zmena > 0 ? 'up' : 'down');
+      el.appendChild(tr);
+    }
+  });
+  dash.draw('ch-prubeh', (el) => {
+    if (kd.notReady(el, 'prubeh')) return;
+    const metric = el.dataset.metric;
+    const all = dash.data('prubeh').data.filter((r) => r[metric] !== null && r[metric] !== '' && r[metric] !== undefined);
+    const dnes = dash.data('stejny_den');
+    const cut = dnes.status === 'ok' && dnes.data.length ? dnes.data[0].den : null;
+    const seasons = [...new Set(all.map((r) => r.sezona))].sort();
+    const series = seasons.map((s) => ({s, pts: all.filter((r) => r.sezona === s).sort((a, b) => a.den - b.den)}));
+    const fmt = metric === 'odmena' ? kd.fKc : metric === 'pokryti' ? kd.fPct : kd.fInt;
+    const W = Math.max(300, el.clientWidth), H = 240, top = 14, bottom = 24;
+    el.replaceChildren();
+    const svg = kd.newSvg(el, W, H, el.closest('.kd-card').querySelector('h3').textContent);
+    const yMax = d3.max(all, (r) => r[metric]) || 1;
+    const y0 = d3.scaleLinear([0, yMax], [1, 0]).nice();
+    const ticks = y0.ticks(4);
+    const tickFmt = metric === 'pokryti' ? (v) => kd.fPct(v).replace(',0', '') : kd.fInt;
+    const left = Math.ceil(d3.max(ticks, (v) => kd.textWidth(svg, tickFmt(v)))) + 8;
+    const xMax = Math.max(d3.max(all, (r) => r.den) || 1, 240);
+    const x = d3.scaleLinear([0, xMax], [left, W - 8]);
+    const y = d3.scaleLinear(y0.domain(), [H - bottom, top]);
+    svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', left).attr('x2', W - 8).attr('y1', (v) => y(v)).attr('y2', (v) => y(v)).attr('stroke', kd.CF.line);
+    svg.append('g').selectAll('text').data(ticks).join('text').attr('class', 'muted').attr('x', left - 6).attr('y', (v) => y(v)).attr('dy', '0.35em').attr('text-anchor', 'end').text(tickFmt);
+    const months = [[0, 'zář'], [30, 'říj'], [61, 'lis'], [91, 'pro'], [122, 'led'], [153, 'úno'], [181, 'bře'], [212, 'dub'], [242, 'kvě']].filter(([d]) => d <= xMax - 10);
+    const mw = d3.max(months, ([, m]) => kd.textWidth(svg, m)) + 6;
+    const every = Math.max(1, Math.ceil(mw / (x(30) - x(0))));
+    svg.append('g').selectAll('text').data(months.filter((m, i) => i % every === 0)).join('text').attr('class', 'muted').attr('x', ([d]) => x(d)).attr('y', H - 6).attr('text-anchor', 'start').text(([, m]) => m);
+    svg.append('line').attr('x1', left).attr('x2', W - 8).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', kd.CF.navy);
+    if (cut !== null) svg.append('line').attr('x1', x(cut)).attr('x2', x(cut)).attr('y1', top - 6).attr('y2', y(0)).attr('stroke', kd.CF.red).attr('stroke-dasharray', '4 3');
+    const line = d3.line().curve(d3.curveStepAfter).x((r) => x(r.den)).y((r) => y(r[metric]));
+    for (const {s, pts} of series.slice().sort((a, b) => (a.s === '2026-27') - (b.s === '2026-27'))) {
+      svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', SEASON_COLOR[s] || kd.CF.muted).attr('stroke-width', s === '2026-27' ? 3 : 1.75)
+        .attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round').attr('d', line);
+    }
+    const valueAt = (pts, d) => { let v = null; for (const p of pts) { if (p.den <= d) v = p[metric]; else break; } return v; };
+    if (cut !== null) {
+      for (const {s, pts} of series) {
+        const v = valueAt(pts, cut);
+        if (v === null) continue;
+        svg.append('circle').attr('cx', x(cut)).attr('cy', y(v)).attr('r', s === '2026-27' ? 4.5 : 3.5).attr('fill', SEASON_COLOR[s] || kd.CF.muted).attr('stroke', kd.CF.white).attr('stroke-width', 1.5);
+      }
+    }
+    const rule = svg.append('line').attr('y1', top).attr('y2', y(0)).attr('stroke', kd.CF.muted).attr('visibility', 'hidden');
+    svg.append('rect').attr('x', left).attr('y', top).attr('width', W - 8 - left).attr('height', H - bottom - top).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [mx] = d3.pointer(ev);
+        const d = Math.max(0, Math.round(x.invert(mx)));
+        rule.attr('x1', x(d)).attr('x2', x(d)).attr('visibility', 'visible');
+        const t = kd.tip(el);
+        const dt = new Date(Date.UTC(2001, 8, 1) + d * 864e5);
+        kd.tipHead(t, `${dt.getUTCDate()}. ${dt.getUTCMonth() + 1}. (${d}. den sezony)`);
+        for (const {s, pts} of series.slice().reverse()) {
+          const v = valueAt(pts, d);
+          if (v !== null && !(s === '2026-27' && cut !== null && d > cut)) kd.tipLine(t, SEASON_COLOR[s], s, fmt(v));
+        }
+        const [px, py] = d3.pointer(ev, el); kd.placeTip(el, t, px, py);
+      })
+      .on('pointerleave', () => { rule.attr('visibility', 'hidden'); const t = el.querySelector('.kd-tip'); if (t) t.hidden = true; });
+  });
+
+  // grades given by delegates
+  const ZN_COLOR = ['#05266B', '#2E75B6', '#E8A0A6', '#C00000'];
+  const VSICHNI = 'Všichni delegáti';
+  const fAvg = (v) => (Math.round(v * 100) / 100).toFixed(2).replace('.', ',');
+  dash.draw('ch-znamky', (el) => {
+    if (kd.notReady(el, 'hodnoceni')) return;
+    const rows = kd.rows('hodnoceni');
+    if (!rows.length) { kd.emptyMsg(el); return; }
+    const W = Math.max(300, el.clientWidth), rowH = 30, barH = 20, legendH = 26;
+    const H = legendH + rows.length * rowH + 8;
+    el.replaceChildren();
+    const svg = kd.newSvg(el, W, H, 'Jaké známky delegáti dávají');
+    let lx = 0;
+    ['1 výborný', '2 velmi dobrý', '3 dostatečný', '4 nedostatečný'].forEach((name, i) => {
+      svg.append('rect').attr('x', lx).attr('y', 4).attr('width', 11).attr('height', 11).attr('fill', ZN_COLOR[i]);
+      svg.append('text').attr('x', lx + 16).attr('y', 10).attr('dy', '0.35em').text(name);
+      lx += 16 + kd.textWidth(svg, name) + 14;
+    });
+    const label = (r) => `${kd.fInt(r.hodnoceni)} · Ø ${fAvg(r.znamka)}`;
+    const left = Math.ceil(d3.max(rows, (r) => kd.textWidth(svg, r.delegat))) + 10;
+    const right = Math.ceil(d3.max(rows, (r) => kd.textWidth(svg, label(r)))) + 12;
+    const x = d3.scaleLinear([0, 1], [left, W - right]);
+    const g = svg.selectAll('g.r').data(rows).join('g').attr('class', 'r').attr('transform', (r, i) => `translate(0,${legendH + i * rowH + (i > 0 && rows[0].delegat === VSICHNI ? 6 : 0)})`);
+    g.append('text').attr('x', left - 10).attr('y', rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').style('font-weight', (r) => r.delegat === VSICHNI ? 700 : 400).text((r) => r.delegat);
+    [1, 2, 3, 4].forEach((k, ki) => {
+      g.append('rect').attr('y', (rowH - barH) / 2).attr('height', barH).attr('fill', ZN_COLOR[ki])
+        .attr('x', (r) => x([1, 2, 3, 4].slice(0, ki).reduce((s, kk) => s + r['z' + kk], 0) / r.hodnoceni))
+        .attr('width', (r) => Math.max(0, x(r['z' + k] / r.hodnoceni) - x(0)));
+    });
+    g.append('text').attr('x', W - right + 8).attr('y', rowH / 2).attr('dy', '0.35em').text(label);
+    kd.hoverable(g.append('rect').attr('width', W).attr('height', rowH).attr('fill', 'transparent'), el, (t, r) => {
+      kd.tipHead(t, r.delegat);
+      [1, 2, 3, 4].forEach((k, ki) => kd.tipLine(t, ZN_COLOR[ki], `Známka ${k}`, `${kd.fInt(r['z' + k])} · ${kd.fPct(r['z' + k] / r.hodnoceni)}`));
+      kd.tipLine(t, null, 'Ø známka', fAvg(r.znamka));
+    });
+    g.style('opacity', (r) => r.delegat === VSICHNI ? 1 : kd.dim('delegat', r.delegat));
+    g.filter((r) => r.delegat !== VSICHNI).select('rect:last-of-type').style('cursor', 'pointer').on('click', (ev, r) => kd.toggle('delegat', r.delegat));
+  });
+
+  dash.draw('ch-cez', (el) => {
+    if (kd.notReady(el, 'hodnoceni')) return;
+    const all = kd.rows('hodnoceni');
+    const avg = all.find((r) => r.delegat === VSICHNI);
+    const rows = all.filter((r) => r.delegat !== VSICHNI).slice().sort((a, b) => a.cez - b.cez);
+    if (!rows.length) { kd.emptyMsg(el); return; }
+    const W = Math.max(300, el.clientWidth), rowH = 30, barH = 20, top = 18;
+    const H = top + rows.length * rowH + 6;
+    el.replaceChildren();
+    const svg = kd.newSvg(el, W, H, 'Průměrné CEZ podle delegáta');
+    const left = Math.ceil(d3.max(rows, (r) => kd.textWidth(svg, r.delegat))) + 10;
+    const right = 44;
+    const x = d3.scaleLinear([0, Math.max(d3.max(rows, (r) => r.cez), avg ? avg.cez : 0) * 1.05], [left, W - right]);
+    const g = svg.selectAll('g.r').data(rows).join('g').attr('class', 'r').attr('transform', (r, i) => `translate(0,${top + i * rowH})`);
+    g.append('text').attr('x', left - 10).attr('y', rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').text((r) => r.delegat);
+    g.append('rect').attr('x', x(0)).attr('y', (rowH - barH) / 2).attr('height', barH).attr('width', (r) => x(r.cez) - x(0)).attr('fill', (r) => avg && r.cez < avg.cez ? kd.CF.navy : kd.CF.blue);
+    g.append('text').attr('x', (r) => x(r.cez) + 6).attr('y', rowH / 2).attr('dy', '0.35em').style('font-weight', 700).text((r) => fAvg(r.cez));
+    if (avg) {
+      svg.append('line').attr('x1', x(avg.cez)).attr('x2', x(avg.cez)).attr('y1', top - 6).attr('y2', H - 4).attr('stroke', kd.CF.red).attr('stroke-dasharray', '4 3');
+      svg.append('text').attr('x', x(avg.cez)).attr('y', top - 8).attr('text-anchor', 'middle').style('fill', kd.CF.red).text('Ø ' + fAvg(avg.cez));
+    }
+    kd.hoverable(g.append('rect').attr('width', W).attr('height', rowH).attr('fill', 'transparent'), el, (t, r) => {
+      kd.tipHead(t, r.delegat);
+      kd.tipLine(t, null, 'Ø CEZ', fAvg(r.cez));
+      kd.tipLine(t, null, 'Ø známka', fAvg(r.znamka));
+      kd.tipLine(t, null, 'Ø obtížnost', fAvg(r.obtiznost));
+      kd.tipLine(t, null, 'Známek', kd.fInt(r.hodnoceni));
+    });
+    g.style('opacity', (r) => kd.dim('delegat', r.delegat));
+    g.select('rect:last-of-type').style('cursor', 'pointer').on('click', (ev, r) => kd.toggle('delegat', r.delegat));
+  });
+
+  dash.draw('ch-zn-obt', (el) => {
+    if (kd.notReady(el, 'hodnoceni')) return;
+    const rows = kd.rows('hodnoceni');
+    if (!rows.length) { kd.emptyMsg(el); return; }
+    const SER = [['znamka', 'Ø známka', kd.CF.navy], ['obtiznost', 'Ø obtížnost', '#9DB7D9']];
+    const W = Math.max(300, el.clientWidth), rowH = 44, barH = 15, legendH = 26, axisH = 18;
+    const H = legendH + axisH + rows.length * rowH + 4;
+    el.replaceChildren();
+    const svg = kd.newSvg(el, W, H, 'Ø známka a Ø obtížnost podle delegáta');
+    let lx = 0;
+    for (const [, name, color] of SER) {
+      svg.append('rect').attr('x', lx).attr('y', 4).attr('width', 11).attr('height', 11).attr('fill', color);
+      svg.append('text').attr('x', lx + 16).attr('y', 10).attr('dy', '0.35em').text(name);
+      lx += 16 + kd.textWidth(svg, name) + 18;
+    }
+    const left = Math.ceil(d3.max(rows, (r) => kd.textWidth(svg, r.delegat))) + 12;
+    const x = d3.scaleLinear([0, 4], [left, W - 44]);
+    const y0 = legendH + axisH;
+    svg.append('g').selectAll('line').data([1, 2, 3, 4]).join('line').attr('x1', (v) => x(v)).attr('x2', (v) => x(v)).attr('y1', y0 - 4).attr('y2', H - 4).attr('stroke', kd.CF.line);
+    svg.append('g').selectAll('text').data([1, 2, 3, 4]).join('text').attr('class', 'muted').attr('x', (v) => x(v)).attr('y', y0 - 8).attr('text-anchor', 'middle').text((v) => v);
+    const g = svg.selectAll('g.r').data(rows).join('g').attr('class', 'r').attr('transform', (r, i) => `translate(0,${y0 + i * rowH})`);
+    g.append('text').attr('x', left - 12).attr('y', rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').style('font-weight', (r) => (r.delegat === VSICHNI ? 700 : 400)).text((r) => r.delegat);
+    SER.forEach(([k, , color], i) => {
+      const yy = rowH / 2 - barH - 1 + i * (barH + 2);
+      g.append('rect').attr('x', x(0)).attr('y', yy).attr('height', barH).attr('width', (r) => x(r[k]) - x(0)).attr('fill', color);
+      g.append('text').attr('x', (r) => x(r[k]) + 5).attr('y', yy + barH / 2).attr('dy', '0.35em').style('font-weight', 700).style('font-size', '12px').text((r) => fAvg(r[k]));
+    });
+    kd.hoverable(g.append('rect').attr('width', W).attr('height', rowH).attr('fill', 'transparent'), el, (t, r) => {
+      kd.tipHead(t, r.delegat);
+      kd.tipLine(t, kd.CF.navy, 'Ø známka', fAvg(r.znamka));
+      kd.tipLine(t, '#9DB7D9', 'Ø obtížnost', fAvg(r.obtiznost));
+      kd.tipLine(t, null, 'Známek', kd.fInt(r.hodnoceni));
+    });
+    g.style('opacity', (r) => (r.delegat === VSICHNI ? 1 : kd.dim('delegat', r.delegat)));
+    g.filter((r) => r.delegat !== VSICHNI).select('rect:last-of-type').style('cursor', 'pointer').on('click', (ev, r) => kd.toggle('delegat', r.delegat));
+  });
+
+  dash.draw('tb-hodnoceni', (el) => {
+    el.replaceChildren();
+    if (dash.data('hodnoceni').status !== 'ok') return;
+    for (const r of kd.rows('hodnoceni')) {
+      const tr = document.createElement('tr');
+      tr.dataset.key = encodeURIComponent(r.obdobi) + ',' + encodeURIComponent(r.delegat);
+      if (r.delegat === VSICHNI) tr.className = 'total';
+      else if (dash.params().delegat === r.delegat) tr.className = 'sel';
+      const add = (text, cls) => { const td = document.createElement('td'); td.textContent = text; if (cls) td.className = cls; tr.appendChild(td); };
+      add(r.delegat, 'nw strong');
+      add(kd.fInt(r.hodnoceni), 'r');
+      add(fAvg(r.znamka), 'r');
+      add(fAvg(r.obtiznost), 'r');
+      add(fAvg(r.cez), 'r strong');
+      add(kd.fPct(r.podil1), 'r');
+      el.appendChild(tr);
+    }
+  });
+
+  // grades over seasons and by competition
+  dash.draw('ch-rozlozeni-sezony', (el) => {
+    if (kd.notReady(el, 'rozlozeni_sezony')) return;
+    const rows = dash.data('rozlozeni_sezony').data;
+    if (!rows.length) { kd.emptyMsg(el); return; }
+    const seasons = [...new Set(rows.map((r) => r.sezona))].sort();
+    const W = Math.max(300, el.clientWidth), H = 260, top = 34, bottom = 40;
+    el.replaceChildren();
+    const svg = kd.newSvg(el, W, H, 'Rozložení známek po sezonách');
+    let lx = 0;
+    for (const s of seasons) {
+      svg.append('rect').attr('x', lx).attr('y', 4).attr('width', 11).attr('height', 11).attr('fill', SEASON_COLOR[s] || kd.CF.muted);
+      const n = rows.find((r) => r.sezona === s).celkem;
+      const lab = `${s} (${kd.fInt(n)})`;
+      svg.append('text').attr('x', lx + 16).attr('y', 10).attr('dy', '0.35em').text(lab);
+      lx += 16 + kd.textWidth(svg, lab) + 14;
+    }
+    const names = ['1 výborný', '2 velmi dobrý', '3 dostatečný', '4 nedostatečný'];
+    const x0 = d3.scaleBand([1, 2, 3, 4], [4, W - 4]).paddingInner(0.22).paddingOuter(0.05);
+    const x1 = d3.scaleBand(seasons, [0, x0.bandwidth()]).padding(0.08);
+    const y = d3.scaleLinear([0, d3.max(rows, (r) => r.podil) * 1.12 || 1], [H - bottom, top]);
+    svg.append('g').selectAll('line').data(y.ticks(4)).join('line').attr('x1', 4).attr('x2', W - 4).attr('y1', (v) => y(v)).attr('y2', (v) => y(v)).attr('stroke', kd.CF.line);
+    const g = svg.selectAll('g.k').data([1, 2, 3, 4]).join('g').attr('class', 'k').attr('transform', (k) => `translate(${x0(k)},0)`);
+    g.selectAll('rect').data((k) => rows.filter((r) => r.znamka === k)).join('rect')
+      .attr('x', (r) => x1(r.sezona)).attr('width', x1.bandwidth()).attr('y', (r) => y(r.podil)).attr('height', (r) => y(0) - y(r.podil)).attr('fill', (r) => SEASON_COLOR[r.sezona] || kd.CF.muted);
+    const showPct = x1.bandwidth() >= kd.textWidth(svg, '00 %');
+    if (showPct) g.selectAll('text.v').data((k) => rows.filter((r) => r.znamka === k)).join('text').attr('class', 'v')
+      .attr('x', (r) => x1(r.sezona) + x1.bandwidth() / 2).attr('y', (r) => y(r.podil) - 4).attr('text-anchor', 'middle').style('font-size', '11px').text((r) => Math.round(r.podil * 100) + ' %');
+    g.append('text').attr('x', x0.bandwidth() / 2).attr('y', H - bottom + 16).attr('text-anchor', 'middle').style('font-weight', 700).text((k) => names[k - 1].split(' ')[0]);
+    g.append('text').attr('class', 'muted').attr('x', x0.bandwidth() / 2).attr('y', H - bottom + 30).attr('text-anchor', 'middle').text((k) => names[k - 1].split(' ').slice(1).join(' '));
+    svg.append('line').attr('x1', 4).attr('x2', W - 4).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', kd.CF.navy);
+    kd.hoverable(g.append('rect').attr('width', x0.bandwidth()).attr('y', top).attr('height', H - bottom - top).attr('fill', 'transparent'), el, (t, k) => {
+      kd.tipHead(t, 'Známka ' + names[k - 1]);
+      for (const r of rows.filter((x) => x.znamka === k)) kd.tipLine(t, SEASON_COLOR[r.sezona], r.sezona, `${kd.fPct(r.podil)} · ${kd.fInt(r.pocet)}×`);
+    });
+  });
+
+  dash.draw('ch-znamky-souteze', (el) => {
+    if (kd.notReady(el, 'znamky_souteze')) return;
+    const rows = kd.rows('znamky_souteze');
+    if (!rows.length) { kd.emptyMsg(el); return; }
+    const W = Math.max(300, el.clientWidth), rowH = 28, barH = 18, legendH = 26;
+    const H = legendH + rows.length * rowH + 6;
+    el.replaceChildren();
+    const svg = kd.newSvg(el, W, H, 'Rozložení známek podle soutěže');
+    let lx = 0;
+    ['1', '2', '3', '4'].forEach((name, i) => {
+      svg.append('rect').attr('x', lx).attr('y', 4).attr('width', 11).attr('height', 11).attr('fill', ZN_COLOR[i]);
+      svg.append('text').attr('x', lx + 16).attr('y', 10).attr('dy', '0.35em').text('známka ' + name);
+      lx += 16 + kd.textWidth(svg, 'známka ' + name) + 14;
+    });
+    const label = (r) => `${kd.fInt(r.hodnoceni)} · Ø ${fAvg(r.znamka)}`;
+    const left = Math.ceil(d3.max(rows, (r) => kd.textWidth(svg, r.soutez))) + 10;
+    const right = Math.ceil(d3.max(rows, (r) => kd.textWidth(svg, label(r)))) + 12;
+    const x = d3.scaleLinear([0, 1], [left, W - right]);
+    const g = svg.selectAll('g.r').data(rows).join('g').attr('class', 'r').attr('transform', (r, i) => `translate(0,${legendH + i * rowH})`);
+    g.append('text').attr('x', left - 10).attr('y', rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').style('font-weight', 700).text((r) => r.soutez);
+    [1, 2, 3, 4].forEach((k, ki) => {
+      g.append('rect').attr('y', (rowH - barH) / 2).attr('height', barH).attr('fill', ZN_COLOR[ki])
+        .attr('x', (r) => x([1, 2, 3, 4].slice(0, ki).reduce((s, kk) => s + r['z' + kk], 0) / r.hodnoceni))
+        .attr('width', (r) => Math.max(0, x(r['z' + k] / r.hodnoceni) - x(0)));
+    });
+    g.append('text').attr('x', W - right + 8).attr('y', rowH / 2).attr('dy', '0.35em').text(label);
+    kd.hoverable(g.append('rect').attr('width', W).attr('height', rowH).attr('fill', 'transparent'), el, (t, r) => {
+      kd.tipHead(t, `${r.soutez} · koeficient ${String(r.koeficient).replace('.', ',')}`);
+      [1, 2, 3, 4].forEach((k, ki) => kd.tipLine(t, ZN_COLOR[ki], `Známka ${k}`, `${kd.fInt(r['z' + k])} · ${kd.fPct(r['z' + k] / r.hodnoceni)}`));
+      kd.tipLine(t, null, 'Ø známka', fAvg(r.znamka));
+    });
+    g.style('opacity', (r) => kd.dim('soutez', r.soutez));
+    g.select('rect:last-of-type').style('cursor', 'pointer').on('click', (ev, r) => kd.toggle('soutez', r.soutez));
+  });
+
+  const METRIKA = {znamka: {label: 'Ø známka', fmt: (v) => fAvg(v), better: 'nižší = lepší známky'}, cez: {label: 'Ø CEZ', fmt: (v) => fAvg(v), better: 'nižší = lepší'},
+    podil1: {label: 'Podíl jedniček', fmt: (v) => kd.fPct(v), better: 'vyšší = víc jedniček'}, obtiznost: {label: 'Ø obtížnost', fmt: (v) => fAvg(v), better: 'vyšší = náročnější zápasy'}};
+  const metrika = () => { const m = dash.params().metrika; return METRIKA[m] ? m : 'znamka'; };
+  document.querySelectorAll('.kd-seg[data-metrika]').forEach((b) => b.addEventListener('click', () => dash.setParams({metrika: b.dataset.metrika === 'znamka' ? null : b.dataset.metrika})));
+  dash.onData(() => { document.querySelectorAll('.kd-seg[data-metrika]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.metrika === metrika()))); });
+
+  dash.draw('ch-delegati-sezony', (el) => {
+    if (kd.notReady(el, 'delegati_sezony')) return;
+    const m = metrika(), M = METRIKA[m];
+    const all = dash.data('delegati_sezony').data;
+    const vals = all.filter((r) => r[m] !== null && r[m] !== undefined);
+    if (!vals.length) { kd.emptyMsg(el); return; }
+    const seasons = [...new Set(all.map((r) => r.sezona))].sort();
+    const tab = dash.data('delegati_sezony_tab');
+    const order = tab.status === 'ok' ? tab.data.map((r) => r.delegat) : [...new Set(all.map((r) => r.delegat))];
+    const people = order.filter((d) => vals.some((r) => r.delegat === d));
+    const yMax = d3.max(vals, (r) => r[m]) * 1.18 || 1;
+    const PW = 190, PH = 118, top = 18, bottom = 18;
+    el.replaceChildren();
+    const grid = document.createElement('div'); grid.className = 'kd-sm-grid'; el.appendChild(grid);
+    const note = document.createElement('p'); note.className = 'kd-sm-note'; note.textContent = `${M.label}: ${M.better}.`; el.insertBefore(note, grid);
+    for (const p of people) {
+      const box = document.createElement('div');
+      box.className = 'kd-sm' + (p === VSICHNI ? ' all' : '');
+      if (p !== VSICHNI) {
+        box.style.opacity = kd.dim('delegat', p);
+        box.tabIndex = 0;
+        box.addEventListener('click', () => kd.toggle('delegat', p));
+        box.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); kd.toggle('delegat', p); } });
+      }
+      const h4 = document.createElement('h4'); h4.textContent = p; box.appendChild(h4);
+      grid.appendChild(box);
+      const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${PW} ${PH}`).attr('role', 'img').attr('aria-label', `${p}: ${M.label} po sezonách`);
+      const x = d3.scaleBand(seasons, [4, PW - 4]).padding(0.22);
+      const y = d3.scaleLinear([0, yMax], [PH - bottom, top]);
+      svg.append('line').attr('x1', 4).attr('x2', PW - 4).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', kd.CF.navy);
+      for (const s of seasons) {
+        const r = all.find((z) => z.delegat === p && z.sezona === s);
+        const v = r ? r[m] : null;
+        const cx = x(s) + x.bandwidth() / 2;
+        svg.append('text').attr('class', 'muted').attr('x', cx).attr('y', PH - 4).attr('text-anchor', 'middle').style('font-size', '11px').text(s.slice(2, 4) + '/' + s.slice(5, 7));
+        if (v === null || v === undefined) {
+          svg.append('text').attr('class', 'muted').attr('x', cx).attr('y', y(0) - 5).attr('text-anchor', 'middle').text('–');
+          continue;
+        }
+        const bar = svg.append('rect').attr('x', x(s)).attr('width', x.bandwidth()).attr('y', y(v)).attr('height', y(0) - y(v)).attr('fill', SEASON_COLOR[s] || kd.CF.muted);
+        svg.append('text').attr('x', cx).attr('y', y(v) - 4).attr('text-anchor', 'middle').style('font-size', '11.5px').style('font-weight', 700).text(M.fmt(v));
+        bar.on('pointermove', (ev) => {
+          const t = kd.tip(el); kd.tipHead(t, `${p} · ${s}`);
+          kd.tipLine(t, SEASON_COLOR[s], M.label, M.fmt(v)); kd.tipLine(t, null, 'Známek', kd.fInt(r.hodnoceni));
+          const [px, py] = d3.pointer(ev, el); kd.placeTip(el, t, px, py);
+        }).on('pointerleave', () => { const t = el.querySelector('.kd-tip'); if (t) t.hidden = true; });
+      }
+    }
+  });
+
+  dash.draw('tb-delegati-sezony', (el) => {
+    el.replaceChildren();
+    const d = dash.data('delegati_sezony_tab');
+    if (d.status !== 'ok') return;
+    const heat = d3.scaleLinear([1.4, 2, 2.8], ['#05266B', '#F1F2F1', '#C00000']).clamp(true);
+    for (const r of d.data) {
+      const tr = document.createElement('tr');
+      if (r.delegat === VSICHNI) tr.className = 'total';
+      else if (dash.params().delegat === r.delegat) tr.className = 'sel';
+      const name = document.createElement('td'); name.className = 'nw strong'; name.textContent = r.delegat; tr.appendChild(name);
+      for (const s of ['2023_24', '2024_25', '2025_26', '2026_27']) {
+        const td = document.createElement('td'); td.className = 'r heat';
+        const v = r['s' + s];
+        if (v === null || v === undefined) { td.textContent = ''; }
+        else {
+          td.textContent = fAvg(v);
+          const c = d3.color(heat(v)); td.style.background = c.formatHex();
+          const lum = (0.299 * c.r + 0.587 * c.g + 0.114 * c.b) / 255;
+          td.style.color = lum < 0.55 ? '#FFFFFF' : '#05266B';
+          td.title = `${kd.fInt(r['n' + s])} známek`;
+        }
+        tr.appendChild(td);
+      }
+      el.appendChild(tr);
+    }
+  });
+
+  // rewards per delegate, stacked bars
+  dash.draw('ch-delegati', (el) => {
+    if (kd.notReady(el, 'delegati')) return;
+    if (!kd.rows('delegati').length) { kd.emptyMsg(el); return; }
+    const rows = kd.rows('delegati');
+    const W = Math.max(300, el.clientWidth), rowH = 30, barH = 20, top = 4, legendH = 26;
+    const H = legendH + top + rows.length * rowH + 4;
+    el.replaceChildren();
+    const svg = kd.newSvg(el, W, H, 'Odměny podle delegátů');
+    let lx = 0;
+    for (const [, name, color] of kd.SLOZKY) {
+      svg.append('rect').attr('x', lx).attr('y', 4).attr('width', 11).attr('height', 11).attr('fill', color);
+      svg.append('text').attr('x', lx + 16).attr('y', 10).attr('dy', '0.35em').text(name);
+      lx += 16 + kd.textWidth(svg, name) + 16;
+    }
+    const left = Math.ceil(d3.max(rows, (r) => kd.textWidth(svg, r.delegat)) || 60) + 10;
+    const right = Math.ceil(d3.max(rows, (r) => kd.textWidth(svg, kd.fKc(r.odmena))) || 40) + 10;
+    const x = d3.scaleLinear([0, d3.max(rows, (r) => r.sazba + r.poradatel + r.video + r.bonus) || 1], [left, W - right]);
+    const g = svg.selectAll('g.row').data(rows).join('g').attr('class', 'row').attr('transform', (r, i) => `translate(0,${legendH + top + i * rowH})`);
+    g.append('text').attr('x', left - 10).attr('y', rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').text((r) => r.delegat);
+    kd.SLOZKY.forEach(([k, , color], ki) => {
+      g.append('rect').attr('x', (r) => x(kd.SLOZKY.slice(0, ki).reduce((s, [kk]) => s + r[kk], 0)))
+        .attr('y', (rowH - barH) / 2).attr('height', barH).attr('width', (r) => Math.max(0, x(r[k]) - x(0))).attr('fill', color);
+    });
+    g.append('text').attr('x', (r) => x(r.sazba + r.poradatel + r.video + r.bonus) + 6).attr('y', rowH / 2).attr('dy', '0.35em').style('font-weight', 700).text((r) => kd.fKc(r.odmena));
+    kd.hoverable(g.append('rect').attr('width', W).attr('height', rowH).attr('fill', 'transparent'), el, (t, r) => {
+      kd.tipHead(t, r.delegat);
+      for (const [k, name, color] of kd.SLOZKY) kd.tipLine(t, color, name, kd.fKc(r[k]));
+      kd.tipLine(t, null, 'Celkem', kd.fKc(r.odmena));
+    });
+    g.style('opacity', (r) => kd.dim('delegat', r.delegat));
+    g.select('rect:last-of-type').style('cursor', 'pointer').on('click', (ev, r) => kd.toggle('delegat', r.delegat));
+  });
+
+  // reward components donut
+  dash.draw('ch-slozky', (el) => {
+    if (kd.notReady(el, 'slozky')) return;
+    if (!kd.rows('slozky').length) { kd.emptyMsg(el); return; }
+    const meta = new Map(kd.SLOZKY.map(([k, name, color]) => [k, {name, color}]));
+    kd.donut(el, kd.rows('slozky'), 'Z čeho se odměny skládají', (r) => meta.get(r.slozka).name, (r) => r.castka, (r) => meta.get(r.slozka).color, kd.fKc);
+  });
+
+  // running total of rewards
+  dash.draw('ch-kumulace', (el) => {
+    if (kd.notReady(el, 'kumulace')) return;
+    if (!kd.rows('kumulace').length) { kd.emptyMsg(el); return; }
+    const rows = kd.rows('kumulace').map((r) => ({...r, d: new Date(r.datum + 'T00:00:00Z')}));
+    const W = Math.max(300, el.clientWidth), H = 230;
+    el.replaceChildren();
+    const svg = kd.newSvg(el, W, H, 'Odměny v průběhu sezony');
+    const yMax = d3.max(rows, (r) => r.kumulace) || 1;
+    const y0 = d3.scaleLinear([0, yMax], [1, 0]).nice();
+    const ticks = y0.ticks(4);
+    const left = Math.ceil(d3.max(ticks, (v) => kd.textWidth(svg, kd.fInt(v)))) + 8;
+    const endLabel = kd.fKc(yMax);
+    const right = Math.ceil(kd.textWidth(svg, endLabel)) + 12;
+    const top = 12, bottom = 24;
+    const y = d3.scaleLinear(y0.domain(), [H - bottom, top]);
+    const x = d3.scaleUtc(d3.extent(rows, (r) => r.d), [left, W - right]);
+    svg.append('g').selectAll('line').data(ticks).join('line').attr('x1', left).attr('x2', W - right).attr('y1', (v) => y(v)).attr('y2', (v) => y(v)).attr('stroke', kd.CF.line);
+    svg.append('g').selectAll('text').data(ticks).join('text').attr('class', 'muted').attr('x', left - 6).attr('y', (v) => y(v)).attr('dy', '0.35em').attr('text-anchor', 'end').text((v) => kd.fInt(v));
+    const xt = x.ticks(d3.utcWeek.every(W < 460 ? 3 : 2));
+    svg.append('g').selectAll('text').data(xt).join('text').attr('class', 'muted').attr('x', (d) => x(d)).attr('y', H - 6).attr('text-anchor', 'middle').text((d) => `${d.getUTCDate()}. ${d.getUTCMonth() + 1}.`);
+    const id = 'kd-grad-' + Math.random().toString(36).slice(2, 8);
+    const grad = svg.append('defs').append('linearGradient').attr('id', id).attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
+    [[0, .26], [.25, .16], [.5, .08], [.75, .03], [1, 0]].forEach(([o, a]) => grad.append('stop').attr('offset', o).attr('style', `stop-color:${kd.CF.red};stop-opacity:${a}`));
+    svg.append('path').datum(rows).attr('fill', `url(#${id})`).attr('d', d3.area().x((r) => x(r.d)).y0(y(0)).y1((r) => y(r.kumulace)));
+    svg.append('path').datum(rows).attr('fill', 'none').attr('stroke', kd.CF.red).attr('stroke-width', 2.5).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round')
+      .attr('d', d3.line().x((r) => x(r.d)).y((r) => y(r.kumulace)));
+    svg.append('line').attr('x1', left).attr('x2', W - right).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', kd.CF.navy);
+    const last = rows[rows.length - 1];
+    svg.append('circle').attr('cx', x(last.d)).attr('cy', y(last.kumulace)).attr('r', 4).attr('fill', kd.CF.red);
+    svg.append('text').attr('x', x(last.d) + 8).attr('y', y(last.kumulace)).attr('dy', '0.35em').style('font-weight', 700).text(kd.fKc(last.kumulace));
+    const dot = svg.append('circle').attr('r', 4).attr('fill', kd.CF.navy).attr('visibility', 'hidden');
+    const bis = d3.bisector((r) => r.d).center;
+    svg.append('rect').attr('x', left).attr('y', top).attr('width', W - right - left).attr('height', H - bottom - top).attr('fill', 'transparent')
+      .on('pointermove', (ev) => {
+        const [mx] = d3.pointer(ev); const r = rows[bis(rows, x.invert(mx))];
+        dot.attr('cx', x(r.d)).attr('cy', y(r.kumulace)).attr('visibility', 'visible');
+        const t = kd.tip(el); kd.tipHead(t, kd.fDate(r.datum)); kd.tipLine(t, null, 'Odměny ten den', kd.fKc(r.odmena)); kd.tipLine(t, kd.CF.red, 'Celkem k tomuto dni', kd.fKc(r.kumulace));
+        const [px, py] = d3.pointer(ev, el); kd.placeTip(el, t, px, py);
+      })
+      .on('pointerleave', () => { dot.attr('visibility', 'hidden'); const t = el.querySelector('.kd-tip'); if (t) t.hidden = true; });
+  });
+
+  // heatmap delegate × week
+  dash.draw('ch-kalendar', (el) => {
+    if (kd.notReady(el, 'kalendar')) return;
+    if (!kd.rows('kalendar').length) { kd.emptyMsg(el); return; }
+    const rows = kd.rows('kalendar');
+    const people = [...new Set(rows.map((r) => r.delegat))];
+    const weeks = [...new Set(rows.map((r) => r.tyden))];
+    const W = Math.max(300, el.clientWidth), cellH = 26, headH = 22;
+    const H = headH + people.length * cellH + 2;
+    el.replaceChildren();
+    const svg = kd.newSvg(el, W, H, 'Kdo kdy delegoval');
+    const left = Math.ceil(d3.max(people, (p) => kd.textWidth(svg, p)) || 60) + 10;
+    const x = d3.scaleBand(weeks, [left, W]).paddingInner(0.08);
+    const yb = d3.scaleBand(people, [headH, H - 2]).paddingInner(0.12);
+    const max = d3.max(rows, (r) => r.zapasy) || 1;
+    const color = d3.scaleLinear([0, 1, max], ['#FFFFFF', '#F7C3C7', kd.CF.red2]);
+    const lw = d3.max(weeks, (w) => kd.textWidth(svg, kd.fDay(w))) + 6;
+    const every = Math.max(1, Math.ceil(lw / x.step()));
+    svg.append('g').selectAll('text').data(weeks.filter((w, i) => i % every === 0)).join('text').attr('class', 'muted')
+      .attr('x', (w) => x(w) + x.bandwidth() / 2).attr('y', headH - 8).attr('text-anchor', 'middle').text((w) => kd.fDay(w));
+    svg.append('g').selectAll('text').data(people).join('text').attr('x', left - 10).attr('y', (p) => yb(p) + yb.bandwidth() / 2).attr('dy', '0.35em').attr('text-anchor', 'end').text((p) => p);
+    const cells = svg.append('g').selectAll('g').data(rows).join('g').attr('transform', (r) => `translate(${x(r.tyden)},${yb(r.delegat)})`);
+    cells.append('rect').attr('width', x.bandwidth()).attr('height', yb.bandwidth()).attr('fill', (r) => r.zapasy ? color(r.zapasy) : kd.CF.white).attr('stroke', kd.CF.line).attr('stroke-width', r => r.zapasy ? 0 : 1);
+    cells.filter((r) => r.zapasy > 0 && x.bandwidth() >= 16).append('text').attr('class', (r) => r.zapasy > max / 2 ? 'on-dark' : null)
+      .attr('x', x.bandwidth() / 2).attr('y', yb.bandwidth() / 2).attr('dy', '0.35em').attr('text-anchor', 'middle').style('font-weight', 700).text((r) => kd.fInt(r.zapasy));
+    kd.hoverable(cells, el, (t, r) => { kd.tipHead(t, `${r.delegat} · týden od ${kd.fDay(r.tyden)}`); kd.tipLine(t, null, 'Delegované zápasy', kd.fInt(r.zapasy)); });
+    cells.style('cursor', 'pointer').style('opacity', (r) => kd.dim('delegat', r.delegat)).on('click', (ev, r) => kd.toggle('delegat', r.delegat));
+  });
+
+  // delegations by list, donut
+  dash.draw('ch-listiny-deleg', (el) => {
+    if (kd.notReady(el, 'listiny_deleg')) return;
+    if (!kd.rows('listiny_deleg').length) { kd.emptyMsg(el); return; }
+    kd.donut(el, kd.rows('listiny_deleg'), 'Rozdělení delegování mezi listiny', (r) => r.listina, (r) => r.nasazeni, (r) => kd.LISTINA[r.listina] || kd.CF.muted, kd.fInt, 'listina');
+  });
+
+  // coverage of referee lists
+  dash.draw('ch-listiny', (el) => {
+    if (kd.notReady(el, 'listiny_podil')) return;
+    if (!kd.rows('listiny_podil').length) { kd.emptyMsg(el); return; }
+    const rows = kd.rows('listiny_podil');
+    const W = Math.max(300, el.clientWidth), rowH = 40, barH = 22, top = 4;
+    const H = top + rows.length * rowH + 4;
+    el.replaceChildren();
+    const svg = kd.newSvg(el, W, H, 'Rozhodčí s delegátem podle listiny');
+    const label = (r) => `${kd.fInt(r.delegovanych)} z ${kd.fInt(r.rozhodcich)}`;
+    const left = Math.ceil(d3.max(rows, (r) => kd.textWidth(svg, r.listina))) + 12;
+    const right = Math.ceil(d3.max(rows, (r) => kd.textWidth(svg, label(r)))) + 12;
+    const x = d3.scaleLinear([0, 1], [left, W - right]);
+    const g = svg.selectAll('g').data(rows).join('g').attr('transform', (r, i) => `translate(0,${top + i * rowH})`);
+    g.append('text').attr('x', left - 12).attr('y', rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').style('font-weight', 700).text((r) => r.listina);
+    g.append('rect').attr('x', x(0)).attr('y', (rowH - barH) / 2).attr('width', x(1) - x(0)).attr('height', barH).attr('fill', kd.CF.white).attr('stroke', kd.CF.line);
+    g.append('rect').attr('x', x(0)).attr('y', (rowH - barH) / 2).attr('width', (r) => x(r.podil) - x(0)).attr('height', barH).attr('fill', (r) => kd.LISTINA[r.listina] || kd.CF.navy);
+    g.append('text').attr('class', 'on-dark').attr('x', x(0) + 6).attr('y', rowH / 2).attr('dy', '0.35em').style('font-weight', 700)
+      .text((r) => (x(r.podil) - x(0) > 52 ? kd.fPct(r.podil) : ''));
+    g.filter((r) => x(r.podil) - x(0) <= 52).append('text').attr('x', (r) => x(r.podil) + 6).attr('y', rowH / 2).attr('dy', '0.35em').style('font-weight', 700).text((r) => kd.fPct(r.podil));
+    g.append('text').attr('class', 'muted').attr('x', x(1) + 8).attr('y', rowH / 2).attr('dy', '0.35em').text(label);
+    g.style('cursor', 'pointer').style('opacity', (r) => kd.dim('listina', r.listina)).on('click', (ev, r) => kd.toggle('listina', r.listina));
+  });
+
+  // most delegated referees
+  dash.draw('ch-rozhodci', (el) => {
+    if (kd.notReady(el, 'rozhodci_top')) return;
+    if (!kd.rows('rozhodci_top').length) { kd.emptyMsg(el); return; }
+    const rows = kd.rows('rozhodci_top');
+    const W = Math.max(300, el.clientWidth), rowH = 24, barH = 16, legendH = 24;
+    const H = legendH + rows.length * rowH + 4;
+    el.replaceChildren();
+    const svg = kd.newSvg(el, W, H, 'Nejčastěji delegovaní rozhodčí');
+    let lx = 0;
+    for (const [l, c] of Object.entries(kd.LISTINA)) {
+      svg.append('rect').attr('x', lx).attr('y', 4).attr('width', 11).attr('height', 11).attr('fill', c);
+      svg.append('text').attr('x', lx + 16).attr('y', 10).attr('dy', '0.35em').text(l);
+      lx += 16 + kd.textWidth(svg, l) + 18;
+    }
+    const name = (r) => r.rozhodci;
+    const left = Math.ceil(d3.max(rows, (r) => kd.textWidth(svg, name(r)))) + 10;
+    const right = 36;
+    const x = d3.scaleLinear([0, d3.max(rows, (r) => r.zapasy) || 1], [left, W - right]);
+    const g = svg.selectAll('g.r').data(rows).join('g').attr('class', 'r').attr('transform', (r, i) => `translate(0,${legendH + i * rowH})`);
+    g.append('text').attr('x', left - 10).attr('y', rowH / 2).attr('dy', '0.35em').attr('text-anchor', 'end').text(name);
+    g.append('rect').attr('x', x(0)).attr('y', (rowH - barH) / 2).attr('height', barH).attr('width', (r) => x(r.zapasy) - x(0)).attr('fill', (r) => kd.LISTINA[r.listina] || kd.CF.muted);
+    g.append('text').attr('x', (r) => x(r.zapasy) + 6).attr('y', rowH / 2).attr('dy', '0.35em').style('font-weight', 700).text((r) => kd.fInt(r.zapasy));
+    kd.hoverable(g.append('rect').attr('width', W).attr('height', rowH).attr('fill', 'transparent'), el, (t, r) => {
+      kd.tipHead(t, `${r.rozhodci} (${r.listina})`);
+      kd.tipLine(t, kd.LISTINA[r.listina], 'Delegované zápasy', kd.fInt(r.zapasy));
+      kd.tipLine(t, null, 'Delegace (akce)', kd.fInt(r.delegaci));
+    });
+    g.style('opacity', (r) => kd.dim('rozhodci', r.rozhodci));
+    g.select('rect:last-of-type').style('cursor', 'pointer').on('click', (ev, r) => kd.toggle('rozhodci', r.rozhodci));
+  });
+
+  // delegated minutes per competition, vertical bars like the season report
+  dash.draw('ch-souteze', (el) => {
+    if (kd.notReady(el, 'souteze')) return;
+    if (!kd.rows('souteze').length) { kd.emptyMsg(el); return; }
+    const rows = kd.rows('souteze');
+    const W = Math.max(300, el.clientWidth), H = 280;
+    el.replaceChildren();
+    const svg = kd.newSvg(el, W, H, 'Delegované minuty dle soutěží');
+    const bottom = Math.ceil(d3.max(rows, (r) => kd.textWidth(svg, r.soutez))) + 12, top = 22;
+    const x = d3.scaleBand(rows.map((r) => r.soutez), [4, W - 4]).padding(0.35);
+    const y = d3.scaleLinear([0, d3.max(rows, (r) => r.minuty) || 1], [H - bottom, top]);
+    const bw = Math.min(32, x.bandwidth());
+    svg.append('g').selectAll('line').data(y.ticks(4)).join('line').attr('x1', 4).attr('x2', W - 4).attr('y1', (v) => y(v)).attr('y2', (v) => y(v)).attr('stroke', kd.CF.line);
+    const g = svg.selectAll('g.b').data(rows).join('g').attr('class', 'b');
+    g.append('rect').attr('x', (r) => x(r.soutez) + (x.bandwidth() - bw) / 2).attr('width', bw).attr('y', (r) => y(r.minuty)).attr('height', (r) => y(0) - y(r.minuty)).attr('fill', kd.CF.red);
+    const showVals = x.step() >= kd.textWidth(svg, kd.fInt(d3.max(rows, (r) => r.minuty))) + 2;
+    if (showVals) g.append('text').attr('x', (r) => x(r.soutez) + x.bandwidth() / 2).attr('y', (r) => y(r.minuty) - 6).attr('text-anchor', 'middle').text((r) => kd.fInt(r.minuty));
+    g.append('text').attr('transform', (r) => `translate(${x(r.soutez) + x.bandwidth() / 2},${y(0) + 8}) rotate(-90)`).attr('text-anchor', 'end').attr('dy', '0.35em').text((r) => r.soutez);
+    svg.append('line').attr('x1', 4).attr('x2', W - 4).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', kd.CF.navy);
+    kd.hoverable(g.append('rect').attr('x', (r) => x(r.soutez) - x.step() * x.paddingInner() / 2).attr('width', x.step()).attr('y', top).attr('height', H - bottom - top).attr('fill', 'transparent'), el, (t, r) => {
+      kd.tipHead(t, r.soutez);
+      kd.tipLine(t, kd.CF.red, 'Minuty', kd.fInt(r.minuty));
+      kd.tipLine(t, null, 'Zápasy', kd.fInt(r.zapasy));
+      kd.tipLine(t, null, 'Odměny', kd.fKc(r.odmena));
+    });
+    g.style('opacity', (r) => kd.dim('soutez', r.soutez));
+    g.select('rect:last-of-type').style('cursor', 'pointer').on('click', (ev, r) => kd.toggle('soutez', r.soutez));
+  });
+
+  // report delay histogram
+  dash.draw('ch-prodleva', (el) => {
+    if (kd.notReady(el, 'prodleva')) return;
+    if (!kd.rows('prodleva').length) { kd.emptyMsg(el); return; }
+    const rows = kd.rows('prodleva');
+    const W = Math.max(300, el.clientWidth), H = 230, top = 22, bottom = 40, LIMIT = 3;
+    el.replaceChildren();
+    const svg = kd.newSvg(el, W, H, 'Za kolik pracovních dnů dorazily zprávy');
+    const x = d3.scaleBand(rows.map((r) => r.dni), [4, W - 4]).padding(0.3);
+    const y = d3.scaleLinear([0, d3.max(rows, (r) => r.akce) || 1], [H - bottom, top]);
+    const bw = Math.min(48, x.bandwidth());
+    const inLimit = (r) => Number(r.dni) <= LIMIT;
+    svg.append('g').selectAll('rect').data(rows).join('rect').attr('x', (r) => x(r.dni) + (x.bandwidth() - bw) / 2).attr('width', bw)
+      .attr('y', (r) => y(r.akce)).attr('height', (r) => y(0) - y(r.akce)).attr('fill', (r) => inLimit(r) ? kd.CF.navy : kd.CF.red);
+    svg.append('g').selectAll('text').data(rows.filter((r) => r.akce > 0)).join('text').attr('x', (r) => x(r.dni) + x.bandwidth() / 2).attr('y', (r) => y(r.akce) - 6).attr('text-anchor', 'middle').style('font-weight', 700).text((r) => kd.fInt(r.akce));
+    svg.append('g').selectAll('text').data(rows).join('text').attr('x', (r) => x(r.dni) + x.bandwidth() / 2).attr('y', H - bottom + 16).attr('text-anchor', 'middle').text((r) => r.dni);
+    svg.append('text').attr('class', 'muted').attr('x', W / 2).attr('y', H - 6).attr('text-anchor', 'middle').text('pracovních dnů od zápasu');
+    svg.append('line').attr('x1', 4).attr('x2', W - 4).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', kd.CF.navy);
+    const lim = rows.findIndex((r) => r.dni === String(LIMIT + 1));
+    if (lim > 0) {
+      const lx = x(rows[lim].dni) - x.step() * x.paddingInner() / 2;
+      svg.append('line').attr('x1', lx).attr('x2', lx).attr('y1', top - 14).attr('y2', y(0)).attr('stroke', kd.CF.red).attr('stroke-dasharray', '4 3');
+      svg.append('text').attr('x', lx - 6).attr('y', top - 8).attr('text-anchor', 'end').style('fill', kd.CF.navy).text('bonus');
+      svg.append('text').attr('x', lx + 6).attr('y', top - 8).style('fill', kd.CF.red).text('bez bonusu');
+    }
+  });
+</script>
+<script>
+  // tables
+  const cell = (tr, text, cls) => { const td = document.createElement('td'); td.textContent = text; if (cls) td.className = cls; tr.appendChild(td); return td; };
+  const emptyBody = (el, id) => { el.replaceChildren(); return dash.data(id).status !== 'ok'; };
+
+  dash.draw('tb-delegati', (el) => {
+    if (emptyBody(el, 'delegati')) return;
+    for (const r of kd.rows('delegati')) {
+      const tr = document.createElement('tr');
+      tr.dataset.key = encodeURIComponent(r.obdobi) + ',' + encodeURIComponent(r.delegat);
+      if (dash.params().delegat === r.delegat) tr.className = 'sel';
+      cell(tr, r.delegat, 'nw strong');
+      cell(tr, kd.fInt(r.zapasy), 'r');
+      cell(tr, kd.fInt(r.akce), 'r');
+      cell(tr, kd.fInt(r.minuty), 'r wide');
+      cell(tr, kd.fKc(r.odmena), 'r nw strong');
+      cell(tr, kd.fInt(r.akce_bonus), 'r wide');
+      cell(tr, kd.fInt(r.ceka), 'r');
+      el.appendChild(tr);
+    }
+  });
+
+  dash.draw('tb-souteze', (el) => {
+    if (emptyBody(el, 'souteze')) return;
+    for (const r of kd.rows('souteze')) {
+      const tr = document.createElement('tr');
+      tr.dataset.key = encodeURIComponent(r.obdobi) + ',' + encodeURIComponent(r.deleg) + ',' + encodeURIComponent(r.soutez);
+      if (dash.params().soutez === r.soutez) tr.className = 'sel';
+      cell(tr, r.soutez, 'strong');
+      cell(tr, kd.fInt(r.zapasy), 'r');
+      cell(tr, kd.fInt(r.minuty), 'r');
+      cell(tr, kd.fKc(r.odmena), 'r nw');
+      el.appendChild(tr);
+    }
+  });
+
+  window.kdSort = {key: 'datum', dir: 1};
+  const chipClass = (s) => (s === 'OK' || s === 'OK – online') ? 'ok' : s.startsWith('čeká') || s.startsWith('OK – chybí') ? 'warn' : s.startsWith('bez') || s.startsWith('nezn') ? 'bad' : '';
+  dash.draw('tb-zapasy', (el) => {
+    if (emptyBody(el, 'zapasy')) return;
+    const q = ((document.getElementById('kd-hledat') || {}).value || '').trim().toLowerCase();
+    const {key, dir} = window.kdSort;
+    const numeric = key === 'odmena';
+    const p = kd.period();
+    let rows = dash.data('zapasy').data.filter((r) => p === 'sezona' || r.obdobi === p);
+    const f = dash.params();
+    if (f.delegat) rows = rows.filter((r) => r.delegat === f.delegat);
+    if (f.soutez) rows = rows.filter((r) => r.soutez === f.soutez);
+    if (f.rozhodci) rows = rows.filter((r) => r.rozhodci1 === f.rozhodci || r.rozhodci2 === f.rozhodci);
+    if (f.listina) rows = rows.filter((r) => r.rozhodci1_listina === f.listina || (r.rozhodci2 && r.rozhodci2_listina === f.listina));
+    if (q) rows = rows.filter((r) => [r.kod, r.domaci, r.hoste, r.rozhodci1, r.rozhodci2, r.delegat, r.stav, r.turnaj].join(' ').toLowerCase().includes(q));
+    window.kdShown = rows.length;
+    rows.sort((a, b) => {
+      const c = numeric ? Number(a[key]) - Number(b[key]) : String(a[key]).localeCompare(String(b[key]), 'cs');
+      return (c || String(a.datum + a.cas).localeCompare(String(b.datum + b.cas))) * dir;
+    });
+    for (const r of rows) {
+      const tr = document.createElement('tr');
+      cell(tr, r.kod, 'nw strong');
+      cell(tr, kd.fDate(r.datum), 'nw');
+      cell(tr, r.domaci, 'wide');
+      cell(tr, r.hoste, 'wide');
+      cell(tr, r.rozhodci1, 'nw');
+      cell(tr, r.rozhodci2, 'nw');
+      cell(tr, r.delegat, 'nw');
+      cell(tr, kd.fKc(Number(r.odmena)), 'r nw');
+      const td = cell(tr, '', '');
+      const chip = document.createElement('span'); chip.className = 'chip ' + chipClass(String(r.stav)); chip.textContent = r.stav; td.appendChild(chip);
+      el.appendChild(tr);
+    }
+    dash.draw('n-zapasy');
+  });
+
+  dash.draw('n-zapasy', (el) => {
+    const d = dash.data('zapasy');
+    el.textContent = d.status === 'ok' ? `Zobrazeno ${kd.fInt(window.kdShown ?? d.data.length)} z ${kd.fInt(d.data.length)} zápasů.` : '—';
+  });
+  document.querySelectorAll('table.kd-click').forEach((t) => t.addEventListener('click', (ev) => {
+    const tr = ev.target.closest('tr[data-key]');
+    if (!tr) return;
+    const parts = tr.dataset.key.split(',').map(decodeURIComponent);
+    if (t.dataset.source === 'delegati') kd.toggle('delegat', parts[1]);
+    if (t.dataset.source === 'hodnoceni' && parts[1] !== 'Všichni delegáti') kd.toggle('delegat', parts[1]);
+    if (t.dataset.source === 'souteze') kd.toggle('soutez', parts[2]);
+  }));
+
+  document.querySelectorAll('#kd-hledat').forEach((inp) => inp.addEventListener('input', () => dash.draw('tb-zapasy')));
+  document.querySelectorAll('th[data-sort]').forEach((th) => {
+    const b = th.querySelector('button');
+    if (!b) return;
+    b.addEventListener('click', () => {
+      const key = th.dataset.sort;
+      window.kdSort = {key, dir: window.kdSort.key === key ? -window.kdSort.dir : (key === 'odmena' ? -1 : 1)};
+      document.querySelectorAll('th[data-sort]').forEach((o) => o.removeAttribute('aria-sort'));
+      th.setAttribute('aria-sort', window.kdSort.dir === 1 ? 'ascending' : 'descending');
+      dash.draw('tb-zapasy');
+    });
+  });
+</script>
+<script>
+  // period switch: whole season / podzim / jaro
+  document.querySelectorAll('.kd-seg[data-obdobi]').forEach((b) => b.addEventListener('click', () => {
+    dash.setParams({obdobi: b.dataset.obdobi === 'sezona' ? null : b.dataset.obdobi});
+  }));
+  dash.onData(() => {
+    const p = kd.period();
+    const k = dash.data('kpi');
+    const jaroRow = k.status === 'ok' ? k.data.find((r) => r.obdobi === 'jaro') : null;
+    const jaroEmpty = !jaroRow || !jaroRow.zapasy;
+    document.querySelectorAll('.kd-seg[data-obdobi]').forEach((b) => {
+      b.setAttribute('aria-pressed', String(b.dataset.obdobi === p));
+      if (b.dataset.obdobi === 'jaro') b.disabled = jaroEmpty && p !== 'jaro';
+    });
+    document.querySelectorAll('.kd-switch-note[data-note="jaro"]').forEach((n) => { n.hidden = !jaroEmpty; });
+  });
+</script>
+<script>
+  // what is picked, with a way to clear it
+  const PICK = [['delegat', 'Delegát', 'filtruje celou stránku'], ['soutez', 'Soutěž', 'filtruje seznam zápasů'], ['rozhodci', 'Rozhodčí', 'filtruje seznam zápasů'], ['listina', 'Listina', 'filtruje seznam zápasů']];
+  dash.draw('vyber', (el) => {
+    el.replaceChildren();
+    const f = dash.params();
+    const on = PICK.filter(([k]) => f[k]);
+    for (const [k, lab, what] of on) {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'kd-chip';
+      b.title = 'Zrušit: ' + what;
+      b.textContent = `${lab}: ${f[k]} ×`;
+      b.addEventListener('click', () => dash.setParams({[k]: null}));
+      el.appendChild(b);
+    }
+    if (on.length > 1) {
+      const all = document.createElement('button'); all.type = 'button'; all.className = 'kd-chip clear'; all.textContent = 'Zrušit vše';
+      all.addEventListener('click', () => dash.setParams(Object.fromEntries(PICK.map(([k]) => [k, null]))));
+      el.appendChild(all);
+    }
+  });
+  dash.onData(() => {
+    const any = PICK.some(([k]) => dash.params()[k]);
+    document.querySelectorAll('.kd-pick-hint').forEach((n) => { n.hidden = any; });
+  });
+</script>
+<script>
+(function () {
+  const ENC = {"v": 1, "kdf": "PBKDF2-SHA256", "iter": 600000, "salt": "8eAe/uvGk4H7Yd4gpOWUGA==", "iv": "lY8M5Lq8Nm8C5AQi", "ct": "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"};
+  const b64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+  const form = document.getElementById('gate-form'), input = document.getElementById('gate-pass'), err = document.getElementById('gate-err'), btn = document.getElementById('gate-btn');
+  async function open(pass) {
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey({name: 'PBKDF2', hash: 'SHA-256', salt: b64(ENC.salt), iterations: ENC.iter}, base, {name: 'AES-GCM', length: 256}, false, ['decrypt']);
+    const plain = await crypto.subtle.decrypt({name: 'AES-GCM', iv: b64(ENC.iv)}, key, b64(ENC.ct));
+    const json = await new Response(new Blob([plain]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+    return JSON.parse(json);
+  }
+  async function unlock(pass, remember) {
+    btn.disabled = true; err.hidden = true; btn.textContent = 'Otevírám…';
+    try {
+      const p = await open(pass);
+      try { if (remember) sessionStorage.setItem('krd-heslo', pass); } catch (e) {}
+      document.getElementById('gate').hidden = true;
+      document.querySelectorAll('.stav').forEach((s) => { s.textContent = p.stav; });
+      document.getElementById('app').hidden = false;
+      window.dash._setData(p.data);
+    } catch (e) {
+      try { sessionStorage.removeItem('krd-heslo'); } catch (x) {}
+      err.hidden = false; btn.disabled = false; btn.textContent = 'Otevřít'; input.select();
+    }
+  }
+  form.addEventListener('submit', (ev) => { ev.preventDefault(); if (input.value) unlock(input.value, true); });
+  let saved = null; try { saved = sessionStorage.getItem('krd-heslo'); } catch (e) {}
+  if (saved) unlock(saved, false); else input.focus();
+})();
+</script>
+</body>
+</html>
