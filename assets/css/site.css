@@ -674,9 +674,10 @@ p { margin: 0 0 var(--step); }
 .page-body > *:not(.watermark),
 .lacuna > *:not(.watermark) { position: relative; z-index: 1; }
 
-/* The 404, which is four lines of text and otherwise an empty page — so the
-   lion gets the room here that it does not get anywhere else, and the emptiness
-   stops being an accident and becomes the point.
+/* The 404, which is four lines of text and otherwise an empty page. The lion
+   was taken off it on 2026-11-07 (owner's request; see 404.html), so the
+   .watermark--lion rules are unused for now; the band keeps its height so the
+   page keeps its proportions. What follows describes the lion as it was.
 
    min-height, because the band would otherwise be shorter than the drawing and
    overflow: hidden would slice the lion through the middle. overflow: hidden,

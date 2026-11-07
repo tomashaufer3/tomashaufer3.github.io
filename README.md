@@ -316,8 +316,10 @@ Study Affairs Office confirming they are happy with it, for the same reason the
 CU coat of arms stays out of the header: institutional artwork on a personal
 page can read as an official page.
 
-**The lion.** `assets/img/cz-lion.svg` is the Bohemian lion, used as a watermark
-behind the whole of `404.html` and nowhere else. It is flattened from the
+**The lion.** `assets/img/cz-lion.svg` is the Bohemian lion. It was the watermark
+behind `404.html` until 2026-11-07, when it was taken off at the owner's request
+(the 404 is also what readers of unlisted subpages such as `/krd/` land on); the
+file and its `.watermark--lion` rules are kept, unused, in case it returns. It is flattened from the
 Wikimedia drawing
 `assets/img/Lion_from_small_coat_of_arms_of_the_Czech_Republic.svg`, which is
 gitignored.
